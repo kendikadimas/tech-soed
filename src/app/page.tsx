@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2 } from 'lucide-react';
+import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2,} from 'lucide-react';
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('Landing Page');
@@ -287,11 +287,11 @@ export default function LandingPage() {
 
         <div className="max-w-4xl mx-auto flex flex-col items-center relative z-10 pt-10">
           <h1 className="text-5xl lg:text-7xl font-extrabold leading-[1.1] text-slate-900 mb-6 tracking-tight">
-            Wujudkan Ide Menjadi <br className="hidden md:block" /> Karya Digital Luar Biasa
+           Bangun Sistem Digital.<br className="hidden md:block" /> Tingkatkan Skala Bisnis.
           </h1>
 
           <p className="text-lg text-slate-500 max-w-2xl leading-relaxed mb-10">
-            Dari desain visual memukau hingga kode yang solid. Kami hadir membantu membangun produk impian yang mempercepat pertumbuhan bisnis Anda di era digital.
+            Kami menghadirkan solusi teknologi yang membantu bisnis berkembang lebih cepat, melayani lebih banyak pelanggan, dan meningkatkan pendapatan secara terukur.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-20">
@@ -313,11 +313,10 @@ export default function LandingPage() {
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Tentang TechSoed</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
-              Solusi Digital untuk Bisnis Anda
-            </h2>
+              Waktunya Bisnis Anda Naik Level
+              </h2>
             <p className="text-lg text-slate-600 leading-relaxed">
-              TechSoed adalah agensi digital modern yang berfokus membantu startup maupun perusahaan bertransformasi secara digital. Kami memadukan UI/UX premium dengan rekayasa teknologi terbaik untuk melahirkan produk yang solid dan berdampak nyata terhadap bisnis Anda.
-            </p>
+TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digital terintegrasi untuk berbagai skala bisnis. Kami menyediakan layanan web development, UI/UX design, digital branding, dan strategi digital marketing untuk membantu bisnis tumbuh lebih cepat dan efisien.            </p>
             <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex flex-col gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
@@ -424,7 +423,7 @@ export default function LandingPage() {
                 <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Karya Kami</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
-                Pekerjaan Terbaik <br className="hidden md:block" /> Untuk Klien Terbaik
+                Project Showcase <br className="hidden md:block" /> 
               </h2>
             </div>
             <p className="text-slate-500 max-w-md md:text-right leading-relaxed">
@@ -694,23 +693,18 @@ export default function LandingPage() {
 
           {/* Links Col 1 */}
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Layanan</h4>
-            <ul className="space-y-4 text-sm">
-              <li><a href="#" className="hover:text-blue-400 transition">UI/UX Design</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition">Website Enterprise</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition">Sistem CMS Custom</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition">Learning Management System</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition">Integrasi E-Commerce</a></li>
-            </ul>
+            
           </div>
 
           {/* Links Col 2 */}
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Perusahaan</h4>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Layanan</h4>
             <ul className="space-y-4 text-sm">
-              <li><a href="/tentang" className="hover:text-blue-400 transition">Tentang Kami</a></li>
-              <li><a href="/syarat-dan-ketentuan" className="hover:text-blue-400 transition">Syarat & Ketentuan</a></li>
-              <li><a href="/kebijakan-privasi" className="hover:text-blue-400 transition">Kebijakan Privasi</a></li>
+              <li><a href="#harga" className="hover:text-blue-400 transition">Web Development</a></li>
+              <li><a href="#harga" className="hover:text-blue-400 transition">UI/UX Design</a></li>
+              <li><a href="#harga" className="hover:text-blue-400 transition">Sistem Informasi (CMS/LMS)</a></li>
+              <li><a href="#harga" className="hover:text-blue-400 transition">Digital Branding</a></li>
+              <li><a href="#harga" className="hover:text-blue-400 transition">Social Media Management</a></li>
             </ul>
           </div>
 
