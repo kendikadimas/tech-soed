@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2,} from 'lucide-react';
+import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2, Monitor, Smartphone, Globe, Cloud, Database } from 'lucide-react';
 
 export default function LandingPage() {
   const [activeTab, setActiveTab] = useState('Landing Page');
@@ -9,15 +9,15 @@ export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [portfolioFilter, setPortfolioFilter] = useState('Semua');
 
-  const portfolioCategories = ['Semua', 'Website', 'Aplikasi', 'Branding'];
+  const portfolioCategories = ['Semua', 'Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce', 'Social Media Management'];
 
   const projectsData = [
-    { title: 'E-Commerce SuperApp', category: 'Aplikasi', image: '/path-to-project1.jpg', desc: 'Aplikasi belanja m-commerce dengan fitur multi-vendor.', size: 'large' },
-    { title: 'Dashboard Analytics', category: 'Website', image: '/path-to-project2.jpg', desc: 'SaaS platform visualisasi data terintegrasi.', size: 'small' },
-    { title: 'Corporate Identity', category: 'Branding', image: '/path-to-project4.jpg', desc: 'Rebranding total identitas perusahaan manufaktur.', size: 'small' },
-    { title: 'Manajemen Klinik Terpadu', category: 'Website', image: '/path-to-project3.jpg', desc: 'Sistem informasi faskes komprehensif (ERP).', size: 'large' },
-    { title: 'Fintech E-Wallet App', category: 'Aplikasi', image: '/path-to-project5.jpg', desc: 'Aplikasi dompet digital dengan transfer p2p.', size: 'small' },
-    { title: 'LMS Edutech Portal', category: 'Website', image: '/path-to-project6.jpg', desc: 'Sistem manajemen e-learning interaktif untuk sekolah.', size: 'small' },
+    { title: 'Toko Elektronik Online', category: 'E-Commerce', image: '/path-to-project1.jpg', desc: 'Sistem jual beli online dengan fitur multi-payment dan ekspedisi.', size: 'large' },
+    { title: 'EduNusantara Portal', category: 'LMS', image: '/path-to-project6.jpg', desc: 'Sistem manajemen e-learning interaktif terintegrasi.', size: 'small' },
+    { title: 'PT Karya Mandiri Profile', category: 'Company Profile', image: '/path-to-project4.jpg', desc: 'Website company profile elegan untuk perusahaan konstruksi.', size: 'small' },
+    { title: 'Sistem Informasi Klinik', category: 'CMS', image: '/path-to-project3.jpg', desc: 'Sistem manajemen data layanan kesehatan komprehensif (ERP).', size: 'large' },
+    { title: 'Produk Skin Care Launch', category: 'Landing Page', image: '/path-to-project5.jpg', desc: 'Landing page konversi tinggi untuk peluncuran kosmetik.', size: 'small' },
+    { title: 'Kopi Senja Campaign', category: 'Social Media Management', image: '/path-to-project2.jpg', desc: 'Konsep dan manajemen desain Instagram Feed.', size: 'small' },
   ];
 
   const filteredProjects = portfolioFilter === 'Semua'
@@ -45,49 +45,48 @@ export default function LandingPage() {
     'Landing Page': [
       {
         name: 'Starter',
-        price: 'Rp 1.500.000',
-        description: '*Cocok untuk bisnis baru yang ingin langsung tampil online dengan landing page elegan.',
+        price: 'Rp 599.000',
+        description: '*Cocok untuk campaign/promo yang ingin langsung tampil online dengan landing page yang ringkas.',
         features: [
-          'Free Domain (.com)',
           'Shared Hosting (6 Bulan)',
-          'Desain Responsif (Mobile & Desktop)',
-          '1 Halaman Landing Page (scroll panjang)',
-          '1 Email Bisnis',
-          '1 GB Disk Storage',
+          'Desain Responsif (Template)',
+          '1 Halaman Landing Page',
+          'Tombol Integrasi WhatsApp',
+          { text: 'Custom Domain', included: false },
+          { text: 'Email Bisnis', included: false },
           'Free SSL',
           '1x Revisi Gratis',
-          'Garansi Maintenance 15 Hari',
-          'Video Panduan Akses Website'
+          'Garansi Maintenance 15 Hari'
         ]
       },
       {
         name: 'Growth',
-        price: 'Rp 2.750.000',
+        price: 'Rp 1.500.000',
         isPopular: true,
-        description: '*Buat kamu yang pengen tampil lebih profesional dan punya kontrol lebih atas fitur & brand.',
+        description: '*Cocok untuk jualan konversi tinggi dengan kontrol fitur dan brand yang lebih komprehensif.',
         features: [
-          'Semua yang ada di Starter, plus:',
+          'Free Domain (.com)',
           'Hosting 1 Tahun',
-          'Desain Visual Lebih Kompleks (CTA, Form, Galeri)',
-          'Direct WhatsApp Chat',
-          '2 Email Bisnis',
-          '10 GB Disk Storage',
+          'Desain Custom Profesional',
+          '1 Halaman Landing Page (Panjang)',
+          '1 Email Bisnis Profesional',
+          'Tombol Order / Form Leads',
           '3x Revisi Gratis',
-          'Free SSL',
           'SEO On-Page Basic',
           'Garansi Maintenance 1 Bulan'
         ]
       },
       {
         name: 'Ultimate',
-        price: 'Rp 3.750.000',
-        description: '*Solusi landing page all-in-one buat bisnis digital yang pengen konversi tinggi + tampil premium.',
+        price: 'Rp 2.750.000',
+        description: '*Solusi landing page all-in-one buat bisnis digital yang ingin dominasi konversi & tampil maksimal.',
         features: [
-          'Semua yang ada di Growth, plus:',
-          'Up to 2 Halaman Tambahan (About / FAQ / Blog)',
-          'Request Fitur Khusus (Popup, Accordion, Pricing)',
-          'Desain Interaktif (Animated Scroll, Parallax)',
+          'Semua fitur pada paket Growth',
+          'Up to 2 Halaman Tambahan (Thank You dsb)',
+          'Request Copywriting Basis Konversi',
+          'Special Effect & Animasi Scroll',
           'Speed Optimization (Lazy Load)',
+          'Integrasi Pixel & Analytics',
           '5x Revisi Gratis',
           'Garansi Maintenance 1.5 Bulan'
         ]
@@ -250,8 +249,29 @@ export default function LandingPage() {
   // Jika paket belum diisi, fallback ke Landing Page
   const currentPricing = pricingData[activeTab] || pricingData['Landing Page'];
 
+  const testimonials = [
+    { name: 'Budi Santoso', role: 'CEO, Retail Nusantara', text: 'TechSoed berhasil mentransformasi website kami menjadi jauh lebih modern dan cepat. Penjualan meningkat drastis berkat UI/UX yang intuitif.', rating: 5 },
+    { name: 'Siti Aminah', role: 'Founder, Hijab Style', text: 'Sistem E-Commerce yang dibuat sangat stabil meski sedang ada flash sale. Timnya responsif dan solutif. Sangat direkomendasikan!', rating: 5 },
+    { name: 'Andi Wijaya', role: 'Direktur, PT Bangun Mandiri', text: 'Aplikasi manajemen ERP dari TechSoed membantu operasional bisnis kami menjadi lebih otomatis dan efisien. Luar biasa!', rating: 5 },
+    { name: 'Lestari', role: 'Head of Marketing, EduTech', text: 'Branding dan desain landing page sangat elegan. Proses pengerjaan on time dan sesuai dengan ekspektasi. Terima kasih TechSoed!', rating: 5 },
+    { name: 'Rizki Pratama', role: 'Pemilik, Kopi Kenangan', text: 'Layanan manajemen media sosial dan visual dari TechSoed membuat engagement kami naik 300% dalam sebulan. Mantap!', rating: 5 },
+  ];
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}} />
       {/* --- FLOATING NAVBAR --- */}
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
         <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
@@ -281,13 +301,42 @@ export default function LandingPage() {
 
       {/* --- CLEAN HERO SECTION --- */}
       <section className="pt-48 pb-20 px-6 relative overflow-hidden bg-white flex flex-col items-center text-center">
+        {/* Decorative Gradients & Grid */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-100 rounded-full blur-[100px] opacity-60 z-0 pointer-events-none"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-50 rounded-full blur-[100px] opacity-60 z-0 pointer-events-none"></div>
+
+        {/* Subtle Dot Pattern */}
+        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#cbd5e1 1.5px, transparent 1.5px)', backgroundSize: '32px 32px', WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)', maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)' }}></div>
+
+        {/* Floating Tech Accents */}
+        <div className="absolute top-36 left-[12%] hidden lg:block opacity-20 animate-[bounce_4s_ease-in-out_infinite] z-0 pointer-events-none">
+          <Monitor className="w-10 h-10 text-blue-500" />
+        </div>
+        <div className="absolute top-48 right-[15%] hidden lg:block opacity-20 animate-[pulse_3s_ease-in-out_infinite] z-0 pointer-events-none">
+          <Code className="w-12 h-12 text-slate-500" />
+        </div>
+        {/* <div className="absolute top-1/2 left-[20%] hidden lg:block opacity-10 animate-[pulse_5s_ease-in-out_infinite] z-0 pointer-events-none">
+        </div> */}
+        <div className="absolute bottom-32 right-[10%] hidden lg:block opacity-20 animate-[bounce_5s_ease-in-out_infinite] z-0 pointer-events-none">
+          <Smartphone className="w-9 h-9 text-slate-600" />
+        </div>
+        <div className="absolute bottom-20 left-[15%] hidden lg:block opacity-20 animate-[pulse_4s_ease-in-out_infinite] z-0 pointer-events-none">
+          <Database className="w-14 h-14 text-blue-400" />
+        </div>
+        <div className="absolute top-24 right-[5%] hidden lg:block opacity-10 animate-[bounce_6s_ease-in-out_infinite] z-0 pointer-events-none">
+          <Cloud className="w-14 h-14 text-slate-400" />
+        </div>
+        <div className="absolute top-1/3 left-6 hidden lg:block opacity-15 animate-[pulse_6s_ease-in-out_infinite] z-0 pointer-events-none">
+          <Globe className="w-8 h-8 text-blue-300" />
+        </div>
+
         {/* Subtle abstract background lines similar to reference */}
-        <div className="absolute left-0 bottom-0 w-[400px] h-[300px] border-t-[1.5px] border-r-[1.5px] border-slate-200 rounded-tr-[100px] border-dashed opacity-40 z-0"></div>
-        <div className="absolute right-0 bottom-0 w-[400px] h-[300px] border-t-[1.5px] border-l-[1.5px] border-slate-200 rounded-tl-[100px] border-dashed opacity-40 z-0"></div>
+        <div className="absolute left-0 bottom-0 w-[400px] h-[300px] border-t-[1.5px] border-r-[1.5px] border-slate-200 rounded-tr-[100px] border-dashed opacity-40 z-0 pointer-events-none"></div>
+        <div className="absolute right-0 bottom-0 w-[400px] h-[300px] border-t-[1.5px] border-l-[1.5px] border-slate-200 rounded-tl-[100px] border-dashed opacity-40 z-0 pointer-events-none"></div>
 
         <div className="max-w-4xl mx-auto flex flex-col items-center relative z-10 pt-10">
           <h1 className="text-5xl lg:text-7xl font-extrabold leading-[1.1] text-slate-900 mb-6 tracking-tight">
-           Bangun Sistem Digital.<br className="hidden md:block" /> Tingkatkan Skala Bisnis.
+            Bangun Sistem Digital.<br className="hidden md:block" /> Tingkatkan Skala Bisnis.
           </h1>
 
           <p className="text-lg text-slate-500 max-w-2xl leading-relaxed mb-10">
@@ -314,9 +363,9 @@ export default function LandingPage() {
             </div>
             <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
               Waktunya Bisnis Anda Naik Level
-              </h2>
+            </h2>
             <p className="text-lg text-slate-600 leading-relaxed">
-TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digital terintegrasi untuk berbagai skala bisnis. Kami menyediakan layanan web development, UI/UX design, digital branding, dan strategi digital marketing untuk membantu bisnis tumbuh lebih cepat dan efisien.            </p>
+              TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digital terintegrasi untuk berbagai skala bisnis. Kami menyediakan layanan web development, UI/UX design, digital branding, dan strategi digital marketing untuk membantu bisnis tumbuh lebih cepat dan efisien.            </p>
             <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex flex-col gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
@@ -324,7 +373,7 @@ TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digita
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-slate-900 mb-1">Web Development</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">Website kustom berkinerja tinggi, aman, dan dapat diskalakan.</p>
+                  {/* <p className="text-slate-600 text-sm leading-relaxed">Website kustom berkinerja tinggi, aman, dan dapat diskalakan.</p> */}
                 </div>
               </div>
 
@@ -334,7 +383,7 @@ TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digita
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-slate-900 mb-1">UI/UX Design</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">Rancangan antarmuka estetis dengan pengalaman pengguna sempurna.</p>
+                  {/* <p className="text-slate-600 text-sm leading-relaxed">Rancangan antarmuka estetis dengan pengalaman pengguna sempurna.</p> */}
                 </div>
               </div>
 
@@ -344,7 +393,7 @@ TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digita
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-slate-900 mb-1">Digital Branding</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">Pembangunan identitas brand yang kuat dengan aset visual ikonis.</p>
+                  {/* <p className="text-slate-600 text-sm leading-relaxed">Pembangunan identitas brand yang kuat dengan aset visual ikonis.</p> */}
                 </div>
               </div>
 
@@ -354,7 +403,7 @@ TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digita
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-slate-900 mb-1">Social Media</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">Strategi pemasaran konten organik dan berbayar berbasis tren analitik.</p>
+                  {/* <p className="text-slate-600 text-sm leading-relaxed">Strategi pemasaran konten organik dan berbayar berbasis tren analitik.</p> */}
                 </div>
               </div>
             </div>
@@ -423,7 +472,7 @@ TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digita
                 <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Karya Kami</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
-                Project Showcase <br className="hidden md:block" /> 
+                Project Showcase <br className="hidden md:block" />
               </h2>
             </div>
             <p className="text-slate-500 max-w-md md:text-right leading-relaxed">
@@ -581,6 +630,45 @@ TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digita
         </div>
       </section>
 
+      {/* --- TESTIMONIALS SECTION --- */}
+      <section className="py-24 px-6 bg-slate-900 overflow-hidden relative">
+        <div className="absolute top-0 right-[10%] w-96 h-96 bg-blue-600 rounded-full blur-[120px] opacity-20 z-0"></div>
+        <div className="absolute bottom-0 left-[10%] w-96 h-96 bg-blue-500 rounded-full blur-[120px] opacity-10 z-0"></div>
+
+        <div className="max-w-7xl mx-auto mb-16 text-center relative z-10 space-y-4">
+          <div className="inline-flex items-center gap-2 bg-slate-800 border border-slate-700 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">Testimoni Klien</span>
+          </div>
+          <h2 className="text-3xl lg:text-4xl font-extrabold text-white">
+            Apa Kata Mereka Tentang Kami
+          </h2>
+        </div>
+
+        <div className="relative flex overflow-x-hidden group">
+          <div className="py-4 animate-scroll flex gap-6 px-3 w-max">
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <div key={i} className="w-[350px] sm:w-[400px] bg-slate-800 border border-slate-700 p-8 rounded-3xl shadow-xl shrink-0 flex flex-col justify-between">
+                <div>
+                  <div className="flex text-amber-400 mb-6">
+                    {[...Array(t.rating)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
+                  </div>
+                  <p className="text-slate-300 mb-8 italic line-clamp-4 text-lg">"{t.text}"</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-lg text-white shrink-0">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white leading-tight">{t.name}</h4>
+                    <p className="text-sm text-slate-400">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* --- FAQ SECTION --- */}
       <section id="faq" className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
@@ -693,7 +781,7 @@ TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digita
 
           {/* Links Col 1 */}
           <div>
-            
+
           </div>
 
           {/* Links Col 2 */}
