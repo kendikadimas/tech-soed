@@ -1,28 +1,54 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2, Monitor, Smartphone, Globe, Cloud, Database } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2, Monitor, Smartphone, Globe, Cloud, Database } from 'lucide-react';
+import { t } from './translations';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function LandingPage() {
+  const [lang, setLang] = useState<'id' | 'en'>('id');
   const [activeTab, setActiveTab] = useState('Landing Page');
   const [showWaText, setShowWaText] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [portfolioFilter, setPortfolioFilter] = useState('Semua');
 
-  const portfolioCategories = ['Semua', 'Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce', 'Social Media Management'];
+  // MODAL ORDER STATE
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState({ name: '', price: '', category: '' });
+  const [orderForm, setOrderForm] = useState({ name: '', phone: '', email: '', projectDesc: '' });
 
-  const projectsData = [
-    { title: 'Toko Elektronik Online', category: 'E-Commerce', image: '/path-to-project1.jpg', desc: 'Sistem jual beli online dengan fitur multi-payment dan ekspedisi.', size: 'large' },
-    { title: 'EduNusantara Portal', category: 'LMS', image: '/path-to-project6.jpg', desc: 'Sistem manajemen e-learning interaktif terintegrasi.', size: 'small' },
-    { title: 'PT Karya Mandiri Profile', category: 'Company Profile', image: '/path-to-project4.jpg', desc: 'Website company profile elegan untuk perusahaan konstruksi.', size: 'small' },
-    { title: 'Sistem Informasi Klinik', category: 'CMS', image: '/path-to-project3.jpg', desc: 'Sistem manajemen data layanan kesehatan komprehensif (ERP).', size: 'large' },
-    { title: 'Produk Skin Care Launch', category: 'Landing Page', image: '/path-to-project5.jpg', desc: 'Landing page konversi tinggi untuk peluncuran kosmetik.', size: 'small' },
-    { title: 'Kopi Senja Campaign', category: 'Social Media Management', image: '/path-to-project2.jpg', desc: 'Konsep dan manajemen desain Instagram Feed.', size: 'small' },
-  ];
+  const handleOrderClick = (pkg: any) => {
+    setSelectedPackage({ name: pkg.name, price: pkg.price, category: activeTab });
+    setIsOrderModalOpen(true);
+  };
 
-  const filteredProjects = portfolioFilter === 'Semua'
+  const portfolioScrollRef = useRef<HTMLDivElement>(null);
+  const pricingScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollContainer = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
+    if (ref.current) {
+      const scrollAmount = window.innerWidth * 0.8;
+      ref.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const handleOrderSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = `${t[lang].orderWaGreeting}%0A%0A${t[lang].orderWaName}: ${orderForm.name}%0A${t[lang].orderWaEmail}: ${orderForm.email || '-'}%0A${t[lang].orderWaPackage}: ${selectedPackage.category} - ${selectedPackage.name} (${selectedPackage.price})%0A${t[lang].orderWaDesc}: ${orderForm.projectDesc}`;
+    window.open(`https://wa.me/6281353424280?text=${message}`, '_blank');
+    setIsOrderModalOpen(false);
+    setOrderForm({ name: '', phone: '', email: '', projectDesc: '' });
+  };
+
+  const portfolioCategories = t[lang].portfolioCategories;
+  const projectsData = t[lang].projectsData;
+  const tabs = t[lang].tabs;
+  const pricingData = t[lang].pricingData as Record<string, any[]>;
+  const testimonials = t[lang].testimonials;
+
+  const filteredProjects = (portfolioFilter === 'Semua' || portfolioFilter === 'All')
     ? projectsData
-    : projectsData.filter(p => p.category === portfolioFilter);
+    : projectsData.filter((p: any) => p.category === portfolioFilter);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,231 +57,18 @@ export default function LandingPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const tabs = [
-    'Landing Page',
-    'Company Profile',
-    'CMS',
-    'LMS',
-    'E-Commerce',
-    // 'Optimasi SEO',
-    'Social Media Management'
-  ];
-
-  const pricingData: Record<string, any[]> = {
-    'Landing Page': [
-      {
-        name: 'Starter',
-        price: 'Rp 599.000',
-        description: '*Cocok untuk campaign/promo yang ingin langsung tampil online dengan landing page yang ringkas.',
-        features: [
-          'Shared Hosting (6 Bulan)',
-          'Desain Responsif (Template)',
-          '1 Halaman Landing Page',
-          'Tombol Integrasi WhatsApp',
-          { text: 'Custom Domain', included: false },
-          { text: 'Email Bisnis', included: false },
-          'Free SSL',
-          '1x Revisi Gratis',
-          'Garansi Maintenance 15 Hari'
-        ]
-      },
-      {
-        name: 'Growth',
-        price: 'Rp 1.500.000',
-        isPopular: true,
-        description: '*Cocok untuk jualan konversi tinggi dengan kontrol fitur dan brand yang lebih komprehensif.',
-        features: [
-          'Free Domain (.com)',
-          'Hosting 1 Tahun',
-          'Desain Custom Profesional',
-          '1 Halaman Landing Page (Panjang)',
-          '1 Email Bisnis Profesional',
-          'Tombol Order / Form Leads',
-          '3x Revisi Gratis',
-          'SEO On-Page Basic',
-          'Garansi Maintenance 1 Bulan'
-        ]
-      },
-      {
-        name: 'Ultimate',
-        price: 'Rp 2.750.000',
-        description: '*Solusi landing page all-in-one buat bisnis digital yang ingin dominasi konversi & tampil maksimal.',
-        features: [
-          'Semua fitur pada paket Growth',
-          'Up to 2 Halaman Tambahan (Thank You dsb)',
-          'Request Copywriting Basis Konversi',
-          'Special Effect & Animasi Scroll',
-          'Speed Optimization (Lazy Load)',
-          'Integrasi Pixel & Analytics',
-          '5x Revisi Gratis',
-          'Garansi Maintenance 1.5 Bulan'
-        ]
-      }
-    ],
-    'Company Profile': [
-      {
-        name: 'Starter', price: 'Rp 899.000',
-        features: [
-          'Domain (.com)', '1 halaman', 'Template custom', 'Responsive', 'SEO Basic',
-          { text: 'CMS Admin', included: false }, { text: 'Blog/Artikel', included: false },
-          'Form Kontak', 'Integrasi WA', 'Garansi 1 bulan', 'Revisi 2x'
-        ],
-        description: '*Cocok untuk perusahaan yang ingin menampilkan identitas secara ringkas.'
-      },
-      {
-        name: 'Professional', price: 'Rp 3.500.000', isPopular: true,
-        features: [
-          'Domain (.com)', '5-7 halaman', 'Semi custom UI/UX', 'Responsive', 'SEO Basic',
-          'CMS Admin', 'Blog/Artikel', 'Form Kontak', 'Integrasi WA', 'Garansi 2 bulan', 'Revisi 3x'
-        ],
-        description: '*Pilihan terbaik untuk perusahaan skala menengah.'
-      },
-      {
-        name: 'Executive', price: 'Rp 7.500.000',
-        features: [
-          'Domain (.com)', 'Unlimited halaman', 'Fully custom UI/UX', 'Responsive', 'Advanced SEO',
-          'CMS Admin', 'Blog/Artikel', 'Form Kontak + Auto email', 'Integrasi WA', 'Garansi 3 bulan', 'Revisi 5x'
-        ],
-        description: '*Solusi komprehensif untuk perusahaan berskala besar.'
-      }
-    ],
-    'CMS': [
-      {
-        name: 'Basic CMS', price: 'Rp 4.500.000',
-        features: [
-          'Domain (.com)', 'Dashboard Admin', { text: 'Multi User Role', included: false },
-          'Manajemen Produk/Service', 'Blog', 'SEO Basic', { text: 'Analytics', included: false },
-          { text: 'Integrasi Payment', included: false }, { text: 'API Integration', included: false },
-          'Garansi 1 bulan', 'Revisi 4x'
-        ],
-        description: '*Sistem dasar untuk memulai pengelolaan data.'
-      },
-      {
-        name: 'Business CMS', price: 'Rp 8.500.000', isPopular: true,
-        features: [
-          'Domain (.com)', 'Dashboard Admin', 'Multi User Role',
-          'Manajemen Produk/Service', 'Blog', 'SEO Advanced', 'Analytics',
-          'Integrasi Payment', { text: 'API Integration', included: false },
-          'Garansi 3 bulan', 'Revisi 5x'
-        ],
-        description: '*Optimal untuk kolaborasi tim dan pelacakan.'
-      },
-      {
-        name: 'Enterprise CMS', price: 'Rp 14.000.000',
-        features: [
-          'Domain (.com)', 'Dashboard Admin', 'Multi User Role',
-          'Manajemen Produk/Service', 'Blog', 'SEO Advanced + struktur schema', 'Analytics',
-          'Integrasi Payment', 'API Integration',
-          'Garansi 6 bulan', 'Revisi 7x'
-        ],
-        description: '*Kustomisasi tak terbatas dan konektivitas API penuh.'
-      }
-    ],
-    'LMS': [
-      {
-        name: 'LMS Starter', price: 'Rp 9.000.000',
-        features: [
-          'Manajemen Course', 'Upload Video', 'Quiz / Ujian',
-          { text: 'Sertifikat', included: false }, { text: 'Progress Tracking', included: false },
-          { text: 'Multi Instructor', included: false }, { text: 'Payment Gateway', included: false },
-          'Dashboard Statistik Basic', 'Role System Basic (4)', 'Maintenance 2 bulan', 'Revisi 4x'
-        ],
-        description: '*Solusi edukasi dasar untuk kursus pemula.'
-      },
-      {
-        name: 'LMS Pro', price: 'Rp 15.000.000', isPopular: true,
-        features: [
-          'Manajemen Course', 'Upload Video', 'Quiz / Ujian',
-          'Sertifikat', 'Progress Tracking',
-          'Multi Instructor', 'Payment Gateway',
-          'Dashboard Statistik Advanced', 'Role System Advanced (5)', 'Maintenance 3 bulan', 'Revisi 5x'
-        ],
-        description: '*Modul pembelajaran interaktif dan mandiri.'
-      },
-      {
-        name: 'LMS Enterprise', price: 'Rp 25.000.000',
-        features: [
-          'Manajemen Course', 'Upload Video', 'Quiz / Ujian + Bank Soal',
-          'Sertifikat Custom', 'Progress Tracking',
-          'Multi Instructor', 'Payment Gateway',
-          'Dashboard Statistik Advanced + Export Data', 'Role System Advanced (5)', 'Maintenance 6 bulan', 'Revisi 7x'
-        ],
-        description: '*Fasilitas edukasi skala besar dengan fitur terlengkap.'
-      }
-    ],
-    'E-Commerce': [
-      {
-        name: 'Store Basic', price: 'Rp 10.000.000',
-        features: [
-          'Produk Unlimited', 'Payment Gateway', 'Manajemen Order',
-          { text: 'Multi Vendor', included: false }, { text: 'Komisi Vendor', included: false },
-          { text: 'Promo & Voucher', included: false }, 'Dashboard Keuangan Basic',
-          { text: 'Integrasi API', included: false }, 'Mobile Optimized'
-        ],
-        description: '*Toko online dengan pengaturan sistem checkout mudah.'
-      },
-      {
-        name: 'Store Pro', price: 'Rp 18.000.000', isPopular: true,
-        features: [
-          'Produk Unlimited', 'Payment Gateway', 'Manajemen Order',
-          { text: 'Multi Vendor', included: false }, { text: 'Komisi Vendor', included: false },
-          'Promo & Voucher', 'Dashboard Keuangan Advanced',
-          'Integrasi API Optional', 'Mobile Optimized'
-        ],
-        description: '*Jangkau lebih banyak konversi dengan pemasaran otomatis.'
-      },
-      {
-        name: 'Marketplace', price: 'Rp 35.000.000+',
-        features: [
-          'Produk Unlimited', 'Payment Gateway', 'Manajemen Order',
-          'Multi Vendor', 'Komisi Vendor',
-          'Promo & Voucher', 'Dashboard Keuangan Advanced',
-          'Integrasi API', 'Mobile Optimized'
-        ],
-        description: '*Buka pintu bagi merchant lain di seluruh wilayah.'
-      }
-    ],
-    'Social Media Management': [
-      {
-        name: 'Feed', price: 'Rp 1.500.000',
-        features: [
-          '12 Desain Feed Premium', 'Copywriting & Caption', 'Riset Hashtag Bertarget',
-          'Penjadwalan Posting', { text: 'Produksi Video Reels', included: false },
-          { text: 'Ide Konten & Storyboard', included: false }, { text: 'Laporan Analitik', included: false }
-        ],
-        description: '*Paket perancangan layout dan desain Feed estetis.'
-      },
-      {
-        name: 'Reels', price: 'Rp 3.500.000', isPopular: true,
-        features: [
-          '8 Video Reels / TikTok', 'Ide Konten & Storyboard', 'Video Editing Transisi Estetik',
-          'Copywriting & Caption', 'Penjadwalan Posting',
-          { text: 'Desain Feed Statis', included: false }, { text: 'Laporan Analitik', included: false }
-        ],
-        description: '*Fokus pada produksi video pendek untuk jangkauan viral.'
-      },
-      {
-        name: 'All Content', price: 'Rp 5.500.000+',
-        features: [
-          '12 Desain Feed Premium', '8 Video Reels / TikTok', 'Ide Konten & Storyboard',
-          'Copywriting & Riset Hashtag', 'Admin Posting & Interaksi',
-          'Optimasi Profil (Bio & Highlight)', 'Laporan Performansi Lengkap'
-        ],
-        description: '*Solusi manajemen akun hulu ke hilir untuk mendongkrak brand Anda.'
-      }
-    ]
-  };
+  // Sync portfolioFilter default translation if language changes when it's on 'All'/'Semua'
+  useEffect(() => {
+    if (portfolioFilter === 'Semua' && lang === 'en') {
+      setPortfolioFilter('All');
+    } else if (portfolioFilter === 'All' && lang === 'id') {
+      setPortfolioFilter('Semua');
+    }
+  }, [lang, portfolioFilter]);
 
   // Jika paket belum diisi, fallback ke Landing Page
   const currentPricing = pricingData[activeTab] || pricingData['Landing Page'];
 
-  const testimonials = [
-    { name: 'Budi Santoso', role: 'CEO, Retail Nusantara', text: 'TechSoed berhasil mentransformasi website kami menjadi jauh lebih modern dan cepat. Penjualan meningkat drastis berkat UI/UX yang intuitif.', rating: 5 },
-    { name: 'Siti Aminah', role: 'Founder, Hijab Style', text: 'Sistem E-Commerce yang dibuat sangat stabil meski sedang ada flash sale. Timnya responsif dan solutif. Sangat direkomendasikan!', rating: 5 },
-    { name: 'Andi Wijaya', role: 'Direktur, PT Bangun Mandiri', text: 'Aplikasi manajemen ERP dari TechSoed membantu operasional bisnis kami menjadi lebih otomatis dan efisien. Luar biasa!', rating: 5 },
-    { name: 'Lestari', role: 'Head of Marketing, EduTech', text: 'Branding dan desain landing page sangat elegan. Proses pengerjaan on time dan sesuai dengan ekspektasi. Terima kasih TechSoed!', rating: 5 },
-    { name: 'Rizki Pratama', role: 'Pemilik, Kopi Kenangan', text: 'Layanan manajemen media sosial dan visual dari TechSoed membuat engagement kami naik 300% dalam sebulan. Mantap!', rating: 5 },
-  ];
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
@@ -287,14 +100,18 @@ export default function LandingPage() {
             <span className="text-xl font-extrabold tracking-tight text-slate-900">TechSoed</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">Project</a>
-            <a href="#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">Harga</a>
-            <a href="#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">Tentang Kami</a>
-            <a href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">FAQ</a>
+            <a href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navProject}</a>
+            <a href="#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navHarga}</a>
+            <a href="#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navTentang}</a>
+            <a href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navFaq}</a>
           </div>
           <div className="hidden md:flex items-center gap-4">
-            {/* <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" className="text-sm font-semibold text-slate-600 hover:text-slate-900 transition px-5 py-2.5 border border-slate-200 rounded-full hover:bg-slate-50">Hubungi Kami</a> */}
-            <a href="https://wa.me/628153424280" target="_blank" rel="noreferrer " className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/20 transition">Hubungi Kami</a>
+            <a href="https://wa.me/628153424280" target="_blank" rel="noreferrer " className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/20 transition">{t[lang].navContact}</a>
+            {/* Lang Dropdown / Toggle */}
+            <div className="flex bg-slate-100 rounded-full p-1 ml-2 shadow-inner items-center">
+              <button onClick={() => setLang('id')} className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${lang === 'id' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}>ID</button>
+              <button onClick={() => setLang('en')} className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${lang === 'en' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}>EN</button>
+            </div>
           </div>
         </nav>
       </div>
@@ -334,46 +151,57 @@ export default function LandingPage() {
         <div className="absolute left-0 bottom-0 w-[400px] h-[300px] border-t-[1.5px] border-r-[1.5px] border-slate-200 rounded-tr-[100px] border-dashed opacity-40 z-0 pointer-events-none"></div>
         <div className="absolute right-0 bottom-0 w-[400px] h-[300px] border-t-[1.5px] border-l-[1.5px] border-slate-200 rounded-tl-[100px] border-dashed opacity-40 z-0 pointer-events-none"></div>
 
-        <div className="max-w-4xl mx-auto flex flex-col items-center relative z-10 pt-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-4xl mx-auto flex flex-col items-center relative z-10 pt-10"
+        >
           <h1 className="text-5xl lg:text-7xl font-extrabold leading-[1.1] text-slate-900 mb-6 tracking-tight">
-            Bangun Sistem Digital.<br className="hidden md:block" /> Tingkatkan Skala Bisnis.
+            {t[lang].heroTitle1}<br className="hidden md:block" /> {t[lang].heroTitle2}
           </h1>
 
           <p className="text-lg text-slate-500 max-w-2xl leading-relaxed mb-10">
-            Kami menghadirkan solusi teknologi yang membantu bisnis berkembang lebih cepat, melayani lebih banyak pelanggan, dan meningkatkan pendapatan secara terukur.
+            {t[lang].heroDesc}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-20">
             <a href="#harga" className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold shadow-xl shadow-blue-500/20 hover:bg-blue-600 hover:-translate-y-0.5 transition-all duration-300">
-              Mulai sekarang
+              {t[lang].heroBtnStart}
             </a>
             <a href="#portfolio" className="bg-white text-slate-800 border border-slate-200 px-8 py-3 rounded-full font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 transition-all duration-300">
-              Lihat portfolio
+              {t[lang].heroBtnPort}
             </a>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* --- ABOUT US SECTION --- */}
       <section id="tentang" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
-          <div className="md:w-1/2 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="md:w-1/2 space-y-6"
+          >
             <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Tentang TechSoed</span>
+              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">{t[lang].aboutTag}</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
-              Waktunya Bisnis Anda Naik Level
+              {t[lang].aboutTitle}
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed">
-              TechSoed adalah perusahaan teknologi yang mengembangkan produk dan sistem digital terintegrasi untuk berbagai skala bisnis. Kami menyediakan layanan web development, UI/UX design, digital branding, dan strategi digital marketing untuk membantu bisnis tumbuh lebih cepat dan efisien.            </p>
+              {t[lang].aboutDesc}
+            </p>
             <div className="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex flex-col gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
                   <Code className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">Web Development</h4>
-                  {/* <p className="text-slate-600 text-sm leading-relaxed">Website kustom berkinerja tinggi, aman, dan dapat diskalakan.</p> */}
+                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc1Title}</h4>
                 </div>
               </div>
 
@@ -382,8 +210,7 @@ export default function LandingPage() {
                   <PenTool className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">UI/UX Design</h4>
-                  {/* <p className="text-slate-600 text-sm leading-relaxed">Rancangan antarmuka estetis dengan pengalaman pengguna sempurna.</p> */}
+                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc2Title}</h4>
                 </div>
               </div>
 
@@ -392,8 +219,7 @@ export default function LandingPage() {
                   <Megaphone className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">Digital Branding</h4>
-                  {/* <p className="text-slate-600 text-sm leading-relaxed">Pembangunan identitas brand yang kuat dengan aset visual ikonis.</p> */}
+                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc3Title}</h4>
                 </div>
               </div>
 
@@ -402,13 +228,18 @@ export default function LandingPage() {
                   <Share2 className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">Social Media</h4>
-                  {/* <p className="text-slate-600 text-sm leading-relaxed">Strategi pemasaran konten organik dan berbayar berbasis tren analitik.</p> */}
+                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc4Title}</h4>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="md:w-1/2 w-full relative">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="md:w-1/2 w-full relative"
+          >
             {/* Dekorasi Latar */}
             <div className="absolute inset-0 bg-blue-600 rounded-[3rem] transform translate-x-4 translate-y-4 opacity-10"></div>
             <div className="absolute -inset-4 border border-slate-200 rounded-[3.5rem] transform -translate-x-2 -translate-y-2 z-0"></div>
@@ -418,12 +249,18 @@ export default function LandingPage() {
               <img src="/path-to-about-image.jpg" alt="Tentang TechSoed" className="w-full h-full object-cover" />
 
               {/* Badge Overlays */}
-              <div className="absolute bottom-8 left-8 bg-white/90 backdrop-blur px-6 py-4 rounded-2xl shadow-lg border border-white/20">
-                <div className="text-3xl font-black text-blue-600">5+</div>
-                <div className="text-xs font-bold text-slate-600 uppercase tracking-wider mt-1">Tahun Pengalaman</div>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="absolute bottom-8 left-8 bg-white/90 backdrop-blur px-6 py-4 rounded-2xl shadow-lg border border-white/20"
+              >
+                <div className="text-3xl font-black text-blue-600">{t[lang].aboutExpNum}</div>
+                <div className="text-xs font-bold text-slate-600 uppercase tracking-wider mt-1">{t[lang].aboutExpText}</div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -469,24 +306,24 @@ export default function LandingPage() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div className="space-y-4 max-w-2xl">
               <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Karya Kami</span>
+                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">{t[lang].portTag}</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
-                Project Showcase <br className="hidden md:block" />
+                {t[lang].portTitle}
               </h2>
             </div>
             <p className="text-slate-500 max-w-md md:text-right leading-relaxed">
-              Jelajahi berbagai studi kasus proyek digital tempat ide-ide brilian Anda dan rekayasa cerdas kami bertemu.
+              {t[lang].portDesc}
             </p>
           </div>
 
           {/* Filtering Pills */}
-          <div className="flex flex-wrap items-center gap-3 mb-12">
+          <div className="flex overflow-x-auto snap-x snap-mandatory flex-nowrap md:flex-wrap items-center gap-3 mb-12 pb-2 -mx-6 px-6 md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {portfolioCategories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setPortfolioFilter(cat)}
-                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${portfolioFilter === cat
+                className={`snap-start shrink-0 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${portfolioFilter === cat
                   ? 'bg-slate-900 text-white shadow-md'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
@@ -496,44 +333,62 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Dynamic Grid Layout (Bento Style) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[350px]">
-            {filteredProjects.map((project, idx) => (
-              <div
-                key={idx}
-                className={`group cursor-pointer relative rounded-[2rem] overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-end p-8 ${project.size === 'large' ? 'md:col-span-2 lg:col-span-2 bg-slate-800' : 'col-span-1'
-                  }`}
-              >
-                {/* Image Background */}
-                <div className="absolute inset-0 z-0">
-                  {/* Fallback pattern until image is loaded/assigned */}
-                  <div className="absolute inset-0 bg-slate-200 mix-blend-multiply opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-in-out" />
+          {/* Dynamic Grid Layout (Bento Style & Mobile Horizontal Scroll) */}
+          <div className="relative group">
+            {/* Nav Arrows */}
+            <div className="absolute top-1/2 -ml-2 sm:-ml-4 md:hidden left-0 z-20 transform -translate-y-1/2 pointer-events-none">
+              <button type="button" onClick={() => scrollContainer(portfolioScrollRef, 'left')} className="w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow-lg flex items-center justify-center pointer-events-auto text-slate-600 hover:text-blue-600 transition active:scale-95 border border-slate-100">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -mr-2 sm:-mr-4 md:hidden right-0 z-20 transform -translate-y-1/2 pointer-events-none">
+              <button type="button" onClick={() => scrollContainer(portfolioScrollRef, 'right')} className="w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow-lg flex items-center justify-center pointer-events-auto text-slate-600 hover:text-blue-600 transition active:scale-95 border border-slate-100">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
 
-                  {/* Dark Gradient Overlay for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
+            <div ref={portfolioScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:auto-rows-[350px] pb-8 -mx-6 px-6 md:mx-0 md:px-0 scroll-pt-6 md:scroll-pt-0">
+              {filteredProjects.map((project: any, idx: number) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className={`group snap-center shrink-0 w-[85vw] md:w-auto min-h-[350px] md:min-h-0 cursor-pointer relative rounded-[2rem] overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-end p-8 ${project.size === 'large' ? 'md:col-span-2 lg:col-span-2 bg-slate-800' : 'md:col-span-1'
+                    }`}
+                >
+                  {/* Image Background */}
+                  <div className="absolute inset-0 z-0">
+                    {/* Fallback pattern until image is loaded/assigned */}
+                    <div className="absolute inset-0 bg-slate-200 mix-blend-multiply opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-in-out" />
 
-                {/* Content */}
-                <div className="relative z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-white text-xs font-bold uppercase tracking-wider mb-4 border border-white/10">
-                    {project.category}
-                  </span>
-                  <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-blue-200 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-300 text-sm max-w-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    {project.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+                    {/* Dark Gradient Overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-white text-xs font-bold uppercase tracking-wider mb-4 border border-white/10">
+                      {project.category}
+                    </span>
+                    <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-blue-200 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-slate-300 text-sm max-w-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {project.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Load More Button */}
           <div className="mt-16 text-center">
             <button className="px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-full font-bold hover:bg-slate-50 hover:border-slate-300 hover:shadow-sm transition-all flex items-center gap-2 mx-auto">
-              Muat Lebih Banyak <ChevronDown className="w-4 h-4" />
+              {t[lang].portLoadMore} <ChevronDown className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -544,23 +399,23 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div className="text-center space-y-4 max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Harga & Paket</span>
+              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">{t[lang].priceTag}</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
-              Pricelist Layanan
+              {t[lang].priceTitle}
             </h2>
             <p className="text-lg text-slate-600">
-              Solusi lengkap untuk membantu bisnis Anda eksis di dunia digital!
+              {t[lang].priceDesc}
             </p>
           </div>
 
           {/* TABS */}
-          <div className="flex flex-wrap justify-center mb-16 gap-2 px-4 max-w-5xl mx-auto">
+          <div className="flex overflow-x-auto snap-x snap-mandatory flex-nowrap md:flex-wrap justify-start md:justify-center mb-16 gap-2 px-6 md:px-4 max-w-5xl mx-auto -mx-6 md:mx-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-5 py-2.5 text-sm font-bold transition-all duration-300 rounded-xl ${activeTab === tab
+                className={`snap-start shrink-0 px-5 py-2.5 text-sm font-bold transition-all duration-300 rounded-xl ${activeTab === tab
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20'
                   : 'bg-white text-slate-600 hover:bg-slate-50 hover:text-blue-600 border border-slate-200'
                   }`}
@@ -570,62 +425,103 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* PRICING CONTENT */}
-          <div className="grid lg:grid-cols-3 gap-8 items-center w-full">
-            {currentPricing?.map((pkg: any, index: number) => (
-              <div
-                key={index}
-                className={`relative flex flex-col p-8 lg:p-10 transition duration-300 rounded-3xl border ${pkg.isPopular
-                  ? 'bg-blue-600 border-blue-500 shadow-xl shadow-blue-900/10 z-10'
-                  : 'bg-white border-slate-200 hover:border-blue-200 shadow-sm'
-                  }`}
-              >
-                {/* Accent Ribbon for Popular */}
-                {pkg.isPopular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-blue-600 text-xs font-bold px-4 py-1.5 rounded-full shadow-sm border border-slate-100">
-                    PALING POPULER
+          {/* PRICING CONTENT (Horizontal scroll on mobile) */}
+          <div className="relative w-full group">
+            {/* Nav Arrows */}
+            <div className="absolute top-1/2 -ml-2 sm:-ml-4 md:hidden left-0 z-20 transform -translate-y-1/2 pointer-events-none">
+              <button type="button" onClick={() => scrollContainer(pricingScrollRef, 'left')} className="w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow-xl flex items-center justify-center pointer-events-auto text-slate-600 hover:text-blue-600 transition active:scale-95 border border-slate-100">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -mr-2 sm:-mr-4 md:hidden right-0 z-20 transform -translate-y-1/2 pointer-events-none">
+              <button type="button" onClick={() => scrollContainer(pricingScrollRef, 'right')} className="w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow-xl flex items-center justify-center pointer-events-auto text-slate-600 hover:text-blue-600 transition active:scale-95 border border-slate-100">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div ref={pricingScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-3 gap-8 lg:items-center w-full pb-8 pt-4 px-6 md:px-4 -mx-6 md:mx-0 scroll-pt-6 md:scroll-pt-0">
+              {currentPricing?.map((pkg: any, index: number) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
+                  className={`relative snap-center shrink-0 w-[85vw] lg:w-auto flex flex-col p-8 lg:p-10 transition duration-300 rounded-3xl border ${pkg.isPopular
+                    ? 'bg-blue-600 border-blue-500 shadow-2xl shadow-blue-900/20 z-10 lg:scale-105'
+                    : 'bg-white border-slate-200 hover:border-blue-200 shadow-sm'
+                    }`}
+                >
+                  {/* Accent Ribbon for Popular */}
+                  {pkg.isPopular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-blue-600 text-xs font-bold px-4 py-1.5 rounded-full shadow-sm border border-slate-100">
+                      {t[lang].pricePopular}
+                    </div>
+                  )}
+
+                  <div className="text-left mb-8 pt-4">
+                    <h3 className={`text-2xl font-bold mb-2 ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</h3>
+                    <div className="mb-4 flex items-baseline gap-1">
+                      <span className={`text-3xl font-extrabold ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.price}</span>
+                    </div>
+                    <p className={`text-sm ${pkg.isPopular ? 'text-blue-100' : 'text-slate-500'} min-h-[40px]`}>
+                      {pkg.description}
+                    </p>
                   </div>
-                )}
 
-                <div className="text-left mb-8 pt-4">
-                  <h3 className={`text-2xl font-bold mb-2 ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</h3>
-                  <div className="mb-4 flex items-baseline gap-1">
-                    <span className={`text-3xl font-extrabold ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.price}</span>
+                  <ul className="space-y-4 mb-8 flex-1">
+                    {pkg.features.map((feature: any, fIndex: number) => {
+                      const text = typeof feature === 'string' ? feature : feature.text;
+                      const included = typeof feature === 'string' ? true : feature.included !== false;
+
+                      return (
+                        <li key={fIndex} className={`flex items-start gap-3 text-sm ${!included ? 'opacity-40 line-through' : ''}`}>
+                          {included ? (
+                            <CheckCircle className={`w-5 h-5 shrink-0 ${pkg.isPopular ? 'text-blue-200' : 'text-blue-600'}`} />
+                          ) : (
+                            <X className={`w-5 h-5 shrink-0 ${pkg.isPopular ? 'text-blue-300' : 'text-slate-400'}`} />
+                          )}
+                          <span className={`${pkg.isPopular ? 'text-white' : 'text-slate-700'}`}>{text}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  <div className="mt-auto">
+                    <button
+                      onClick={() => handleOrderClick(pkg)}
+                      className={`w-full py-3.5 font-bold rounded-xl transition flex items-center justify-center gap-2 ${pkg.isPopular
+                        ? 'bg-white text-blue-600 hover:bg-slate-50 shadow-md'
+                        : 'bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100'
+                        }`}>
+                      <ShoppingCart className="w-5 h-5" /> {t[lang].priceOrderText}
+                    </button>
                   </div>
-                  <p className={`text-sm ${pkg.isPopular ? 'text-blue-100' : 'text-slate-500'} min-h-[40px]`}>
-                    {pkg.description}
-                  </p>
-                </div>
-
-                <ul className="space-y-4 mb-8 flex-1">
-                  {pkg.features.map((feature: any, fIndex: number) => {
-                    const text = typeof feature === 'string' ? feature : feature.text;
-                    const included = typeof feature === 'string' ? true : feature.included !== false;
-
-                    return (
-                      <li key={fIndex} className={`flex items-start gap-3 text-sm ${!included ? 'opacity-40 line-through' : ''}`}>
-                        {included ? (
-                          <CheckCircle className={`w-5 h-5 shrink-0 ${pkg.isPopular ? 'text-blue-200' : 'text-blue-600'}`} />
-                        ) : (
-                          <X className={`w-5 h-5 shrink-0 ${pkg.isPopular ? 'text-blue-300' : 'text-slate-400'}`} />
-                        )}
-                        <span className={`${pkg.isPopular ? 'text-white' : 'text-slate-700'}`}>{text}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-
-                <div className="mt-auto">
-                  <button className={`w-full py-3.5 font-bold rounded-xl transition flex items-center justify-center gap-2 ${pkg.isPopular
-                    ? 'bg-white text-blue-600 hover:bg-slate-50 shadow-md'
-                    : 'bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100'
-                    }`}>
-                    <ShoppingCart className="w-5 h-5" /> Order Sekarang
-                  </button>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          {/* Consultation Banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-16 text-center max-w-2xl mx-auto bg-white p-8 rounded-3xl border border-slate-200 shadow-sm"
+          >
+            <h3 className="text-xl font-bold text-slate-900 mb-2">{t[lang].priceConsultText}</h3>
+            <div className="mt-6">
+              <a
+                href={`https://wa.me/628153424280?text=${t[lang].orderWaGreeting}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-3.5 rounded-xl font-bold hover:bg-[#20bd5a] hover:shadow-lg hover:shadow-[#25D366]/30 transition-all duration-300"
+              >
+                <MessageCircle className="w-5 h-5" /> {t[lang].priceConsultBtn}
+              </a>
+            </div>
+          </motion.div>
 
         </div>
       </section>
@@ -635,14 +531,20 @@ export default function LandingPage() {
         <div className="absolute top-0 right-[10%] w-96 h-96 bg-blue-600 rounded-full blur-[120px] opacity-20 z-0"></div>
         <div className="absolute bottom-0 left-[10%] w-96 h-96 bg-blue-500 rounded-full blur-[120px] opacity-10 z-0"></div>
 
-        <div className="max-w-7xl mx-auto mb-16 text-center relative z-10 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-7xl mx-auto mb-16 text-center relative z-10 space-y-4"
+        >
           <div className="inline-flex items-center gap-2 bg-slate-800 border border-slate-700 px-3 py-1 rounded-full">
-            <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">Testimoni Klien</span>
+            <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">{t[lang].testiTag}</span>
           </div>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-white">
-            Apa Kata Mereka Tentang Kami
+            {t[lang].testiTitle}
           </h2>
-        </div>
+        </motion.div>
 
         <div className="relative flex overflow-x-hidden group">
           <div className="py-4 animate-scroll flex gap-6 px-3 w-max">
@@ -672,36 +574,29 @@ export default function LandingPage() {
       {/* --- FAQ SECTION --- */}
       <section id="faq" className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center space-y-4 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center space-y-4 mb-16"
+          >
             <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900">
-              Pertanyaan yang Sering Diajukan
+              {t[lang].faqH2}
             </h2>
             <p className="text-lg text-slate-600">
-              Menghapus keraguan Anda sebelum memulai kerja sama dengan TechSoed.
+              {t[lang].faqDesc}
             </p>
-          </div>
+          </motion.div>
 
           <div className="space-y-4">
-            {[
-              {
-                q: 'Berapa lama estimasi pengerjaan website/aplikasi?',
-                a: 'Waktu pengerjaan sangat bergantung pada kompleksitas fitur dan skala pengerjaan. Untuk Landing Page memakan waktu 1–2 minggu. CMS dan E-Commerce umumnya berkisar 4–8 minggu. Timeline detil akan kami sediakan setelah menganalisis kebutuhan spesifik dari diskusi awal.'
-              },
-              // {
-              //   q: 'Apakah harga paket sudah termasuk biaya domain & hosting?',
-              //   a: 'Ya! Untuk paket Landing Page dan CMS, kami memberikan domain (.com/.id) dan cloud hosting gratis (hingga 1 tahun pertama) dengan garansi stabilitas 99% uptime.'
-              // },
-              {
-                q: 'Bagaimana jika saya memerlukan fitur kustom di luar paket di atas?',
-                a: 'TechSoed mengkhususkan diri di dalam custom enterprise development. Hubungi tim representatif kami untuk mendiskusikan fitur yang belum ada dalam daftar. Kami akan menyiapkan timeline dan penawaran sesuai dengan proporsi teknologinya.'
-              },
-              {
-                q: 'Apakah ada biaya lanjutan (Maintenance) setelah aplikasi selesai dibuat?',
-                a: 'Kami memberikan Garansi Bug/Error (Maintenance Gratis) dari 15 hari hingga 6 bulan tergantung paket Anda. Setelah itu, kami sangat menyarankan layanan SLA/Maintenance opsional tahunan agar pihak kami dapat rutin menambal (patch) keamanan dan mengoptimasi infrastruktur sistem.'
-              }
-            ].map((faq, idx) => (
-              <div
+            {t[lang].faqData.map((faq: { q: string, a: string }, idx: number) => (
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
                 className="border border-slate-200 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm"
               >
                 <button
@@ -716,14 +611,14 @@ export default function LandingPage() {
                   />
                 </button>
                 <div
-                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === idx ? 'max-h-60 pb-5 opacity-100' : 'max-h-0 opacity-0'
+                  className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openFaq === idx ? 'max-h-[500px] pb-5 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                 >
                   <p className="text-slate-600 leading-relaxed pt-2 border-t border-slate-200">
                     {faq.a}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -731,25 +626,30 @@ export default function LandingPage() {
 
       {/* --- CTA BANNER SECTION --- */}
       <section className="py-20 px-6 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-6xl mx-auto bg-blue-600 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-blue-600/20">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto bg-blue-600 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-blue-600/20"
+        >
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500 rounded-full blur-3xl opacity-50 transform translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-700 rounded-full blur-3xl opacity-30 transform -translate-x-1/2 translate-y-1/2"></div>
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-8">
             <h2 className="text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-              Siap Membawa Bisnis Anda Naik Kelas?
+              {t[lang].ctaTitle}
             </h2>
             <p className="text-lg text-blue-100 leading-relaxed font-medium">
-              Konsultasikan masalah teknikal bisnis Anda bersama kami. Tim teknis terbaik
-              kami siap memandu pembuatan dan transisi digitalisasi tanpa hambatan sama sekali.
+              {t[lang].ctaDesc}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
               <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-extrabold hover:bg-blue-50 transition drop-shadow-lg flex items-center justify-center gap-2">
-                Hubungi Kami Sekarang <ArrowRight className="w-5 h-5" />
+                {t[lang].ctaBtn} <ArrowRight className="w-5 h-5" />
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* --- FOOTER --- */}
@@ -764,7 +664,7 @@ export default function LandingPage() {
               <span className="text-xl font-bold tracking-tight text-white">TechSoed</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Agensi solusi digital dengan spesialisasi pengembangan perangkat lunak (website, aplikasi web, dan LMS) berkinerja tinggi. Didirikan berfokus pada efisiensi.
+              {t[lang].footerDesc}
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
@@ -786,7 +686,7 @@ export default function LandingPage() {
 
           {/* Links Col 2 */}
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Layanan</h4>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t[lang].footerSvcHeading}</h4>
             <ul className="space-y-4 text-sm">
               <li><a href="#harga" className="hover:text-blue-400 transition">Web Development</a></li>
               <li><a href="#harga" className="hover:text-blue-400 transition">UI/UX Design</a></li>
@@ -798,7 +698,7 @@ export default function LandingPage() {
 
           {/* Contact Col */}
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Kontak</h4>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t[lang].footerContactHeading}</h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
@@ -818,10 +718,10 @@ export default function LandingPage() {
 
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} TechSoed Agency. Hak Cipta Dilindungi.
+            {t[lang].footerCopyright.replace('{year}', new Date().getFullYear().toString())}
           </p>
           <div className="flex items-center gap-6 text-sm text-slate-500">
-            <span>Dirancang dengan cinta 💙</span>
+            <span>{t[lang].footerMadeWithLove}</span>
           </div>
         </div>
       </footer>
@@ -843,6 +743,78 @@ export default function LandingPage() {
           <span className="font-bold text-sm pr-2">Ingin Konsultasi?</span>
         </div> */}
       </a>
+
+      {/* --- FORM ORDER MODAL --- */}
+      <AnimatePresence>
+        {isOrderModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+              onClick={() => setIsOrderModalOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white rounded-3xl w-full max-w-lg shadow-2xl relative z-10 overflow-hidden"
+            >
+              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <h3 className="text-xl font-bold text-slate-900">{t[lang].orderFormTitle}</h3>
+                <button onClick={() => setIsOrderModalOpen(false)} className="text-slate-400 hover:text-slate-700 bg-white p-2 rounded-full shadow-sm">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <form onSubmit={handleOrderSubmit} className="p-6 space-y-5">
+
+                {/* Package Card Summary */}
+                <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex gap-4">
+                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shrink-0">
+                    <ShoppingCart className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">{t[lang].orderFormPackage}</p>
+                    <p className="font-bold text-slate-900">{selectedPackage.category} - {selectedPackage.name}</p>
+                    <p className="text-sm font-medium text-slate-600">{selectedPackage.price}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-1.5">{t[lang].orderFormName} *</label>
+                  <input required value={orderForm.name} onChange={e => setOrderForm({ ...orderForm, name: e.target.value })} type="text" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Budi Santoso" />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-1.5">{t[lang].orderFormPhone} *</label>
+                    <input required value={orderForm.phone} onChange={e => setOrderForm({ ...orderForm, phone: e.target.value })} type="tel" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="0812..." />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-1.5">{t[lang].orderFormEmail}</label>
+                    <input value={orderForm.email} onChange={e => setOrderForm({ ...orderForm, email: e.target.value })} type="email" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="budi@email.com" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-1.5">{t[lang].orderFormProject} *</label>
+                  <textarea required value={orderForm.projectDesc} onChange={e => setOrderForm({ ...orderForm, projectDesc: e.target.value })} rows={3} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition resize-none" placeholder="..."></textarea>
+                </div>
+
+                <div className="pt-2 flex gap-3">
+                  <button type="button" onClick={() => setIsOrderModalOpen(false)} className="px-6 py-3.5 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition">
+                    {t[lang].orderFormCancel}
+                  </button>
+                  <button type="submit" className="flex-1 px-6 py-3.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/30 transition flex items-center justify-center gap-2">
+                    <Zap className="w-5 h-5" /> {t[lang].orderFormSubmit}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
