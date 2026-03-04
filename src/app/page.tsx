@@ -71,7 +71,7 @@ export default function LandingPage() {
 
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
+    <div className="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes scroll {
@@ -318,7 +318,7 @@ export default function LandingPage() {
           </div>
 
           {/* Filtering Pills */}
-          <div className="flex overflow-x-auto snap-x snap-mandatory flex-nowrap md:flex-wrap items-center gap-3 mb-12 pb-2 -mx-6 px-6 md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex overflow-x-auto snap-x snap-mandatory flex-nowrap md:flex-wrap items-center gap-3 mb-12 pb-2 -mx-6 px-6 md:mx-0 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden before:content-[''] before:shrink-0 before:w-1 md:before:w-0 after:content-[''] after:shrink-0 after:w-4 md:after:w-0">
             {portfolioCategories.map(cat => (
               <button
                 key={cat}
@@ -347,7 +347,7 @@ export default function LandingPage() {
               </button>
             </div>
 
-            <div ref={portfolioScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:auto-rows-[350px] pb-8 -mx-6 px-6 md:mx-0 md:px-0 scroll-pt-6 md:scroll-pt-0">
+            <div ref={portfolioScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:auto-rows-[350px] pb-8 -mx-6 px-6 md:mx-0 md:px-0 scroll-pl-6 md:scroll-pl-0 before:content-[''] before:shrink-0 before:w-1 md:before:hidden after:content-[''] after:shrink-0 after:w-px md:after:hidden">
               {filteredProjects.map((project: any, idx: number) => (
                 <motion.div
                   key={idx}
@@ -410,7 +410,7 @@ export default function LandingPage() {
           </div>
 
           {/* TABS */}
-          <div className="flex overflow-x-auto snap-x snap-mandatory flex-nowrap md:flex-wrap justify-start md:justify-center mb-16 gap-2 px-6 md:px-4 max-w-5xl mx-auto -mx-6 md:mx-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex overflow-x-auto snap-x snap-mandatory flex-nowrap md:flex-wrap justify-start md:justify-center mb-16 gap-2 px-6 md:px-4 max-w-5xl mx-auto -mx-6 md:mx-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden before:content-[''] before:shrink-0 before:w-1 md:before:w-0 after:content-[''] after:shrink-0 after:w-4 md:after:w-0">
             {tabs.map((tab) => (
               <button
                 key={tab}
@@ -439,7 +439,7 @@ export default function LandingPage() {
               </button>
             </div>
 
-            <div ref={pricingScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-3 gap-8 lg:items-center w-full pb-8 pt-4 px-6 md:px-4 -mx-6 md:mx-0 scroll-pt-6 md:scroll-pt-0">
+            <div ref={pricingScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-3 gap-8 lg:items-center w-full pb-8 pt-4 px-6 md:px-4 -mx-6 md:mx-0 scroll-pl-6 md:scroll-pl-0 before:content-[''] before:shrink-0 before:w-1 md:before:hidden after:content-[''] after:shrink-0 after:w-px lg:after:hidden">
               {currentPricing?.map((pkg: any, index: number) => (
                 <motion.div
                   key={index}
