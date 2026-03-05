@@ -50,12 +50,12 @@ export const t = {
         ],
         portfolioCategories: ['Semua', 'Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce', 'Social Media Management'],
         projectsData: [
-            { title: 'Toko Elektronik Online', category: 'E-Commerce', image: '/path-to-project1.jpg', desc: 'Sistem jual beli online dengan fitur multi-payment dan ekspedisi.', size: 'large' },
-            { title: 'EduNusantara Portal', category: 'LMS', image: '/path-to-project6.jpg', desc: 'Sistem manajemen e-learning interaktif terintegrasi.', size: 'small' },
-            { title: 'PT Karya Mandiri Profile', category: 'Company Profile', image: '/path-to-project4.jpg', desc: 'Website company profile elegan untuk perusahaan konstruksi.', size: 'small' },
-            { title: 'Sistem Informasi Klinik', category: 'CMS', image: '/path-to-project3.jpg', desc: 'Sistem manajemen data layanan kesehatan komprehensif (ERP).', size: 'large' },
-            { title: 'Produk Skin Care Launch', category: 'Landing Page', image: '/path-to-project5.jpg', desc: 'Landing page konversi tinggi untuk peluncuran kosmetik.', size: 'small' },
-            { title: 'Kopi Senja Campaign', category: 'Social Media Management', image: '/path-to-project2.jpg', desc: 'Konsep dan manajemen desain Instagram Feed.', size: 'small' },
+            { title: 'Larasena', category: 'LMS', image: '/projects/larasena.png', desc: 'Sistem generate batik dengan AI dan manajemen operasional konveksi batik.', size: 'large' },
+            { title: 'Jemari Point', category: 'Company Profile', image: '/projects/jemari.png', desc: 'Sistem terintegrasi manajemen toko emas.', size: 'large' },
+            { title: 'Differlok E-Learning', category: 'LMS', image: '/projects/differlok.png', desc: 'Platform pembelajaran yang menyesuaikan metode efektif belajar mahasiswa UNTIDAR.', size: 'large' },
+            { title: 'KP-SPAMS Damar Wulan', category: 'Company Profile', image: '/projects/damarwulan.png', desc: 'Sistem pengelolaan layanan air dengan fitur cek pelanggan dan laporan bulanan', size: 'large' },
+            { title: 'Website Desa Kalisabuk', category: 'Company Profile', image: '/projects/kalisabuk.png', desc: 'Sistem informasi Desa Kalisabuk dengan fitur informasi desa, berita, dan data warga.', size: 'large' },
+            { title: 'Rico Capital', category: 'LMS', image: '/projects/ricocapital.png', desc: 'Platform edukasi cryptocurrency dan blockchain', size: 'large' },
         ],
         tabs: [
             'Landing Page',

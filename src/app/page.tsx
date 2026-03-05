@@ -333,21 +333,9 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* Dynamic Grid Layout (Bento Style & Mobile Horizontal Scroll) */}
+          {/* Dynamic Grid Layout (Bento Style) */}
           <div className="relative group">
-            {/* Nav Arrows */}
-            <div className="absolute top-1/2 -ml-2 sm:-ml-4 md:hidden left-0 z-20 transform -translate-y-1/2 pointer-events-none">
-              <button type="button" onClick={() => scrollContainer(portfolioScrollRef, 'left')} className="w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow-lg flex items-center justify-center pointer-events-auto text-slate-600 hover:text-blue-600 transition active:scale-95 border border-slate-100">
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-            </div>
-            <div className="absolute top-1/2 -mr-2 sm:-mr-4 md:hidden right-0 z-20 transform -translate-y-1/2 pointer-events-none">
-              <button type="button" onClick={() => scrollContainer(portfolioScrollRef, 'right')} className="w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow-lg flex items-center justify-center pointer-events-auto text-slate-600 hover:text-blue-600 transition active:scale-95 border border-slate-100">
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>
-
-            <div ref={portfolioScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:auto-rows-[350px] pb-8 -mx-6 px-6 md:mx-0 md:px-0 scroll-pl-6 md:scroll-pl-0 before:content-[''] before:shrink-0 before:w-1 md:before:hidden after:content-[''] after:shrink-0 after:w-px md:after:hidden">
+            <div ref={portfolioScrollRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[350px] pb-8">
               {filteredProjects.map((project: any, idx: number) => (
                 <motion.div
                   key={idx}
@@ -355,7 +343,7 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`group snap-center shrink-0 w-[85vw] md:w-auto min-h-[350px] md:min-h-0 cursor-pointer relative rounded-[2rem] overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-end p-8 ${project.size === 'large' ? 'md:col-span-2 lg:col-span-2 bg-slate-800' : 'md:col-span-1'
+                  className={`group cursor-pointer relative rounded-[2rem] overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-end p-8 ${project.size === 'large' ? 'sm:col-span-2 lg:col-span-6 bg-slate-800' : 'sm:col-span-1 lg:col-span-4'
                     }`}
                 >
                   {/* Image Background */}
