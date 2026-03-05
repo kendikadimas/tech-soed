@@ -1,5 +1,11 @@
 import React from 'react';
 import { ArrowLeft, FileText, CheckCircle2, ShieldAlert } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Kebijakan Privasi | TechSoed',
+    description: 'Pelajari bagaimana TechSoed mengelola dan menjaga privasi data Anda dengan aman.',
+};
 
 export default function KebijakanPrivasiPage() {
     return (

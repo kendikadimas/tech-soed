@@ -1,5 +1,11 @@
 import React from 'react';
 import { ArrowLeft, Rocket, Target, ShieldCheck, Users } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Tentang Kami | TechSoed - Software House Purwokerto',
+    description: 'Pelajari lebih lanjut tentang TechSoed, software house terkemuka di Purwokerto yang memiliki visi membangun masa depan digital bersama Anda.',
+};
 
 export default function TentangPage() {
     return (

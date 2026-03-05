@@ -89,13 +89,8 @@ export default function LandingPage() {
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
         <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded relative flex items-center justify-center">
-              {/* Decorative Logo replicating image reference */}
-              <div className="w-6 h-6 bg-blue-600 rounded-sm transform rotate-45 relative">
-                <div className="absolute -top-1.5 -left-1.5 w-2 h-2 bg-blue-400 rounded-full"></div>
-                <div className="absolute -bottom-1.5 -right-1.5 w-2 h-2 bg-blue-400 rounded-full"></div>
-              </div>
-              <div className="w-3 h-3 bg-white absolute z-10 rounded-sm transform rotate-45"></div>
+            <div className="w-10 h-10 rounded relative flex items-center justify-center">
+              <img src="/projects/logo.png" alt="TechSoed Logo" className="w-full h-full object-contain" />
             </div>
             <span className="text-xl font-extrabold tracking-tight text-slate-900">TechSoed</span>
           </div>
@@ -246,7 +241,7 @@ export default function LandingPage() {
 
             {/* Kontainer Gambar Utama */}
             <div className="bg-slate-200 rounded-[3rem] overflow-hidden relative aspect-square z-10 shadow-xl shadow-slate-200/50">
-              <img src="/path-to-about-image.jpg" alt="Tentang TechSoed" className="w-full h-full object-cover" />
+              <img src="/projects/logo.png" alt="Tentang TechSoed" className="w-full h-full object-contain p-8 bg-white" />
 
               {/* Badge Overlays */}
               <motion.div
@@ -646,8 +641,8 @@ export default function LandingPage() {
           {/* Brand Col */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Zap className="text-white w-5 h-5" />
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-white/10 p-1">
+                <img src="/projects/logo.png" alt="TechSoed Logo" className="w-full h-full object-contain" />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">TechSoed</span>
             </div>

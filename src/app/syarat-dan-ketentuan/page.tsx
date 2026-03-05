@@ -1,5 +1,11 @@
 import React from 'react';
 import { ArrowLeft, CheckCircle, Scale, ShieldCheck, FileText, BadgeCheck } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Syarat & Ketentuan | TechSoed',
+    description: 'Baca kelengkapan Syarat dan Ketentuan layanan TechSoed mengenai pembuatan website dan aplikasi.',
+};
 
 export default function SyaratKetentuanPage() {
     return (
