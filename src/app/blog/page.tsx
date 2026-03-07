@@ -1,13 +1,14 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, User } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts } from '@/lib/blogData';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Blog & Artikel | TechSoed Purwokerto',
+    title: 'Blog & Artikel | Soedirman Inovasi Digital Purwokerto',
     description: 'Kumpulan artikel seputar teknologi, panduan membuat website, tips memilih software house, layanan web developer, dan UI/UX design dengan fokus pada bisnis digital modern di Purwokerto.',
-    keywords: ["berita teknologi", "blog techsoed", "artikel software house", "tips bisnis digital", "pembuatan website purwokerto"],
+    keywords: ["berita teknologi", "blog soedirmaninovasi", "artikel software house", "tips bisnis digital", "pembuatan website purwokerto"],
 };
 
 export default function BlogIndexPage() {
@@ -16,15 +17,10 @@ export default function BlogIndexPage() {
             {/* FLOATING NAVBAR */}
             <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
                 <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded relative flex items-center justify-center">
-                            <div className="w-6 h-6 bg-blue-600 rounded-sm transform rotate-45 relative">
-                                <div className="absolute -top-1.5 -left-1.5 w-2 h-2 bg-blue-400 rounded-full"></div>
-                                <div className="absolute -bottom-1.5 -right-1.5 w-2 h-2 bg-blue-400 rounded-full"></div>
-                            </div>
-                            <div className="w-3 h-3 bg-white absolute z-10 rounded-sm transform rotate-45"></div>
+                    <div className="flex items-center">
+                        <div className="w-48 h-12 rounded relative flex items-center justify-start">
+                            <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo" fill className="object-contain object-left" />
                         </div>
-                        <span className="text-xl font-extrabold tracking-tight text-slate-900">TechSoed</span>
                     </div>
                     <div className="hidden md:flex items-center gap-4">
                         <Link href="/" className="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition flex items-center gap-2">
@@ -47,7 +43,7 @@ export default function BlogIndexPage() {
                         Wawasan Digital & Teknologi
                     </h1>
                     <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                        Insight mendalam dari sudut pandang engineer TechSoed, perancangan antarmuka, hingga analisis taktis manajemen IT perusahaan yang revolusioner.
+                        Insight mendalam dari sudut pandang engineer Soedirman Inovasi Digital, perancangan antarmuka, hingga analisis taktis manajemen IT perusahaan yang revolusioner.
                     </p>
                 </div>
             </section>

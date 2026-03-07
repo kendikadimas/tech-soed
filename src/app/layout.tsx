@@ -9,12 +9,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tech-soed.vercel.app"),
+  metadataBase: new URL("https://soedirman-inovasi.vercel.app"),
   alternates: {
     canonical: "/",
   },
-  title: "TechSoed | Jasa Pembuatan Website & Aplikasi di Purwokerto",
-  description: "TechSoed menyediakan spesialisasi layanan jasa pembuatan website, jasa pembuatan aplikasi mobile, web development, dan sistem informasi (CMS/LMS) terbaik di Purwokerto.",
+  title: "Soedirman Inovasi Digital | Jasa Pembuatan Website & Aplikasi di Purwokerto",
+  description: "Soedirman Inovasi Digital menyediakan spesialisasi layanan jasa pembuatan website, jasa pembuatan aplikasi mobile, web development, dan sistem informasi (CMS/LMS) terbaik di Purwokerto.",
   keywords: [
     "jasa pembuatan website",
     "jasa pembuatan web",
@@ -26,22 +26,22 @@ export const metadata: Metadata = {
     "web developer purwokerto",
     "software house purwokerto",
     "sistem informasi",
-    "techsoed",
+    "soedirmaninovasi",
     "banyumas",
     "jawa tengah"
   ],
-  authors: [{ name: "TechSoed" }],
+  authors: [{ name: "Soedirman Inovasi Digital" }],
   openGraph: {
-    title: "TechSoed | Jasa Pembuatan Website & Aplikasi Terpercaya",
+    title: "Soedirman Inovasi Digital | Jasa Pembuatan Website & Aplikasi Terpercaya",
     description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi.",
-    url: "https://tech-soed.vercel.app",
-    siteName: "TechSoed",
+    url: "https://soedirman-inovasi.vercel.app",
+    siteName: "Soedirman Inovasi Digital",
     images: [
       {
-        url: "/projects/logo.png", // Change to the absolute path of production image logo later
+        url: "/projects/logotrans.png", // Change to the absolute path of production image logo later
         width: 800,
         height: 600,
-        alt: "TechSoed Logo",
+        alt: "Soedirman Inovasi Digital Logo",
       },
     ],
     locale: "id_ID",
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TechSoed | Jasa Pembuatan Website & Aplikasi",
-    description: "Spesialis layanan jasa pembuatan website dan aplikasi mobile profesional dari TechSoed.",
-    images: ["/projects/logo.png"],
+    title: "Soedirman Inovasi Digital | Jasa Pembuatan Website & Aplikasi",
+    description: "Spesialis layanan jasa pembuatan website dan aplikasi mobile profesional dari Soedirman Inovasi Digital.",
+    images: ["/projects/logotrans.png"],
   },
   verification: {
     google: "F5b1OkKQFg_a0eQ1KZLWcZU1_BLvdr0CgXo9kHW_MEw",
@@ -72,10 +72,10 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "TechSoed",
+              "name": "Soedirman Inovasi Digital",
               "operatingSystem": "Web",
               "applicationCategory": "BusinessApplication",
-              "description": "TechSoed melayani jasa pembuatan website, jasa pembuatan aplikasi mobile, perancangan sistem informasi, CMS, LMS, dan digital marketing terpercaya di Purwokerto.",
+              "description": "Soedirman Inovasi Digital melayani jasa pembuatan website, jasa pembuatan aplikasi mobile, perancangan sistem informasi, CMS, LMS, dan digital marketing terpercaya di Purwokerto.",
               "offers": {
                 "@type": "Offer",
                 "price": "0",
@@ -83,7 +83,7 @@ export default function RootLayout({
               },
               "provider": {
                 "@type": "LocalBusiness",
-                "name": "TechSoed",
+                "name": "Soedirman Inovasi Digital",
                 "address": {
                   "@type": "PostalAddress",
                   "addressLocality": "Purwokerto",
@@ -91,8 +91,8 @@ export default function RootLayout({
                   "addressCountry": "ID"
                 },
                 "telephone": "+628153424280",
-                "email": "halo@techsoed.com",
-                "url": "https://tech-soed.vercel.app"
+                "email": "halo@soedirmaninovasi.com",
+                "url": "https://soedirman-inovasi.vercel.app"
               }
             })
           }}

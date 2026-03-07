@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2, Monitor, Smartphone, Globe, Cloud, Database } from 'lucide-react';
+import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2, Monitor, Smartphone, Globe, Cloud, Database, ArrowUp } from 'lucide-react';
 import { t } from './translations';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -13,6 +13,7 @@ export default function LandingPage() {
   const [showWaText, setShowWaText] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [portfolioFilter, setPortfolioFilter] = useState('Semua');
+  const [scrolled, setScrolled] = useState(false);
 
   // MODAL ORDER STATE
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -56,7 +57,20 @@ export default function LandingPage() {
     const timer = setTimeout(() => {
       setShowWaText(false);
     }, 4000); // Teks otomatis ditutup
-    return () => clearTimeout(timer);
+
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   // Sync portfolioFilter default translation if language changes when it's on 'All'/'Semua'
@@ -88,31 +102,40 @@ export default function LandingPage() {
         }
       `}} />
       {/* --- FLOATING NAVBAR --- */}
-      <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-        <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded relative flex items-center justify-center">
-              <Image src="/projects/logo.png" alt="TechSoed Logo - Jasa Pembuatan Website dan Aplikasi" fill className="object-contain" />
-            </div>
-            <span className="text-xl font-extrabold tracking-tight text-slate-900">TechSoed</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navProject}</Link>
-            <Link href="#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navHarga}</Link>
-            <Link href="#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navTentang}</Link>
-            <Link href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navFaq}</Link>
-            <Link href="/blog" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navBlog}</Link>
-          </div>
-          <div className="hidden md:flex items-center gap-4">
-            <a href="https://wa.me/628153424280" target="_blank" rel="noreferrer " aria-label="WhatsApp Contact" className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/20 transition">{t[lang].navContact}</a>
-            {/* Lang Dropdown / Toggle */}
-            <div className="flex bg-slate-100 rounded-full p-1 ml-2 shadow-inner items-center">
-              <button onClick={() => setLang('id')} className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${lang === 'id' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}>ID</button>
-              <button onClick={() => setLang('en')} className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${lang === 'en' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}>EN</button>
-            </div>
-          </div>
-        </nav>
-      </div>
+      <AnimatePresence>
+        {!scrolled && (
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -100, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4"
+          >
+            <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-56 h-14 rounded relative flex items-center justify-start">
+                  <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo - Jasa Pembuatan Website dan Aplikasi" fill className="object-contain object-left" />
+                </div>
+              </div>
+              <div className="hidden md:flex items-center gap-8">
+                <Link href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navProject}</Link>
+                <Link href="#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navHarga}</Link>
+                <Link href="#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navTentang}</Link>
+                <Link href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navFaq}</Link>
+                <Link href="/blog" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navBlog}</Link>
+              </div>
+              <div className="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/628153424280" target="_blank" rel="noreferrer " aria-label="WhatsApp Contact" className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/20 transition">{t[lang].navContact}</a>
+                {/* Lang Dropdown / Toggle */}
+                <div className="flex bg-slate-100 rounded-full p-1 ml-2 shadow-inner items-center">
+                  <button onClick={() => setLang('id')} className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${lang === 'id' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}>ID</button>
+                  <button onClick={() => setLang('en')} className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${lang === 'en' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}>EN</button>
+                </div>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* --- CLEAN HERO SECTION --- */}
       <section className="pt-48 pb-20 px-6 relative overflow-hidden bg-white flex flex-col items-center text-center">
@@ -244,7 +267,7 @@ export default function LandingPage() {
 
             {/* Kontainer Gambar Utama */}
             <div className="bg-slate-200 rounded-[3rem] overflow-hidden relative aspect-square z-10 shadow-xl shadow-slate-200/50">
-              <Image src="/projects/logo.png" alt="Tim Developer dan UI/UX Designer TechSoed merancang UI aplikasi" fill className="object-contain p-8 bg-white" />
+              <Image src="/projects/logotrans.png" alt="Tim Developer dan UI/UX Designer Soedirman Inovasi Digital merancang UI aplikasi" fill className="object-contain p-8 bg-white" />
 
               {/* Badge Overlays */}
               <motion.div
@@ -345,7 +368,7 @@ export default function LandingPage() {
                 >
                   {/* Image Top Section */}
                   <div className="w-full bg-slate-50 overflow-hidden border-b border-slate-100 p-0 m-0 leading-none">
-                    <Image src={project.image} alt={project.title ? `${project.title} - Portofolio TechSoed` : "Portofolio Project TechSoed"} width={0} height={0} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ width: '100%', height: 'auto' }} className="group-hover:scale-105 transition duration-700 ease-in-out block" />
+                    <Image src={project.image} alt={project.title ? `${project.title} - Portofolio Soedirman Inovasi Digital` : "Portofolio Project Soedirman Inovasi Digital"} width={0} height={0} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ width: '100%', height: 'auto' }} className="group-hover:scale-105 transition duration-700 ease-in-out block" />
                   </div>
 
                   {/* Content Bottom Section */}
@@ -639,23 +662,22 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Col */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-white/10 p-1 relative">
-                <Image src="/projects/logo.png" alt="TechSoed Logo Footer Jasa Website" fill className="object-contain" />
+            <div className="flex items-center">
+              <div className="w-56 h-14 relative flex items-center justify-start overflow-hidden">
+                <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo Footer Jasa Website" fill className="object-contain object-left" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">TechSoed</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">
               {t[lang].footerDesc}
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" aria-label="TechSoed Instagram" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+              <a href="#" aria-label="Soedirman Inovasi Digital Instagram" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" aria-label="TechSoed Facebook" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+              <a href="#" aria-label="Soedirman Inovasi Digital Facebook" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" aria-label="TechSoed LinkedIn" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+              <a href="#" aria-label="Soedirman Inovasi Digital LinkedIn" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
                 <Linkedin className="w-4 h-4" />
               </a>
             </div>
@@ -692,7 +714,7 @@ export default function LandingPage() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-blue-500 shrink-0" />
-                <span>halo@techsoed.com</span>
+                <span>halo@soedirmaninovasi.com</span>
               </li>
             </ul>
           </div>
@@ -713,7 +735,7 @@ export default function LandingPage() {
         href="https://wa.me/628153424280"
         target="_blank"
         rel="noreferrer"
-        aria-label="Hubungi WhatsApp TechSoed"
+        aria-label="Hubungi WhatsApp Soedirman Inovasi Digital"
         className="fixed bottom-6 right-6 z-[100] flex items-center bg-[#25D366] text-white p-3 rounded-full shadow-2xl shadow-[#25D366]/30 hover:-translate-y-1 hover:bg-[#20bd5a] transition-all duration-300"
         onMouseEnter={() => setShowWaText(true)}
         onMouseLeave={() => setShowWaText(false)}
@@ -799,6 +821,22 @@ export default function LandingPage() {
         )}
       </AnimatePresence>
 
+      {/* --- SCROLL TO TOP BUTTON --- */}
+      <AnimatePresence>
+        {scrolled && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            aria-label="Scroll to top"
+            className="fixed bottom-24 right-6 z-[90] flex items-center justify-center bg-white text-slate-800 p-3 rounded-full shadow-lg shadow-slate-200 border border-slate-100 hover:-translate-y-1 hover:bg-slate-50 transition-all duration-300"
+          >
+            <ArrowUp className="w-6 h-6" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

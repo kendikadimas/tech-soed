@@ -29,10 +29,10 @@ Coba perhatikan perilaku konsumsi Anda sendiri akhir-akhir ini. Kebanyakan pelan
 **3. Layanan Customer Service Otomatis (Chatbot & FAQ)**
 Merespons pesan berulang melalui platform *chat* mungkin menghabiskan banyak sumber daya administratif. Website modern kini sudah memfasilitasi formulir otomatis, integrasi live-chat (WhatsApp), dan repositori pintar artikel pertanyaan teknis (FAQ), yang terbukti bisa memangkas beban kerja SDM secara masif.
 
-Oleh karenanya, investasi pada website adalah pondasi terkuat yang bisa Anda ambil saat ini. TechSoed dengan bangga menjadi partner web developer terbaik Anda di Purwokerto.
+Oleh karenanya, investasi pada website adalah pondasi terkuat yang bisa Anda ambil saat ini. Soedirman Inovasi Digital dengan bangga menjadi partner web developer terbaik Anda di Purwokerto.
         `,
         date: "05 Maret 2026",
-        author: "TechSoed Team",
+        author: "Soedirman Inovasi Digital Team",
         image: "/projects/kalisabuk.png",
         readTime: "4 Menit Baca",
         category: "Bisnis & Teknologi"
@@ -63,10 +63,10 @@ Aplikasi bukan perabot yang dibiarkan diam; mereka perlu 'perawatan' terus mener
 **5. Komunikasi Terintegrasi (Project Management)**
 Seberapa cepat (*Agile*) feedback tim developer mereka saat Anda merombak rancangan fitur? Perhatikan metode komunikasi mereka (apakah menggunakan Jira, Trello, atau repositori GitHub dengan pipeline CI/CD yang proper).
 
-Jika Anda membutuhkan konsultan dan Software House end-to-end yang solid di wilayah Banyumas, **TechSoed** menawarkan transparansi tinggi di seluruh tahap siklus pembuatan software Anda.
+Jika Anda membutuhkan konsultan dan Software House end-to-end yang solid di wilayah Banyumas, **Soedirman Inovasi Digital** menawarkan transparansi tinggi di seluruh tahap siklus pembuatan software Anda.
         `,
         date: "28 Februari 2026",
-        author: "TechSoed Engineering",
+        author: "Soedirman Inovasi Digital Engineering",
         image: "/projects/larasena.png",
         readTime: "5 Menit Baca",
         category: "Panduan Edukasi"
@@ -86,13 +86,13 @@ Secara ringkas, UI (User Interface) berurusan dengan seluruh aspek *graphic desi
 
 **Bagaimana UI/UX mendongkrak omzet?**
 1. **Frictionless Experience (Tanpa Gesekan):** Formulir pendaftaran yang diringkas, *Call To Action (CTA)* yang menonjol dan memikat perhatian.
-2. **Psikologi Warna yang Menggugah:** Setiap skema gradasi warna yang diterapkan oleh *designer* profesional memancarkan *vibe* spesifik. (misal: warna biru tua di TechSoed menyimbolkan stabilitas, keamanan dan reliabilitas korporat teknologi).
+2. **Psikologi Warna yang Menggugah:** Setiap skema gradasi warna yang diterapkan oleh *designer* profesional memancarkan *vibe* spesifik. (misal: warna biru tua di Soedirman Inovasi Digital menyimbolkan stabilitas, keamanan dan reliabilitas korporat teknologi).
 3. **Aksesibilitas Seluler (Mobile-First):** Nyatanya, 80% konsumen saat ini akan mengakses produk sistem e-commerce maupun Company Profile via genggaman smartphone. Tampilan yang cacat *(not responsive)* di mode HP bisa menghanguskan peluang closing seketika.
 
-Dalam layanan perancangan di TechSoed, setiap prototipe antarmuka desain diriset berdasarkan orientasi metrik data demi menunjang omzet Anda. Kami sangat serius merekayasa fungsionalitas visual yang membuat penjelajahan klien Anda memukau sekaligus berbobot fungsional.
+Dalam layanan perancangan di Soedirman Inovasi Digital, setiap prototipe antarmuka desain diriset berdasarkan orientasi metrik data demi menunjang omzet Anda. Kami sangat serius merekayasa fungsionalitas visual yang membuat penjelajahan klien Anda memukau sekaligus berbobot fungsional.
         `,
         date: "14 Februari 2026",
-        author: "TechSoed Design Team",
+        author: "Soedirman Inovasi Digital Design Team",
         image: "/projects/jemari.png",
         readTime: "3 Menit Baca",
         category: "Desain & Kreatif"

@@ -1,10 +1,11 @@
 import React from 'react';
 import { ArrowLeft, FileText, CheckCircle2, ShieldAlert } from 'lucide-react';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Kebijakan Privasi | TechSoed',
-    description: 'Pelajari bagaimana TechSoed mengelola dan menjaga privasi data Anda dengan aman.',
+    title: 'Kebijakan Privasi | Soedirman Inovasi Digital',
+    description: 'Pelajari bagaimana Soedirman Inovasi Digital mengelola dan menjaga privasi data Anda dengan aman.',
 };
 
 export default function KebijakanPrivasiPage() {
@@ -13,15 +14,10 @@ export default function KebijakanPrivasiPage() {
             {/* FLOATING NAVBAR */}
             <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
                 <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded relative flex items-center justify-center">
-                            <div className="w-6 h-6 bg-blue-600 rounded-sm transform rotate-45 relative">
-                                <div className="absolute -top-1.5 -left-1.5 w-2 h-2 bg-blue-400 rounded-full"></div>
-                                <div className="absolute -bottom-1.5 -right-1.5 w-2 h-2 bg-blue-400 rounded-full"></div>
-                            </div>
-                            <div className="w-3 h-3 bg-white absolute z-10 rounded-sm transform rotate-45"></div>
+                    <div className="flex items-center">
+                        <div className="w-48 h-12 rounded relative flex items-center justify-start">
+                            <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo" fill className="object-contain object-left" />
                         </div>
-                        <span className="text-xl font-extrabold tracking-tight text-slate-900">TechSoed</span>
                     </div>
                     <div className="hidden md:flex items-center gap-4">
                         <a href="/" className="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition flex items-center gap-2">
@@ -54,7 +50,7 @@ export default function KebijakanPrivasiPage() {
 
                     <div className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-blue">
                         <p className="lead text-xl text-slate-600 mb-10">
-                            Di TechSoed, privasi dari pengunjung dan privasi kekayaan intelektual klien kami adalah prioritas paling tinggi bagi internal kami. Dokumen Kebijakan Privasi ini diformulasikan untuk menjelaskan pengumpulan dan protokol penggunaan informasi operasi Anda.
+                            Di Soedirman Inovasi Digital, privasi dari pengunjung dan privasi kekayaan intelektual klien kami adalah prioritas paling tinggi bagi internal kami. Dokumen Kebijakan Privasi ini diformulasikan untuk menjelaskan pengumpulan dan protokol penggunaan informasi operasi Anda.
                         </p>
 
                         <div className="space-y-12">

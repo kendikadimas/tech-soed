@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: 'https://tech-soed.vercel.app/sitemap.xml',
+        sitemap: 'https://soedirman-inovasi.vercel.app/sitemap.xml',
     };
 }
