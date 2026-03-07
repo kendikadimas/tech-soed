@@ -3,25 +3,25 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
     return [
         {
-            url: 'https://techsoed.com',
+            url: 'https://tech-soed.vercel.app',
             lastModified: new Date(),
             changeFrequency: 'yearly',
             priority: 1,
         },
         {
-            url: 'https://techsoed.com/tentang',
+            url: 'https://tech-soed.vercel.app/tentang',
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
         {
-            url: 'https://techsoed.com/syarat-dan-ketentuan',
+            url: 'https://tech-soed.vercel.app/syarat-dan-ketentuan',
             lastModified: new Date(),
             changeFrequency: 'yearly',
             priority: 0.5,
         },
         {
-            url: 'https://techsoed.com/kebijakan-privasi',
+            url: 'https://tech-soed.vercel.app/kebijakan-privasi',
             lastModified: new Date(),
             changeFrequency: 'yearly',
             priority: 0.5,

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TechSoed | Software House di Purwokerto | Jasa Pembuatan Website & Aplikasi",
     description: "Software House terpercaya di Purwokerto yang melayani pembuatan website, aplikasi mobile, dan solusi teknologi digital lainnya.",
-    url: "https://techsoed.com",
+    url: "https://tech-soed.vercel.app",
     siteName: "TechSoed",
     images: [
       {
