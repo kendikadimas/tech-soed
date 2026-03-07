@@ -333,7 +333,7 @@ export default function LandingPage() {
 
           {/* Dynamic Grid Layout (Bento Style) */}
           <div className="relative group">
-            <div ref={portfolioScrollRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[350px] pb-8">
+            <div ref={portfolioScrollRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 pb-8">
               {filteredProjects.map((project: any, idx: number) => (
                 <motion.div
                   key={idx}
@@ -341,28 +341,25 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`group cursor-pointer relative rounded-[2rem] overflow-hidden bg-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-end p-8 ${project.size === 'large' ? 'sm:col-span-2 lg:col-span-6 bg-slate-800' : 'sm:col-span-1 lg:col-span-4'
+                  className={`group cursor-pointer rounded-[2rem] overflow-hidden bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col ${project.size === 'large' ? 'sm:col-span-2 lg:col-span-6' : 'sm:col-span-1 lg:col-span-4'
                     }`}
                 >
-                  {/* Image Background */}
-                  <div className="absolute inset-0 z-0">
-                    {/* Fallback pattern until image is loaded/assigned */}
-                    <div className="absolute inset-0 bg-slate-200 mix-blend-multiply opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                    <Image src={project.image} alt={project.title ? `${project.title} - Portofolio TechSoed` : "Portofolio Project TechSoed"} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition duration-700 ease-in-out" />
-
-                    {/* Dark Gradient Overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  {/* Image Top Section */}
+                  <div className="relative w-full aspect-[16/10] bg-slate-50 overflow-hidden border-b border-slate-100 flex items-center justify-center p-4">
+                    <Image src={project.image} alt={project.title ? `${project.title} - Portofolio TechSoed` : "Portofolio Project TechSoed"} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-contain drop-shadow-sm group-hover:scale-105 transition duration-700 ease-in-out p-4" />
                   </div>
 
-                  {/* Content */}
-                  <div className="relative z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-white text-xs font-bold uppercase tracking-wider mb-4 border border-white/10">
-                      {project.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-blue-200 transition-colors">
+                  {/* Content Bottom Section */}
+                  <div className="p-8 flex flex-col flex-1 bg-white">
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider rounded-lg">
+                        {project.category}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-slate-300 text-sm max-w-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    <p className="text-slate-600 text-sm leading-relaxed flex-1">
                       {project.desc}
                     </p>
                   </div>
