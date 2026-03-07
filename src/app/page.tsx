@@ -425,7 +425,7 @@ export default function LandingPage() {
               </button>
             </div>
 
-            <div ref={pricingScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-3 gap-8 lg:items-center w-full pb-8 pt-4 px-6 md:px-4 -mx-6 md:mx-0 scroll-pl-6 md:scroll-pl-0 before:content-[''] before:shrink-0 before:w-1 md:before:hidden after:content-[''] after:shrink-0 after:w-px lg:after:hidden">
+            <div ref={pricingScrollRef} className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-3 gap-8 lg:items-center w-full pb-12 pt-12 lg:pt-16 px-6 md:px-4 -mx-6 md:mx-0 scroll-pl-6 md:scroll-pl-0 before:content-[''] before:shrink-0 before:w-1 md:before:hidden after:content-[''] after:shrink-0 after:w-px lg:after:hidden">
               {currentPricing?.map((pkg: any, index: number) => (
                 <motion.div
                   key={index}
