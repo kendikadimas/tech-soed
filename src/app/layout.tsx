@@ -13,27 +13,27 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "TechSoed | Software House di Purwokerto | Jasa Buat Website & Aplikasi",
-  description: "TechSoed adalah Software House dan Web Developer terpercaya di Purwokerto. Melayani jasa pembuatan website, aplikasi mobile, UI/UX design, sistem informasi (CMS/LMS), dan digital marketing terbaik.",
+  title: "TechSoed | Jasa Pembuatan Website & Aplikasi di Purwokerto",
+  description: "TechSoed menyediakan spesialisasi layanan jasa pembuatan website, jasa pembuatan aplikasi mobile, web development, dan sistem informasi (CMS/LMS) terbaik di Purwokerto.",
   keywords: [
-    "software house di purwokerto",
-    "jasa buat website",
+    "jasa pembuatan website",
+    "jasa pembuatan web",
+    "jasa pembuatan aplikasi",
+    "jasa pembuatan aplikasi mobile",
+    "jasa pembuatan sistem",
+    "jasa pembuatan sistem informasi",
     "jasa bikin website purwokerto",
     "web developer purwokerto",
-    "jasa pembuatan aplikasi",
-    "jasa website murah",
-    "bikin aplikasi mobile",
-    "jasa ui ux design",
+    "software house purwokerto",
     "sistem informasi",
-    "digital branding",
     "techsoed",
     "banyumas",
     "jawa tengah"
   ],
   authors: [{ name: "TechSoed" }],
   openGraph: {
-    title: "TechSoed | Software House di Purwokerto | Jasa Pembuatan Website & Aplikasi",
-    description: "Software House terpercaya di Purwokerto yang melayani pembuatan website, aplikasi mobile, dan solusi teknologi digital lainnya.",
+    title: "TechSoed | Jasa Pembuatan Website & Aplikasi Terpercaya",
+    description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi.",
     url: "https://tech-soed.vercel.app",
     siteName: "TechSoed",
     images: [
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TechSoed | Software House & Web Development di Purwokerto",
-    description: "Jasa pembuatan website dan aplikasi mobile profesional dari TechSoed.",
+    title: "TechSoed | Jasa Pembuatan Website & Aplikasi",
+    description: "Spesialis layanan jasa pembuatan website dan aplikasi mobile profesional dari TechSoed.",
     images: ["/projects/logo.png"],
   },
   verification: {
@@ -75,7 +75,7 @@ export default function RootLayout({
               "name": "TechSoed",
               "operatingSystem": "Web",
               "applicationCategory": "BusinessApplication",
-              "description": "TechSoed adalah Software House dan Web Developer terpercaya di Purwokerto. Melayani jasa pembuatan website, aplikasi mobile, UI/UX design.",
+              "description": "TechSoed melayani jasa pembuatan website, jasa pembuatan aplikasi mobile, perancangan sistem informasi, CMS, LMS, dan digital marketing terpercaya di Purwokerto.",
               "offers": {
                 "@type": "Offer",
                 "price": "0",
