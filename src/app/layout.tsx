@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     description: "Jasa pembuatan website dan aplikasi mobile profesional dari TechSoed.",
     images: ["/projects/logo.png"],
   },
+  verification: {
+    google: "F5b1OkKQFg_a0eQ1KZLWcZU1_BLvdr0CgXo9kHW_MEw",
+  },
 };
 
 export default function RootLayout({
