@@ -99,6 +99,7 @@ export default function LandingPage() {
             <a href="#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navHarga}</a>
             <a href="#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navTentang}</a>
             <a href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navFaq}</a>
+            <a href="/blog" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navBlog}</a>
           </div>
           <div className="hidden md:flex items-center gap-4">
             <a href="https://wa.me/628153424280" target="_blank" rel="noreferrer " className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/20 transition">{t[lang].navContact}</a>
