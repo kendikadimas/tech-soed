@@ -333,7 +333,7 @@ export default function LandingPage() {
 
           {/* Dynamic Grid Layout (Bento Style) */}
           <div className="relative group">
-            <div ref={portfolioScrollRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 pb-8">
+            <div ref={portfolioScrollRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-8">
               {filteredProjects.map((project: any, idx: number) => (
                 <motion.div
                   key={idx}
@@ -341,8 +341,7 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`group cursor-pointer rounded-[2rem] overflow-hidden bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col ${project.size === 'large' ? 'sm:col-span-2 lg:col-span-6' : 'sm:col-span-1 lg:col-span-4'
-                    }`}
+                  className="group cursor-pointer rounded-[2rem] overflow-hidden bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col"
                 >
                   {/* Image Top Section */}
                   <div className="relative w-full aspect-[16/10] bg-slate-50 overflow-hidden border-b border-slate-100 flex items-center justify-center p-4">
