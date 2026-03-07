@@ -9,6 +9,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tech-soed.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
   title: "TechSoed | Software House di Purwokerto | Jasa Buat Website & Aplikasi",
   description: "TechSoed adalah Software House dan Web Developer terpercaya di Purwokerto. Melayani jasa pembuatan website, aplikasi mobile, UI/UX design, sistem informasi (CMS/LMS), dan digital marketing terbaik.",
   keywords: [
@@ -60,7 +64,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="id">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "TechSoed",
+              "operatingSystem": "Web",
+              "applicationCategory": "BusinessApplication",
+              "description": "TechSoed adalah Software House dan Web Developer terpercaya di Purwokerto. Melayani jasa pembuatan website, aplikasi mobile, UI/UX design.",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "IDR"
+              },
+              "provider": {
+                "@type": "LocalBusiness",
+                "name": "TechSoed",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Purwokerto",
+                  "addressRegion": "Jawa Tengah",
+                  "addressCountry": "ID"
+                },
+                "telephone": "+628153424280",
+                "email": "halo@techsoed.com",
+                "url": "https://tech-soed.vercel.app"
+              }
+            })
+          }}
+        />
+      </head>
       <body
         className={`${poppins.variable} antialiased`}
       >

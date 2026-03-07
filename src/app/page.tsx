@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Zap, Trophy, Users, Briefcase, CheckCircle, Star, ShoppingCart, Check, X, MessageCircle, ChevronDown, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Code, PenTool, Megaphone, Share2, Monitor, Smartphone, Globe, Cloud, Database } from 'lucide-react';
 import { t } from './translations';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function LandingPage() {
   const [lang, setLang] = useState<'id' | 'en'>('id');
@@ -90,19 +92,19 @@ export default function LandingPage() {
         <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded relative flex items-center justify-center">
-              <img src="/projects/logo.png" alt="TechSoed Logo" className="w-full h-full object-contain" />
+              <Image src="/projects/logo.png" alt="TechSoed Logo - Jasa Pembuatan Website dan Aplikasi" fill className="object-contain" />
             </div>
             <span className="text-xl font-extrabold tracking-tight text-slate-900">TechSoed</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navProject}</a>
-            <a href="#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navHarga}</a>
-            <a href="#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navTentang}</a>
-            <a href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navFaq}</a>
-            <a href="/blog" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navBlog}</a>
+            <Link href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navProject}</Link>
+            <Link href="#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navHarga}</Link>
+            <Link href="#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navTentang}</Link>
+            <Link href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navFaq}</Link>
+            <Link href="/blog" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">{t[lang].navBlog}</Link>
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <a href="https://wa.me/628153424280" target="_blank" rel="noreferrer " className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/20 transition">{t[lang].navContact}</a>
+            <a href="https://wa.me/628153424280" target="_blank" rel="noreferrer " aria-label="WhatsApp Contact" className="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 shadow shadow-blue-600/20 transition">{t[lang].navContact}</a>
             {/* Lang Dropdown / Toggle */}
             <div className="flex bg-slate-100 rounded-full p-1 ml-2 shadow-inner items-center">
               <button onClick={() => setLang('id')} className={`px-3 py-1 text-xs font-bold rounded-full transition-all ${lang === 'id' ? "bg-white text-blue-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}>ID</button>
@@ -162,12 +164,12 @@ export default function LandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-20">
-            <a href="#harga" className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold shadow-xl shadow-blue-500/20 hover:bg-blue-600 hover:-translate-y-0.5 transition-all duration-300">
+            <Link href="#harga" className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold shadow-xl shadow-blue-500/20 hover:bg-blue-600 hover:-translate-y-0.5 transition-all duration-300">
               {t[lang].heroBtnStart}
-            </a>
-            <a href="#portfolio" className="bg-white text-slate-800 border border-slate-200 px-8 py-3 rounded-full font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 transition-all duration-300">
+            </Link>
+            <Link href="#portfolio" className="bg-white text-slate-800 border border-slate-200 px-8 py-3 rounded-full font-semibold shadow-sm hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 transition-all duration-300">
               {t[lang].heroBtnPort}
-            </a>
+            </Link>
           </div>
         </motion.div>
       </section>
@@ -197,7 +199,7 @@ export default function LandingPage() {
                   <Code className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc1Title}</h4>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc1Title}</h3>
                 </div>
               </div>
 
@@ -206,7 +208,7 @@ export default function LandingPage() {
                   <PenTool className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc2Title}</h4>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc2Title}</h3>
                 </div>
               </div>
 
@@ -215,7 +217,7 @@ export default function LandingPage() {
                   <Megaphone className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc3Title}</h4>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc3Title}</h3>
                 </div>
               </div>
 
@@ -224,7 +226,7 @@ export default function LandingPage() {
                   <Share2 className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc4Title}</h4>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{t[lang].aboutSvc4Title}</h3>
                 </div>
               </div>
             </div>
@@ -242,7 +244,7 @@ export default function LandingPage() {
 
             {/* Kontainer Gambar Utama */}
             <div className="bg-slate-200 rounded-[3rem] overflow-hidden relative aspect-square z-10 shadow-xl shadow-slate-200/50">
-              <img src="/projects/logo.png" alt="Tentang TechSoed" className="w-full h-full object-contain p-8 bg-white" />
+              <Image src="/projects/logo.png" alt="Tim Developer dan UI/UX Designer TechSoed merancang UI aplikasi" fill className="object-contain p-8 bg-white" />
 
               {/* Badge Overlays */}
               <motion.div
@@ -346,7 +348,7 @@ export default function LandingPage() {
                   <div className="absolute inset-0 z-0">
                     {/* Fallback pattern until image is loaded/assigned */}
                     <div className="absolute inset-0 bg-slate-200 mix-blend-multiply opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-in-out" />
+                    <Image src={project.image} alt={project.title ? `${project.title} - Portofolio TechSoed` : "Portofolio Project TechSoed"} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition duration-700 ease-in-out" />
 
                     {/* Dark Gradient Overlay for text readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -545,7 +547,7 @@ export default function LandingPage() {
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="font-bold text-white leading-tight">{t.name}</h4>
+                    <h3 className="font-bold text-white leading-tight">{t.name}</h3>
                     <p className="text-sm text-slate-400">{t.role}</p>
                   </div>
                 </div>
@@ -642,8 +644,8 @@ export default function LandingPage() {
           {/* Brand Col */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-white/10 p-1">
-                <img src="/projects/logo.png" alt="TechSoed Logo" className="w-full h-full object-contain" />
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-white/10 p-1 relative">
+                <Image src="/projects/logo.png" alt="TechSoed Logo Footer Jasa Website" fill className="object-contain" />
               </div>
               <span className="text-xl font-bold tracking-tight text-white">TechSoed</span>
             </div>
@@ -651,13 +653,13 @@ export default function LandingPage() {
               {t[lang].footerDesc}
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+              <a href="#" aria-label="TechSoed Instagram" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+              <a href="#" aria-label="TechSoed Facebook" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+              <a href="#" aria-label="TechSoed LinkedIn" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
                 <Linkedin className="w-4 h-4" />
               </a>
             </div>
@@ -670,19 +672,19 @@ export default function LandingPage() {
 
           {/* Links Col 2 */}
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t[lang].footerSvcHeading}</h4>
+            <h3 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t[lang].footerSvcHeading}</h3>
             <ul className="space-y-4 text-sm">
-              <li><a href="#harga" className="hover:text-blue-400 transition">Web Development</a></li>
-              <li><a href="#harga" className="hover:text-blue-400 transition">UI/UX Design</a></li>
-              <li><a href="#harga" className="hover:text-blue-400 transition">Sistem Informasi (CMS/LMS)</a></li>
-              <li><a href="#harga" className="hover:text-blue-400 transition">Digital Branding</a></li>
-              <li><a href="#harga" className="hover:text-blue-400 transition">Social Media Management</a></li>
+              <li><Link href="#harga" className="hover:text-blue-400 transition">Web Development</Link></li>
+              <li><Link href="#harga" className="hover:text-blue-400 transition">UI/UX Design</Link></li>
+              <li><Link href="#harga" className="hover:text-blue-400 transition">Sistem Informasi (CMS/LMS)</Link></li>
+              <li><Link href="#harga" className="hover:text-blue-400 transition">Digital Branding</Link></li>
+              <li><Link href="#harga" className="hover:text-blue-400 transition">Social Media Management</Link></li>
             </ul>
           </div>
 
           {/* Contact Col */}
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t[lang].footerContactHeading}</h4>
+            <h3 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t[lang].footerContactHeading}</h3>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
@@ -715,6 +717,7 @@ export default function LandingPage() {
         href="https://wa.me/628153424280"
         target="_blank"
         rel="noreferrer"
+        aria-label="Hubungi WhatsApp TechSoed"
         className="fixed bottom-6 right-6 z-[100] flex items-center bg-[#25D366] text-white p-3 rounded-full shadow-2xl shadow-[#25D366]/30 hover:-translate-y-1 hover:bg-[#20bd5a] transition-all duration-300"
         onMouseEnter={() => setShowWaText(true)}
         onMouseLeave={() => setShowWaText(false)}
