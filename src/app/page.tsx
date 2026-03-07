@@ -344,8 +344,8 @@ export default function LandingPage() {
                   className="group cursor-pointer rounded-[2rem] overflow-hidden bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col"
                 >
                   {/* Image Top Section */}
-                  <div className="relative w-full aspect-[16/10] bg-slate-50 overflow-hidden border-b border-slate-100 flex items-center justify-center p-4">
-                    <Image src={project.image} alt={project.title ? `${project.title} - Portofolio TechSoed` : "Portofolio Project TechSoed"} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-contain drop-shadow-sm group-hover:scale-105 transition duration-700 ease-in-out p-4" />
+                  <div className="w-full bg-slate-50 overflow-hidden border-b border-slate-100 p-0 m-0 leading-none">
+                    <Image src={project.image} alt={project.title ? `${project.title} - Portofolio TechSoed` : "Portofolio Project TechSoed"} width={0} height={0} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ width: '100%', height: 'auto' }} className="group-hover:scale-105 transition duration-700 ease-in-out block" />
                   </div>
 
                   {/* Content Bottom Section */}
