@@ -324,12 +324,12 @@ export const t = {
         ],
         portfolioCategories: ['All', 'Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce', 'Social Media Management'],
         projectsData: [
-            { title: 'Online Electronics Store', category: 'E-Commerce', image: '/path-to-project1.jpg', desc: 'Online trading system with multi-payment and shipping features.', size: 'large' },
-            { title: 'EduNusantara Portal', category: 'LMS', image: '/path-to-project6.jpg', desc: 'Integrated interactive e-learning management system.', size: 'small' },
-            { title: 'PT Karya Mandiri Profile', category: 'Company Profile', image: '/path-to-project4.jpg', desc: 'Elegant company profile website for a construction company.', size: 'small' },
-            { title: 'Clinic Information System', category: 'CMS', image: '/path-to-project3.jpg', desc: 'Comprehensive healthcare data management system (ERP).', size: 'large' },
-            { title: 'Skin Care Product Launch', category: 'Landing Page', image: '/path-to-project5.jpg', desc: 'High conversion landing page for cosmetic launch.', size: 'small' },
-            { title: 'Kopi Senja Campaign', category: 'Social Media Management', image: '/path-to-project2.jpg', desc: 'Instagram Feed design concept and management.', size: 'small' },
+            { title: 'Larasena', category: 'LMS', image: '/projects/larasena.png', desc: 'AI-powered batik pattern generation system and operational management for batik convection.', size: 'large' },
+            { title: 'Jemari Point', category: 'Company Profile', image: '/projects/jemari.png', desc: 'Integrated management system for a jewelry store.', size: 'large' },
+            { title: 'Differlok E-Learning', category: 'LMS', image: '/projects/differlok.png', desc: 'An adaptive learning platform tailored to the effective study methods of UNTIDAR students.', size: 'large' },
+            { title: 'KP-SPAMS Damar Wulan', category: 'Company Profile', image: '/projects/damarwulan.png', desc: 'Water service management system featuring customer tracking and monthly reporting.', size: 'large' },
+            { title: 'Website Desa Kalisabuk', category: 'Company Profile', image: '/projects/kalisabuk.png', desc: 'Kalisabuk Village information system with news, announcements, and resident data features.', size: 'large' },
+            { title: 'Rico Capital', category: 'LMS', image: '/projects/ricocapital.png', desc: 'Cryptocurrency and blockchain educational platform.', size: 'large' },
         ],
         tabs: [
             'Landing Page',
