@@ -54,7 +54,7 @@ function LandingPageContent() {
       {/* <TestimonialsSection /> */}
       <FaqSection />
       <CtaSection />
-      <ScrollToTop visible={window.scrollY > 200} />
+      <ScrollToTop visible={scrolled} />
       <OrderModal
         isOpen={isOrderModalOpen}
         onClose={() => setIsOrderModalOpen(false)}
