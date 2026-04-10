@@ -1,25 +1,37 @@
 export const t = {
     id: {
-        navProject: "Project",
-        navHarga: "Harga",
-        navTentang: "Tentang Kami",
-        navFaq: "FAQ",
-        navBlog: "Artikel",
+        navProducts: "Produk & Layanan",
+        navSolutions: "Solusi",
+        navResources: "Resources",
+        navSignIn: "Cek Portofolio",
+        navWhatsApp: "WhatsApp Kami",
         navContact: "Hubungi Kami",
-        heroTitle1: "Bangun Sistem Digital.",
-        heroTitle2: "Tingkatkan Skala Bisnis.",
-        heroDesc: "Soedirman Inovasi Digital menyediakan spesialisasi layanan jasa pembuatan website, jasa pembuatan aplikasi mobile, UI/UX design, dan pembaruan sistem informasi. Ciptakan inovasi teknologi bersama tim handal kami untuk menjangkau lebih banyak pelanggan di ranah digital.",
+        heroTitle: "Partner Digital untuk Bisnis yang Ingin Berkembang",
+        heroDesc: "Kami membantu bisnis Anda berkembang melalui pengembangan software, website, dan pengelolaan social media yang terintegrasi untuk meningkatkan visibilitas, efisiensi, dan penjualan.",
         heroBtnStart: "Konsultasi Gratis",
         heroBtnPort: "Lihat Portfolio",
-        aboutTag: "Tentang Soedirman Inovasi Digital",
-        aboutTitle: "Software House & Digital Agency Profesional",
-        aboutDesc: "Bukan sekadar agensi digital biasa. Soedirman Inovasi Digital adalah mitra teknologi strategis Anda di Purwokerto yang menyediakan jasa pembuatan sistem informasi (CMS), e-learning (LMS), aplikasi kasir/E-Commerce, perancangan landing page, hingga kampanye Sosial Media yang sudah teroptimasi SEO (Search Engine Optimization) secara penuh.",
+        aboutTag: "Tentang TechSoe",
+        aboutTitle: "Bersama membangun masa depan digital bisnis Anda",
+        aboutDesc: "TechSoe adalah partner transformasi yang menyediakan solusi serta layanan digital untuk mendukung bisnis capai hasil terbaik dengan skala yang lebih besar.",
+        aboutLink: "Sekilas tentang TechSoe",
         aboutSvc1Title: "Web Development",
         aboutSvc2Title: "UI/UX Design",
         aboutSvc3Title: "Digital Branding",
         aboutSvc4Title: "Social Media",
         aboutExpNum: "5+",
         aboutExpText: "Tahun Pengalaman",
+        svcTag: "Layanan Kami",
+        svcTitle: "Solusi Digital untuk Bisnis Anda",
+        svcWebTitle: "Web Development",
+        svcWebDesc: "Membangun website responsif, cepat, dan berstandar industri dengan teknologi terbaru seperti Next.js dan Laravel.",
+        svcMobileTitle: "Mobile Apps",
+        svcMobileDesc: "Aplikasi Android & iOS kustom dengan performa tinggi untuk menjangkau pengguna di genggaman mereka.",
+        svcDesignTitle: "UI/UX Design",
+        svcDesignDesc: "Riset pengguna dan perancangan antarmuka yang intuitif untuk memastikan konversi dan kenyamanan pengguna.",
+        svcSystemTitle: "Sistem Informasi",
+        svcSystemDesc: "Optimalkan operasional dengan sistem internal khusus seperti ERP, CRM, dan Dashboard Manajemen data.",
+        svcSMMTitle: "Social Media Management",
+        svcSMMDesc: "Manajemen konten dan strategi visual di media sosial untuk membangun kehadiran brand yang kuat.",
         portTag: "Karya Kami",
         portTitle: "Project Showcase",
         portDesc: "Jelajahi berbagai studi kasus proyek digital tempat ide-ide brilian Anda dan rekayasa cerdas kami bertemu.",
@@ -34,19 +46,39 @@ export const t = {
         testiTag: "Testimoni Klien",
         testiTitle: "Apa Kata Mereka Tentang Kami",
         faqH2: "Pertanyaan yang Sering Diajukan",
-        faqDesc: "Menghapus keraguan Anda sebelum memulai kerja sama dengan Soedirman Inovasi Digital.",
+        faqDesc: "Menghapus keraguan Anda sebelum memulai kerja sama dengan TechSoe.",
         faqData: [
             {
-                q: 'Berapa lama estimasi pengerjaan website/aplikasi?',
-                a: 'Waktu pengerjaan sangat bergantung pada kompleksitas fitur dan skala pengerjaan. Untuk Landing Page memakan waktu 1–2 minggu. CMS dan E-Commerce umumnya berkisar 4–8 minggu. Timeline detil akan kami sediakan setelah menganalisis kebutuhan spesifik dari diskusi awal.'
+                q: 'Apakah saya akan mendapatkan akses full ke Source Code aplikasi?',
+                a: 'Ya, TechSoe memberikan kepemilikan penuh atas source code kepada klien setelah pelunasan. Kami tidak menerapkan sistem sewa (locked code), sehingga Anda bebas untuk mengembangkan aplikasi di masa depan baik dengan tim kami maupun internal Anda.'
             },
             {
-                q: 'Bagaimana jika saya memerlukan fitur kustom di luar paket di atas?',
-                a: 'Soedirman Inovasi Digital mengkhususkan diri di dalam custom enterprise development. Hubungi tim representatif kami untuk mendiskusikan fitur yang belum ada dalam daftar. Kami akan menyiapkan timeline dan penawaran sesuai dengan proporsi teknologinya.'
+                q: 'Teknologi apa yang TechSoe gunakan untuk pengembangan website?',
+                a: 'Kami menggunakan stack teknologi modern dan standar industri. Di antaranya adalah Next.js (React) untuk performa web yang kencang dan SEO-friendly, Tailwind CSS untuk desain premium, serta Laravel atau Node.js untuk solusi backend yang stabil dan aman.'
             },
             {
-                q: 'Apakah ada biaya lanjutan (Maintenance) setelah aplikasi selesai dibuat?',
-                a: 'Kami memberikan Garansi Bug/Error (Maintenance Gratis) dari 15 hari hingga 6 bulan tergantung paket Anda. Setelah itu, kami sangat menyarankan layanan SLA/Maintenance opsional tahunan agar pihak kami dapat rutin menambal (patch) keamanan dan mengoptimasi infrastruktur sistem.'
+                q: 'Apakah website yang dibuat sudah SEO Friendly?',
+                a: 'Tentu. Setiap website yang kami kembangkan telah melalui optimasi SEO On-Page dasar, termasuk struktur heading (H1-H3), meta tags, optimasi kecepatan loading (LCP), hingga implementasi Semantic HTML guna memudahkan mesin pencari seperti Google mengindeks bisnis Anda.'
+            },
+            {
+                q: 'Bagaimana sistem pembayaran di TechSoe?',
+                a: 'Umumnya kami menggunakan sistem termin: (1) DP sebesar 40-50% untuk memulai pengerjaan, (2) Termin kedua saat development mencapai 50-70%, dan (3) Pelunasan setelah aplikasi selesai di-deploy ke production/domain publik.'
+            },
+            {
+                q: 'Apakah website yang dibuat bisa diakses dengan baik melalui HP?',
+                a: 'Ya, seluruh produk digital kami menggunakan prinsip "Mobile-First Design" atau responsivitas penuh. Website Anda akan tampil sempurna dan berfungsi maksimal di berbagai ukuran perangkat, mulai dari smartphone, tablet, hingga desktop.'
+            },
+            {
+                q: 'Apakah TechSoe bisa membantu integrasi dengan pihak ketiga (API)?',
+                a: 'Sangat bisa. Kami berpengalaman mengintegrasikan sistem dengan Payment Gateway (Midtrans, Xendit), Cargo/Logistik (RajaOngkir), WhatsApp API, hingga Map Service atau API pihak ketiga lainnya sesuai kebutuhan bisnis Anda.'
+            },
+            {
+                q: 'Bagaimana jika saya belum memiliki Domain dan Hosting?',
+                a: 'Jangan khawatir, tim TechSoe akan membantu proses pendaftaran domain (.com, .id, .co.id) serta konfigurasi server/hosting yang sesuai dengan estimasi trafik bisnis Anda. Kami memastikan server Anda terkonfigurasi dengan keamanan SSL (HTTPS).'
+            },
+            {
+                q: 'Apakah ada pelatihan cara mengelola website sendiri?',
+                a: 'Tentu. Setelah pengerjaan selesai, kami memberikan sesi training atau dokumentasi panduan singkat (User Manual) agar tim Anda bisa mengelola konten website seperti update produk, edit teks, atau melihat laporan data secara mandiri.'
             }
         ],
         portfolioCategories: ['Semua', 'Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce', 'Social Media Management'],
@@ -65,6 +97,13 @@ export const t = {
             'LMS',
             'E-Commerce',
             'Social Media Management'
+        ],
+        pricingServiceGroups: [
+            { id: 'web', name: 'Web Development', tabs: ['Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce'] },
+            { id: 'mobile', name: 'Mobile Apps', tabs: ['Mobile App Packages'] },
+            { id: 'design', name: 'UI/UX Design', tabs: ['UI/UX Packages'] },
+            { id: 'branding', name: 'Social Media Management', tabs: ['Social Media Packages'] },
+            { id: 'is', name: 'Sistem Informasi', tabs: ['Sistem Informasi Packages'] },
         ],
         pricingData: {
             'Landing Page': [
@@ -213,27 +252,82 @@ export const t = {
                     description: '*Buka pintu bagi merchant lain di seluruh wilayah.'
                 }
             ],
-            'Social Media Management': [
+            'Mobile App Packages': [
                 {
-                    name: 'Feed', price: 'Rp 1.500.000',
+                    name: 'MVP Mobile', price: 'Rp 25.000.000',
+                    features: [
+                        'Satu Platform (Android/iOS)', 'UI/UX Standar', 'Authentikasi (Login/Regis)', 
+                        'Data Cloud (Firebase/SQL)', 'Notification System', 'Maksimal 5 Fitur Utama', 
+                        'Garansi Maintenance 3 Bulan'
+                    ],
+                    description: '*Cocok untuk validasi ide bisnis awal dengan aplikasi fungsional.'
+                },
+                {
+                    name: 'Business App', price: 'Rp 55.000.000', isPopular: true,
+                    features: [
+                        'Hybrid Android & iOS (Flutter)', 'Custom UI/UX Design', 'API Integration', 
+                        'Push Notification Advanced', 'Maksimal 10 Fitur Utama', 'Submission ke Playstore/Appstore', 
+                        'Garansi Maintenance 6 Bulan'
+                    ],
+                    description: '*Solusi aplikasi profesional untuk bisnis yang sedang berkembang.'
+                },
+                {
+                    name: 'Elite Mobile', price: 'Rp 100.000.000+',
+                    features: [
+                        'Fully Custom Features', 'Advanced Backend System', 'Payment Gateway Integration', 
+                        'High Security Encryption', 'Maksimal 20 Fitur Utama', 'Submission ke Playstore/Appstore', 
+                        'Garansi Maintenance 1 Tahun'
+                    ],
+                    description: '*Sistem aplikasi skala besar dengan fitur kompleks & integrasi penuh.'
+                }
+            ],
+            'UI/UX Packages': [
+                {
+                    name: 'UI Micro', price: 'Rp 2.500.000',
+                    features: [
+                        'High Fidelity Design (Figma)', '1 Landing Page Long', 'Responsive View (Desktop/Mobile)', 
+                        'User Flow Diagram', 'Dark & Light Mode', 'Revisi 3x'
+                    ],
+                    description: '*Desain antarmuka modern fokus pada konversi produk.'
+                },
+                {
+                    name: 'UI Professional', price: 'Rp 8.000.000', isPopular: true,
+                    features: [
+                        'Up to 10 Pages/Screens', 'Interactive Prototype', 'Design System Basic', 
+                        'Export Ready for Dev', 'User Persona Research', 'Revisi 5x'
+                    ],
+                    description: '*Solusi desain lengkap untuk website atau aplikasi aplikasi bisnis.'
+                },
+                {
+                    name: 'Design Center', price: 'Rp 20.000.000+',
+                    features: [
+                        'Comprehensive Design System', 'Master Component Library', 'Style Guide & Typography', 
+                        'Up to 30 Screens', 'Advanced Prototyping', 'Revisi UNLIMITED'
+                    ],
+                    description: '*Standarisasi desain untuk produk skala besar dan konsistensi brand.'
+                }
+            ],
+            'Social Media Packages': [
+                {
+                    name: 'Basic Feed', price: 'Rp 1.500.000',
                     features: [
                         '12 Desain Feed Premium', 'Copywriting & Caption', 'Riset Hashtag Bertarget',
                         'Penjadwalan Posting', { text: 'Produksi Video Reels', included: false },
-                        { text: 'Ide Konten & Storyboard', included: false }, { text: 'Laporan Analitik', included: false }
+                        { text: 'Ide Konten & Storyboard', included: false }, { text: 'Laporan Analitk', included: false }
                     ],
                     description: '*Paket perancangan layout dan desain Feed estetis.'
                 },
                 {
-                    name: 'Reels', price: 'Rp 3.500.000', isPopular: true,
+                    name: 'Viral Reels', price: 'Rp 3.500.000', isPopular: true,
                     features: [
                         '8 Video Reels / TikTok', 'Ide Konten & Storyboard', 'Video Editing Transisi Estetik',
                         'Copywriting & Caption', 'Penjadwalan Posting',
-                        { text: 'Desain Feed Statis', included: false }, { text: 'Laporan Analitik', included: false }
+                        'Riset Audio Trending', { text: 'Laporan Analitik', included: false }
                     ],
                     description: '*Fokus pada produksi video pendek untuk jangkauan viral.'
                 },
                 {
-                    name: 'All Content', price: 'Rp 5.500.000+',
+                    name: 'All-in-One', price: 'Rp 5.500.000',
                     features: [
                         '12 Desain Feed Premium', '8 Video Reels / TikTok', 'Ide Konten & Storyboard',
                         'Copywriting & Riset Hashtag', 'Admin Posting & Interaksi',
@@ -241,22 +335,48 @@ export const t = {
                     ],
                     description: '*Solusi manajemen akun hulu ke hilir untuk mendongkrak brand Anda.'
                 }
+            ],
+            'Sistem Informasi Packages': [
+                {
+                    name: 'System Core', price: 'Rp 15.000.000',
+                    features: [
+                        'Web Based System', 'Dashboard Manajemen Data', 'Kelola Produk & Inventori', 
+                        'Multi User (Admin/Staff)', 'Laporan Statistik Basic', 'Garansi 3 Bulan'
+                    ],
+                    description: '*Sistem internal dasar untuk mendigitalkan operasional bisnis.'
+                },
+                {
+                    name: 'Enterprise Hub', price: 'Rp 45.000.000', isPopular: true,
+                    features: [
+                        'Custom Modules (Keuangan/SDM/Sales)', 'Notifikasi Email/WA', 'Audit Trail & Tracking', 
+                        'Integrasi Database Terpusat', 'Advanced Dashboard Analytics', 'Garansi 6 Bulan'
+                    ],
+                    description: '*Solusi ERP atau CRM kustom yang dirancang sesuai alur kerja bisnis Anda.'
+                },
+                {
+                    name: 'Smart System', price: 'Rp 85.000.000+',
+                    features: [
+                        'Full Custom Automation', 'Integrasi Multi-API', 'Enterprise Grade Security', 
+                        'Scalable Infrastructure', 'Pelatihan Staff & Dokumentasi', 'Garansi 1 Tahun'
+                    ],
+                    description: '*Solusi software kompleks hulu ke hilir untuk efisiensi korporasi.'
+                }
             ]
         },
         testimonials: [
-            { name: 'Budi Santoso', role: 'CEO, Retail Nusantara', text: 'Soedirman Inovasi Digital berhasil mentransformasi website kami menjadi jauh lebih modern dan cepat. Penjualan meningkat drastis berkat UI/UX yang intuitif.', rating: 5 },
+            { name: 'Budi Santoso', role: 'CEO, Retail Nusantara', text: 'TechSoe berhasil mentransformasi website kami menjadi jauh lebih modern dan cepat. Penjualan meningkat drastis berkat UI/UX yang intuitif.', rating: 5 },
             { name: 'Siti Aminah', role: 'Founder, Hijab Style', text: 'Sistem E-Commerce yang dibuat sangat stabil meski sedang ada flash sale. Timnya responsif dan solutif. Sangat direkomendasikan!', rating: 5 },
-            { name: 'Andi Wijaya', role: 'Direktur, PT Bangun Mandiri', text: 'Aplikasi manajemen ERP dari Soedirman Inovasi Digital membantu operasional bisnis kami menjadi lebih otomatis dan efisien. Luar biasa!', rating: 5 },
-            { name: 'Lestari', role: 'Head of Marketing, EduTech', text: 'Branding dan desain landing page sangat elegan. Proses pengerjaan on time dan sesuai dengan ekspektasi. Terima kasih Soedirman Inovasi Digital!', rating: 5 },
-            { name: 'Rizki Pratama', role: 'Pemilik, Kopi Kenangan', text: 'Layanan manajemen media sosial dan visual dari Soedirman Inovasi Digital membuat engagement kami naik 300% dalam sebulan. Mantap!', rating: 5 },
+            { name: 'Andi Wijaya', role: 'Direktur, PT Bangun Mandiri', text: 'Aplikasi manajemen ERP dari TechSoe membantu operasional bisnis kami menjadi lebih otomatis dan efisien. Luar biasa!', rating: 5 },
+            { name: 'Lestari', role: 'Head of Marketing, EduTech', text: 'Branding dan desain landing page sangat elegan. Proses pengerjaan on time dan sesuai dengan ekspektasi. Terima kasih TechSoe!', rating: 5 },
+            { name: 'Rizki Pratama', role: 'Pemilik, Kopi Kenangan', text: 'Layanan manajemen media sosial dan visual dari TechSoe membuat engagement kami naik 300% dalam sebulan. Mantap!', rating: 5 },
         ],
         ctaTitle: "Mulai Digitalisasi Bisnis Anda Hari Ini!",
-        ctaDesc: "Jangan biarkan kompetitor selangkah di depan. Konsultasikan ide proyek perancangan aplikasi atau kebutuhan jasa pembuatan website Anda kepada Soedirman Inovasi Digital. Kami siap memberikan solusi e-commerce, sistem CMS, dan strategi digital dengan garansi kualitas terbaik.",
+        ctaDesc: "Jangan biarkan kompetitor selangkah di depan. Konsultasikan ide proyek perancangan aplikasi atau kebutuhan jasa pembuatan website Anda kepada TechSoe. Kami siap memberikan solusi e-commerce, sistem CMS, dan strategi digital dengan garansi kualitas terbaik.",
         ctaBtn: "Hubungi Tim Ahli Kami",
-        footerDesc: "Soedirman Inovasi Digital merupakan agensi spesialis jasa pembuatan website, pengembangan aplikasi mobile, CMS, sistem informasi terintegrasi, serta layanan UI/UX dan digital marketing berkinerja tinggi yang dirancang untuk SEO.",
+        footerDesc: "TechSoe merupakan agensi spesialis jasa pembuatan website, pengembangan aplikasi mobile, CMS, sistem informasi terintegrasi, serta layanan UI/UX dan digital marketing berkinerja tinggi yang dirancang untuk SEO.",
         footerSvcHeading: "Layanan",
         footerContactHeading: "Kontak",
-        footerCopyright: "© {year} Soedirman Inovasi Digital Agency. Hak Cipta Dilindungi.",
+        footerCopyright: "© {year} TechSoe Agency. Hak Cipta Dilindungi.",
         footerMadeWithLove: "Dirancang dengan cinta 💙",
         orderFormTitle: "Form Pemesanan",
         orderFormName: "Nama Lengkap",
@@ -266,33 +386,45 @@ export const t = {
         orderFormPackage: "Paket Terpilih",
         orderFormSubmit: "Kirim via WhatsApp",
         orderFormCancel: "Batal",
-        orderWaGreeting: "Halo! Saya tertarik dengan layanan Soedirman Inovasi Digital.",
+        orderWaGreeting: "Halo! Saya tertarik dengan layanan TechSoe.",
         orderWaName: "Nama",
         orderWaPackage: "Paket",
         orderWaDesc: "Detail Project",
         orderWaEmail: "Email"
     },
     en: {
-        navProject: "Project",
-        navHarga: "Pricing",
-        navTentang: "About Us",
-        navFaq: "FAQ",
-        navBlog: "Blog",
+        navProducts: "Products & Services",
+        navSolutions: "Solutions",
+        navResources: "Resources",
+        navSignIn: "Portfolios",
+        navWhatsApp: "WhatsApp Us",
         navContact: "Contact Us",
-        heroTitle1: "Build Digital Systems.",
-        heroTitle2: "Scale Up Your Business.",
-        heroDesc: "Soedirman Inovasi Digital provides specialized services in website development, mobile app creation, UI/UX design, and information system engineering. Build technological innovations with our reliable team to reach more digital customers.",
+        heroTitle: "Build Digital Systems & Scale Up Your Business.",
+        heroDesc: "From website development to social media management, TechSoe is ready to help your business thrive in the digital world.",
         heroBtnStart: "Free Consultation",
         heroBtnPort: "View Our Portfolio",
-        aboutTag: "About Soedirman Inovasi Digital",
-        aboutTitle: "Professional Software House & Digital Agency",
-        aboutDesc: "More than just a standard digital agency. Soedirman Inovasi Digital is your strategic technology partner based in Purwokerto, offering premium information system creation (CMS, LMS), POS & E-Commerce applications, custom landing pages, and fully SEO-optimized social media campaigns.",
+        aboutTag: "About TechSoe",
+        aboutTitle: "Building your business digital future together",
+        aboutDesc: "TechSoe is a transformation partner providing digital solutions and services to help businesses achieve best results at a larger scale.",
+        aboutLink: "A quick look at TechSoe",
         aboutSvc1Title: "Web Development",
         aboutSvc2Title: "UI/UX Design",
         aboutSvc3Title: "Digital Branding",
         aboutSvc4Title: "Social Media",
         aboutExpNum: "5+",
         aboutExpText: "Years of Experience",
+        svcTag: "Our Services",
+        svcTitle: "Comprehensive Digital Solutions for Your Business",
+        svcWebTitle: "Web Development",
+        svcWebDesc: "Building responsive, fast, and industry-standard websites using the latest tech like Next.js and Laravel.",
+        svcMobileTitle: "Mobile Apps",
+        svcMobileDesc: "High-performance custom Android & iOS apps to reach users right in their hands.",
+        svcDesignTitle: "UI/UX Design",
+        svcDesignDesc: "User research and intuitive interface design to ensure conversion and user comfort.",
+        svcSystemTitle: "Sistem Informasi",
+        svcSystemDesc: "Optimize operations with custom internal systems like ERP, CRM, and data Management Dashboards.",
+        svcSMMTitle: "Social Media Management",
+        svcSMMDesc: "Content management and visual strategies on social media to build a strong brand presence.",
         portTag: "Our Work",
         portTitle: "Project Showcase",
         portDesc: "Explore various digital project case studies where your brilliant ideas meet our smart engineering.",
@@ -307,7 +439,7 @@ export const t = {
         testiTag: "Client Testimonials",
         testiTitle: "What They Say About Us",
         faqH2: "Frequently Asked Questions",
-        faqDesc: "Clearing your doubts before starting a collaboration with Soedirman Inovasi Digital.",
+        faqDesc: "Clearing your doubts before starting a collaboration with TechSoe.",
         faqData: [
             {
                 q: 'How long is the estimated time to build a website/application?',
@@ -315,11 +447,43 @@ export const t = {
             },
             {
                 q: 'What if I need custom features outside the packages above?',
-                a: 'Soedirman Inovasi Digital specializes in custom enterprise development. Contact our representatives to discuss features not listed. We will prepare a timeline and quote matching the technological proportion.'
+                a: 'TechSoe specializes in custom enterprise development. Contact our representatives to discuss features not listed. We will prepare a timeline and quote matching the technological proportion.'
             },
             {
                 q: 'Is there an ongoing fee (Maintenance) after the application is finished?',
                 a: 'We provide a Bug/Error Warranty (Free Maintenance) for 15 days up to 6 months depending on your package. After that, we highly recommend an optional annual SLA/Maintenance service so our team can routinely apply security patches and optimize system infrastructure.'
+            },
+            {
+                q: 'Will I get full access to the source code?',
+                a: 'Yes, TechSoe provides full ownership of the source code to the client after final payment. We do not use a "locked code" or rental system, giving you the freedom to develop the app in the future with our team or your internal developers.'
+            },
+            {
+                q: 'What technologies does TechSoe use for development?',
+                a: 'We use a modern, industry-standard tech stack. This includes Next.js (React) for fast, SEO-friendly performance, Tailwind CSS for premium design, and Laravel or Node.js for stable and secure backend solutions.'
+            },
+            {
+                q: 'Are your websites SEO Friendly?',
+                a: 'Absolutely. Every website we develop undergoes basic On-Page SEO optimization, including heading structures (H1-H3), meta tags, loading speed optimization (LCP), and Semantic HTML implementation to help search engines like Google index your business easily.'
+            },
+            {
+                q: 'What is the payment system at TechSoe?',
+                a: 'Typically, we use a tiered payment system: (1) 40-50% down payment to begin development, (2) Second installment when development reaches 50-70%, and (3) Final payment once the application is ready for deployment to production or a public domain.'
+            },
+            {
+                q: 'Will my website work well on mobile devices?',
+                a: 'Yes, all our digital products are built with "Mobile-First Design" or full responsiveness in mind. Your website will look perfect and function optimally across all screen sizes, from smartphones and tablets to desktops.'
+            },
+            {
+                q: 'Can TechSoe help with third-party API integrations?',
+                a: 'Yes, we can. we have experience integrating systems with Payment Gateways (Midtrans, Xendit, Stripe), Logistics/Cargo APIs, WhatsApp API, Map services, and various other third-party APIs to suit your business requirements.'
+            },
+            {
+                q: 'What if I don\'t have a Domain or Hosting yet?',
+                a: 'Don\'t worry, the TechSoe team will assist you with domain registration (.com, .id, etc.) and server/hosting configuration tailored to your estimated business traffic. We also ensure your server is secured with SSL (HTTPS).'
+            },
+            {
+                q: 'Is there training provided on how to manage the website?',
+                a: 'Definitely. Once the project is complete, we provide a training session or brief documentation (User Manual) so your team can manage website content, such as updating products or editing text, independently.'
             }
         ],
         portfolioCategories: ['All', 'Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce', 'Social Media Management'],
@@ -338,6 +502,13 @@ export const t = {
             'LMS',
             'E-Commerce',
             'Social Media Management'
+        ],
+        pricingServiceGroups: [
+            { id: 'web', name: 'Web Development', tabs: ['Landing Page', 'Company Profile', 'CMS', 'LMS', 'E-Commerce'] },
+            { id: 'mobile', name: 'Mobile Apps', tabs: ['Mobile App Packages'] },
+            { id: 'design', name: 'UI/UX Design', tabs: ['UI/UX Packages'] },
+            { id: 'branding', name: 'Social Media Management', tabs: ['Social Media Packages'] },
+            { id: 'is', name: 'Sistem Informasi', tabs: ['Sistem Informasi Packages'] },
         ],
         pricingData: {
             'Landing Page': [
@@ -486,27 +657,82 @@ export const t = {
                     description: '*Open doors to the other merchants across all regions.'
                 }
             ],
-            'Social Media Management': [
+            'Mobile App Packages': [
                 {
-                    name: 'Feed', price: 'Rp 1.500.000',
+                    name: 'MVP Mobile', price: 'Rp 25.000.000',
+                    features: [
+                        'Single Platform (Android/iOS)', 'Standard UI/UX', 'Authentication (Login/Register)', 
+                        'Cloud Data (Firebase/SQL)', 'Notification System', 'Max 5 Core Features', 
+                        '3 Months Maintenance Warranty'
+                    ],
+                    description: '*Suitable for validating early business ideas with a functional app.'
+                },
+                {
+                    name: 'Business App', price: 'Rp 55.000.000', isPopular: true,
+                    features: [
+                        'Hybrid Android & iOS (Flutter)', 'Custom UI/UX Design', 'API Integration', 
+                        'Advanced Push Notifications', 'Max 10 Core Features', 'Playstore/Appstore Submission', 
+                        '6 Months Maintenance Warranty'
+                    ],
+                    description: '*Professional app solution for growing businesses.'
+                },
+                {
+                    name: 'Elite Mobile', price: 'Rp 100.000.000+',
+                    features: [
+                        'Fully Custom Features', 'Advanced Backend System', 'Payment Gateway Integration', 
+                        'High Security Encryption', 'Max 20 Core Features', 'Playstore/Appstore Submission', 
+                        '1 Year Maintenance Warranty'
+                    ],
+                    description: '*Large-scale app systems with complex features & full integration.'
+                }
+            ],
+            'UI/UX Packages': [
+                {
+                    name: 'UI Micro', price: 'Rp 2.500.000',
+                    features: [
+                        'High Fidelity Design (Figma)', '1 Long Landing Page', 'Responsive View (Desktop/Mobile)', 
+                        'User Flow Diagram', 'Dark & Light Mode', '3x Revisions'
+                    ],
+                    description: '*Modern interface design focused on product conversion.'
+                },
+                {
+                    name: 'UI Professional', price: 'Rp 8.000.000', isPopular: true,
+                    features: [
+                        'Up to 10 Pages/Screens', 'Interactive Prototype', 'Basic Design System', 
+                        'Export Ready for Dev', 'User Persona Research', '5x Revisions'
+                    ],
+                    description: '*Complete design solution for professional websites or business apps.'
+                },
+                {
+                    name: 'Design Center', price: 'Rp 20.000.000+',
+                    features: [
+                        'Comprehensive Design System', 'Master Component Library', 'Style Guide & Typography', 
+                        'Up to 30 Screens', 'Advanced Prototyping', 'UNLIMITED Revisions'
+                    ],
+                    description: '*Design standardization for large-scale products and brand consistency.'
+                }
+            ],
+            'Social Media Packages': [
+                {
+                    name: 'Basic Feed', price: 'Rp 1.500.000',
                     features: [
                         '12 Premium Feed Designs', 'Copywriting & Captions', 'Targeted Hashtag Research',
                         'Post Scheduling', { text: 'Reels Video Production', included: false },
                         { text: 'Content Ideas & Storyboards', included: false }, { text: 'Analytics Reports', included: false }
                     ],
-                    description: '*An aesthetic Feed layout and design package.'
+                    description: '*Aesthetic Feed layout and design package.'
                 },
                 {
-                    name: 'Reels', price: 'Rp 3.500.000', isPopular: true,
+                    name: 'Viral Reels', price: 'Rp 3.500.000', isPopular: true,
                     features: [
                         '8 Reels / TikTok Videos', 'Content Ideas & Storyboards', 'Aesthetic Transition Video Editing',
                         'Copywriting & Captions', 'Post Scheduling',
-                        { text: 'Static Feed Designs', included: false }, { text: 'Analytics Reports', included: false }
+                        'Trending Audio Research', { text: 'Analytics Reports', included: false }
                     ],
                     description: '*Focuses on short video production for viral reach.'
                 },
                 {
-                    name: 'All Content', price: 'Rp 5.500.000+',
+                    name: 'All-in-One', price: 'Rp 5.500.000',
                     features: [
                         '12 Premium Feed Designs', '8 Reels / TikTok Videos', 'Content Ideas & Storyboards',
                         'Copywriting & Hashtag Research', 'Admin Posting & Interactions',
@@ -514,22 +740,48 @@ export const t = {
                     ],
                     description: '*End-to-end account management solution to boost your brand.'
                 }
+            ],
+            'Sistem Informasi Packages': [
+                {
+                    name: 'System Core', price: 'Rp 15.000.000',
+                    features: [
+                        'Web-Based System', 'Data Management Dashboard', 'Product & Inventory Management', 
+                        'Multi-User (Admin/Staff)', 'Basic Statistical Reports', '3 Months Warranty'
+                    ],
+                    description: '*Foundational internal system to digitize business operations.'
+                },
+                {
+                    name: 'Enterprise Hub', price: 'Rp 45.000.000', isPopular: true,
+                    features: [
+                        'Custom Modules (Finance/HR/Sales)', 'Email/WA Notifications', 'Audit Trail & Tracking', 
+                        'Centralized Database Integration', 'Advanced Analytics Dashboard', '6 Months Warranty'
+                    ],
+                    description: '*Custom ERP or CRM solution designed to match your business workflow.'
+                },
+                {
+                    name: 'Smart System', price: 'Rp 85.000.000+',
+                    features: [
+                        'Full Custom Automation', 'Multi-API Integration', 'Enterprise-Grade Security', 
+                        'Scalable Infrastructure', 'Staff Training & Documentation', '1 Year Warranty'
+                    ],
+                    description: '*Complex end-to-end software solution for corporate efficiency.'
+                }
             ]
         },
         testimonials: [
-            { name: 'Budi Santoso', role: 'CEO, Retail Nusantara', text: 'Soedirman Inovasi Digital successfully transformed our website into something much more modern and faster. Sales skyrocketed thanks to the intuitive UI/UX.', rating: 5 },
+            { name: 'Budi Santoso', role: 'CEO, Retail Nusantara', text: 'TechSoe successfully transformed our website into something much more modern and faster. Sales skyrocketed thanks to the intuitive UI/UX.', rating: 5 },
             { name: 'Siti Aminah', role: 'Founder, Hijab Style', text: 'The E-Commerce system they built is incredibly stable even during flash sales. The team is responsive and solution-oriented. Highly recommended!', rating: 5 },
-            { name: 'Andi Wijaya', role: 'Director, PT Bangun Mandiri', text: 'The ERP management application from Soedirman Inovasi Digital helped our business operations become more automated and efficient. Amazing!', rating: 5 },
-            { name: 'Lestari', role: 'Head of Marketing, EduTech', text: 'The branding and landing page design are extremely elegant. The development process was strictly on time and met expectations. Thank you Soedirman Inovasi Digital!', rating: 5 },
-            { name: 'Rizki Pratama', role: 'Owner, Kopi Kenangan', text: 'The social media management and visual services from Soedirman Inovasi Digital increased our engagement by 300% in just one month. Awesome!', rating: 5 },
+            { name: 'Andi Wijaya', role: 'Director, PT Bangun Mandiri', text: 'The ERP management application from TechSoe helped our business operations become more automated and efficient. Amazing!', rating: 5 },
+            { name: 'Lestari', role: 'Head of Marketing, EduTech', text: 'The branding and landing page design are extremely elegant. The development process was strictly on time and met expectations. Thank you TechSoe!', rating: 5 },
+            { name: 'Rizki Pratama', role: 'Owner, Kopi Kenangan', text: 'The social media management and visual services from TechSoe increased our engagement by 300% in just one month. Awesome!', rating: 5 },
         ],
         ctaTitle: "Ready to Digitize Your Business Today?",
-        ctaDesc: "Don't let competitors stay one step ahead. Consult your application ideas or professional website creation needs with Soedirman Inovasi Digital. We are ready to provide robust e-commerce and CMS solutions with guaranteed premium quality.",
+        ctaDesc: "Don't let competitors stay one step ahead. Consult your application ideas or professional website creation needs with TechSoe. We are ready to provide robust e-commerce and CMS solutions with guaranteed premium quality.",
         ctaBtn: "Contact Our Expert Team",
-        footerDesc: "Soedirman Inovasi Digital is a premier agency specializing in high-performance website creation, mobile app development, integrated information systems (CMS), and SEO-driven digital marketing strategies.",
+        footerDesc: "TechSoe is a premier agency specializing in high-performance website creation, mobile app development, integrated information systems (CMS), and SEO-driven digital marketing strategies.",
         footerSvcHeading: "Services",
         footerContactHeading: "Contact",
-        footerCopyright: "© {year} Soedirman Inovasi Digital Agency. All Rights Reserved.",
+        footerCopyright: "© {year} TechSoe Agency. All Rights Reserved.",
         footerMadeWithLove: "Designed with love 💙",
         orderFormTitle: "Order Form",
         orderFormName: "Full Name",
@@ -539,7 +791,7 @@ export const t = {
         orderFormPackage: "Selected Package",
         orderFormSubmit: "Send via WhatsApp",
         orderFormCancel: "Cancel",
-        orderWaGreeting: "Hello! I am interested in Soedirman Inovasi Digital services.",
+        orderWaGreeting: "Hello! I am interested in TechSoe services.",
         orderWaName: "Name",
         orderWaPackage: "Package",
         orderWaDesc: "Project Details",

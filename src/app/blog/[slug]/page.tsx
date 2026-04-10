@@ -1,11 +1,11 @@
 import React from 'react';
-import { ArrowLeft, Calendar, User, Clock, Tag } from 'lucide-react';
-import Image from 'next/image';
+import { Calendar, User, Clock, Tag } from 'lucide-react';
 import Link from 'next/link';
 import { blogPosts } from '@/lib/blogData';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
+import { Navbar, Footer } from "../../components";
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -17,13 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const post = blogPosts.find((p) => p.slug === slug);
     if (!post) {
         return {
-            title: 'Artikel Tidak Ditemukan | Soedirman Inovasi Digital',
+            title: 'Artikel Tidak Ditemukan | TechSoe',
             description: 'Konten artikel blog tidak tersedia.',
         };
     }
 
     return {
-        title: post.title + " | Soedirman Inovasi Digital Blog",
+        title: post.title + " | TechSoe Blog",
         description: post.excerpt,
         openGraph: {
             title: post.title,
@@ -63,24 +63,9 @@ export default async function BlogPostPage({ params }: Props) {
 
     return (
         <div className="min-h-screen bg-white font-sans text-slate-900 pb-32">
-            {/* FLOATING NAVBAR */}
-            <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-                <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
-                    <div className="flex items-center">
-                        <div className="w-48 h-12 rounded relative flex items-center justify-start">
-                            <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo" fill className="object-contain object-left" />
-                        </div>
-                    </div>
-                    <div className="hidden md:flex items-center gap-4">
-                        <Link href="/blog" className="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition flex items-center gap-2">
-                            <ArrowLeft className="w-4 h-4" /> Kembali ke Artikel
-                        </Link>
-                    </div>
-                </nav>
-            </div>
 
             {/* HERO ARTICLE HEADER */}
-            <section className="pt-48 pb-16 px-6 relative bg-slate-50 border-b border-slate-100">
+            <section className="pt-20 pb-16 px-6 relative bg-slate-50 border-b border-slate-100">
                 <div className="max-w-4xl mx-auto">
                     <div className="flex items-center gap-3 mb-6">
                         <span className="bg-blue-100 text-blue-700 font-bold uppercase tracking-wider text-xs px-4 py-1.5 rounded-full inline-flex items-center gap-2">
@@ -114,7 +99,6 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* MAIN ARTICLE BODY */}
             <article className="max-w-3xl mx-auto px-6 mt-16 text-lg text-slate-600 leading-relaxed font-medium pb-20 border-b border-slate-100">
-                {/* Parse Markdown content cleanly */}
                 <div className="prose prose-lg prose-slate prose-blue max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-img:rounded-2xl prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
                     <ReactMarkdown>{post.content}</ReactMarkdown>
                 </div>

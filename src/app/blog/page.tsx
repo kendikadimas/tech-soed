@@ -1,37 +1,17 @@
+"use client";
+
 import React from 'react';
-import { ArrowLeft, ArrowRight, BookOpen, Calendar, Clock, User } from 'lucide-react';
-import Image from 'next/image';
+import { ArrowRight, BookOpen, Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { blogPosts } from '@/lib/blogData';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'Blog & Artikel | Soedirman Inovasi Digital Purwokerto',
-    description: 'Kumpulan artikel seputar teknologi, panduan membuat website, tips memilih software house, layanan web developer, dan UI/UX design dengan fokus pada bisnis digital modern di Purwokerto.',
-    keywords: ["berita teknologi", "blog soedirmaninovasi", "artikel software house", "tips bisnis digital", "pembuatan website purwokerto"],
-};
+import { Navbar, Footer } from '../components';
 
 export default function BlogIndexPage() {
     return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-32">
-            {/* FLOATING NAVBAR */}
-            <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-                <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
-                    <div className="flex items-center">
-                        <div className="w-48 h-12 rounded relative flex items-center justify-start">
-                            <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo" fill className="object-contain object-left" />
-                        </div>
-                    </div>
-                    <div className="hidden md:flex items-center gap-4">
-                        <Link href="/" className="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition flex items-center gap-2">
-                            <ArrowLeft className="w-4 h-4" /> Kembali ke Beranda
-                        </Link>
-                    </div>
-                </nav>
-            </div>
 
             {/* HEADER HERO */}
-            <section className="pt-48 pb-20 px-6 relative overflow-hidden bg-slate-900 text-center rounded-b-[4rem] shadow-sm">
+            <section className="pt-20 pb-20 px-6 relative overflow-hidden bg-slate-900 text-center rounded-b-[4rem] shadow-sm">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[100px] opacity-30 transform translate-x-1/2 -translate-y-1/2 z-0"></div>
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[100px] opacity-20 transform -translate-x-1/2 translate-y-1/2 z-0"></div>
 
@@ -43,7 +23,7 @@ export default function BlogIndexPage() {
                         Wawasan Digital & Teknologi
                     </h1>
                     <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                        Insight mendalam dari sudut pandang engineer Soedirman Inovasi Digital, perancangan antarmuka, hingga analisis taktis manajemen IT perusahaan yang revolusioner.
+                        Insight mendalam dari sudut pandang engineer TechSoe, perancangan antarmuka, hingga analisis taktis manajemen IT perusahaan yang revolusioner.
                     </p>
                 </div>
             </section>

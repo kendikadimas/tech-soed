@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://soedirman-inovasi.vercel.app"),
+  metadataBase: new URL("https://techsoe.vercel.app"),
   alternates: {
     canonical: "/",
   },
-  title: "Soedirman Inovasi Digital | Jasa Pembuatan Website & Aplikasi di Purwokerto",
-  description: "Soedirman Inovasi Digital menyediakan spesialisasi layanan jasa pembuatan website, jasa pembuatan aplikasi mobile, web development, dan sistem informasi (CMS/LMS) terbaik di Purwokerto.",
+  title: "TechSoe | Jasa Pembuatan Website & Aplikasi di Purwokerto",
+  description: "TechSoe menyediakan spesialisasi layanan jasa pembuatan website, jasa pembuatan aplikasi mobile, web development, dan sistem informasi (CMS/LMS) terbaik di Purwokerto.",
   keywords: [
     "jasa pembuatan website",
     "jasa pembuatan web",
@@ -26,22 +25,22 @@ export const metadata: Metadata = {
     "web developer purwokerto",
     "software house purwokerto",
     "sistem informasi",
-    "soedirmaninovasi",
+    "techsoe",
     "banyumas",
     "jawa tengah"
   ],
-  authors: [{ name: "Soedirman Inovasi Digital" }],
+  authors: [{ name: "TechSoe" }],
   openGraph: {
-    title: "Soedirman Inovasi Digital | Jasa Pembuatan Website & Aplikasi Terpercaya",
+    title: "TechSoe | Jasa Pembuatan Website & Aplikasi Terpercaya",
     description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi.",
-    url: "https://soedirman-inovasi.vercel.app",
-    siteName: "Soedirman Inovasi Digital",
+    url: "https://techsoe.vercel.app",
+    siteName: "TechSoe",
     images: [
       {
         url: "/projects/logotrans.png", // Change to the absolute path of production image logo later
         width: 800,
         height: 600,
-        alt: "Soedirman Inovasi Digital Logo",
+        alt: "TechSoe Logo",
       },
     ],
     locale: "id_ID",
@@ -49,14 +48,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Soedirman Inovasi Digital | Jasa Pembuatan Website & Aplikasi",
-    description: "Spesialis layanan jasa pembuatan website dan aplikasi mobile profesional dari Soedirman Inovasi Digital.",
+    title: "TechSoe | Jasa Pembuatan Website & Aplikasi",
+    description: "Spesialis layanan jasa pembuatan website dan aplikasi mobile profesional dari TechSoe.",
     images: ["/projects/logotrans.png"],
   },
   verification: {
     google: "F5b1OkKQFg_a0eQ1KZLWcZU1_BLvdr0CgXo9kHW_MEw",
   },
 };
+
+import { LangProvider, Navbar, Footer, WhatsAppButton } from "./components";
 
 export default function RootLayout({
   children,
@@ -72,10 +73,10 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              "name": "Soedirman Inovasi Digital",
+              "name": "TechSoe",
               "operatingSystem": "Web",
               "applicationCategory": "BusinessApplication",
-              "description": "Soedirman Inovasi Digital melayani jasa pembuatan website, jasa pembuatan aplikasi mobile, perancangan sistem informasi, CMS, LMS, dan digital marketing terpercaya di Purwokerto.",
+              "description": "TechSoe melayani jasa pembuatan website, jasa pembuatan aplikasi mobile, perancangan sistem informasi, CMS, LMS, dan digital marketing terpercaya di Purwokerto.",
               "offers": {
                 "@type": "Offer",
                 "price": "0",
@@ -83,7 +84,7 @@ export default function RootLayout({
               },
               "provider": {
                 "@type": "LocalBusiness",
-                "name": "Soedirman Inovasi Digital",
+                "name": "TechSoe",
                 "address": {
                   "@type": "PostalAddress",
                   "addressLocality": "Purwokerto",
@@ -91,17 +92,24 @@ export default function RootLayout({
                   "addressCountry": "ID"
                 },
                 "telephone": "+628153424280",
-                "email": "halo@soedirmaninovasi.com",
-                "url": "https://soedirman-inovasi.vercel.app"
+                "email": "halo@techsoe.com",
+                "url": "https://techsoe.vercel.app"
               }
             })
           }}
         />
       </head>
       <body
-        className={`${poppins.variable} antialiased`}
+        className={`${inter.variable} antialiased`}
       >
-        {children}
+        <LangProvider>
+          <Navbar />
+          <main>
+            {children}
+          </main>
+          <Footer />
+          <WhatsAppButton />
+        </LangProvider>
       </body>
     </html>
   );

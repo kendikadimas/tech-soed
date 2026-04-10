@@ -1,49 +1,21 @@
-import React from 'react';
-import { ArrowLeft, Rocket, Target, ShieldCheck, Users } from 'lucide-react';
-import Image from 'next/image';
-import type { Metadata } from 'next';
+"use client";
 
-export const metadata: Metadata = {
-    title: 'Tentang Kami | Soedirman Inovasi Digital - Software House Purwokerto',
-    description: 'Pelajari lebih lanjut tentang Soedirman Inovasi Digital, software house terkemuka di Purwokerto yang memiliki visi membangun masa depan digital bersama Anda.',
-};
+import React from 'react';
+import { Rocket, Target, ShieldCheck, Users } from 'lucide-react';
+import { SectionTag } from '../components';
 
 export default function TentangPage() {
     return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-32">
-            {/* FLOATING NAVBAR */}
-            <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-                <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
-                    <div className="flex items-center">
-                        <div className="w-48 h-12 rounded relative flex items-center justify-start">
-                            <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo" fill className="object-contain object-left" />
-                        </div>
-                    </div>
-                    <div className="hidden md:flex items-center gap-8">
-                        <a href="/#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">Project</a>
-                        <a href="/#harga" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">Harga</a>
-                        <a href="/#tentang" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">Tentang Kami</a>
-                        <a href="/#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">FAQ</a>
-                    </div>
-                    <div className="hidden md:flex items-center gap-4">
-                        <a href="/" className="bg-slate-100 text-slate-700 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition flex items-center gap-2">
-                            <ArrowLeft className="w-4 h-4" /> Kembali
-                        </a>
-                    </div>
-                </nav>
-            </div>
-
             {/* HERO SECTION */}
-            <section className="pt-48 pb-20 px-6 relative overflow-hidden bg-white text-center rounded-b-[4rem] shadow-sm">
+            <section className="pt-20 pb-20 px-6 relative overflow-hidden bg-white text-center rounded-b-[4rem] shadow-sm">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50 rounded-full blur-3xl opacity-60 transform translate-x-1/2 -translate-y-1/2 z-0"></div>
                 <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-50 rounded-full blur-3xl opacity-60 transform -translate-x-1/2 translate-y-1/2 z-0"></div>
 
                 <div className="max-w-4xl mx-auto relative z-10">
-                    <div className="inline-flex items-center gap-2 bg-blue-100/50 border border-blue-200 px-4 py-1.5 rounded-full mb-8">
-                        <span className="text-xs font-bold text-blue-700 uppercase tracking-wider">Perkenalan Tim</span>
-                    </div>
+                    <SectionTag text="Perkenalan Tim" />
                     <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
-                        Membangun Massa Depan <br className="hidden md:block" /> Bersama Soedirman Inovasi Digital
+                        Membangun Masa Depan <br className="hidden md:block" /> Bersama TechSoe
                     </h1>
                     <p className="text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
                         Kami bukan sekadar *vendor*, melainkan arsitek digital untuk startup dan entitas bisnis modern yang mendambakan produk perangkat lunak bervisi jangka panjang.

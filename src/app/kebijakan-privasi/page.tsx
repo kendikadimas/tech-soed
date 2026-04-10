@@ -4,8 +4,8 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Kebijakan Privasi | Soedirman Inovasi Digital',
-    description: 'Pelajari bagaimana Soedirman Inovasi Digital mengelola dan menjaga privasi data Anda dengan aman.',
+    title: 'Kebijakan Privasi | TechSoe',
+    description: 'Pelajari bagaimana TechSoe mengelola dan menjaga privasi data Anda dengan aman.',
 };
 
 export default function KebijakanPrivasiPage() {
@@ -16,7 +16,7 @@ export default function KebijakanPrivasiPage() {
                 <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
                     <div className="flex items-center">
                         <div className="w-48 h-12 rounded relative flex items-center justify-start">
-                            <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo" fill className="object-contain object-left" />
+                            <Image src="/projects/logotrans.png" alt="TechSoe Logo" fill className="object-contain object-left" />
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-4">
@@ -50,7 +50,7 @@ export default function KebijakanPrivasiPage() {
 
                     <div className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-blue">
                         <p className="lead text-xl text-slate-600 mb-10">
-                            Di Soedirman Inovasi Digital, privasi dari pengunjung dan privasi kekayaan intelektual klien kami adalah prioritas paling tinggi bagi internal kami. Dokumen Kebijakan Privasi ini diformulasikan untuk menjelaskan pengumpulan dan protokol penggunaan informasi operasi Anda.
+                            Di TechSoe, privasi dari pengunjung dan privasi kekayaan intelektual klien kami adalah prioritas paling tinggi bagi internal kami. Dokumen Kebijakan Privasi ini diformulasikan untuk menjelaskan pengumpulan dan protokol penggunaan informasi operasi Anda.
                         </p>
 
                         <div className="space-y-12">

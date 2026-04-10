@@ -4,8 +4,8 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Syarat & Ketentuan | Soedirman Inovasi Digital',
-    description: 'Baca kelengkapan Syarat dan Ketentuan layanan Soedirman Inovasi Digital mengenai pembuatan website dan aplikasi.',
+    title: 'Syarat & Ketentuan | TechSoe',
+    description: 'Baca kelengkapan Syarat dan Ketentuan layanan TechSoe mengenai pembuatan website dan aplikasi.',
 };
 
 export default function SyaratKetentuanPage() {
@@ -16,7 +16,7 @@ export default function SyaratKetentuanPage() {
                 <nav className="bg-white/95 backdrop-blur-sm border border-slate-100 shadow-sm rounded-full px-6 py-3 w-full max-w-5xl flex items-center justify-between">
                     <div className="flex items-center">
                         <div className="w-48 h-12 rounded relative flex items-center justify-start">
-                            <Image src="/projects/logotrans.png" alt="Soedirman Inovasi Digital Logo" fill className="object-contain object-left" />
+                            <Image src="/projects/logotrans.png" alt="TechSoe Logo" fill className="object-contain object-left" />
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-4">
@@ -41,7 +41,7 @@ export default function SyaratKetentuanPage() {
                         Ketentuan Layanan
                     </h1>
                     <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto mb-8">
-                        Perjanjian komersial *(Terms of Service)* resmi ini mengklarifikasikan alur pengerjaan dan tanggung jawab yang seimbang antara Soedirman Inovasi Digital dan pihak klien.
+                        Perjanjian komersial *(Terms of Service)* resmi ini mengklarifikasikan alur pengerjaan dan tanggung jawab yang seimbang antara TechSoe dan pihak klien.
                     </p>
                     <span className="inline-block bg-slate-800 text-slate-300 font-medium px-4 py-2 rounded-full text-sm border border-slate-700 shadow-sm">
                         Telah diperbarui: {new Date().toLocaleDateString('id-ID')}
@@ -84,7 +84,7 @@ export default function SyaratKetentuanPage() {
                             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">2. Hak Revisi Klien</h2>
                             <div className="text-slate-600 space-y-4 leading-relaxed">
                                 <p>
-                                    Soedirman Inovasi Digital adalah entitas pelayanan klien yang fleksibel (*agile*), dan memaklumi perubahan (*change request*) selama pengembangan berjalan:
+                                    TechSoe adalah entitas pelayanan klien yang fleksibel (*agile*), dan memaklumi perubahan (*change request*) selama pengembangan berjalan:
                                 </p>
                                 <div className="grid md:grid-cols-2 gap-4 mt-6">
                                     <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
@@ -115,7 +115,7 @@ export default function SyaratKetentuanPage() {
                             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">3. Klaim Garansi Pascabeli (After-Sales)</h2>
                             <div className="text-slate-600 space-y-4 leading-relaxed">
                                 <p>
-                                    Perangkat lunak berbasis web maupun mobile rentan terkena kesalahan *runtime* di lingkungan pelanggan *real-world*. Soedirman Inovasi Digital otomatis menjamin kualitas barang dari pihak kami setelah *handover*:
+                                    Perangkat lunak berbasis web maupun mobile rentan terkena kesalahan *runtime* di lingkungan pelanggan *real-world*. TechSoe otomatis menjamin kualitas barang dari pihak kami setelah *handover*:
                                 </p>
                                 <ul className="list-disc pl-5 mt-4 space-y-2 font-medium">
                                     <li><span className="text-slate-900 font-bold">Produk Starter/LP:</span> Memiliki cakupan asuransi *Bug Fixing* hingga **30 Hari**.</li>
