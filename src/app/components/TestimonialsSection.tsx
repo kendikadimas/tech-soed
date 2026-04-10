@@ -12,7 +12,7 @@ export default function TestimonialsSection() {
   const testimonials = t[lang].testimonials;
 
   return (
-    <section className="py-24 px-6 lg:px-36 bg-slate-900 overflow-hidden relative">
+    <section id="testimoni" className="py-24 px-6 lg:px-12 bg-white overflow-hidden relative">
       <div className="absolute top-0 right-[10%] w-96 h-96 bg-blue-600 rounded-full blur-[120px] opacity-20 z-0" />
       <div className="absolute bottom-0 left-[10%] w-96 h-96 bg-blue-500 rounded-full blur-[120px] opacity-10 z-0" />
 

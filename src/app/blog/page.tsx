@@ -13,7 +13,7 @@ export default function BlogIndexPage() {
             {/* HEADER HERO */}
             <section className="pt-20 pb-20 px-6 relative overflow-hidden bg-slate-900 text-center rounded-b-[4rem] shadow-sm">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[100px] opacity-30 transform translate-x-1/2 -translate-y-1/2 z-0"></div>
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[100px] opacity-20 transform -translate-x-1/2 translate-y-1/2 z-0"></div>
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900 rounded-full blur-[100px] opacity-20 transform -translate-x-1/2 translate-y-1/2 z-0"></div>
 
                 <div className="max-w-4xl mx-auto relative z-10">
                     <div className="w-20 h-20 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-blue-500/30">

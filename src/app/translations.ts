@@ -4,7 +4,7 @@ export const t = {
         navSolutions: "Solusi",
         navResources: "Resources",
         navSignIn: "Cek Portofolio",
-        navWhatsApp: "WhatsApp Kami",
+        navWhatsApp: "Konsultasi Gratis",
         navContact: "Hubungi Kami",
         heroTitle: "Partner Digital untuk Bisnis yang Ingin Berkembang",
         heroDesc: "Kami membantu bisnis Anda berkembang melalui pengembangan software, website, dan pengelolaan social media yang terintegrasi untuk meningkatkan visibilitas, efisiensi, dan penjualan.",
@@ -20,8 +20,15 @@ export const t = {
         aboutSvc4Title: "Social Media",
         aboutExpNum: "5+",
         aboutExpText: "Tahun Pengalaman",
+        heroStats: [
+            { label: 'Layanan Terjamin', value: '100%' },
+            { label: 'Klien Puas', value: 'Puas' },
+            { label: 'Tim Profesional', value: 'Ahli' },
+            { label: 'Dukungan Penuh', value: 'Penuh' },
+        ],
         svcTag: "Layanan Kami",
         svcTitle: "Solusi Digital untuk Bisnis Anda",
+        svcText: "Kami menyediakan berbagai layanan pengembangan teknologi dan branding digital yang dirancang khusus untuk mempercepat pertumbuhan bisnis Anda di era digital.",
         svcWebTitle: "Web Development",
         svcWebDesc: "Membangun website responsif, cepat, dan berstandar industri dengan teknologi terbaru seperti Next.js dan Laravel.",
         svcMobileTitle: "Mobile Apps",
@@ -41,8 +48,9 @@ export const t = {
         priceDesc: "Solusi lengkap untuk membantu bisnis Anda eksis di dunia digital!",
         pricePopular: "PALING POPULER",
         priceOrderText: "Order Sekarang",
+        priceConsultSubtitle: "Konsultasikan kebutuhan Anda dengan tim ahli kami sekarang!",
+        priceConsultBtn: "Hubungi Konsultan",
         priceConsultText: "Masih bingung memilih paket yang tepat?",
-        priceConsultBtn: "Konsultasi Gratis",
         testiTag: "Testimoni Klien",
         testiTitle: "Apa Kata Mereka Tentang Kami",
         faqH2: "Pertanyaan yang Sering Diajukan",
@@ -372,7 +380,7 @@ export const t = {
         ],
         ctaTitle: "Mulai Digitalisasi Bisnis Anda Hari Ini!",
         ctaDesc: "Jangan biarkan kompetitor selangkah di depan. Konsultasikan ide proyek perancangan aplikasi atau kebutuhan jasa pembuatan website Anda kepada TechSoe. Kami siap memberikan solusi e-commerce, sistem CMS, dan strategi digital dengan garansi kualitas terbaik.",
-        ctaBtn: "Hubungi Tim Ahli Kami",
+        ctaBtn: "Mulai Sekarang",
         footerDesc: "TechSoe merupakan agensi spesialis jasa pembuatan website, pengembangan aplikasi mobile, CMS, sistem informasi terintegrasi, serta layanan UI/UX dan digital marketing berkinerja tinggi yang dirancang untuk SEO.",
         footerSvcHeading: "Layanan",
         footerContactHeading: "Kontak",
@@ -413,15 +421,22 @@ export const t = {
         aboutSvc4Title: "Social Media",
         aboutExpNum: "5+",
         aboutExpText: "Years of Experience",
+        heroStats: [
+            { label: 'Verified Service', value: '100%' },
+            { label: 'Happy Clients', value: 'Happy' },
+            { label: 'Expert Team', value: 'Expert' },
+            { label: 'Full Support', value: 'Full' },
+        ],
         svcTag: "Our Services",
-        svcTitle: "Comprehensive Digital Solutions for Your Business",
+        svcTitle: "Digital Solutions for Your Business",
+        svcText: "We provide various technology development and digital branding services specifically designed to accelerate your business growth in the digital era.",
         svcWebTitle: "Web Development",
         svcWebDesc: "Building responsive, fast, and industry-standard websites using the latest tech like Next.js and Laravel.",
         svcMobileTitle: "Mobile Apps",
         svcMobileDesc: "High-performance custom Android & iOS apps to reach users right in their hands.",
         svcDesignTitle: "UI/UX Design",
         svcDesignDesc: "User research and intuitive interface design to ensure conversion and user comfort.",
-        svcSystemTitle: "Sistem Informasi",
+        svcSystemTitle: "Information Systems",
         svcSystemDesc: "Optimize operations with custom internal systems like ERP, CRM, and data Management Dashboards.",
         svcSMMTitle: "Social Media Management",
         svcSMMDesc: "Content management and visual strategies on social media to build a strong brand presence.",
@@ -434,25 +449,14 @@ export const t = {
         priceDesc: "Complete solutions to help your business thrive in the digital world!",
         pricePopular: "MOST POPULAR",
         priceOrderText: "Order Now",
+        priceConsultSubtitle: "Consult your needs with our team of experts now!",
+        priceConsultBtn: "Contact Consultant",
         priceConsultText: "Still confused about choosing the right package?",
-        priceConsultBtn: "Free Consultation",
         testiTag: "Client Testimonials",
         testiTitle: "What They Say About Us",
         faqH2: "Frequently Asked Questions",
         faqDesc: "Clearing your doubts before starting a collaboration with TechSoe.",
         faqData: [
-            {
-                q: 'How long is the estimated time to build a website/application?',
-                a: 'The timeline highly depends on feature complexity and scope. Landing Pages take 1–2 weeks. CMS and E-Commerce generally take 4–8 weeks. A detailed timeline will be provided after analyzing your specific needs during the initial discussion.'
-            },
-            {
-                q: 'What if I need custom features outside the packages above?',
-                a: 'TechSoe specializes in custom enterprise development. Contact our representatives to discuss features not listed. We will prepare a timeline and quote matching the technological proportion.'
-            },
-            {
-                q: 'Is there an ongoing fee (Maintenance) after the application is finished?',
-                a: 'We provide a Bug/Error Warranty (Free Maintenance) for 15 days up to 6 months depending on your package. After that, we highly recommend an optional annual SLA/Maintenance service so our team can routinely apply security patches and optimize system infrastructure.'
-            },
             {
                 q: 'Will I get full access to the source code?',
                 a: 'Yes, TechSoe provides full ownership of the source code to the client after final payment. We do not use a "locked code" or rental system, giving you the freedom to develop the app in the future with our team or your internal developers.'
@@ -508,7 +512,7 @@ export const t = {
             { id: 'mobile', name: 'Mobile Apps', tabs: ['Mobile App Packages'] },
             { id: 'design', name: 'UI/UX Design', tabs: ['UI/UX Packages'] },
             { id: 'branding', name: 'Social Media Management', tabs: ['Social Media Packages'] },
-            { id: 'is', name: 'Sistem Informasi', tabs: ['Sistem Informasi Packages'] },
+            { id: 'is', name: 'Information Systems', tabs: ['Information Systems Packages'] },
         ],
         pricingData: {
             'Landing Page': [
@@ -741,7 +745,7 @@ export const t = {
                     description: '*End-to-end account management solution to boost your brand.'
                 }
             ],
-            'Sistem Informasi Packages': [
+            'Information Systems Packages': [
                 {
                     name: 'System Core', price: 'Rp 15.000.000',
                     features: [
@@ -777,7 +781,7 @@ export const t = {
         ],
         ctaTitle: "Ready to Digitize Your Business Today?",
         ctaDesc: "Don't let competitors stay one step ahead. Consult your application ideas or professional website creation needs with TechSoe. We are ready to provide robust e-commerce and CMS solutions with guaranteed premium quality.",
-        ctaBtn: "Contact Our Expert Team",
+        ctaBtn: "Get Started Now",
         footerDesc: "TechSoe is a premier agency specializing in high-performance website creation, mobile app development, integrated information systems (CMS), and SEO-driven digital marketing strategies.",
         footerSvcHeading: "Services",
         footerContactHeading: "Contact",

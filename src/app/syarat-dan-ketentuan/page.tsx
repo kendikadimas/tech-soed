@@ -31,7 +31,7 @@ export default function SyaratKetentuanPage() {
             <section className="pt-48 pb-24 px-6 relative overflow-hidden bg-slate-900 text-center rounded-b-[4rem] shadow-xl">
                 {/* Glow Effects */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-700 rounded-full blur-[100px] opacity-20 transform translate-x-1/2 -translate-y-1/2 z-0"></div>
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[100px] opacity-20 transform -translate-x-1/2 translate-y-1/2 z-0"></div>
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900 rounded-full blur-[100px] opacity-20 transform -translate-x-1/2 translate-y-1/2 z-0"></div>
 
                 <div className="max-w-4xl mx-auto relative z-10">
                     <div className="w-20 h-20 bg-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-emerald-500/30">
@@ -56,7 +56,7 @@ export default function SyaratKetentuanPage() {
                 <div className="bg-white rounded-[2rem] p-10 md:p-14 border border-slate-100 shadow-lg shadow-slate-200/50">
                     <div className="flex gap-6 items-start">
                         <div className="w-14 h-14 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-center shrink-0">
-                            <FileText className="text-indigo-600 w-7 h-7" />
+                            <FileText className="text-blue-900 w-7 h-7" />
                         </div>
                         <div>
                             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">1. Termin Terminologi & SLA</h2>

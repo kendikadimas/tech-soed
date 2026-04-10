@@ -14,19 +14,19 @@ export default function AboutSection() {
   const { lang } = useLang();
 
   return (
-    <section id="tentang" className="py-20 px-6 lg:px-36 bg-white">
+    <section id="tentang" className="py-24 px-6 lg:px-12 bg-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="bg-[#0a1d37] rounded-xl relative min-h-[400px] lg:h-[50vh] flex items-center shadow-2xl shadow-blue-900/20"
+          className="bg-[#0a1d37] rounded-xl relative min-h-[450px] lg:min-h-[550px] flex items-center shadow-2xl shadow-blue-900/20"
         >
           {/* Subtle Background Elements */}
           <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none rounded-[3.5rem] overflow-hidden" />
           
-          <div className="container mx-auto px-10 lg:px-20 py-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
             {/* Left Content */}
             <div className="text-white space-y-6 max-w-xl">
               <h2 className="text-2xl lg:text-4xl font-extrabold leading-tight tracking-tight">
@@ -57,12 +57,12 @@ export default function AboutSection() {
             </div>
 
             {/* Right Image (Out of bounds) */}
-            <div className="relative hidden lg:block h-full">
-              <div className="absolute bottom-[-40px] right-0 w-full h-[140%]">
+            <div className="relative hidden md:block h-full">
+              <div className="absolute bottom-[-40px] right-0 w-full h-[120%]">
                 <div className="relative w-full h-full transform hover:scale-105 transition-transform duration-700">
                   <Image 
-                    src="/projects/about_mockup.png" 
-                    alt="Membangun Ekonomi Digital Bersama TechSoe" 
+                    src="/projects/logo.png" 
+                    alt="Logo TechSoe" 
                     fill 
                     className="object-contain object-bottom drop-shadow-2xl"
                     priority

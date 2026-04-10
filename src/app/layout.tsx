@@ -104,10 +104,12 @@ export default function RootLayout({
       >
         <LangProvider>
           <Navbar />
-          <main>
+          <main className="bg-white">
             {children}
           </main>
-          <Footer />
+          <div className="bg-white">
+            <Footer />
+          </div>
           <WhatsAppButton />
         </LangProvider>
       </body>
