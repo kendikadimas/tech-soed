@@ -12,6 +12,7 @@ import {
   CtaSection,
   ScrollToTop,
   OrderModal,
+  ContactSection,
 } from './components';
 
 function LandingPageContent() {
@@ -51,9 +52,10 @@ function LandingPageContent() {
       <ServicesSection />
       <PortfolioSection />
       <PricingSection onOrderClick={handleOrderClick} />
-      {/* <TestimonialsSection /> */}
+      <TestimonialsSection />
       <FaqSection />
       <CtaSection />
+      <ContactSection />
       <ScrollToTop visible={scrolled} />
       <OrderModal
         isOpen={isOrderModalOpen}

@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "TechSoe | Jasa Pembuatan Website & Aplikasi di Purwokerto",
-  description: "TechSoe menyediakan spesialisasi layanan jasa pembuatan website, jasa pembuatan aplikasi mobile, web development, dan sistem informasi (CMS/LMS) terbaik di Purwokerto.",
+  title: "TechSoe | Jasa Pembuatan Website & Aplikasi Professional Purwokerto",
+  description: "TechSoe adalah Software House di Purwokerto yang melayani jasa pembuatan website, aplikasi mobile Android/iOS, sistem informasi (CMS/LMS), & UI/UX Design berkualitas.",
   keywords: [
     "jasa pembuatan website",
     "jasa pembuatan web",
@@ -25,22 +25,25 @@ export const metadata: Metadata = {
     "web developer purwokerto",
     "software house purwokerto",
     "sistem informasi",
+    "bikin aplikasi android purwokerto",
+    "digital agency purwokerto",
     "techsoe",
     "banyumas",
     "jawa tengah"
   ],
   authors: [{ name: "TechSoe" }],
+  category: 'technology',
   openGraph: {
-    title: "TechSoe | Jasa Pembuatan Website & Aplikasi Terpercaya",
-    description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi.",
+    title: "TechSoe | Software House & Jasa Pembuatan Website Terpercaya",
+    description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi dengan kualitas premium.",
     url: "https://techsoe.vercel.app",
     siteName: "TechSoe",
     images: [
       {
-        url: "/projects/logotrans.png", // Change to the absolute path of production image logo later
-        width: 800,
-        height: 600,
-        alt: "TechSoe Logo",
+        url: "/projects/hero.png",
+        width: 1200,
+        height: 630,
+        alt: "TechSoe Digital Solution",
       },
     ],
     locale: "id_ID",
@@ -49,11 +52,22 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "TechSoe | Jasa Pembuatan Website & Aplikasi",
-    description: "Spesialis layanan jasa pembuatan website dan aplikasi mobile profesional dari TechSoe.",
-    images: ["/projects/logotrans.png"],
+    description: "Solusi digital terbaik untuk bisnis Anda. Jasa pembuatan website dan aplikasi mobile profesional.",
+    images: ["/projects/hero.png"],
   },
   verification: {
     google: "F5b1OkKQFg_a0eQ1KZLWcZU1_BLvdr0CgXo9kHW_MEw",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
@@ -70,32 +84,110 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "TechSoe",
-              "operatingSystem": "Web",
-              "applicationCategory": "BusinessApplication",
-              "description": "TechSoe melayani jasa pembuatan website, jasa pembuatan aplikasi mobile, perancangan sistem informasi, CMS, LMS, dan digital marketing terpercaya di Purwokerto.",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "IDR"
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": "TechSoe Application Suite",
+                "operatingSystem": "Web, Android, iOS",
+                "applicationCategory": "BusinessApplication",
+                "description": "TechSoe melayani jasa pembuatan website, pengembangan aplikasi mobile, dan perancangan sistem informasi bisnis terintegrasi.",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "IDR"
+                }
               },
-              "provider": {
+              {
+                "@context": "https://schema.org",
                 "@type": "LocalBusiness",
-                "name": "TechSoe",
+                "@id": "https://techsoe.vercel.app/#organization",
+                "name": "TechSoe Agency",
+                "image": "https://techsoe.vercel.app/projects/logo.png",
+                "url": "https://techsoe.vercel.app",
+                "telephone": "+6281353424280",
+                "email": "techsoe26@gmail.com",
                 "address": {
                   "@type": "PostalAddress",
+                  "streetAddress": "Purwokerto",
                   "addressLocality": "Purwokerto",
                   "addressRegion": "Jawa Tengah",
+                  "postalCode": "53123",
                   "addressCountry": "ID"
                 },
-                "telephone": "+628153424280",
-                "email": "halo@techsoe.com",
-                "url": "https://techsoe.vercel.app"
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": -7.4244,
+                  "longitude": 109.2303
+                },
+                "openingHoursSpecification": {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+                  ],
+                  "opens": "08:00",
+                  "closes": "17:00"
+                },
+                "sameAs": [
+                  "https://www.instagram.com/techsoe",
+                  "https://github.com/kendikadimas"
+                ]
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "TechSoe",
+                "url": "https://techsoe.vercel.app",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://techsoe.vercel.app/blog?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "serviceType": "Jasa Pembuatan Website & Aplikasi",
+                "provider": {
+                  "@type": "LocalBusiness",
+                  "name": "TechSoe"
+                },
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "Indonesia"
+                },
+                "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": "Digital Services",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Web Development",
+                        "description": "Jasa pembuatan website modern dengan Next.js dan Laravel."
+                      }
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Mobile Apps",
+                        "description": "Pengembangan aplikasi mobile Android dan iOS professional."
+                      }
+                    },
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Sistem Informasi",
+                        "description": "Solusi sistem informasi bisnis, CRM, dan ERP kustom."
+                      }
+                    }
+                  ]
+                }
               }
-            })
+            ])
           }}
         />
       </head>

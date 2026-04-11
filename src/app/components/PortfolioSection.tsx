@@ -79,6 +79,24 @@ export default function PortfolioSection() {
     setCurrentPage(1);
   }, [portfolioMainFilter, websiteType]);
 
+  // Refs for scrolling
+  const filterScrollRef = useRef<HTMLDivElement>(null);
+  const projectScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollFilter = (direction: 'left' | 'right') => {
+    if (filterScrollRef.current) {
+      const amount = 200;
+      filterScrollRef.current.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+    }
+  };
+
+  const scrollProjects = (direction: 'left' | 'right') => {
+    if (projectScrollRef.current) {
+      const amount = projectScrollRef.current.offsetWidth * 0.8;
+      projectScrollRef.current.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="portfolio" className="py-24 px-6 lg:px-12 bg-white flex flex-col items-center">
       <div className="max-w-7xl mx-auto w-full">
@@ -97,66 +115,108 @@ export default function PortfolioSection() {
           </p>
         </div>
 
-        {/* Filter System */}
-        <div className="flex flex-wrap items-center gap-3 mb-16 relative z-50">
-          {topCategories.map((cat) => (
-            <div key={cat.id} className="relative" ref={cat.id === 'Web Development' ? dropdownRef : null}>
-              <button
-                onClick={() => {
-                  setPortfolioMainFilter(cat.id);
-                  if (cat.id === 'Web Development') {
-                    setIsWebDropdownOpen(!isWebDropdownOpen);
-                  } else {
-                    setIsWebDropdownOpen(false);
-                    setWebsiteType('All');
-                  }
-                }}
-                className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 whitespace-nowrap ${portfolioMainFilter === cat.id
-                  ? 'bg-blue-900 text-white shadow-xl shadow-blue-900/20'
-                  : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
-                  }`}
-              >
-                {cat.id === 'Web Development' && portfolioMainFilter === 'Web Development' && websiteType !== 'All'
-                  ? websiteType
-                  : cat.name}
-                {cat.id === 'Web Development' && (
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isWebDropdownOpen ? 'rotate-180' : ''}`} />
-                )}
-              </button>
+        {/* Filter System - Scrollable on Mobile */}
+        <div className="relative mb-16 group/filter">
+          {/* Arrow Buttons for Filter (Mobile Only) */}
+          <div className="absolute top-1/2 -left-6 -translate-y-1/2 z-60 lg:hidden opacity-0 group-hover/filter:opacity-100 transition-opacity">
+            <button 
+              onClick={() => scrollFilter('left')}
+              className="p-3 text-slate-400 hover:text-blue-900 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+          </div>
+          <div className="absolute top-1/2 -right-6 -translate-y-1/2 z-60 lg:hidden opacity-0 group-hover/filter:opacity-100 transition-opacity">
+            <button 
+              onClick={() => scrollFilter('right')}
+              className="p-3 text-slate-400 hover:text-blue-900 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
 
-              {cat.id === 'Web Development' && isWebDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute top-full left-0 mt-3 w-64 bg-white border border-slate-100 shadow-2xl rounded-2xl p-2 z-50 overflow-hidden"
+          <div 
+            ref={filterScrollRef}
+            className="flex flex-nowrap lg:flex-wrap items-center gap-3 overflow-x-auto lg:overflow-x-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-4 lg:pb-0 relative z-50 snap-x"
+          >
+            {topCategories.map((cat) => (
+              <div key={cat.id} className="relative shrink-0 snap-start" ref={cat.id === 'Web Development' ? dropdownRef : null}>
+                <button
+                  onClick={() => {
+                    setPortfolioMainFilter(cat.id);
+                    if (cat.id === 'Web Development') {
+                      setIsWebDropdownOpen(!isWebDropdownOpen);
+                    } else {
+                      setIsWebDropdownOpen(false);
+                      setWebsiteType('All');
+                    }
+                  }}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 whitespace-nowrap ${portfolioMainFilter === cat.id
+                    ? 'bg-blue-900 text-white shadow-xl shadow-blue-900/20'
+                    : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                    }`}
                 >
-                  {webSubCategories.map((sub) => (
-                    <button
-                      key={sub.id}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setWebsiteType(sub.id);
-                        setIsWebDropdownOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-2.5 rounded-xl text-sm transition-all ${websiteType === sub.id
-                        ? 'bg-indigo-50 text-indigo-700 font-bold'
-                        : 'text-slate-600 hover:bg-slate-50'
-                        }`}
-                    >
-                      {sub.name}
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </div>
-          ))}
+                  {cat.id === 'Web Development' && portfolioMainFilter === 'Web Development' && websiteType !== 'All'
+                    ? websiteType
+                    : cat.name}
+                  {cat.id === 'Web Development' && (
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isWebDropdownOpen ? 'rotate-180' : ''}`} />
+                  )}
+                </button>
+
+                {cat.id === 'Web Development' && isWebDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-full left-0 mt-3 w-64 bg-white border border-slate-100 shadow-2xl rounded-2xl p-2 z-50 overflow-hidden"
+                  >
+                    {webSubCategories.map((sub) => (
+                      <button
+                        key={sub.id}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setWebsiteType(sub.id);
+                          setIsWebDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2.5 rounded-xl text-sm transition-all ${websiteType === sub.id
+                          ? 'bg-indigo-50 text-indigo-700 font-bold'
+                          : 'text-slate-600 hover:bg-slate-50'
+                          }`}
+                      >
+                        {sub.name}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Grid */}
-        <div className="relative min-h-[600px]">
+        {/* Carousel / Grid */}
+        <div className="relative min-h-[400px] group/carousel">
+          {/* Mobile Arrows for Carousel */}
+          <div className="absolute top-[40%] -left-8 -translate-y-1/2 z-40 lg:hidden">
+            <button 
+              onClick={() => scrollProjects('left')}
+              className="p-4 text-blue-900 hover:text-blue-600 active:scale-90 transition-all drop-shadow-sm"
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
+          </div>
+          <div className="absolute top-[40%] -right-8 -translate-y-1/2 z-40 lg:hidden">
+            <button 
+              onClick={() => scrollProjects('right')}
+              className="p-4 text-slate-300 hover:text-blue-900 active:scale-90 transition-all drop-shadow-sm"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+          </div>
+
           <motion.div
+            ref={projectScrollRef}
             layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+            className="flex lg:grid lg:grid-cols-3 gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory pb-10 scroll-smooth"
           >
             <AnimatePresence mode='popLayout'>
               {currentProjects.map((project: any, idx: number) => (
@@ -167,10 +227,10 @@ export default function PortfolioSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group cursor-pointer flex flex-col"
+                  className="group cursor-pointer flex flex-col shrink-0 w-[80%] sm:w-[45%] lg:w-full snap-center"
                 >
                   {/* Image Container */}
-                  <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
+                  <div className="relative w-full aspect-square sm:aspect-video rounded-3xl overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -178,19 +238,19 @@ export default function PortfolioSection() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="group-hover:scale-105 transition duration-700 ease-in-out object-cover"
                     />
-                    <div className="absolute top-6 left-6">
-                      <span className="px-4 py-1.5 bg-white/95 backdrop-blur-md text-slate-900 text-[10px] font-black uppercase tracking-wider rounded-xl shadow-xl border border-white">
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-white/95 backdrop-blur-md text-slate-900 text-[9px] font-black uppercase tracking-wider rounded-lg shadow-xl border border-white">
                         {project.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Content Container */}
-                  <div className="py-8 px-2 flex flex-col flex-1">
-                    <h3 className="text-xl font-black text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
+                  <div className="py-6 px-1 flex flex-col flex-1">
+                    <h3 className="text-lg lg:text-xl font-black text-slate-900 mb-2 group-hover:text-blue-900 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-slate-500 text-sm font-medium leading-relaxed line-clamp-2">
+                    <p className="text-slate-500 text-xs lg:text-sm font-medium leading-relaxed line-clamp-2">
                       {project.desc}
                     </p>
                   </div>
@@ -200,9 +260,9 @@ export default function PortfolioSection() {
           </motion.div>
         </div>
 
-        {/* Improved Pagination Controls */}
+        {/* Desktop Improved Pagination Controls */}
         {totalPages > 1 && (
-          <div className="mt-20 flex items-center justify-center gap-2">
+          <div className="mt-10 hidden lg:flex items-center justify-center gap-2">
             <button
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}

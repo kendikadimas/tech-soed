@@ -61,45 +61,14 @@ export default function HeroSection() {
           </svg>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center relative z-10">
-          {/* LEFT COLUMN: TEXT */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-start text-left lg:pr-4"
-          >
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.1] text-slate-900 mb-6 lg:mb-8 tracking-tight">
-              {t[lang].heroTitle.split('&')[0]}
-              <span className="text-blue-900 block">{t[lang].heroTitle.split('&')[1]}</span>
-            </h1>
-
-            <p className="text-base lg:text-lg text-slate-500 max-w-xl leading-relaxed mb-8 lg:mb-10 font-medium opacity-90">
-              {t[lang].heroDesc}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Link
-                href="#harga"
-                className="bg-blue-900 text-white px-8 py-4 rounded-2xl font-bold text-base shadow-2xl shadow-blue-900/30 hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-center"
-              >
-                {t[lang].heroBtnStart}
-              </Link>
-              <Link
-                href="#portfolio"
-                className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-4 rounded-2xl font-bold text-base hover:border-indigo-100 hover:bg-indigo-50/30 hover:-translate-y-1 transition-all duration-300 text-center"
-              >
-                {t[lang].heroBtnPort}
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* RIGHT COLUMN: IMAGE/MOCKUP WITH INFO BUBBLES */}
+        <div className="max-w-[1440px] mx-auto w-full flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-10 items-center relative z-10">
+          
+          {/* RIGHT COLUMN: IMAGE/MOCKUP (NOW TOP ON MOBILE) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative w-full h-[450px] lg:h-[550px] xl:h-[650px] flex items-center justify-center pointer-events-none"
+            className="relative w-full h-[240px] sm:h-[450px] lg:h-[550px] xl:h-[650px] flex items-center justify-center pointer-events-none order-1 lg:order-2 my-2 lg:my-0"
           >
             {/* Main Visual Container */}
             <div className="relative w-full h-full pointer-events-auto">
@@ -116,32 +85,8 @@ export default function HeroSection() {
                 />
               </div>
 
-              {/* Info Bubbles */}
-              <div className="absolute inset-0 z-20 pointer-events-none">
-                {/* Bubble 1: Desain Premium */}
-                {/* <motion.div
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: 1,
-                        y: [0, -10, 0] 
-                      }}
-                      transition={{ 
-                        delay: 1, 
-                        scale: { type: "spring", stiffness: 100 },
-                        y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                      }}
-                      className="absolute top-[8%] left-0 lg:-left-6 bg-white shadow-2xl shadow-indigo-200/50 p-2.5 lg:p-3.5 rounded-2xl border border-indigo-50 flex items-center gap-2.5 z-30 pointer-events-auto"
-                  >
-                      <div className="w-8 h-8 lg:w-9 lg:h-9 bg-blue-900 rounded-xl flex items-center justify-center text-white shrink-0">
-                          <Sparkles className="w-4 h-4 text-white" />
-                      </div>
-                      <div>
-                          <div className="text-[8px] lg:text-[9px] font-bold text-indigo-500 uppercase tracking-widest leading-none mb-1">High Quality</div>
-                          <div className="text-[11px] lg:text-xs font-black text-slate-900 whitespace-nowrap">Desain Premium 💎</div>
-                      </div>
-                  </motion.div> */}
-
+              {/* Info Bubbles - Hidden on Mobile */}
+              <div className="hidden lg:block absolute inset-0 z-20 pointer-events-none">
                 {/* Bubble 2: Mobile Apps */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0 }}
@@ -155,14 +100,14 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute top-[30%] -right-4 lg:-right-10 bg-white shadow-2xl shadow-blue-200/50 p-2.5 lg:p-3.5 rounded-2xl border border-blue-50 flex items-center gap-2.5 z-30 pointer-events-auto"
+                  className="absolute top-[30%] -right-10 bg-white shadow-2xl shadow-blue-200/50 p-3.5 rounded-2xl border border-blue-50 flex items-center gap-2.5 z-30 pointer-events-auto"
                 >
-                  <div className="w-8 h-8 lg:w-9 lg:h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                  <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Smartphone className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <div className="text-[8px] lg:text-[9px] font-bold text-blue-500 uppercase tracking-widest leading-none mb-1">Mobile App</div>
-                    <div className="text-[11px] lg:text-xs font-black text-slate-900 whitespace-nowrap">Android & iOS</div>
+                    <div className="text-[9px] font-bold text-blue-500 uppercase tracking-widest leading-none mb-1">Mobile App</div>
+                    <div className="text-xs font-black text-slate-900 whitespace-nowrap">Android & iOS</div>
                   </div>
                 </motion.div>
 
@@ -179,14 +124,14 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute bottom-[25%] -left-6 lg:-left-16 bg-white shadow-2xl shadow-emerald-200/50 p-2.5 lg:p-3.5 rounded-2xl border border-emerald-50 flex items-center gap-2.5 z-30 pointer-events-auto"
+                  className="absolute bottom-[25%] -left-16 bg-white shadow-2xl shadow-emerald-200/50 p-3.5 rounded-2xl border border-emerald-50 flex items-center gap-2.5 z-30 pointer-events-auto"
                 >
-                  <div className="w-8 h-8 lg:w-9 lg:h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                  <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Layout className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <div className="text-[8px] lg:text-[9px] font-bold text-emerald-500 uppercase tracking-widest leading-none mb-1">Pembuatan</div>
-                    <div className="text-[11px] lg:text-xs font-black text-slate-900 whitespace-nowrap">Website</div>
+                    <div className="text-[9px] font-bold text-emerald-500 uppercase tracking-widest leading-none mb-1">Pembuatan</div>
+                    <div className="text-xs font-black text-slate-900 whitespace-nowrap">Website</div>
                   </div>
                 </motion.div>
 
@@ -203,14 +148,14 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     x: { duration: 5, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute top-[25%] lg:-left-10 bg-white shadow-2xl shadow-purple-200/50 p-2.5 lg:p-3.5 rounded-2xl border border-purple-50 flex items-center gap-2.5 z-30 pointer-events-auto"
+                  className="absolute top-[25%] -left-10 bg-white shadow-2xl shadow-purple-200/50 p-3.5 rounded-2xl border border-purple-50 flex items-center gap-2.5 z-30 pointer-events-auto"
                 >
-                  <div className="w-8 h-8 lg:w-9 lg:h-9 bg-purple-600 rounded-xl flex items-center justify-center text-white shrink-0">
+                  <div className="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Palette className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <div className="text-[8px] lg:text-[9px] font-bold text-purple-500 uppercase tracking-widest leading-none mb-1">UI/UX Design</div>
-                    <div className="text-[11px] lg:text-xs font-black text-slate-900 whitespace-nowrap">Modern Design</div>
+                    <div className="text-[9px] font-bold text-purple-500 uppercase tracking-widest leading-none mb-1">UI/UX Design</div>
+                    <div className="text-xs font-black text-slate-900 whitespace-nowrap">Modern Design</div>
                   </div>
                 </motion.div>
 
@@ -227,14 +172,14 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute bottom-[40%] -right-6 lg:-right-16 bg-white shadow-2xl shadow-pink-200/50 p-2.5 lg:p-3.5 rounded-2xl border border-pink-50 flex items-center gap-2.5 z-30 pointer-events-auto"
+                  className="absolute bottom-[40%] -right-16 bg-white shadow-2xl shadow-pink-200/50 p-3.5 rounded-2xl border border-pink-50 flex items-center gap-2.5 z-30 pointer-events-auto"
                 >
-                  <div className="w-8 h-8 lg:w-9 lg:h-9 bg-pink-500 rounded-xl flex items-center justify-center text-white shrink-0">
+                  <div className="w-9 h-9 bg-pink-500 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Share2 className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <div className="text-[8px] lg:text-[9px] font-bold text-pink-500 uppercase tracking-widest leading-none mb-1">Social Media</div>
-                    <div className="text-[11px] lg:text-xs font-black text-slate-900 whitespace-nowrap">Management</div>
+                    <div className="text-[9px] font-bold text-pink-500 uppercase tracking-widest leading-none mb-1">Social Media</div>
+                    <div className="text-xs font-black text-slate-900 whitespace-nowrap">Management</div>
                   </div>
                 </motion.div>
 
@@ -251,20 +196,80 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute bottom-[20%] right-0 lg:-right-8 bg-slate-900 shadow-2xl shadow-slate-900/40 p-2.5 lg:p-4 rounded-2xl border border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto"
+                  className="absolute bottom-[20%] -right-8 bg-slate-900 shadow-2xl shadow-slate-900/40 p-4 rounded-2xl border border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto"
                 >
-                  <div className="w-8 h-8 lg:w-9 lg:h-9 bg-blue-500 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/30">
+                  <div className="w-9 h-9 bg-blue-500 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/30">
                     <Rocket className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <div className="text-[8px] lg:text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">Scalable Solution</div>
-                    <div className="text-xs lg:text-sm font-black text-white whitespace-nowrap">Untuk Semua Bisnis</div>
+                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">Scalable Solution</div>
+                    <div className="text-sm font-black text-white whitespace-nowrap">Untuk Semua Bisnis</div>
                   </div>
                 </motion.div>
               </div>
 
               {/* Visual Decorative Glows */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-indigo-200/10 rounded-full blur-[100px] lg:blur-[140px] z-0 animate-pulse" />
+            </div>
+          </motion.div>
+
+          {/* LEFT COLUMN: TEXT (Headline below image on mobile) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-4 order-2 lg:order-1"
+          >
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight text-slate-900 mb-4 lg:mb-8 tracking-tight">
+              {t[lang].heroTitle.split('&')[0]}
+              <span className="text-blue-900 lg:block"> {t[lang].heroTitle.split('&')[1]}</span>
+            </h1>
+
+            {/* Description - Desktop Only at this position */}
+            <p className="hidden lg:block text-base lg:text-lg text-slate-500 max-w-xl leading-relaxed mb-8 lg:mb-10 font-medium opacity-90">
+              {t[lang].heroDesc}
+            </p>
+
+            {/* Desktop Buttons */}
+            <div className="hidden lg:flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Link
+                href="#harga"
+                className="bg-blue-900 text-white px-8 py-4 rounded-2xl font-bold text-base shadow-2xl shadow-blue-900/30 hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-center"
+              >
+                {t[lang].heroBtnStart}
+              </Link>
+              <Link
+                href="#portfolio"
+                className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-4 rounded-2xl font-bold text-base hover:border-indigo-100 hover:bg-indigo-50/30 hover:-translate-y-1 transition-all duration-300 text-center"
+              >
+                {t[lang].heroBtnPort}
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* MOBILE ONLY: DESCRIPTION & BUTTONS */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-col items-center gap-6 order-3 lg:hidden"
+          >
+            <p className="text-xs sm:text-base text-slate-500 font-medium leading-relaxed opacity-90 text-center px-4">
+              {t[lang].heroDesc}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 w-full px-4">
+                <Link
+                  href="#harga"
+                  className="bg-blue-900 text-white px-8 py-3.5 rounded-2xl font-bold text-sm shadow-2xl shadow-blue-900/30 active:scale-95 transition-all text-center"
+                >
+                  {t[lang].heroBtnStart}
+                </Link>
+                <Link
+                  href="#portfolio"
+                  className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-3.5 rounded-2xl font-bold text-sm active:scale-95 transition-all text-center"
+                >
+                  {t[lang].heroBtnPort}
+                </Link>
             </div>
           </motion.div>
         </div>
