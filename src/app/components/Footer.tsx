@@ -49,7 +49,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Navigation</h3>
+            <div className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Navigation</div>
             <ul className="space-y-4">
               {['Layanan', 'Portfolio', 'Tentang Kami', 'Harga'].map((item, i) => (
                 <li key={i}>
@@ -64,7 +64,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">{t[lang].footerSvcHeading}</h3>
+            <div className="text-white font-bold mb-8 uppercase tracking-widest text-xs">{t[lang].footerSvcHeading}</div>
             <ul className="space-y-4">
               {[
                 { name: 'Web Development', tag: 'Hot' },
@@ -85,7 +85,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-8">
-            <h3 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Reach Out</h3>
+            <div className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Reach Out</div>
             <ul className="space-y-6">
               <li className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-indigo-400 shrink-0">

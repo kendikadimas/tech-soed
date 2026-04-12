@@ -102,9 +102,9 @@ export default function ServicesSection() {
 
                 {/* Content */}
                 <div className="flex-1 text-left relative z-10">
-                  <h3 className="text-base lg:text-lg font-bold text-white mb-1 group-hover:text-white transition-colors">
+                  <div className="text-base lg:text-lg font-bold text-white mb-1 group-hover:text-white transition-colors">
                     {svc.title}
-                  </h3>
+                  </div>
                   <p className="text-xs lg:text-sm font-medium text-slate-400 leading-relaxed">
                     {svc.desc}
                   </p>

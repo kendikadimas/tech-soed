@@ -220,7 +220,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                 )}
 
                 <div className="text-left mb-6">
-                  <h3 className={`text-lg lg:text-xl font-black mb-1 ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</h3>
+                  <div className={`text-lg lg:text-xl font-black mb-1 ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</div>
                   <div className="mb-3 flex items-baseline gap-1">
                     <span className={`text-2xl lg:text-3xl font-black ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.price}</span>
                   </div>
@@ -269,9 +269,9 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
         >
           <div className="bg-slate-50 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-100">
             <div className="text-center md:text-left">
-              <h3 className="text-lg lg:text-xl font-bold text-slate-900 mb-1">
+              <h4 className="text-lg lg:text-xl font-bold text-slate-900 mb-1">
                 {t[lang].priceConsultText}
-              </h3>
+              </h4>
               <p className="text-slate-500 text-sm font-medium">
                 {t[lang].priceConsultSubtitle}
               </p>

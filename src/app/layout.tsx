@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "TechSoe | Jasa Pembuatan Website & Aplikasi Professional Purwokerto",
-  description: "TechSoe adalah Software House di Purwokerto yang melayani jasa pembuatan website, aplikasi mobile Android/iOS, sistem informasi (CMS/LMS), & UI/UX Design berkualitas.",
+  title: "TechSoe | Jasa Website & Aplikasi Professional Purwokerto",
+  description: "Software House Purwokerto melayani jasa pembuatan website, aplikasi mobile Android/iOS, sistem informasi, & UI/UX Design berkualitas.",
   keywords: [
     "jasa pembuatan website",
     "jasa pembuatan web",
@@ -33,6 +33,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "TechSoe" }],
   category: 'technology',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
   openGraph: {
     title: "TechSoe | Software House & Jasa Pembuatan Website Terpercaya",
     description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi dengan kualitas premium.",

@@ -213,7 +213,7 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* LEFT COLUMN: TEXT (Headline below image on mobile) */}
+          {/* LEFT COLUMN: TEXT */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -225,51 +225,25 @@ export default function HeroSection() {
               <span className="text-blue-900 lg:block"> {t[lang].heroTitle.split('&')[1]}</span>
             </h1>
 
-            {/* Description - Desktop Only at this position */}
-            <p className="hidden lg:block text-base lg:text-lg text-slate-500 max-w-xl leading-relaxed mb-8 lg:mb-10 font-medium opacity-90">
-              {t[lang].heroDesc}
+            {/* Description - Unified for both Mobile & Desktop */}
+            <p className="text-xs sm:text-base lg:text-lg text-slate-500 max-w-xl leading-relaxed mb-8 lg:mb-10 font-medium opacity-90 px-4 lg:px-0">
+              {t[lang].heroDesc.replace('bisnis Anda', 'bisnis Anda di Purwokerto')}
             </p>
 
-            {/* Desktop Buttons */}
-            <div className="hidden lg:flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            {/* Buttons - Unified for both Mobile & Desktop */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 lg:px-0">
               <Link
                 href="#harga"
-                className="bg-blue-900 text-white px-8 py-4 rounded-2xl font-bold text-base shadow-2xl shadow-blue-900/30 hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-center"
+                className="bg-blue-900 text-white px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base shadow-2xl shadow-blue-900/30 hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-center"
               >
                 {t[lang].heroBtnStart}
               </Link>
               <Link
                 href="#portfolio"
-                className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-4 rounded-2xl font-bold text-base hover:border-indigo-100 hover:bg-indigo-50/30 hover:-translate-y-1 transition-all duration-300 text-center"
+                className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base hover:border-indigo-100 hover:bg-indigo-50/30 hover:-translate-y-1 transition-all duration-300 text-center"
               >
                 {t[lang].heroBtnPort}
               </Link>
-            </div>
-          </motion.div>
-
-          {/* MOBILE ONLY: DESCRIPTION & BUTTONS */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-col items-center gap-6 order-3 lg:hidden"
-          >
-            <p className="text-xs sm:text-base text-slate-500 font-medium leading-relaxed opacity-90 text-center px-4">
-              {t[lang].heroDesc}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 w-full px-4">
-                <Link
-                  href="#harga"
-                  className="bg-blue-900 text-white px-8 py-3.5 rounded-2xl font-bold text-sm shadow-2xl shadow-blue-900/30 active:scale-95 transition-all text-center"
-                >
-                  {t[lang].heroBtnStart}
-                </Link>
-                <Link
-                  href="#portfolio"
-                  className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-3.5 rounded-2xl font-bold text-sm active:scale-95 transition-all text-center"
-                >
-                  {t[lang].heroBtnPort}
-                </Link>
             </div>
           </motion.div>
         </div>
