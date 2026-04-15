@@ -37,11 +37,11 @@ export default function AboutSection() {
               </p>
 
               <Link 
-              href="#portfolio" 
-              className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-3.5 rounded-xl font-bold text-base hover:border-indigo-100 hover:bg-indigo-50/30 hover:-translate-y-1 transition-all duration-300 text-center"
-            >
-              {t[lang].heroBtnPort}
-            </Link>
+                href="#portfolio" 
+                className="bg-transparent text-white border-2 border-white/30 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-white/10 hover:border-white transition-all duration-300 text-center min-h-[44px] flex items-center justify-center w-fit"
+              >
+                {t[lang].heroBtnPort}
+              </Link>
               
               {/* <Link 
                 href="/tentang" 

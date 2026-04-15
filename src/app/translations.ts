@@ -7,9 +7,9 @@ export const t = {
         navWhatsApp: "Konsultasi WhatsApp",
         navContact: "Hubungi Kami",
         heroTitle: "Partner Digital Professional untuk Bisnis Anda",
-        heroDesc: "Spesialis jasa pembuatan website, aplikasi mobile, & sistem informasi professional di Purwokerto untuk tingkatkan efisiensi bisnis Anda.",
-        heroBtnStart: "Konsultasi Gratis Sekarang",
-        heroBtnPort: "Lihat Portfolio",
+        heroDesc: "Spesialis UMKM & Bisnis Indonesia. Jasa pembuatan website & aplikasi profesional dengan pengerjaan 7–14 hari. Garansi revisi & dukungan teknis penuh.",
+        heroBtnStart: "Konsultasi Gratis",
+        heroBtnPort: "Lihat Portofolio",
         aboutTag: "Tentang TechSoe",
         aboutTitle: "Bersama membangun masa depan digital bisnis Anda",
         aboutDesc: "TechSoe adalah partner transformasi yang menyediakan solusi serta layanan digital untuk mendukung bisnis capai hasil terbaik dengan skala yang lebih besar.",
@@ -21,10 +21,10 @@ export const t = {
         aboutExpNum: "5+",
         aboutExpText: "Tahun Pengalaman",
         heroStats: [
-            { label: 'Layanan Terjamin', value: '100%' },
-            { label: 'Klien Puas', value: 'Puas' },
-            { label: 'Tim Profesional', value: 'Ahli' },
-            { label: 'Dukungan Penuh', value: 'Penuh' },
+            { label: 'Proyek Selesai', value: '10+' },
+            { label: 'Klien Puas', value: '99%' },
+            { label: 'Pengalaman', value: '2 Tahun' },
+            { label: 'Respon Cepat', value: '24 Jam' },
         ],
         svcTag: "Layanan Kami",
         svcTitle: "Solusi Digital untuk Bisnis Anda",
@@ -117,27 +117,26 @@ export const t = {
             'Landing Page': [
                 {
                     name: 'Starter', price: 'Rp 599.000',
-                    description: '*Cocok untuk campaign/promo yang ingin langsung tampil online dengan landing page yang ringkas.',
+                    description: 'Cocok untuk campaign/promo yang ingin langsung tampil online dengan landing page yang ringkas.',
                     features: [
-                        'Shared Hosting (6 Bulan)', 'Desain Responsif (Template)', '1 Halaman Landing Page', 'Tombol Integrasi WhatsApp',
-                        { text: 'Custom Domain', included: false }, { text: 'Email Bisnis', included: false },
-                        'Free SSL', '1x Revisi Gratis', 'Garansi Maintenance 15 Hari'
+                        'Free Domain (.com)', 'Free Hosting', '1 Halaman Landing Page', 'Tombol Integrasi WhatsApp',
+                        'Free SSL', '2x Revisi Gratis', 'Garansi Maintenance 1 Bulan'
                     ]
                 },
                 {
                     name: 'Growth', price: 'Rp 1.500.000', isPopular: true,
-                    description: '*Cocok untuk jualan konversi tinggi dengan kontrol fitur dan brand yang lebih komprehensif.',
+                    description: 'Cocok untuk jualan konversi tinggi dengan kontrol fitur dan brand yang lebih komprehensif.',
                     features: [
-                        'Free Domain (.com)', 'Hosting 1 Tahun', 'Desain Custom Profesional', '1 Halaman Landing Page (Panjang)',
-                        '1 Email Bisnis Profesional', 'Tombol Order / Form Leads', '3x Revisi Gratis', 'SEO On-Page Basic', 'Garansi Maintenance 1 Bulan'
+                        'Free Domain (.com)', 'Free Hosting', 'Desain Custom Profesional', '1 Halaman Landing Page (Panjang)',
+                        '1 Email Bisnis Profesional', 'Tombol Order / Form Leads', '4x Revisi Gratis', 'SEO On-Page Basic', 'Garansi Maintenance 1 Bulan'
                     ]
                 },
                 {
                     name: 'Ultimate', price: 'Rp 2.750.000',
-                    description: '*Solusi landing page all-in-one buat bisnis digital yang ingin dominasi konversi & tampil maksimal.',
+                    description: 'Solusi landing page all-in-one buat bisnis digital yang ingin dominasi konversi & tampil maksimal.',
                     features: [
-                        'Semua fitur pada paket Growth', 'Up to 2 Halaman Tambahan (Thank You dsb)', 'Request Copywriting Basis Konversi',
-                        'Special Effect & Animasi Scroll', 'Speed Optimization (Lazy Load)', 'Integrasi Pixel & Analytics', '5x Revisi Gratis', 'Garansi Maintenance 1.5 Bulan'
+                        'Semua fitur pada paket Growth', 'Request Fitur Khusus (Popup, Accordion, Pricing Table, dll)', 'Desain Interaktif',
+                        'Special Effect & Animasi Scroll', 'Speed Optimization (Lazy Load)', 'Integrasi Pixel & Analytics', '5x Revisi Gratis', 'Garansi Maintenance 1 Bulan'
                     ]
                 }
             ],
@@ -145,32 +144,31 @@ export const t = {
                 {
                     name: 'Starter', price: 'Rp 899.000',
                     features: [
-                        'Domain (.com)', '1 halaman', 'Template custom', 'Responsive', 'SEO Basic',
-                        { text: 'CMS Admin', included: false }, { text: 'Blog/Artikel', included: false },
-                        'Form Kontak', 'Integrasi WA', 'Garansi 1 bulan', 'Revisi 2x'
+                        'Free Domain (.com)', 'Free Hosting', '3 halaman (Home, About, Contact)', 'Responsive', 'SEO Basic',
+                        'Form Kontak', 'Integrasi WA', 'Garansi 6 bulan', 'Revisi 2x'
                     ],
-                    description: '*Cocok untuk perusahaan yang ingin menampilkan identitas secara ringkas.'
+                    description: 'Cocok untuk perusahaan yang ingin menampilkan identitas secara ringkas.'
                 },
                 {
-                    name: 'Professional', price: 'Rp 3.500.000', isPopular: true,
+                    name: 'Professional', price: 'Rp 2.599.000', isPopular: true,
                     features: [
-                        'Domain (.com)', '5-7 halaman', 'Semi custom UI/UX', 'Responsive', 'SEO Basic',
-                        'CMS Admin', 'Blog/Artikel', 'Form Kontak', 'Integrasi WA', 'Garansi 2 bulan', 'Revisi 3x'
+                        'Free Domain (.com)', '5-7 halaman', 'Custom UI/UX', 'Responsive', 'SEO Basic',
+                        'CMS Admin', 'Blog/Artikel', 'Form Kontak', 'Integrasi WA', 'Garansi 6 bulan', 'Revisi 3x'
                     ],
-                    description: '*Pilihan terbaik untuk perusahaan skala menengah.'
+                    description: 'Pilihan terbaik untuk perusahaan skala menengah.'
                 },
                 {
-                    name: 'Executive', price: 'Rp 7.500.000',
+                    name: 'Executive', price: 'Rp 4.999.000',
                     features: [
-                        'Domain (.com)', 'Unlimited halaman', 'Fully custom UI/UX', 'Responsive', 'Advanced SEO',
-                        'CMS Admin', 'Blog/Artikel', 'Form Kontak + Auto email', 'Integrasi WA', 'Garansi 3 bulan', 'Revisi 5x'
+                        'Free Domain (.com)', 'Up to 20 halaman', 'Fully custom UI/UX', 'Responsive', 'Advanced SEO',
+                        'CMS Admin', 'Blog/Artikel', 'Form Kontak + Auto email', 'Integrasi WA', 'Garansi 6 bulan', 'Revisi 5x'
                     ],
-                    description: '*Solusi komprehensif untuk perusahaan berskala besar.'
+                    description: 'Solusi komprehensif untuk perusahaan berskala besar.'
                 }
             ],
             'CMS': [
                 {
-                    name: 'Basic CMS', price: 'Rp 4.500.000',
+                    name: 'Basic CMS', price: 'Rp 3.500.000',
                     features: [
                         'Domain (.com)', 'Dashboard Admin', { text: 'Multi User Role', included: false },
                         'Manajemen Produk/Service', 'Blog', 'SEO Basic', { text: 'Analytics', included: false },
@@ -180,7 +178,7 @@ export const t = {
                     description: '*Sistem dasar untuk memulai pengelolaan data.'
                 },
                 {
-                    name: 'Business CMS', price: 'Rp 8.500.000', isPopular: true,
+                    name: 'Business CMS', price: 'Rp 6.500.000', isPopular: true,
                     features: [
                         'Domain (.com)', 'Dashboard Admin', 'Multi User Role',
                         'Manajemen Produk/Service', 'Blog', 'SEO Advanced', 'Analytics',
@@ -190,7 +188,7 @@ export const t = {
                     description: '*Optimal untuk kolaborasi tim dan pelacakan.'
                 },
                 {
-                    name: 'Enterprise CMS', price: 'Rp 14.000.000',
+                    name: 'Enterprise CMS', price: 'Rp 11.000.000',
                     features: [
                         'Domain (.com)', 'Dashboard Admin', 'Multi User Role',
                         'Manajemen Produk/Service', 'Blog', 'SEO Advanced + struktur schema', 'Analytics',
@@ -201,7 +199,7 @@ export const t = {
             ],
             'LMS': [
                 {
-                    name: 'LMS Starter', price: 'Rp 9.000.000',
+                    name: 'LMS Starter', price: 'Rp 6.999.000',
                     features: [
                         'Manajemen Course', 'Upload Video', 'Quiz / Ujian',
                         { text: 'Sertifikat', included: false }, { text: 'Progress Tracking', included: false },
@@ -211,7 +209,7 @@ export const t = {
                     description: '*Solusi edukasi dasar untuk kursus pemula.'
                 },
                 {
-                    name: 'LMS Pro', price: 'Rp 15.000.000', isPopular: true,
+                    name: 'LMS Pro', price: 'Rp 8.000.000', isPopular: true,
                     features: [
                         'Manajemen Course', 'Upload Video', 'Quiz / Ujian',
                         'Sertifikat', 'Progress Tracking', 'Multi Instructor', 'Payment Gateway',
@@ -220,7 +218,7 @@ export const t = {
                     description: '*Modul pembelajaran interaktif dan mandiri.'
                 },
                 {
-                    name: 'LMS Enterprise', price: 'Rp 25.000.000',
+                    name: 'LMS Enterprise', price: 'Rp 14.000.000',
                     features: [
                         'Manajemen Course', 'Upload Video', 'Quiz / Ujian + Bank Soal',
                         'Sertifikat Custom', 'Progress Tracking', 'Multi Instructor', 'Payment Gateway',
@@ -264,8 +262,8 @@ export const t = {
                 {
                     name: 'MVP Mobile', price: 'Rp 25.000.000',
                     features: [
-                        'Satu Platform (Android/iOS)', 'UI/UX Standar', 'Authentikasi (Login/Regis)', 
-                        'Data Cloud (Firebase/SQL)', 'Notification System', 'Maksimal 5 Fitur Utama', 
+                        'Satu Platform (Android/iOS)', 'UI/UX Standar', 'Authentikasi (Login/Regis)',
+                        'Data Cloud (Firebase/SQL)', 'Notification System', 'Maksimal 5 Fitur Utama',
                         'Garansi Maintenance 3 Bulan'
                     ],
                     description: '*Cocok untuk validasi ide bisnis awal dengan aplikasi fungsional.'
@@ -273,8 +271,8 @@ export const t = {
                 {
                     name: 'Business App', price: 'Rp 55.000.000', isPopular: true,
                     features: [
-                        'Hybrid Android & iOS (Flutter)', 'Custom UI/UX Design', 'API Integration', 
-                        'Push Notification Advanced', 'Maksimal 10 Fitur Utama', 'Submission ke Playstore/Appstore', 
+                        'Hybrid Android & iOS (Flutter)', 'Custom UI/UX Design', 'API Integration',
+                        'Push Notification Advanced', 'Maksimal 10 Fitur Utama', 'Submission ke Playstore/Appstore',
                         'Garansi Maintenance 6 Bulan'
                     ],
                     description: '*Solusi aplikasi profesional untuk bisnis yang sedang berkembang.'
@@ -282,8 +280,8 @@ export const t = {
                 {
                     name: 'Elite Mobile', price: 'Rp 100.000.000+',
                     features: [
-                        'Fully Custom Features', 'Advanced Backend System', 'Payment Gateway Integration', 
-                        'High Security Encryption', 'Maksimal 20 Fitur Utama', 'Submission ke Playstore/Appstore', 
+                        'Fully Custom Features', 'Advanced Backend System', 'Payment Gateway Integration',
+                        'High Security Encryption', 'Maksimal 20 Fitur Utama', 'Submission ke Playstore/Appstore',
                         'Garansi Maintenance 1 Tahun'
                     ],
                     description: '*Sistem aplikasi skala besar dengan fitur kompleks & integrasi penuh.'
@@ -291,25 +289,25 @@ export const t = {
             ],
             'UI/UX Packages': [
                 {
-                    name: 'UI Micro', price: 'Rp 2.500.000',
+                    name: 'UI Micro', price: 'Rp 400.000',
                     features: [
-                        'High Fidelity Design (Figma)', '1 Landing Page Long', 'Responsive View (Desktop/Mobile)', 
+                        'High Fidelity Design (Figma)', '1 Landing Page Long', 'Responsive View (Desktop/Mobile)',
                         'User Flow Diagram', 'Dark & Light Mode', 'Revisi 3x'
                     ],
                     description: '*Desain antarmuka modern fokus pada konversi produk.'
                 },
                 {
-                    name: 'UI Professional', price: 'Rp 8.000.000', isPopular: true,
+                    name: 'UI Professional', price: 'Rp 800.000', isPopular: true,
                     features: [
-                        'Up to 10 Pages/Screens', 'Interactive Prototype', 'Design System Basic', 
+                        'Up to 10 Pages/Screens', 'Interactive Prototype', 'Design System Basic',
                         'Export Ready for Dev', 'User Persona Research', 'Revisi 5x'
                     ],
                     description: '*Solusi desain lengkap untuk website atau aplikasi aplikasi bisnis.'
                 },
                 {
-                    name: 'Design Center', price: 'Rp 20.000.000+',
+                    name: 'Design Center', price: 'Rp 1.899.000',
                     features: [
-                        'Comprehensive Design System', 'Master Component Library', 'Style Guide & Typography', 
+                        'Comprehensive Design System', 'Master Component Library', 'Style Guide & Typography',
                         'Up to 30 Screens', 'Advanced Prototyping', 'Revisi UNLIMITED'
                     ],
                     description: '*Standarisasi desain untuk produk skala besar dan konsistensi brand.'
@@ -348,7 +346,7 @@ export const t = {
                 {
                     name: 'System Core', price: 'Rp 15.000.000',
                     features: [
-                        'Web Based System', 'Dashboard Manajemen Data', 'Kelola Produk & Inventori', 
+                        'Web Based System', 'Dashboard Manajemen Data', 'Kelola Produk & Inventori',
                         'Multi User (Admin/Staff)', 'Laporan Statistik Basic', 'Garansi 3 Bulan'
                     ],
                     description: '*Sistem internal dasar untuk mendigitalkan operasional bisnis.'
@@ -356,7 +354,7 @@ export const t = {
                 {
                     name: 'Enterprise Hub', price: 'Rp 45.000.000', isPopular: true,
                     features: [
-                        'Custom Modules (Keuangan/SDM/Sales)', 'Notifikasi Email/WA', 'Audit Trail & Tracking', 
+                        'Custom Modules (Keuangan/SDM/Sales)', 'Notifikasi Email/WA', 'Audit Trail & Tracking',
                         'Integrasi Database Terpusat', 'Advanced Dashboard Analytics', 'Garansi 6 Bulan'
                     ],
                     description: '*Solusi ERP atau CRM kustom yang dirancang sesuai alur kerja bisnis Anda.'
@@ -364,7 +362,7 @@ export const t = {
                 {
                     name: 'Smart System', price: 'Rp 85.000.000+',
                     features: [
-                        'Full Custom Automation', 'Integrasi Multi-API', 'Enterprise Grade Security', 
+                        'Full Custom Automation', 'Integrasi Multi-API', 'Enterprise Grade Security',
                         'Scalable Infrastructure', 'Pelatihan Staff & Dokumentasi', 'Garansi 1 Tahun'
                     ],
                     description: '*Solusi software kompleks hulu ke hilir untuk efisiensi korporasi.'
@@ -372,11 +370,11 @@ export const t = {
             ]
         },
         testimonials: [
-            { name: 'Founder Larasena', role: 'Digitalisasi Batik', text: 'TechSoe sangat inovatif dalam merancang sistem AI Batik kami. Tidak hanya sekadar website, tapi solusi nyata untuk operasional konveksi kami.', rating: 5 },
-            { name: 'Manager Jemari Point', role: 'Retail Perhiasan', text: 'Sistem manajemen stok emas yang dibangun membantu kami memantau transaksi secara real-time. Sangat membantu efisiensi toko.', rating: 5 },
-            { name: 'Ketua KP-SPAMS', role: 'Damar Wulan', text: 'Layanan air warga kini jadi lebih transparan dan modern. Fitur laporan bulanan dan cek pelanggan sangat memudahkan administrasi kami.', rating: 5 },
-            { name: 'Admin Desa', role: 'Desa Kalisabuk', text: 'Website informasi desa memudahkan kami menyebarkan berita dan mendata warga secara digital. Pelayanan publik jadi lebih cepat.', rating: 5 },
-            { name: 'Developer Differlok', role: 'Edutech UNTIDAR', text: 'Platform e-learning yang detail dan responsif. Membantu mahasiswa mendapatkan pengalaman belajar yang lebih adaptif dan terstruktur.', rating: 5 },
+            { name: 'Budi Santoso', role: 'Founder Larasena', text: 'TechSoe sangat inovatif dalam merancang sistem AI Batik kami. Tidak hanya sekadar website, tapi solusi nyata untuk operasional konveksi kami.', rating: 5 },
+            { name: 'Ani Wijaya', role: 'Manager Jemari Point', text: 'Sistem manajemen stok emas yang dibangun membantu kami memantau transaksi secara real-time. Sangat membantu efisiensi toko.', rating: 5 },
+            { name: 'Haji Darmawan', role: 'Ketua KP-SPAMS', text: 'Layanan air warga kini jadi lebih transparan dan modern. Fitur laporan bulanan dan cek pelanggan sangat memudahkan administrasi kami.', rating: 5 },
+            { name: 'Siti Aminah', role: 'Owner Kedai Kopi', text: 'Website landing page yang dibuat sangat cepat dan responsif. Sejak launching, pesanan dari WhatsApp meningkat drastis.', rating: 5 },
+            { name: 'Rahmat Hidayat', role: 'CEO Tech Solution', text: 'Partner development yang bisa diandalkan. Komunikasi lancar dan hasil pengerjaan tepat waktu sesuai deadline yang sudah disepakati.', rating: 5 },
         ],
         ctaTitle: "Mulai Digitalisasi Bisnis Anda Hari Ini!",
         ctaDesc: "Jangan biarkan kompetitor selangkah di depan. Konsultasikan ide proyek perancangan aplikasi atau kebutuhan jasa pembuatan website Anda kepada TechSoe. Kami siap memberikan solusi e-commerce, sistem CMS, dan strategi digital dengan garansi kualitas terbaik.",
@@ -528,27 +526,26 @@ export const t = {
             'Landing Page': [
                 {
                     name: 'Starter', price: 'Rp 599.000',
-                    description: '*Suitable for campaigns/promos aiming to go online immediately with a concise landing page.',
+                    description: 'Suitable for campaigns/promos aiming to go online immediately with a concise landing page.',
                     features: [
-                        'Shared Hosting (6 Months)', 'Responsive Design (Template)', '1 Landing Page', 'WhatsApp Integration Button',
-                        { text: 'Custom Domain', included: false }, { text: 'Business Email', included: false },
-                        'Free SSL', '1x Free Revision', '15 Days Maintenance Warranty'
+                        'Free Domain (.com)', 'Free Hosting', '1 Landing Page', 'WhatsApp Integration Button',
+                        'Free SSL', '2x Free Revisions', '1 Month Maintenance Warranty'
                     ]
                 },
                 {
                     name: 'Growth', price: 'Rp 1.500.000', isPopular: true,
-                    description: '*Suitable for high-conversion sales with more comprehensive feature and brand control.',
+                    description: 'Suitable for high-conversion sales with more comprehensive feature and brand control.',
                     features: [
-                        'Free Domain (.com)', '1 Year Hosting', 'Professional Custom Design', '1 Landing Page (Long)',
-                        '1 Professional Business Email', 'Order Button / Leads Form', '3x Free Revisions', 'Basic On-Page SEO', '1 Month Maintenance Warranty'
+                        'Free Domain (.com)', 'Free Hosting', 'Professional Custom Design', '1 Landing Page (Long)',
+                        '1 Professional Business Email', 'Order Button / Leads Form', '4x Free Revisions', 'Basic On-Page SEO', '1 Month Maintenance Warranty'
                     ]
                 },
                 {
                     name: 'Ultimate', price: 'Rp 2.750.000',
-                    description: '*All-in-one landing page solution for digital businesses aiming to dominate conversions & maximize presence.',
+                    description: 'All-in-one landing page solution for digital businesses aiming to dominate conversions & maximize presence.',
                     features: [
-                        'All features in the Growth package', 'Up to 2 Additional Pages (Thank You, etc.)', 'Conversion-Based Copywriting Request',
-                        'Special Effects & Scroll Animations', 'Speed Optimization (Lazy Load)', 'Pixel & Analytics Integration', '5x Free Revisions', '1.5 Months Maintenance Warranty'
+                        'All features in the Growth package', 'Request Special Features (Popup, Accordion, Pricing Table, etc.)', 'Interactive Design',
+                        'Special Effects & Scroll Animations', 'Speed Optimization (Lazy Load)', 'Pixel & Analytics Integration', '5x Free Revisions', '1 Month Maintenance Warranty'
                     ]
                 }
             ],
@@ -556,88 +553,87 @@ export const t = {
                 {
                     name: 'Starter', price: 'Rp 899.000',
                     features: [
-                        'Domain (.com)', '1 page', 'Custom Template', 'Responsive', 'Basic SEO',
-                        { text: 'Admin CMS', included: false }, { text: 'Blog/Articles', included: false },
-                        'Contact Form', 'WhatsApp Integration', '1 Month Warranty', '2x Revisions'
+                        'Free Domain (.com)', 'Free Hosting', '3 pages (Home, About, Contact)', 'Responsive', 'Basic SEO',
+                        'Contact Form', 'WhatsApp Integration', '6 Months Warranty', '2x Revisions'
                     ],
-                    description: '*Suitable for companies looking to establish a concise identity.'
+                    description: 'Suitable for companies looking to establish a concise identity.'
                 },
                 {
-                    name: 'Professional', price: 'Rp 3.500.000', isPopular: true,
+                    name: 'Professional', price: 'Rp 2.599.000', isPopular: true,
                     features: [
-                        'Domain (.com)', '5-7 pages', 'Semi-Custom UI/UX', 'Responsive', 'Basic SEO',
-                        'Admin CMS', 'Blog/Articles', 'Contact Form', 'WhatsApp Integration', '2 Months Warranty', '3x Revisions'
+                        'Free Domain (.com)', '5-7 pages', 'Custom UI/UX', 'Responsive', 'Basic SEO',
+                        'Admin CMS', 'Blog/Articles', 'Contact Form', 'WhatsApp Integration', '6 Months Warranty', '3x Revisions'
                     ],
-                    description: '*The best choice for mid-scale companies.'
+                    description: 'The best choice for mid-scale companies.'
                 },
                 {
-                    name: 'Executive', price: 'Rp 7.500.000',
+                    name: 'Executive', price: 'Rp 4.999.000',
                     features: [
-                        'Domain (.com)', 'Unlimited pages', 'Fully Custom UI/UX', 'Responsive', 'Advanced SEO',
-                        'Admin CMS', 'Blog/Articles', 'Contact Form + Auto Email', 'WhatsApp Integration', '3 Months Warranty', '5x Revisions'
+                        'Free Domain (.com)', 'Up to 20 pages', 'Fully Custom UI/UX', 'Responsive', 'Advanced SEO',
+                        'Admin CMS', 'Blog/Articles', 'Contact Form + Auto Email', 'WhatsApp Integration', '6 Months Warranty', '5x Revisions'
                     ],
-                    description: '*A comprehensive solution for large-scale enterprises.'
+                    description: 'A comprehensive solution for large-scale enterprises.'
                 }
             ],
             'CMS': [
                 {
-                    name: 'Basic CMS', price: 'Rp 4.500.000',
+                    name: 'Basic CMS', price: 'Rp 3.500.000',
                     features: [
                         'Domain (.com)', 'Admin Dashboard', { text: 'Multi User Role', included: false },
                         'Product/Service Management', 'Blog', 'Basic SEO', { text: 'Analytics', included: false },
                         { text: 'Payment Integration', included: false }, { text: 'API Integration', included: false },
                         '1 Month Warranty', '4x Revisions'
                     ],
-                    description: '*A foundational system to start managing data.'
+                    description: 'A foundational system to start managing data.'
                 },
                 {
-                    name: 'Business CMS', price: 'Rp 8.500.000', isPopular: true,
+                    name: 'Business CMS', price: 'Rp 6.500.000', isPopular: true,
                     features: [
                         'Domain (.com)', 'Admin Dashboard', 'Multi User Role',
                         'Product/Service Management', 'Blog', 'Advanced SEO', 'Analytics',
                         'Payment Integration', { text: 'API Integration', included: false },
                         '3 Months Warranty', '5x Revisions'
                     ],
-                    description: '*Optimal for team collaboration and tracking.'
+                    description: 'Optimal for team collaboration and tracking.'
                 },
                 {
-                    name: 'Enterprise CMS', price: 'Rp 14.000.000',
+                    name: 'Enterprise CMS', price: 'Rp 11.000.000',
                     features: [
                         'Domain (.com)', 'Admin Dashboard', 'Multi User Role',
                         'Product/Service Management', 'Blog', 'Advanced SEO + Schema Structure', 'Analytics',
                         'Payment Integration', 'API Integration', '6 Months Warranty', '7x Revisions'
                     ],
-                    description: '*Unlimited customization and full API connectivity.'
+                    description: 'Unlimited customization and full API connectivity.'
                 }
             ],
             'LMS': [
                 {
-                    name: 'LMS Starter', price: 'Rp 9.000.000',
+                    name: 'LMS Starter', price: 'Rp 6.999.000',
                     features: [
                         'Course Management', 'Video Upload', 'Quizzes / Exams',
                         { text: 'Certificates', included: false }, { text: 'Progress Tracking', included: false },
                         { text: 'Multi Instructor', included: false }, { text: 'Payment Gateway', included: false },
                         'Basic Stat Dashboard', 'Basic Role System (4)', '2 Months Maintenance', '4x Revisions'
                     ],
-                    description: '*A basic educational solution for beginner courses.'
+                    description: 'A basic educational solution for beginner courses.'
                 },
                 {
-                    name: 'LMS Pro', price: 'Rp 15.000.000', isPopular: true,
+                    name: 'LMS Pro', price: 'Rp 8.000.000', isPopular: true,
                     features: [
                         'Course Management', 'Video Upload', 'Quizzes / Exams',
                         'Certificates', 'Progress Tracking', 'Multi Instructor', 'Payment Gateway',
                         'Advanced Stat Dashboard', 'Advanced Role System (5)', '3 Months Maintenance', '5x Revisions'
                     ],
-                    description: '*Interactive and self-paced learning modules.'
+                    description: 'Interactive and self-paced learning modules.'
                 },
                 {
-                    name: 'LMS Enterprise', price: 'Rp 25.000.000',
+                    name: 'LMS Enterprise', price: 'Rp 14.000.000',
                     features: [
                         'Course Management', 'Video Upload', 'Quizzes / Exams + Question Bank',
                         'Custom Certificates', 'Progress Tracking', 'Multi Instructor', 'Payment Gateway',
                         'Advanced Stat Dashboard + Data Export', 'Advanced Role System (5)', '6 Months Maintenance', '7x Revisions'
                     ],
-                    description: '*Large-scale educational facility with the most complete features.'
+                    description: 'Large-scale educational facility with the most complete features.'
                 }
             ],
             'E-Commerce': [
@@ -649,7 +645,7 @@ export const t = {
                         { text: 'Promos & Vouchers', included: false }, 'Basic Financial Dashboard',
                         { text: 'API Integration', included: false }, 'Mobile Optimized'
                     ],
-                    description: '*An online store with a straightforward checkout system setup.'
+                    description: 'An online store with a straightforward checkout system setup.'
                 },
                 {
                     name: 'Store Pro', price: 'Rp 18.000.000', isPopular: true,
@@ -659,7 +655,7 @@ export const t = {
                         'Promos & Vouchers', 'Advanced Financial Dashboard',
                         'Optional API Integration', 'Mobile Optimized'
                     ],
-                    description: '*Reach more conversions with automated marketing.'
+                    description: 'Reach more conversions with automated marketing.'
                 },
                 {
                     name: 'Marketplace', price: 'Rp 35.000.000+',
@@ -668,15 +664,15 @@ export const t = {
                         'Multi Vendor', 'Vendor Commissions', 'Promos & Vouchers', 'Advanced Financial Dashboard',
                         'API Integration', 'Mobile Optimized'
                     ],
-                    description: '*Open doors to the other merchants across all regions.'
+                    description: 'Open doors to other merchants across all regions.'
                 }
             ],
             'Mobile App Packages': [
                 {
                     name: 'MVP Mobile', price: 'Rp 25.000.000',
                     features: [
-                        'Single Platform (Android/iOS)', 'Standard UI/UX', 'Authentication (Login/Register)', 
-                        'Cloud Data (Firebase/SQL)', 'Notification System', 'Max 5 Core Features', 
+                        'Single Platform (Android/iOS)', 'Standard UI/UX', 'Authentication (Login/Register)',
+                        'Cloud Data (Firebase/SQL)', 'Notification System', 'Max 5 Core Features',
                         '3 Months Maintenance Warranty'
                     ],
                     description: '*Suitable for validating early business ideas with a functional app.'
@@ -684,8 +680,8 @@ export const t = {
                 {
                     name: 'Business App', price: 'Rp 55.000.000', isPopular: true,
                     features: [
-                        'Hybrid Android & iOS (Flutter)', 'Custom UI/UX Design', 'API Integration', 
-                        'Advanced Push Notifications', 'Max 10 Core Features', 'Playstore/Appstore Submission', 
+                        'Hybrid Android & iOS (Flutter)', 'Custom UI/UX Design', 'API Integration',
+                        'Advanced Push Notifications', 'Max 10 Core Features', 'Playstore/Appstore Submission',
                         '6 Months Maintenance Warranty'
                     ],
                     description: '*Professional app solution for growing businesses.'
@@ -693,8 +689,8 @@ export const t = {
                 {
                     name: 'Elite Mobile', price: 'Rp 100.000.000+',
                     features: [
-                        'Fully Custom Features', 'Advanced Backend System', 'Payment Gateway Integration', 
-                        'High Security Encryption', 'Max 20 Core Features', 'Playstore/Appstore Submission', 
+                        'Fully Custom Features', 'Advanced Backend System', 'Payment Gateway Integration',
+                        'High Security Encryption', 'Max 20 Core Features', 'Playstore/Appstore Submission',
                         '1 Year Maintenance Warranty'
                     ],
                     description: '*Large-scale app systems with complex features & full integration.'
@@ -704,7 +700,7 @@ export const t = {
                 {
                     name: 'UI Micro', price: 'Rp 2.500.000',
                     features: [
-                        'High Fidelity Design (Figma)', '1 Long Landing Page', 'Responsive View (Desktop/Mobile)', 
+                        'High Fidelity Design (Figma)', '1 Long Landing Page', 'Responsive View (Desktop/Mobile)',
                         'User Flow Diagram', 'Dark & Light Mode', '3x Revisions'
                     ],
                     description: '*Modern interface design focused on product conversion.'
@@ -712,7 +708,7 @@ export const t = {
                 {
                     name: 'UI Professional', price: 'Rp 8.000.000', isPopular: true,
                     features: [
-                        'Up to 10 Pages/Screens', 'Interactive Prototype', 'Basic Design System', 
+                        'Up to 10 Pages/Screens', 'Interactive Prototype', 'Basic Design System',
                         'Export Ready for Dev', 'User Persona Research', '5x Revisions'
                     ],
                     description: '*Complete design solution for professional websites or business apps.'
@@ -720,7 +716,7 @@ export const t = {
                 {
                     name: 'Design Center', price: 'Rp 20.000.000+',
                     features: [
-                        'Comprehensive Design System', 'Master Component Library', 'Style Guide & Typography', 
+                        'Comprehensive Design System', 'Master Component Library', 'Style Guide & Typography',
                         'Up to 30 Screens', 'Advanced Prototyping', 'UNLIMITED Revisions'
                     ],
                     description: '*Design standardization for large-scale products and brand consistency.'
@@ -759,7 +755,7 @@ export const t = {
                 {
                     name: 'System Core', price: 'Rp 15.000.000',
                     features: [
-                        'Web-Based System', 'Data Management Dashboard', 'Product & Inventory Management', 
+                        'Web-Based System', 'Data Management Dashboard', 'Product & Inventory Management',
                         'Multi-User (Admin/Staff)', 'Basic Statistical Reports', '3 Months Warranty'
                     ],
                     description: '*Foundational internal system to digitize business operations.'
@@ -767,7 +763,7 @@ export const t = {
                 {
                     name: 'Enterprise Hub', price: 'Rp 45.000.000', isPopular: true,
                     features: [
-                        'Custom Modules (Finance/HR/Sales)', 'Email/WA Notifications', 'Audit Trail & Tracking', 
+                        'Custom Modules (Finance/HR/Sales)', 'Email/WA Notifications', 'Audit Trail & Tracking',
                         'Centralized Database Integration', 'Advanced Analytics Dashboard', '6 Months Warranty'
                     ],
                     description: '*Custom ERP or CRM solution designed to match your business workflow.'
@@ -775,7 +771,7 @@ export const t = {
                 {
                     name: 'Smart System', price: 'Rp 85.000.000+',
                     features: [
-                        'Full Custom Automation', 'Multi-API Integration', 'Enterprise-Grade Security', 
+                        'Full Custom Automation', 'Multi-API Integration', 'Enterprise-Grade Security',
                         'Scalable Infrastructure', 'Staff Training & Documentation', '1 Year Warranty'
                     ],
                     description: '*Complex end-to-end software solution for corporate efficiency.'

@@ -193,30 +193,10 @@ export default function PortfolioSection() {
           </div>
         </div>
 
-        {/* Carousel / Grid */}
-        <div className="relative min-h-[400px] group/carousel">
-          {/* Mobile Arrows for Carousel */}
-          <div className="absolute top-[40%] -left-8 -translate-y-1/2 z-40 lg:hidden">
-            <button 
-              onClick={() => scrollProjects('left')}
-              className="p-4 text-blue-900 hover:text-blue-600 active:scale-90 transition-all drop-shadow-sm"
-            >
-              <ChevronLeft className="w-8 h-8" />
-            </button>
-          </div>
-          <div className="absolute top-[40%] -right-8 -translate-y-1/2 z-40 lg:hidden">
-            <button 
-              onClick={() => scrollProjects('right')}
-              className="p-4 text-slate-300 hover:text-blue-900 active:scale-90 transition-all drop-shadow-sm"
-            >
-              <ChevronRight className="w-8 h-8" />
-            </button>
-          </div>
-
           <motion.div
             ref={projectScrollRef}
             layout
-            className="flex lg:grid lg:grid-cols-3 gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory pb-10 scroll-smooth"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
           >
             <AnimatePresence mode='popLayout'>
               {currentProjects.map((project: any, idx: number) => (
@@ -224,41 +204,44 @@ export default function PortfolioSection() {
                   key={project.title}
                   layout
                   initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group cursor-pointer flex flex-col shrink-0 w-[80%] sm:w-[45%] lg:w-full snap-center"
+                  className="group cursor-pointer flex flex-col w-full bg-white rounded-4xl overflow-hidden border border-slate-100 hover:border-blue-100 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500"
                 >
                   {/* Image Container */}
-                  <div className="relative w-full aspect-square sm:aspect-video rounded-3xl overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
+                  <div className="relative w-full aspect-4/3 overflow-hidden bg-slate-100">
                     <Image
                       src={project.image}
-                      alt={project.title}
+                      alt={`Proyek ${project.title} - ${project.category}`}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="group-hover:scale-105 transition duration-700 ease-in-out object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="group-hover:scale-110 transition duration-700 ease-in-out object-cover"
                     />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-white/95 backdrop-blur-md text-slate-900 text-[9px] font-black uppercase tracking-wider rounded-lg shadow-xl border border-white">
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="px-4 py-1.5 bg-white/95 backdrop-blur-md text-slate-900 text-[10px] font-black uppercase tracking-wider rounded-xl shadow-sm border border-white">
                         {project.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Content Container */}
-                  <div className="py-6 px-1 flex flex-col flex-1">
-                    <h3 className="text-lg lg:text-xl font-black text-slate-900 mb-2 group-hover:text-blue-900 transition-colors">
+                  <div className="p-6 lg:p-8 flex flex-col flex-1">
+                    <h3 className="text-xl lg:text-2xl font-black text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-slate-500 text-xs lg:text-sm font-medium leading-relaxed line-clamp-2">
+                    <p className="text-slate-500 text-sm lg:text-base font-medium leading-relaxed line-clamp-3">
                       {project.desc}
                     </p>
+                    <div className="mt-6 pt-6 border-t border-slate-50 flex items-center text-blue-900 font-bold text-sm group-hover:gap-2 transition-all">
+                      Lihat Detail <ChevronRight className="w-4 h-4" />
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
-        </div>
 
         {/* Desktop Improved Pagination Controls */}
         {totalPages > 1 && (

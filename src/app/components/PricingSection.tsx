@@ -249,9 +249,9 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
 
                 <button
                   onClick={() => handleOrderClick(pkg)}
-                  className={`w-full py-3.5 font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 active:scale-95 ${pkg.isPopular
-                    ? 'bg-white text-blue-900 hover:bg-slate-50'
-                    : 'bg-indigo-50 text-blue-900 hover:bg-blue-900 hover:text-white'
+                  className={`w-full min-h-[44px] py-3.5 font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 active:scale-95 ${pkg.isPopular
+                    ? 'bg-blue-900 text-white hover:bg-slate-900 shadow-xl shadow-blue-900/20'
+                    : 'bg-white text-blue-900 border-2 border-indigo-100 hover:bg-indigo-50 hover:border-blue-900'
                     }`}>
                   {t[lang].priceOrderText}
                 </button>
@@ -280,7 +280,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
               href={`https://wa.me/6281234567890?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 bg-[#25D366] text-white font-bold rounded-2xl hover:bg-[#20bd5a] transition-all shadow-lg shadow-[#25D366]/20 active:scale-95 whitespace-nowrap text-sm"
+              className="px-8 py-3.5 bg-[#25D366] text-white font-bold rounded-2xl hover:bg-[#20bd5a] transition-all shadow-lg shadow-[#25D366]/20 active:scale-95 whitespace-nowrap text-sm min-h-[44px] flex items-center justify-center"
             >
               {t[lang].priceConsultBtn}
             </a>

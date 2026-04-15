@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MapPin, Instagram } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { t } from '../translations';
@@ -29,21 +29,26 @@ export default function Footer() {
               {t[lang].footerDesc}
             </p>
             <div className="flex items-center gap-4">
-              {[
-                { icon: Instagram, href: '#', label: 'Instagram' },
-                { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Facebook, href: '#', label: 'Facebook' },
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-900 hover:text-white transition-all duration-300 group"
-                >
-                  <social.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
-                </a>
-              ))}
+              <a
+                href="https://www.instagram.com/techsoe.id/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-pink-600 hover:text-white transition-all duration-300 group"
+              >
+                <Instagram className="w-5 h-5 transition-transform group-hover:scale-110" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@techsoe.id?is_from_webapp=1&sender_device=pc"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="TikTok"
+                className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-slate-950 hover:text-white transition-all duration-300 group"
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current transition-transform group-hover:scale-110" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.33-.85.51-1.44 1.43-1.58 2.41-.01.07-.01.14-.01.21.03.95.53 1.86 1.33 2.39.77.53 1.77.71 2.69.48 1.31-.38 2.21-1.66 2.22-3.02.01-4.32-.02-8.63.02-12.96z"/>
+                </svg>
+              </a>
             </div>
           </div>
 

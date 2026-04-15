@@ -226,21 +226,21 @@ export default function HeroSection() {
             </h1>
 
             {/* Description - Unified for both Mobile & Desktop */}
-            <p className="text-xs sm:text-base lg:text-lg text-slate-500 max-w-xl leading-relaxed mb-8 lg:mb-10 font-medium opacity-90 px-4 lg:px-0">
-              {t[lang].heroDesc.replace('bisnis Anda', 'bisnis Anda di Purwokerto')}
+            <p className="text-sm sm:text-base lg:text-lg text-slate-500 max-w-xl leading-relaxed mb-8 lg:mb-10 font-medium opacity-90 px-4 lg:px-0">
+              {t[lang].heroDesc}
             </p>
 
             {/* Buttons - Unified for both Mobile & Desktop */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 lg:px-0">
               <Link
                 href="#harga"
-                className="bg-blue-900 text-white px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base shadow-2xl shadow-blue-900/30 hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-300 text-center"
+                className="bg-blue-900 text-white min-h-[44px] px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base shadow-2xl shadow-blue-900/30 hover:bg-slate-800 hover:-translate-y-1 transition-all duration-300 text-center flex items-center justify-center"
               >
                 {t[lang].heroBtnStart}
               </Link>
               <Link
                 href="#portfolio"
-                className="bg-white text-slate-800 border-2 border-slate-100 px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base hover:border-indigo-100 hover:bg-indigo-50/30 hover:-translate-y-1 transition-all duration-300 text-center"
+                className="bg-white text-slate-800 border-2 border-slate-100 min-h-[44px] px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base hover:border-blue-900 hover:bg-blue-50/30 hover:-translate-y-1 transition-all duration-300 text-center flex items-center justify-center"
               >
                 {t[lang].heroBtnPort}
               </Link>
@@ -270,7 +270,7 @@ export default function HeroSection() {
                   </div>
                   <div>
                     <div className="text-2xl lg:text-3xl font-black text-slate-900 mb-1 leading-none">{stat.value}</div>
-                    <div className="text-xs lg:text-sm font-bold text-slate-400 uppercase tracking-wider">{stat.label}</div>
+                    <div className="text-sm font-bold text-slate-400 uppercase tracking-wider">{stat.label}</div>
                   </div>
                 </motion.div>
               );

@@ -14,8 +14,8 @@ interface SectionTagProps {
  */
 export default function SectionTag({ text, variant = 'light' }: SectionTagProps) {
   const classes = variant === 'dark'
-    ? 'bg-slate-800 border-slate-700 text-blue-400'
-    : 'bg-blue-50 border-blue-100 text-blue-600';
+    ? 'bg-slate-800 border-slate-700 text-blue-300'
+    : 'bg-blue-50 border-blue-200 text-blue-800';
 
   return (
     <div className={`inline-flex items-center gap-2 ${classes} border px-3 py-1 rounded-full`}>

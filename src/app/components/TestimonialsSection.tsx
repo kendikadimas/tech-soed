@@ -1,47 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { Star, Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { t } from '../translations';
 import { useLang } from './LangContext';
-import SectionTag from './SectionTag';
-
-const AUTOPLAY_DURATION = 5000; // 5 seconds
 
 export default function TestimonialsSection() {
   const { lang } = useLang();
   const testimonials = t[lang].testimonials;
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    // Reset progress when index changes
-    setProgress(0);
-    
-    const intervalTime = 100; // Update progress every 100ms
-    const increment = (intervalTime / AUTOPLAY_DURATION) * 100;
-
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveIndex((idx) => (idx + 1) % testimonials.length);
-          return 0;
-        }
-        return prev + increment;
-      });
-    }, intervalTime);
-
-    return () => clearInterval(timer);
-  }, [activeIndex, testimonials.length]);
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-  };
 
   return (
     <section id="testimoni" className="py-24 px-6 lg:px-12 bg-white overflow-hidden relative">
@@ -49,108 +17,71 @@ export default function TestimonialsSection() {
       <div className="absolute top-0 right-[5%] w-96 h-96 bg-blue-100 rounded-full blur-[120px] opacity-40 z-0" />
       <div className="absolute bottom-0 left-[5%] w-96 h-96 bg-blue-50 rounded-full blur-[120px] opacity-40 z-0" />
 
-      <div className="max-w-2xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-10 text-center space-y-4"
+          className="mb-16 text-center space-y-4"
         >
-          {/* <SectionTag text={t[lang].testiTag} variant="dark" /> */}
-          <h2 className="text-2xl lg:text-3xl font-black text-slate-900">
+          <h2 className="text-3xl lg:text-5xl font-black text-slate-900">
             {t[lang].testiTitle}
           </h2>
+          <p className="text-slate-500 font-medium max-w-2xl mx-auto text-sm lg:text-base">
+            Kepuasan klien adalah prioritas utama kami. Berikut adalah pengalaman mereka bekerja sama dengan TechSoe.
+          </p>
         </motion.div>
 
-        {/* Testimonial Display Area */}
-        <div className="relative">
-          {/* Main Navigation Arrows (Background-less) */}
-          <div className="hidden md:block absolute top-[40%] -left-16 -translate-y-1/2">
-            <button onClick={handlePrev} className="p-2 text-blue-900/30 hover:text-blue-900 transition-colors">
-              <ChevronLeft className="w-8 h-8" />
-            </button>
-          </div>
-          <div className="hidden md:block absolute top-[40%] -right-16 -translate-y-1/2">
-            <button onClick={handleNext} className="p-2 text-blue-900/30 hover:text-blue-900 transition-colors">
-              <ChevronRight className="w-8 h-8" />
-            </button>
-          </div>
+        {/* Testimonial Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testi: any, index: number) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-slate-50 border border-slate-100 p-8 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 relative group flex flex-col h-full"
+            >
+              {/* Quote Icon */}
+              <div className="absolute top-6 right-8 text-blue-900/10 group-hover:text-blue-900/20 transition-colors">
+                <Quote className="w-10 h-10 fill-current" />
+              </div>
 
-          <div className="bg-slate-50 border border-slate-100 p-6 md:p-10 rounded-xl shadow-sm relative overflow-hidden">
-            {/* Quote Icon Background */}
-            <div className="absolute top-4 right-6 text-blue-900/5">
-                <Quote className="w-16 h-16 fill-current" />
-            </div>
+              {/* Star Rating */}
+              <div className="flex gap-1 text-amber-400 mb-6">
+                {[...Array(testi.rating || 5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col gap-6 items-center md:items-start"
-              >
-                {/* Image / Initial Avatar */}
-                {/* <div className="w-24 h-24 md:w-32 md:h-32 bg-blue-900 rounded-4xl flex items-center justify-center font-black text-3xl md:text-5xl text-white shadow-xl shadow-blue-900/20 shrink-0">
-                  {testimonials[activeIndex].name.charAt(0)}
-                </div> */}
+              {/* Testimonial Text */}
+              <p className="text-slate-600 font-medium leading-relaxed mb-8 flex-1 text-sm lg:text-base italic">
+                &quot;{testi.text}&quot;
+              </p>
 
-                <div className="flex-1 text-center md:text-left">
-                  {/* <div className="flex justify-center md:justify-start text-amber-400 mb-4 gap-0.5">
-                    {[...Array(testimonials[activeIndex].rating)].map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-current" />
-                    ))}
-                  </div> */}
-
-                  <p className="text-lg md:text-xl font-medium text-slate-600 leading-relaxed mb-6 italic">
-                    &quot;{testimonials[activeIndex].text}&quot;
-                  </p>
-
-                  <div>
-                    <h3 className="text-lg font-black text-slate-900 leading-tight">
-                      {testimonials[activeIndex].name}
-                    </h3>
-                    <p className="text-blue-600 font-bold text-[10px] uppercase tracking-widest mt-1">
-                      {testimonials[activeIndex].role}
-                    </p>
-                  </div>
+              {/* Client Info */}
+              <div className="flex items-center gap-4 border-t border-slate-200/60 pt-6">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-blue-100 shrink-0 border-2 border-white shadow-sm">
+                  <Image
+                    src={`https://i.pravatar.cc/48?u=${testi.name}`}
+                    alt={testi.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Pagination Indicators with Progress Bars */}
-            <div className="flex gap-2 justify-center md:justify-start mt-8 md:mt-10">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIndex(i)}
-                  className="relative h-1 rounded-full bg-slate-200 transition-all overflow-hidden"
-                  style={{ width: activeIndex === i ? '32px' : '8px' }}
-                >
-                  {activeIndex === i && (
-                    <motion.div
-                      className="absolute inset-0 bg-blue-900"
-                      initial={{ width: "0%" }}
-                      animate={{ width: `${progress}%` }}
-                      transition={{ ease: "linear", duration: 0.1 }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Arrows (Bottom) */}
-        <div className="flex md:hidden justify-center gap-6 mt-8">
-            <button onClick={handlePrev} className="p-2 text-blue-900/40 active:text-blue-900 transition-colors">
-              <ChevronLeft className="w-8 h-8" />
-            </button>
-            <button onClick={handleNext} className="p-2 text-blue-900/40 active:text-blue-900 transition-colors">
-              <ChevronRight className="w-8 h-8" />
-            </button>
+                <div>
+                  <h3 className="text-sm lg:text-base font-black text-slate-900 leading-tight">
+                    {testi.name}
+                  </h3>
+                  <p className="text-blue-600 font-bold text-[10px] lg:text-[11px] uppercase tracking-widest mt-0.5">
+                    {testi.role}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
