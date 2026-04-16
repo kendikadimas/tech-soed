@@ -33,7 +33,7 @@ function LandingPageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-slate-950 font-sans text-slate-900 dark:text-white transition-colors overflow-x-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes scroll {

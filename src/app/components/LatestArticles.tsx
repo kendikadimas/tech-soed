@@ -12,14 +12,14 @@ export default function LatestArticles() {
   const recentPosts = [...blogPosts].reverse().slice(0, 3);
 
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
+    <section className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl text-center md:text-left">
-            <h2 className="text-3xl lg:text-4xl font-black text-slate-900 mb-4 tracking-tight">
+            <h2 className="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors mb-4 tracking-tight">
               Wawasan <span className="text-blue-900">Digital Purwokerto</span>
             </h2>
-            <p className="text-slate-500 font-medium leading-relaxed">
+            <p className="text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed">
               Tips dan strategi pengembangan website, aplikasi mobile, serta solusi IT terintegrasi sebagai Partner Digital Professional Anda di Banyumas.
             </p>
           </div>
@@ -43,7 +43,7 @@ export default function LatestArticles() {
             >
               <Link 
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col h-full bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500"
+                className="group flex flex-col h-full bg-slate-50 dark:bg-slate-950 transition-colors rounded-3xl border border-slate-100 dark:border-slate-800 transition-colors overflow-hidden hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500"
               >
                 <div className="p-6 sm:p-8 flex flex-col flex-1">
                   <div className="flex items-center justify-between mb-4">
@@ -55,13 +55,13 @@ export default function LatestArticles() {
                       {post.date}
                     </div>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-blue-900 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white transition-colors mb-4 leading-tight group-hover:text-blue-900 transition-colors ">
                     {post.title}
                   </h3>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">
+                  <p className="text-slate-500 dark:text-slate-400 transition-colors text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">
                     {post.excerpt}
                   </p>
-                  <div className="mt-auto pt-6 border-t border-slate-50 flex items-center text-blue-900 font-bold text-sm">
+                  <div className="mt-auto pt-6 border-t border-slate-50 dark:border-slate-800 transition-colors flex items-center text-blue-900 font-bold text-sm">
                     Baca Selengkapnya
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:ml-3 transition-all" />
                   </div>

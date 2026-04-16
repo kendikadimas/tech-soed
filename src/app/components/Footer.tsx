@@ -11,7 +11,7 @@ export default function Footer() {
   const { lang } = useLang();
 
   return (
-    <footer className="bg-slate-900 text-slate-300 py-20 px-6 lg:px-12 rounded-t-[3rem] relative overflow-hidden">
+    <footer className="bg-slate-900 dark:bg-slate-900 transition-colors text-slate-300 py-20 px-6 lg:px-12 rounded-t-[3rem] relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-900/5 blur-[120px] rounded-full z-0" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/5 blur-[120px] rounded-full z-0" />

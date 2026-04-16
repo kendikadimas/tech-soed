@@ -1,5 +1,7 @@
 export { LangProvider, useLang } from './LangContext';
 export { default as SectionTag } from './SectionTag';
+export { ThemeProvider } from './ThemeProvider';
+
 export { default as Navbar } from './Navbar';
 export { default as HeroSection } from './HeroSection';
 export { default as AboutSection } from './AboutSection';

@@ -14,7 +14,7 @@ export default function AboutSection() {
   const { lang } = useLang();
 
   return (
-    <section id="tentang" className="py-24 px-6 lg:px-12 bg-white overflow-hidden relative">
+    <section id="tentang" className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -38,16 +38,16 @@ export default function AboutSection() {
 
               <Link 
                 href="#portfolio" 
-                className="bg-transparent text-white border-2 border-white/30 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-white/10 hover:border-white transition-all duration-300 text-center min-h-[44px] flex items-center justify-center w-fit"
+                className="bg-transparent text-white border-2 border-white/30 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-white/10 dark:bg-slate-950/10 transition-colors hover:border-white transition-all duration-300 text-center min-h-[44px] flex items-center justify-center w-fit"
               >
                 {t[lang].heroBtnPort}
               </Link>
               
               {/* <Link 
                 href="/tentang" 
-                className="inline-flex items-center gap-3 text-white font-bold group hover:text-blue-200 transition-colors"
+                className="inline-flex items-center gap-3 text-white font-bold group hover:text-blue-200 transition-colors "
               >
-                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-950 transition-colors flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Play className="w-3 h-3 text-[#0a1d37] fill-current ml-0.5" />
                 </div>
                 <span className="text-sm lg:text-base underline underline-offset-8 decoration-white/20 group-hover:decoration-blue-200">

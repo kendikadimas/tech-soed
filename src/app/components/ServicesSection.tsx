@@ -56,17 +56,17 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section className="py-24 px-6 lg:px-12 bg-white overflow-hidden relative">
+    <section className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-left max-w-3xl mb-16 relative">
-          <div className="absolute -top-10 -left-6 w-32 h-32 bg-blue-100/50 blur-3xl rounded-full -z-10" />
+          <div className="absolute -top-10 -left-6 w-32 h-32 bg-blue-100/50 dark:bg-blue-900/20 blur-3xl rounded-full -z-10" />
           <motion.h2
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-5xl font-black text-slate-900 leading-[1.1] mb-6"
+            className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors leading-[1.1] mb-6"
           >
             {t[lang].svcTitle}
           </motion.h2>
@@ -75,7 +75,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-500 font-medium leading-relaxed max-w-2xl"
+            className="text-lg text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl"
           >
             {t[lang].svcText}
           </motion.p>
@@ -93,7 +93,7 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05 }}
-                className="group relative rounded-lg p-6 bg-blue-950 border border-slate-200/60 hover:border-blue-500/30 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04),0_10px_20px_-2px_rgba(0,0,0,0.02)] hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 flex items-center gap-6 overflow-hidden"
+                className="group relative rounded-lg p-6 bg-blue-950 border border-slate-200/60 dark:border-slate-700/60 transition-colors hover:border-blue-500/30 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04),0_10px_20px_-2px_rgba(0,0,0,0.02)] hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 flex items-center gap-6 overflow-hidden"
               >
                 {/* Icon Left */}
                 <div className="shrink-0 text-slate-400 group-hover:text-white transition-colors duration-300">
@@ -102,7 +102,7 @@ export default function ServicesSection() {
 
                 {/* Content */}
                 <div className="flex-1 text-left relative z-10">
-                  <div className="text-base lg:text-lg font-bold text-white mb-1 group-hover:text-white transition-colors">
+                  <div className="text-base lg:text-lg font-bold text-white mb-1 group-hover:text-white transition-colors ">
                     {svc.title}
                   </div>
                   <p className="text-xs lg:text-sm font-medium text-slate-400 leading-relaxed">
