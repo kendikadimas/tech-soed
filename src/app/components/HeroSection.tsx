@@ -254,7 +254,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-start text-left lg:pr-4 order-2 lg:order-1 pt-0 lg:-translate-y-12"
           >
-            <h1 className="text-[1.35rem] sm:text-[2rem] lg:text-[2.7rem] xl:text-[3.375rem] font-black leading-tight text-slate-900 dark:text-white mb-3 lg:mb-8 tracking-tight">
+            <h1 className="text-[1.15rem] sm:text-[2rem] lg:text-[2.7rem] xl:text-[3.375rem] font-black leading-tight text-slate-900 dark:text-white mb-3 lg:mb-8 tracking-tight">
               {t[lang].heroTitle.includes('&') ? (
                 <>
                   {t[lang].heroTitle.split('&')[0]}
