@@ -89,7 +89,7 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
                     </a>
                   )}
                   <a
-                    href="https://wa.me/6281353424280?text=Halo TechSoe, saya tertarik dengan proyek yang ada di portofolio Anda!"
+                    href="https://wa.me/6285814174267?text=Halo TechSoe, saya tertarik dengan proyek yang ada di portofolio Anda!"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366] text-white font-bold rounded-2xl hover:bg-[#20bd5a] transition-all shadow-lg shadow-green-600/20 active:scale-95 text-sm"

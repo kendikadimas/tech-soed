@@ -16,7 +16,7 @@ export default function ContactSection() {
     const formData = new FormData(e.target as HTMLFormElement);
     const name = formData.get('name');
     const message = formData.get('message');
-    const whatsappUrl = `https://wa.me/6281353424280?text=Halo TechSoe, saya ${name}. ${message}`;
+    const whatsappUrl = `https://wa.me/6285814174267?text=Halo TechSoe, saya ${name}. ${message}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -53,7 +53,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white transition-colors ">{t[lang].contactInfoTitle}</h4>
-                  <p className="text-slate-500 dark:text-slate-400 transition-colors ">techsoe26@gmail.com</p>
+                  <p className="text-slate-500 dark:text-slate-400 transition-colors ">hi@techsoe.com</p>
                 </div>
               </div>
 
@@ -65,7 +65,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-white transition-colors ">WhatsApp</h4>
-                  <p className="text-slate-500 dark:text-slate-400 transition-colors ">+62 813-5342-4280</p>
+                  <p className="text-slate-500 dark:text-slate-400 transition-colors ">+62 858-1417-4267</p>
                 </div>
               </div>
 

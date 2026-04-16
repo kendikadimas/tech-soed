@@ -32,7 +32,7 @@ export default function CtaSection() {
           </p>
 
           <a
-            href={`https://wa.me/6281234567890?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
+            href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 px-6 sm:px-10 py-3.5 sm:py-4 bg-white text-blue-900 hover:bg-slate-50 transition-all font-black text-sm sm:text-base rounded-2xl shadow-xl hover:-translate-y-1 active:scale-95 min-h-[44px]"

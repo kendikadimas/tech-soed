@@ -109,7 +109,7 @@ export default function RootLayout({
                 "name": "TechSoe Agency",
                 "image": "https://techsoe.com/projects/logo.png",
                 "url": "https://techsoe.com",
-                "telephone": "+6281353424280",
+                "telephone": "+6285814174267",
                 "email": "hi@techsoe.com",
                 "address": {
                   "@type": "PostalAddress",
