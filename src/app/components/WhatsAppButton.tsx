@@ -2,11 +2,15 @@
 
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import { t } from '../translations';
+import { useLang } from './LangContext';
 
 export default function WhatsAppButton() {
+  const { lang } = useLang();
+
   return (
     <a
-      href="https://wa.me/6285814174267"
+      href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
       target="_blank"
       rel="noreferrer"
       aria-label="Hubungi WhatsApp TechSoe"
