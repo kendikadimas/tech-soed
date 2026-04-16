@@ -1,6 +1,4 @@
 "use client";
-
-                  href="mailto:hi@techsoe.com"
 import { Mail, MapPin, Instagram } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,7 +23,7 @@ export default function Footer() {
                 <Image src="/projects/logo.png" alt="TechSoe Logo" fill className="object-contain object-left" />
               </div>
             </div>
-                    <p className="font-semibold text-sm">hi@techsoe.com</p>
+            <p className="text-slate-400 text-sm font-medium leading-relaxed max-w-xs">
               {t[lang].footerDesc}
             </p>
             <div className="flex items-center gap-4">
@@ -115,7 +113,7 @@ export default function Footer() {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="text-sm font-bold text-slate-400">
-                  techsoe26@gmail.com
+                  hi@techsoe.com
                 </div>
               </li>
             </ul>
