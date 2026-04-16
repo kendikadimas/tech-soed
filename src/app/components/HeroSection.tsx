@@ -252,9 +252,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-start text-left lg:pr-4 order-2 lg:order-1 pt-0 lg:-translate-y-12"
+            className="flex flex-col items-start text-left w-full px-4 lg:px-0 lg:pr-4 order-2 lg:order-1 pt-0 lg:-translate-y-12"
           >
-            <h1 className="text-[1.15rem] sm:text-[2rem] lg:text-[2.7rem] xl:text-[3.375rem] font-black leading-tight text-slate-900 dark:text-white mb-3 lg:mb-8 tracking-tight">
+            <h1 className="text-[1.15rem] sm:text-[2rem] lg:text-[2.7rem] xl:text-[3.375rem] font-black leading-[1.2] text-slate-900 dark:text-white mb-3 lg:mb-8 tracking-tight max-w-[18ch] sm:max-w-none">
               {t[lang].heroTitle.includes('&') ? (
                 <>
                   {t[lang].heroTitle.split('&')[0]}
@@ -271,11 +271,11 @@ export default function HeroSection() {
             </h1>
 
             {/* Description - Unified for both Mobile & Desktop */}
-            <p className="text-sm sm:text-base lg:text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed mb-5 lg:mb-10 font-medium opacity-90 px-4 lg:px-0">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-500 dark:text-slate-400 max-w-[36ch] sm:max-w-xl leading-relaxed mb-5 lg:mb-10 font-medium opacity-90">
               {t[lang].heroDesc}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4 lg:px-0">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <Link
                 href="#harga"
                 className="bg-blue-900 text-white min-h-[44px] px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base shadow-2xl shadow-blue-900/30 dark:shadow-blue-900/20 hover:bg-slate-800 hover:-translate-y-1 transition-all duration-300 text-center flex items-center justify-center"
