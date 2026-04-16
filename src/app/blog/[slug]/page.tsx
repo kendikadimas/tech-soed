@@ -5,7 +5,6 @@ import { blogPosts } from '@/lib/blogData';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
-import { Navbar, Footer } from "../../components";
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -62,21 +61,21 @@ export default async function BlogPostPage({ params }: Props) {
     }
 
     return (
-        <div className="min-h-screen bg-white font-sans text-slate-900 pb-32">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 pb-24 sm:pb-32 transition-colors">
 
             {/* HERO ARTICLE HEADER */}
-            <section className="pt-20 pb-16 px-6 relative bg-slate-50 border-b border-slate-100">
-                <div className="max-w-4xl mx-auto">
-                    <div className="flex items-center gap-3 mb-6">
-                        <span className="bg-blue-100 text-blue-700 font-bold uppercase tracking-wider text-xs px-4 py-1.5 rounded-full inline-flex items-center gap-2">
+            <section className="pt-32 sm:pt-36 pb-10 sm:pb-14 px-5 sm:px-6 relative transition-colors">
+                <div className="animate-blog-header max-w-4xl mx-auto rounded-3xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 sm:p-10 shadow-sm transition-colors">
+                    <div className="flex items-center gap-3 mb-5">
+                        <span className="bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-black uppercase tracking-widest text-[10px] sm:text-xs px-3 sm:px-4 py-1.5 rounded-full inline-flex items-center gap-2 border border-blue-100 dark:border-blue-900/40 transition-colors">
                             <Tag className="w-3 h-3" /> {post.category}
                         </span>
                     </div>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-8 leading-tight tracking-tight">
+                    <h1 className="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white mb-7 sm:mb-8 leading-tight tracking-tight break-words">
                         {post.title}
                     </h1>
 
-                    <div className="flex flex-wrap items-center gap-6 text-sm font-semibold text-slate-500 mb-10">
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">
                         <div className="flex items-center gap-2">
                             <User className="w-4 h-4 text-blue-500" /> Oleh {post.author}
                         </div>
@@ -92,19 +91,21 @@ export default async function BlogPostPage({ params }: Props) {
 
 
             {/* MAIN ARTICLE BODY */}
-            <article className="max-w-3xl mx-auto px-6 mt-16 text-lg text-slate-600 leading-relaxed font-medium pb-20 border-b border-slate-100">
-                <div className="prose prose-lg prose-slate prose-blue max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-img:rounded-2xl prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+            <article className="animate-blog-body max-w-3xl mx-auto px-5 sm:px-6 mt-8 sm:mt-10 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium pb-16 sm:pb-20 border-b border-slate-100 dark:border-slate-800 transition-colors">
+                <div className="prose prose-base sm:prose-lg prose-slate dark:prose-invert prose-blue max-w-none prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-img:rounded-2xl prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-p:leading-relaxed prose-li:leading-relaxed">
                     <ReactMarkdown>{post.content}</ReactMarkdown>
                 </div>
             </article>
 
             {/* CALL TO ACTION BOTTOM */}
-            <div className="max-w-3xl mx-auto px-6 mt-12 text-center bg-blue-50 rounded-3xl p-10 border border-blue-100 shadow-sm">
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">Butuh Website atau Digitalisasi untuk Bisnis Anda?</h3>
-                <p className="text-slate-600 mb-8">Pakar kami siap mendengarkan visi Anda dan menawarkaan konsultasi arsitektur perangkat lunak dengan optimal tanpa biaya tersembunyi.</p>
+            <div className="animate-blog-body max-w-3xl mx-auto px-5 sm:px-6 mt-10 sm:mt-12">
+                <div className="text-center bg-blue-50 dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-blue-100 dark:border-slate-800 shadow-sm transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">Butuh Website atau Digitalisasi untuk Bisnis Anda?</h3>
+                <p className="text-slate-600 dark:text-slate-300 mb-8">Pakar kami siap mendengarkan visi Anda dan menawarkaan konsultasi arsitektur perangkat lunak dengan optimal tanpa biaya tersembunyi.</p>
                 <Link href="/#harga" className="inline-flex bg-blue-600 text-white font-bold py-3.5 px-8 rounded-full shadow-lg hover:bg-blue-700 transition">
                     Tertarik Konsultasi Gratis
                 </Link>
+                </div>
             </div>
         </div>
     );
