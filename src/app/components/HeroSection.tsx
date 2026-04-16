@@ -59,7 +59,7 @@ export default function HeroSection() {
 
   // Mapping icons to stats
   const statIcons = [CheckCircle2, Users, Award, Zap];
-  const statColors = ['text-blue-900', 'text-blue-600', 'text-blue-900', 'text-blue-600'];
+  const statColors = ['text-blue-900 dark:text-white', 'text-blue-600 dark:text-white', 'text-blue-900 dark:text-white', 'text-blue-600 dark:text-white'];
 
   const heroStats = t[lang].heroStats || [];
 
