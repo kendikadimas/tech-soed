@@ -25,19 +25,8 @@ body {
   font-family: var(--font-inter), sans-serif;
 }
 
-/* Unify all Tailwind blue shades in dark mode to one readable accent blue. */
-.dark {
-  --color-blue-50: #2563eb;
-  --color-blue-100: #2563eb;
-  --color-blue-200: #2563eb;
-  --color-blue-300: #2563eb;
-  --color-blue-400: #2563eb;
-  --color-blue-500: #2563eb;
-  --color-blue-600: #2563eb;
-  --color-blue-700: #2563eb;
-  --color-blue-800: #2563eb;
-  --color-blue-900: #2563eb;
-  --color-blue-950: #2563eb;
+html {
+  scroll-behavior: smooth;
 }
 
 @keyframes blogHeaderReveal {
@@ -71,6 +60,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate-blog-header,
   .animate-blog-body {
     animation: none;
