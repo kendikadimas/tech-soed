@@ -21,7 +21,7 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="bg-[#0a1d37] rounded-xl relative min-h-[450px] lg:min-h-[550px] flex items-center shadow-2xl shadow-blue-900/20"
+          className="bg-blue-950 rounded-xl relative min-h-[450px] lg:min-h-[550px] flex items-center shadow-2xl shadow-blue-900/20"
         >
           {/* Subtle Background Elements */}
           <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none rounded-[3.5rem] overflow-hidden" />

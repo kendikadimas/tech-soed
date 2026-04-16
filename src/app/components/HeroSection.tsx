@@ -69,26 +69,26 @@ export default function HeroSection() {
         {/* Background Subtle Wavy Lines Pattern (SVG) */}
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <svg
-            className="w-full h-full"
+            className="w-full h-full text-blue-500"
             viewBox="0 0 1440 800"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M-100 600C200 400 500 800 800 600C1100 400 1400 600 1600 400"
-              stroke="#6366f1"
+              stroke="currentColor"
               strokeWidth="0.5"
               strokeDasharray="10 10"
             />
             <path
               d="M-100 650C200 450 500 850 800 650C1100 450 1400 650 1600 450"
-              stroke="#6366f1"
+              stroke="currentColor"
               strokeWidth="0.5"
               strokeDasharray="10 10"
             />
             <path
               d="M1440 100C1200 300 900 -100 600 100C300 300 0 100 -200 300"
-              stroke="#3b82f6"
+              stroke="currentColor"
               strokeWidth="0.5"
               strokeDasharray="10 10"
             />

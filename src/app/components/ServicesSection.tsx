@@ -91,9 +91,10 @@ export default function ServicesSection() {
                 key={svc.id}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileTap={{ scale: 0.985, y: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05 }}
-                className="group relative rounded-lg p-6 bg-blue-950 border border-slate-200/60 dark:border-slate-700/60 transition-colors hover:border-blue-500/30 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04),0_10px_20px_-2px_rgba(0,0,0,0.02)] hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 flex items-center gap-6 overflow-hidden"
+                className="group relative rounded-lg p-6 bg-blue-950 border border-slate-200/60 dark:border-slate-700/60 transition-colors hover:border-blue-500/30 active:border-blue-400/60 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.04),0_10px_20px_-2px_rgba(0,0,0,0.02)] hover:shadow-xl hover:shadow-blue-500/5 active:shadow-lg active:shadow-blue-500/20 transition-all duration-300 flex items-center gap-6 overflow-hidden"
               >
                 {/* Icon Left */}
                 <div className="shrink-0 text-slate-400 group-hover:text-white transition-colors duration-300">
@@ -113,9 +114,9 @@ export default function ServicesSection() {
                 {/* Arrow Right */}
                 <Link
                   href={svc.target}
-                  className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-slate-200 group-hover:text-blue-900 group-hover:bg-blue-50 transition-all font-bold"
+                  className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-slate-200 group-hover:text-blue-900 group-hover:bg-blue-50 group-active:text-blue-900 group-active:bg-blue-50 transition-all font-bold active:scale-95"
                 >
-                  <ArrowRight className="w-5 h-5 transform transition-transform" />
+                  <ArrowRight className="w-5 h-5 transform transition-transform group-hover:translate-x-0.5 group-active:translate-x-0.5" />
                 </Link>
               </motion.div>
             );
