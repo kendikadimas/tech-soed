@@ -72,14 +72,14 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
   };
 
   return (
-    <section id="harga" className="py-24 px-6 lg:px-12 bg-white rounded-t-[3rem]">
+    <section id="harga" className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors rounded-t-[3rem]">
       <div className="max-w-[1400px] mx-auto flex flex-col items-center">
         {/* Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl lg:text-5xl font-black leading-tight text-slate-900">
+          <h2 className="text-3xl lg:text-5xl font-black leading-tight text-slate-900 dark:text-white transition-colors ">
             {t[lang].priceTitle}
           </h2>
-          <p className="text-base text-slate-600 font-medium">
+          <p className="text-base text-slate-600 dark:text-slate-400 transition-colors font-medium">
             {t[lang].priceDesc}
           </p>
         </div>
@@ -93,7 +93,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                 const el = document.getElementById('pricing-filter-scroll');
                 el?.scrollBy({ left: -150, behavior: 'smooth' });
               }}
-              className="p-3 text-blue-900 hover:text-blue-600 transition-colors"
+              className="p-3 text-blue-900 hover:text-blue-600 transition-colors "
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
@@ -104,7 +104,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                 const el = document.getElementById('pricing-filter-scroll');
                 el?.scrollBy({ left: 150, behavior: 'smooth' });
               }}
-              className="p-3 text-slate-400 hover:text-blue-900 transition-colors"
+              className="p-3 text-slate-400 hover:text-blue-900 transition-colors "
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -112,7 +112,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
 
           <div 
             id="pricing-filter-scroll"
-            className="flex flex-nowrap lg:flex-wrap items-center lg:justify-center gap-2 w-full p-1.5 bg-slate-50 rounded-2xl border border-slate-100 overflow-x-auto lg:overflow-x-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x relative z-50"
+            className="flex flex-nowrap lg:flex-wrap items-center lg:justify-center gap-2 w-full p-1.5 bg-slate-50 dark:bg-slate-950 transition-colors rounded-2xl border border-slate-100 dark:border-slate-800 transition-colors overflow-x-auto lg:overflow-x-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x relative z-50"
           >
             {pricingServiceGroups.map((group: any) => (
               <div key={group.id} className="relative grow md:flex-initial snap-start" ref={group.id === 'web' ? dropdownRef : null}>
@@ -132,7 +132,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                   }}
                   className={`w-full px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap ${activeService === group.id
                     ? 'bg-blue-900 text-white shadow-lg shadow-blue-900/20'
-                    : 'text-slate-500 hover:bg-white hover:shadow-sm'
+                    : 'text-slate-500 dark:text-slate-400 transition-colors hover:bg-slate-50 dark:bg-slate-950 transition-colors hover:shadow-sm'
                     }`}
                 >
                   {group.id === 'web' && activeService === 'web' ? activeTab : group.name}
@@ -145,7 +145,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-full left-0 mt-2 w-56 bg-white border border-slate-100 shadow-2xl rounded-2xl p-2 z-50"
+                    className="absolute top-full left-0 mt-2 w-56 bg-slate-50 dark:bg-slate-950 transition-colors border border-slate-100 dark:border-slate-800 transition-colors shadow-2xl rounded-2xl p-2 z-50"
                   >
                     {group.tabs.map((tab: string) => (
                       <button
@@ -157,7 +157,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                         }}
                         className={`w-full text-left px-4 py-2 rounded-xl text-sm transition-all ${activeTab === tab
                           ? 'bg-indigo-50 text-indigo-700 font-bold'
-                          : 'text-slate-600 hover:bg-slate-50'
+                          : 'text-slate-600 dark:text-slate-400 transition-colors hover:bg-slate-50 dark:bg-slate-950 transition-colors '
                           }`}
                       >
                         {tab}
@@ -210,21 +210,21 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className={`relative min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 p-6 lg:p-7 rounded-4xl border transition-all duration-300 snap-center flex flex-col ${pkg.isPopular
                   ? 'bg-blue-900 text-white border-indigo-400 shadow-2xl shadow-blue-900/30 scale-[1.03] z-10 py-10'
-                  : 'bg-white text-slate-800 border-slate-100 hover:border-indigo-100 shadow-lg shadow-slate-200/40'
+                  : 'bg-slate-50 dark:bg-slate-950 transition-colors text-slate-800 dark:text-slate-200 transition-colors border-slate-100 dark:border-slate-800 transition-colors hover:border-indigo-100 shadow-lg shadow-slate-200/40'
                   }`}
               >
                 {pkg.isPopular && (
-                  <div className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-white text-blue-900 text-[10px] font-black px-4 py-1 rounded-full border border-indigo-50 uppercase tracking-widest">
+                  <div className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-slate-50 dark:bg-slate-900 transition-colors text-blue-900 dark:text-blue-200 text-[10px] font-black px-4 py-1 rounded-full border border-indigo-50 dark:border-slate-700 uppercase tracking-widest">
                     {t[lang].pricePopular}
                   </div>
                 )}
 
                 <div className="text-left mb-6">
-                  <div className={`text-lg lg:text-xl font-black mb-1 ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</div>
+                  <div className={`text-lg lg:text-xl font-black mb-1 ${pkg.isPopular ? 'text-white' : 'text-slate-900 dark:text-white transition-colors '}`}>{pkg.name}</div>
                   <div className="mb-3 flex items-baseline gap-1">
-                    <span className={`text-2xl lg:text-3xl font-black ${pkg.isPopular ? 'text-white' : 'text-slate-900'}`}>{pkg.price}</span>
+                    <span className={`text-2xl lg:text-3xl font-black ${pkg.isPopular ? 'text-white' : 'text-slate-900 dark:text-white transition-colors '}`}>{pkg.price}</span>
                   </div>
-                  <p className={`text-[12px] lg:text-xs font-medium ${pkg.isPopular ? 'text-indigo-100' : 'text-slate-500'} leading-relaxed`}>
+                  <p className={`text-[12px] lg:text-xs font-medium ${pkg.isPopular ? 'text-indigo-100' : 'text-slate-500 dark:text-slate-400 transition-colors '} leading-relaxed`}>
                     {pkg.description}
                   </p>
                 </div>
@@ -241,7 +241,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                         ) : (
                           <X className={`w-4 h-4 shrink-0 ${pkg.isPopular ? 'text-indigo-300' : 'text-slate-300'}`} />
                         )}
-                        <span className={`${pkg.isPopular ? 'text-white/90' : 'text-slate-600'} font-medium`}>{text}</span>
+                        <span className={`${pkg.isPopular ? 'text-white/90' : 'text-slate-600 dark:text-slate-400 transition-colors '} font-medium`}>{text}</span>
                       </li>
                     );
                   })}
@@ -250,8 +250,8 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                 <button
                   onClick={() => handleOrderClick(pkg)}
                   className={`w-full min-h-[44px] py-3.5 font-bold rounded-2xl text-sm transition-all flex items-center justify-center gap-2 active:scale-95 ${pkg.isPopular
-                    ? 'bg-blue-900 text-white hover:bg-slate-900 shadow-xl shadow-blue-900/20'
-                    : 'bg-white text-blue-900 border-2 border-indigo-100 hover:bg-indigo-50 hover:border-blue-900'
+                    ? 'bg-white text-blue-900 hover:bg-slate-50 shadow-xl shadow-black/10'
+                    : 'bg-slate-50 dark:bg-slate-800 transition-colors text-blue-900 dark:text-blue-100 border-2 border-indigo-100 dark:border-slate-700 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:border-blue-900 dark:hover:border-slate-600'
                     }`}>
                   {t[lang].priceOrderText}
                 </button>
@@ -267,12 +267,12 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
           viewport={{ once: true }}
           className="mt-12 w-full max-w-3xl"
         >
-          <div className="bg-slate-50 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-100">
+          <div className="bg-slate-50 dark:bg-slate-950 transition-colors rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-100 dark:border-slate-800 transition-colors ">
             <div className="text-center md:text-left">
-              <h4 className="text-lg lg:text-xl font-bold text-slate-900 mb-1">
+              <h4 className="text-lg lg:text-xl font-bold text-slate-900 dark:text-white transition-colors mb-1">
                 {t[lang].priceConsultText}
               </h4>
-              <p className="text-slate-500 text-sm font-medium">
+              <p className="text-slate-500 dark:text-slate-400 transition-colors text-sm font-medium">
                 {t[lang].priceConsultSubtitle}
               </p>
             </div>

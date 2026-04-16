@@ -1,17 +1,19 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import ProjectModal from './ProjectModal';
 
 export default function PortfolioSection() {
   const { lang } = useLang();
   const [portfolioMainFilter, setPortfolioMainFilter] = useState('All');
   const [websiteType, setWebsiteType] = useState('All');
   const [isWebDropdownOpen, setIsWebDropdownOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Carousel Ref
@@ -87,7 +89,7 @@ export default function PortfolioSection() {
   };
 
   return (
-    <section id="portfolio" className="py-24 px-6 lg:px-12 bg-white flex flex-col items-center">
+    <section id="portfolio" className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors flex flex-col items-center">
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="text-left max-w-4xl mb-12 relative">
@@ -95,11 +97,11 @@ export default function PortfolioSection() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-3xl lg:text-5xl font-black text-slate-900 leading-tight mb-4"
+            className="text-3xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors leading-tight mb-4"
           >
             {t[lang].portTitle}
           </motion.h2>
-          <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-2xl">
+          <p className="text-lg text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl">
             {t[lang].portDesc}
           </p>
         </div>
@@ -110,7 +112,7 @@ export default function PortfolioSection() {
           <div className="absolute top-1/2 -left-6 -translate-y-1/2 z-60 lg:hidden opacity-0 group-hover/filter:opacity-100 transition-opacity">
             <button 
               onClick={() => scrollFilter('left')}
-              className="p-3 text-slate-400 hover:text-blue-900 transition-colors"
+              className="p-3 text-slate-400 hover:text-blue-900 transition-colors "
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
@@ -118,7 +120,7 @@ export default function PortfolioSection() {
           <div className="absolute top-1/2 -right-6 -translate-y-1/2 z-60 lg:hidden opacity-0 group-hover/filter:opacity-100 transition-opacity">
             <button 
               onClick={() => scrollFilter('right')}
-              className="p-3 text-slate-400 hover:text-blue-900 transition-colors"
+              className="p-3 text-slate-400 hover:text-blue-900 transition-colors "
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -144,7 +146,7 @@ export default function PortfolioSection() {
                   }}
                   className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 whitespace-nowrap ${portfolioMainFilter === cat.id
                     ? 'bg-blue-900 text-white'
-                    : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
+                    : 'bg-slate-50 dark:bg-slate-950 transition-colors text-slate-500 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors '
                     }`}
                 >
                   {cat.id === 'Web Development' && portfolioMainFilter === 'Web Development' && websiteType !== 'All'
@@ -159,7 +161,7 @@ export default function PortfolioSection() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="hidden lg:block absolute top-full left-0 mt-3 w-64 bg-white border border-slate-100 rounded-2xl p-2 z-50 overflow-hidden"
+                    className="hidden lg:block absolute top-full left-0 mt-3 w-64 bg-slate-50 dark:bg-slate-950 transition-colors border border-slate-100 dark:border-slate-800 transition-colors rounded-2xl p-2 z-50 overflow-hidden"
                   >
                     {webSubCategories.map((sub) => (
                       <button
@@ -170,8 +172,8 @@ export default function PortfolioSection() {
                           setIsWebDropdownOpen(false);
                         }}
                         className={`w-full text-left px-4 py-2.5 rounded-xl text-sm transition-all ${websiteType === sub.id
-                          ? 'bg-indigo-50 text-indigo-700 font-bold'
-                          : 'text-slate-600 hover:bg-slate-50'
+                          ? 'bg-indigo-50 dark:bg-blue-900/30 text-indigo-700 dark:text-indigo-200 font-bold'
+                          : 'text-slate-600 dark:text-slate-400 transition-colors hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors '
                           }`}
                       >
                         {sub.name}
@@ -190,7 +192,7 @@ export default function PortfolioSection() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="flex lg:hidden absolute top-full left-0 right-0 flex-wrap gap-2 mt-2 p-4 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl z-60 shadow-2xl"
+                className="flex lg:hidden absolute top-full left-0 right-0 flex-wrap gap-2 mt-2 p-4 bg-white/95 dark:bg-slate-950/95 transition-colors backdrop-blur-md border border-slate-100 dark:border-slate-800 transition-colors rounded-2xl z-60 shadow-2xl"
               >
                 {webSubCategories.map((sub) => (
                   <button
@@ -201,7 +203,7 @@ export default function PortfolioSection() {
                     }}
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${websiteType === sub.id
                       ? 'bg-blue-900 text-white'
-                      : 'bg-slate-50 text-slate-500 border border-slate-100'
+                      : 'bg-white dark:bg-slate-950 transition-colors text-slate-500 dark:text-slate-400 transition-colors border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors '
                       }`}
                   >
                     {sub.name}
@@ -217,13 +219,13 @@ export default function PortfolioSection() {
           {/* Navigation Buttons (Desktop & Mobile) */}
           <button
             onClick={() => scrollProjects('left')}
-            className="absolute -left-4 lg:-left-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 backdrop-blur-md border border-slate-100 text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
+            className="absolute -left-4 lg:-left-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 dark:bg-slate-950/90 transition-colors backdrop-blur-md border border-slate-100 dark:border-slate-800 transition-colors text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
           >
             <ChevronLeft className="w-5 h-5 lg:w-8 lg:h-8" />
           </button>
           <button
             onClick={() => scrollProjects('right')}
-            className="absolute -right-4 lg:-right-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 backdrop-blur-md border border-slate-100 text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
+            className="absolute -right-4 lg:-right-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 dark:bg-slate-950/90 transition-colors backdrop-blur-md border border-slate-100 dark:border-slate-800 transition-colors text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
           >
             <ChevronRight className="w-5 h-5 lg:w-8 lg:h-8" />
           </button>
@@ -243,10 +245,11 @@ export default function PortfolioSection() {
                   viewport={{ once: true }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group cursor-pointer flex flex-col flex-none w-[85%] md:w-[45%] lg:w-[calc(33.333%-1.5rem)] bg-white rounded-xl overflow-hidden border border-slate-100 hover:border-blue-100 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 snap-center"
+                  className="group cursor-pointer flex flex-col flex-none w-[85%] md:w-[45%] lg:w-[calc(33.333%-1.5rem)] bg-slate-50 dark:bg-slate-950 transition-colors rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-colors hover:border-blue-100 dark:hover:border-blue-800 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 snap-center"
+                  onClick={() => setSelectedProject(project)}
                 >
                   {/* Image Container */}
-                  <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
+                  <div className="relative w-full aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800 transition-colors ">
                     <Image
                       src={project.image}
                       alt={`${project.title} - Jasa Pembuatan Website Purwokerto`}
@@ -255,7 +258,7 @@ export default function PortfolioSection() {
                       className="group-hover:scale-105 transition duration-700 ease-in-out object-contain p-2"
                     />
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="px-4 py-1.5 bg-white/95 backdrop-blur-md text-slate-900 text-[10px] font-black uppercase tracking-wider rounded-xl shadow-sm border border-white">
+                      <span className="px-4 py-1.5 bg-white/95 dark:bg-slate-950/95 transition-colors backdrop-blur-md text-slate-900 dark:text-white transition-colors text-[10px] font-black uppercase tracking-wider rounded-xl shadow-sm border border-white">
                         {project.category}
                       </span>
                     </div>
@@ -263,12 +266,18 @@ export default function PortfolioSection() {
 
                   {/* Content Container */}
                   <div className="p-6 lg:p-8 flex flex-col flex-1">
-                    <h3 className="text-xl lg:text-2xl font-black text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
+                    <h3 className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white transition-colors mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ">
                       {project.title}
                     </h3>
-                    <p className="text-slate-500 text-sm lg:text-base font-medium leading-relaxed line-clamp-3">
+                    <p className="text-slate-500 dark:text-slate-400 transition-colors text-sm lg:text-base font-medium leading-relaxed line-clamp-3 mb-4">
                       {project.desc}
                     </p>
+
+                    <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800 transition-colors flex items-center justify-between">
+                       <span className="text-blue-600 dark:text-blue-400 font-bold text-sm lg:text-base flex items-center gap-2 group-hover:gap-3 transition-all">
+                          {lang === 'id' ? 'Lihat Detail' : 'View Details'} <ArrowRight className="w-4 h-4" />
+                       </span>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -277,7 +286,7 @@ export default function PortfolioSection() {
 
           {/* Mobile indicator line */}
           <div className="flex lg:hidden justify-center gap-2 mt-2">
-            <div className="w-12 h-1 bg-slate-100 rounded-xl overflow-hidden">
+            <div className="w-12 h-1 bg-slate-100 dark:bg-slate-800 transition-colors rounded-xl overflow-hidden">
                <motion.div 
                 className="h-full bg-blue-900/20"
                 initial={{ width: "0%" }}
@@ -288,6 +297,12 @@ export default function PortfolioSection() {
           </div>
         </div>
       </div>
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+        lang={lang}
+      />
     </section>
   );
 }

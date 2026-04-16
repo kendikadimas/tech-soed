@@ -45,11 +45,11 @@ export default function OrderModal({ isOpen, onClose, selectedPackage }: OrderMo
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="bg-white rounded-3xl w-full max-w-md shadow-2xl relative z-10 overflow-hidden"
+            className="bg-white dark:bg-slate-950 transition-colors dark:bg-slate-950 transition-colors rounded-3xl w-full max-w-md shadow-2xl relative z-10 overflow-hidden"
           >
-            <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-              <h3 className="text-xl font-bold text-slate-900">{t[lang].orderFormTitle}</h3>
-              <button onClick={onClose} className="text-slate-400 hover:text-slate-700 bg-white p-2 rounded-full shadow-sm">
+            <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800 transition-colors flex items-center justify-between bg-slate-50 dark:bg-slate-950 transition-colors dark:bg-slate-950 transition-colors ">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white transition-colors dark:text-white transition-colors ">{t[lang].orderFormTitle}</h3>
+              <button onClick={onClose} className="text-slate-400 hover:text-slate-700 dark:text-slate-300 transition-colors dark:text-slate-300 transition-colors bg-white dark:bg-slate-950 transition-colors dark:bg-slate-950 transition-colors p-2 rounded-full shadow-sm">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -62,30 +62,30 @@ export default function OrderModal({ isOpen, onClose, selectedPackage }: OrderMo
                 </div>
                 <div>
                   <p className="text-xs font-bold text-blue-600 uppercase tracking-wider">{t[lang].orderFormPackage}</p>
-                  <p className="font-bold text-slate-900">{selectedPackage.category} - {selectedPackage.name}</p>
-                  <p className="text-sm font-medium text-slate-600">{selectedPackage.price}</p>
+                  <p className="font-bold text-slate-900 dark:text-white transition-colors dark:text-white transition-colors ">{selectedPackage.category} - {selectedPackage.name}</p>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400 transition-colors dark:text-slate-400 transition-colors ">{selectedPackage.price}</p>
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-1.5">{t[lang].orderFormName} *</label>
-                <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} type="text" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Budi Santoso" />
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors dark:text-slate-300 transition-colors mb-1.5">{t[lang].orderFormName} *</label>
+                <input required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} type="text" className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors dark:border-slate-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Budi Santoso" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-1.5">{t[lang].orderFormPhone} *</label>
-                  <input required value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} type="tel" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="0812..." />
+                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors dark:text-slate-300 transition-colors mb-1.5">{t[lang].orderFormPhone} *</label>
+                  <input required value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} type="tel" className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors dark:border-slate-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="0812..." />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-1.5">{t[lang].orderFormEmail}</label>
-                  <input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} type="email" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="budi@email.com" />
+                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors dark:text-slate-300 transition-colors mb-1.5">{t[lang].orderFormEmail}</label>
+                  <input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} type="email" className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors dark:border-slate-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="budi@email.com" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold text-slate-700 mb-1">{t[lang].orderFormProject} *</label>
-                <textarea required value={form.projectDesc} onChange={e => setForm({ ...form, projectDesc: e.target.value })} rows={2} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition resize-none text-sm" placeholder="..." />
+                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 transition-colors dark:text-slate-300 transition-colors mb-1">{t[lang].orderFormProject} *</label>
+                <textarea required value={form.projectDesc} onChange={e => setForm({ ...form, projectDesc: e.target.value })} rows={2} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 transition-colors dark:border-slate-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition resize-none text-sm" placeholder="..." />
               </div>
               <div className="pt-2 flex gap-3">
-                <button type="button" onClick={onClose} className="px-6 py-3.5 rounded-xl font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition min-h-[44px]">
+                <button type="button" onClick={onClose} className="px-6 py-3.5 rounded-xl font-bold text-slate-600 dark:text-slate-400 transition-colors dark:text-slate-400 transition-colors bg-slate-100 dark:bg-slate-800 transition-colors dark:bg-slate-800 transition-colors hover:bg-slate-200 transition min-h-[44px]">
                   {t[lang].orderFormCancel}
                 </button>
                 <button type="submit" className="flex-1 px-6 py-3.5 rounded-xl font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] shadow-lg shadow-[#25D366]/30 transition flex items-center justify-center gap-2 min-h-[44px]">

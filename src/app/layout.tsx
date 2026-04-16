@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { LangProvider, Navbar, Footer, WhatsAppButton } from "./components";
+import { LangProvider, Navbar, Footer, WhatsAppButton, ThemeProvider } from "./components";
 
 export default function RootLayout({
   children,
@@ -83,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -196,18 +196,20 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} antialiased`}
+        className={`${inter.variable} antialiased dark:bg-slate-950 transition-colors`}
       >
-        <LangProvider>
-          <Navbar />
-          <main className="bg-white">
-            {children}
-          </main>
-          <div className="bg-white">
-            <Footer />
-          </div>
-          <WhatsAppButton />
-        </LangProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <LangProvider>
+            <Navbar />
+            <main className="bg-white dark:bg-slate-950 transition-colors">
+              {children}
+            </main>
+            <div className="bg-slate-50 dark:bg-slate-950 transition-colors">
+              <Footer />
+            </div>
+            <WhatsAppButton />
+          </LangProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

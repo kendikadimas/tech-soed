@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://techsoe.com
+
+# Sitemaps
+Sitemap: https://techsoe.com/sitemap.xml
