@@ -3,7 +3,6 @@
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { t } from '../translations';
 import { useLang } from './LangContext';
 
@@ -63,13 +62,8 @@ export default function TestimonialsSection() {
 
               {/* Client Info */}
               <div className="flex items-center gap-4 border-t border-slate-200/60 pt-6">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-blue-100 shrink-0 border-2 border-white shadow-sm">
-                  <Image
-                    src={`https://i.pravatar.cc/48?u=${testi.name}`}
-                    alt={testi.name}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center shrink-0 border-2 border-white shadow-sm text-white font-black text-lg">
+                  {testi.name.charAt(0)}
                 </div>
                 <div>
                   <h3 className="text-sm lg:text-base font-black text-slate-900 leading-tight">

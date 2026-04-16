@@ -8,6 +8,7 @@ export { default as PortfolioSection } from './PortfolioSection';
 export { default as PricingSection } from './PricingSection';
 export { default as TestimonialsSection } from './TestimonialsSection';
 export { default as FaqSection } from './FaqSection';
+export { default as LatestArticles } from './LatestArticles';
 export { default as CtaSection } from './CtaSection';
 export { default as Footer } from './Footer';
 export { default as WhatsAppButton } from './WhatsAppButton';

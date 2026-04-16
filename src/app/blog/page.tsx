@@ -33,13 +33,10 @@ export default function BlogIndexPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {blogPosts.map((post) => (
                         <Link key={post.id} href={`/blog/${post.slug}`} className="group bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">
-                            <div className="relative h-64 overflow-hidden bg-slate-200">
-                                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out" />
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-blue-600 shadow-sm">
+                            <div className="p-8 flex flex-col flex-1">
+                                <div className="mb-4 bg-slate-50 w-fit px-3 py-1 rounded-full text-xs font-bold text-blue-600 border border-slate-100">
                                     {post.category}
                                 </div>
-                            </div>
-                            <div className="p-8 flex flex-col flex-1">
                                 <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors">
                                     {post.title}
                                 </h3>

@@ -61,10 +61,10 @@ export default function AboutSection() {
               <div className="absolute bottom-[-40px] right-0 w-full h-[120%]">
                 <div className="relative w-full h-full transform hover:scale-105 transition-transform duration-700">
                   <Image 
-                    src="/projects/logo.png" 
-                    alt="Logo TechSoe" 
+                    src="/projects/hero.png" 
+                    alt="Layanan Jasa Pembuatan Website Purwokerto - TechSoe" 
                     fill 
-                    className="object-contain object-bottom drop-shadow-2xl"
+                    className="object-cover"
                     priority
                   />
                 </div>

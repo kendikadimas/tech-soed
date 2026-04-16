@@ -208,8 +208,8 @@ export default function HeroSection() {
                 </motion.div>
               </div>
 
-              {/* Visual Decorative Glows */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-indigo-200/10 rounded-full blur-[100px] lg:blur-[140px] z-0 animate-pulse" />
+              {/* Solid Background Blob */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-blue-50/90 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] z-0" />
             </div>
           </motion.div>
 
@@ -220,9 +220,20 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-4 order-2 lg:order-1"
           >
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight text-slate-900 mb-4 lg:mb-8 tracking-tight">
-              {t[lang].heroTitle.split('&')[0]}
-              <span className="text-blue-900 lg:block"> {t[lang].heroTitle.split('&')[1]}</span>
+            <h1 className="text-[1.35rem] sm:text-[2rem] lg:text-[2.7rem] xl:text-[3.375rem] font-black leading-tight text-slate-900 mb-4 lg:mb-8 tracking-tight">
+              {t[lang].heroTitle.includes('&') ? (
+                <>
+                  {t[lang].heroTitle.split('&')[0]}
+                  <span className="text-blue-900"> {t[lang].heroTitle.split('&')[1]}</span>
+                </>
+              ) : t[lang].heroTitle.includes('dan') ? (
+                <>
+                  {t[lang].heroTitle.split('dan')[0]}
+                  <span className="text-blue-900"> dan {t[lang].heroTitle.split('dan')[1]}</span>
+                </>
+              ) : (
+                t[lang].heroTitle
+              )}
             </h1>
 
             {/* Description - Unified for both Mobile & Desktop */}

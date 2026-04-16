@@ -6,13 +6,13 @@ export const t = {
         navSignIn: "Cek Portofolio",
         navWhatsApp: "Konsultasi WhatsApp",
         navContact: "Hubungi Kami",
-        heroTitle: "Partner Digital Professional untuk Bisnis Anda",
-        heroDesc: "Spesialis UMKM & Bisnis Indonesia. Jasa pembuatan website & aplikasi profesional dengan pengerjaan 7–14 hari. Garansi revisi & dukungan teknis penuh.",
+        heroTitle: "Jasa Pembuatan Website dan Solusi Digital Purwokerto",
+        heroDesc: "Solusi Software House & Partner Digital terbaik di Purwokerto. Kami membantu digitalisasi bisnis Anda melalui jasa pembuatan website, aplikasi mobile, dan sistem informasi dengan kualitas premium & SEO-friendly.",
         heroBtnStart: "Konsultasi Gratis",
         heroBtnPort: "Lihat Portofolio",
         aboutTag: "Tentang TechSoe",
-        aboutTitle: "Bersama membangun masa depan digital bisnis Anda",
-        aboutDesc: "TechSoe adalah partner transformasi yang menyediakan solusi serta layanan digital untuk mendukung bisnis capai hasil terbaik dengan skala yang lebih besar.",
+        aboutTitle: "Software House Purwokerto & Partner Solusi Digital Anda",
+        aboutDesc: "TechSoe hadir sebagai partner transformasi yang menyediakan jasa pembuatan website Purwokerto, aplikasi mobile, dan solusi digital terintegrasi untuk mendukung bisnis Anda mencapai hasil terbaik.",
         aboutLink: "Sekilas tentang TechSoe",
         aboutSvc1Title: "Web Development",
         aboutSvc2Title: "UI/UX Design",
@@ -30,15 +30,15 @@ export const t = {
         svcTitle: "Solusi Digital untuk Bisnis Anda",
         svcText: "Kami menyediakan berbagai layanan pengembangan teknologi dan branding digital yang dirancang khusus untuk mempercepat pertumbuhan bisnis Anda di era digital.",
         svcWebTitle: "Web Development",
-        svcWebDesc: "Membangun website responsif, cepat, dan berstandar industri dengan teknologi terbaru seperti Next.js dan Laravel.",
+        svcWebDesc: "Jasa pembuatan website Purwokerto responsif, cepat, dan SEO-friendly menggunakan Next.js.",
         svcMobileTitle: "Mobile Apps",
-        svcMobileDesc: "Aplikasi Android & iOS kustom dengan performa tinggi untuk menjangkau pengguna di genggaman mereka.",
+        svcMobileDesc: "Jasa pembuatan aplikasi mobile Android & iOS kustom dengan performa tinggi.",
         svcDesignTitle: "UI/UX Design",
-        svcDesignDesc: "Riset pengguna dan perancangan antarmuka yang intuitif untuk memastikan konversi dan kenyamanan pengguna.",
+        svcDesignDesc: "Jasa desain UI/UX profesional untuk meningkatkan konversi dan pengalaman pengguna.",
         svcSystemTitle: "Sistem Informasi",
-        svcSystemDesc: "Optimalkan operasional dengan sistem internal khusus seperti ERP, CRM, dan Dashboard Manajemen data.",
+        svcSystemDesc: "Pengembangan sistem informasi kustom, ERP, dan CRM untuk efisiensi bisnis Anda.",
         svcSMMTitle: "Social Media Management",
-        svcSMMDesc: "Manajemen konten dan strategi visual di media sosial untuk membangun kehadiran brand yang kuat.",
+        svcSMMDesc: "Jasa social media management dan digital branding untuk memperkuat eksistensi bisnis.",
         portTag: "Karya Kami",
         portTitle: "Proyek Unggulan",
         portDesc: "Jelajahi berbagai studi kasus proyek digital tempat ide-ide brilian Anda dan rekayasa cerdas kami bertemu.",
@@ -58,7 +58,7 @@ export const t = {
         faqData: [
             {
                 q: 'Apakah saya akan mendapatkan akses full ke Source Code aplikasi?',
-                a: 'Ya, TechSoe memberikan kepemilikan penuh atas source code kepada klien setelah pelunasan. Kami tidak menerapkan sistem sewa (locked code), sehingga Anda bebas untuk mengembangkan aplikasi di masa depan baik dengan tim kami maupun internal Anda.'
+                a: 'Ya, TechSoe (hubungi hi@techsoe.com) memberikan kepemilikan penuh atas source code kepada klien setelah pelunasan. Kami tidak menerapkan sistem sewa (locked code), sehingga Anda bebas untuk mengembangkan aplikasi di masa depan baik dengan tim kami maupun internal Anda.'
             },
             {
                 q: 'Teknologi apa yang TechSoe gunakan untuk pengembangan website?',
@@ -415,8 +415,8 @@ export const t = {
         navSignIn: "Portfolios",
         navWhatsApp: "WhatsApp Us",
         navContact: "Contact Us",
-        heroTitle: "Professional Digital Partner for Your Business",
-        heroDesc: "Professional software house in Purwokerto specializing in website & mobile app development to scale your business efficiency.",
+        heroTitle: "Professional Web Development in Purwokerto & Digital Partner",
+        heroDesc: "The best software house solution in Purwokerto for SMEs & Businesses. Professional website creation services, mobile apps, and info systems with fast delivery & SEO-friendly.",
         heroBtnStart: "Get Free Consultation",
         heroBtnPort: "View Our Portfolio",
         aboutTag: "About TechSoe",
@@ -467,7 +467,7 @@ export const t = {
         faqData: [
             {
                 q: 'Will I get full access to the source code?',
-                a: 'Yes, TechSoe provides full ownership of the source code to the client after final payment. We do not use a "locked code" or rental system, giving you the freedom to develop the app in the future with our team or your internal developers.'
+                a: 'Yes, TechSoe (email: hi@techsoe.com) provides full ownership of the source code to the client after final payment. We do not use a "locked code" or rental system, giving you the freedom to develop the app in the future with our team or your internal developers.'
             },
             {
                 q: 'What technologies does TechSoe use for development?',

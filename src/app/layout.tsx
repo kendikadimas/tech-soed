@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "TechSoe | Jasa Website & Aplikasi Professional Purwokerto",
-  description: "Software House Purwokerto melayani jasa pembuatan website, aplikasi mobile Android/iOS, sistem informasi, & UI/UX Design berkualitas.",
+  title: "Jasa Pembuatan Website Purwokerto & Partner Digital Professional | TechSoe",
+  description: "Solusi Software House & Partner Digital terbaik di Purwokerto. Kami membantu digitalisasi bisnis Anda melalui jasa pembuatan website, aplikasi mobile, dan sistem informasi dengan kualitas premium & SEO-friendly.",
   keywords: [
     "jasa pembuatan website",
     "jasa pembuatan web",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         url: "/projects/hero.png",
         width: 1200,
         height: 630,
-        alt: "TechSoe Digital Solution",
+        alt: "Jasa Pembuatan Website Purwokerto - TechSoe Software House",
       },
     ],
     locale: "id_ID",
@@ -110,7 +110,7 @@ export default function RootLayout({
                 "image": "https://techsoe.com/projects/logo.png",
                 "url": "https://techsoe.com",
                 "telephone": "+6281353424280",
-                "email": "techsoe26@gmail.com",
+                "email": "hi@techsoe.com",
                 "address": {
                   "@type": "PostalAddress",
                   "streetAddress": "Purwokerto",

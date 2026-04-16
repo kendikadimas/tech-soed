@@ -58,7 +58,7 @@ export default function Footer() {
             <ul className="space-y-4">
               {['Layanan', 'Portfolio', 'Tentang Kami', 'Harga'].map((item, i) => (
                 <li key={i}>
-                  <Link href={`#${item.toLowerCase().replace(' ', '')}`} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
+                  <Link href={`#${item === 'Tentang Kami' ? 'tentang' : item.toLowerCase()}`} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-800 group-hover:bg-indigo-500 transition-colors" />
                     <span className="text-sm font-bold">{item}</span>
                   </Link>
@@ -128,8 +128,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} TechSoe Digital Agency. All rights reserved.
           </p>
           <div className="flex items-center gap-8">
-            <Link href="#" className="text-xs text-slate-500 hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="text-xs text-slate-500 hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/kebijakan-privasi" className="text-xs text-slate-500 hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/syarat-dan-ketentuan" className="text-xs text-slate-500 hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

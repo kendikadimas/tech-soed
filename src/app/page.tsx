@@ -9,6 +9,7 @@ import {
   PricingSection,
   TestimonialsSection,
   FaqSection,
+  LatestArticles,
   CtaSection,
   ScrollToTop,
   OrderModal,
@@ -53,6 +54,7 @@ function LandingPageContent() {
       <PortfolioSection />
       <PricingSection onOrderClick={handleOrderClick} />
       <TestimonialsSection />
+      <LatestArticles />
       <FaqSection />
       <CtaSection />
       <ContactSection />

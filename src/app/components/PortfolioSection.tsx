@@ -249,7 +249,7 @@ export default function PortfolioSection() {
                   <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
                     <Image
                       src={project.image}
-                      alt={`Proyek ${project.title} - ${project.category}`}
+                      alt={`${project.title} - Jasa Pembuatan Website Purwokerto`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="group-hover:scale-105 transition duration-700 ease-in-out object-contain p-2"

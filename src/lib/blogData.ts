@@ -33,7 +33,7 @@ Oleh karenanya, investasi pada website adalah pondasi terkuat yang bisa Anda amb
         `,
         date: "05 Maret 2026",
         author: "TechSoe Team",
-        image: "/projects/kalisabuk.png",
+        image: "/projects/blog_1.png",
         readTime: "4 Menit Baca",
         category: "Bisnis & Teknologi"
     },
@@ -67,7 +67,7 @@ Jika Anda membutuhkan konsultan dan Software House end-to-end yang solid di wila
         `,
         date: "28 Februari 2026",
         author: "TechSoe Engineering",
-        image: "/projects/larasena.png",
+        image: "/projects/blog_2.png",
         readTime: "5 Menit Baca",
         category: "Panduan Edukasi"
     },
@@ -93,8 +93,36 @@ Dalam layanan perancangan di TechSoe, setiap prototipe antarmuka desain diriset 
         `,
         date: "14 Februari 2026",
         author: "TechSoe Design Team",
-        image: "/projects/jemari.png",
+        image: "/projects/blog_3.png",
         readTime: "3 Menit Baca",
         category: "Desain & Kreatif"
+    },
+    {
+        id: "4",
+        slug: "techsoe-partner-digital-professional-purwokerto",
+        title: "TechSoe: Partner Digital Professional untuk Solusi IT Terintegrasi di Purwokerto",
+        excerpt: "Mengapa memilih Partner Digital Professional sangat krusial bagi kesuksesan jangka panjang bisnis Anda. TechSoe hadir sebagai solusi satu pintu untuk jasa pembuatan website dan aplikasi di Purwokerto.",
+        content: `
+Dunia IT terus berkembang dengan kecepatan yang luar biasa. Membangun sebuah aset digital bukan lagi sekadar memiliki tampilan online, melainkan mencari **Partner Digital Professional** yang tepat untuk menemani perjalanan bisnis Anda. Di wilayah Banyumas, TechSoe telah memposisikan diri sebagai pemimpin dalam **jasa pembuatan website Purwokerto** yang tidak hanya fokus pada estetika, namun juga pada performa dan skalabilitas.
+
+**Apa Itu Partner Digital Professional?**
+Berbeda dengan freelancer biasa, partner digital profesional adalah mitra strategis yang memahami alur bisnis Anda. Kami tidak hanya menulis kode, tapi memberikan konsultasi mengenai:
+1. **Efisiensi Alur Kerja:** Bagaimana website atau aplikasi bisa memotong waktu administratif tim Anda.
+2. **Optimasi Konversi:** Bagaimana struktur navigasi bisa mengiringi pengunjung menjadi pembeli (Closing).
+3. **Keamanan Data:** Memastikan sistem Anda aman dari serangan siber dengan standar enkripsi terbaru.
+
+**Layanan Satu Pintu (One-Stop Solution)**
+Sebagai Software House utama di Purwokerto, TechSoe menyediakan ekosistem lengkap:
+- **Jasa Buat Website:** Mulai dari Landing Page konversi tinggi hingga Company Profile korporat.
+- **Sistem Informasi Kustom:** ERP, CRM, dan Manajemen Inventori yang disesuaikan dengan kebutuhan unik Anda.
+- **Aplikasi Mobile:** Pengembangan Android & iOS menggunakan framework Flutter yang modern dan cepat.
+
+Memilih TechSoe berarti memilih ketenangan pikiran. Dengan dukungan tim ahli yang berbasis di Purwokerto, kami siap memberikan bantuan teknis langsung dan konsultasi tatap muka untuk memastikan bisnis Anda tetap relevan di era transformasi digital.
+        `,
+        date: "16 April 2026",
+        author: "TechSoe Management",
+        image: "/projects/blog_4.png",
+        readTime: "4 Menit Baca",
+        category: "Partner Digital"
     }
 ];

@@ -90,12 +90,6 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
             </section>
 
-            {/* COVER IMAGE */}
-            <section className="max-w-5xl mx-auto px-6 -mt-10 relative z-20">
-                <div className="w-full aspect-[21/9] rounded-[2rem] overflow-hidden shadow-xl bg-slate-200 border border-slate-100">
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                </div>
-            </section>
 
             {/* MAIN ARTICLE BODY */}
             <article className="max-w-3xl mx-auto px-6 mt-16 text-lg text-slate-600 leading-relaxed font-medium pb-20 border-b border-slate-100">
