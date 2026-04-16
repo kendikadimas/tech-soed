@@ -8,7 +8,7 @@ import {
   ChevronRight,
   ChevronDown
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { t } from '../translations';
 import { useLang } from './LangContext';
 
@@ -22,6 +22,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
 
   const [activeService, setActiveService] = useState('web');
   const activeGroup = pricingServiceGroups.find((g: any) => g.id === activeService) || pricingServiceGroups[0];
+  const webGroup = pricingServiceGroups.find((g: any) => g.id === 'web');
 
   const [activeTab, setActiveTab] = useState(activeGroup.tabs[0]);
   const [isWebDropdownOpen, setIsWebDropdownOpen] = useState(false);
@@ -145,7 +146,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-full left-0 mt-2 w-56 bg-slate-50 dark:bg-slate-950 transition-colors border border-slate-100 dark:border-slate-800 transition-colors shadow-2xl rounded-2xl p-2 z-50"
+                    className="hidden lg:block absolute top-full left-0 mt-2 w-56 bg-slate-50 dark:bg-slate-950 transition-colors border border-slate-100 dark:border-slate-800 transition-colors shadow-2xl rounded-2xl p-2 z-50"
                   >
                     {group.tabs.map((tab: string) => (
                       <button
@@ -168,6 +169,33 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
               </div>
             ))}
           </div>
+
+          <AnimatePresence>
+            {activeService === 'web' && isWebDropdownOpen && webGroup && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="lg:hidden mt-3 p-3 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border border-slate-100 dark:border-slate-800 rounded-2xl shadow-2xl flex flex-wrap gap-2"
+              >
+                {webGroup.tabs.map((tab: string) => (
+                  <button
+                    key={tab}
+                    onClick={() => {
+                      setActiveTab(tab);
+                      setIsWebDropdownOpen(false);
+                    }}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${activeTab === tab
+                      ? 'bg-blue-900 text-white'
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Pricing Cards Container */}
