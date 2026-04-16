@@ -54,16 +54,19 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-12">
             {/* LOGO */}
-            <Link href="/" className="flex items-center">
-              <div className="relative w-40 h-10">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="relative w-9 h-9 lg:w-10 lg:h-10 shrink-0">
                 <Image
                   src="/projects/logo.png"
                   alt="TechSoe Logo"
                   fill
-                  className="object-contain object-left"
+                  className="object-contain"
                   priority
                 />
               </div>
+              <span className="text-xl lg:text-2xl font-black text-slate-900 tracking-tighter group-hover:text-blue-600 transition-colors">
+                TechSoe
+              </span>
             </Link>
 
             {/* DESKTOP MENU (LEFT ALIGNED) */}

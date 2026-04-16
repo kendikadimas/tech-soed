@@ -14,9 +14,8 @@ export default function PortfolioSection() {
   const [isWebDropdownOpen, setIsWebDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Pagination State
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  // Carousel Ref
+  const projectScrollRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown logic
   useEffect(() => {
@@ -68,20 +67,10 @@ export default function PortfolioSection() {
     return p.category === portfolioMainFilter;
   });
 
-  // Pagination Logic
-  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentProjects = filteredProjects.slice(indexOfFirstItem, indexOfLastItem);
-
-  // Reset to page 1 when filter changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [portfolioMainFilter, websiteType]);
+  const currentProjects = filteredProjects;
 
   // Refs for scrolling
   const filterScrollRef = useRef<HTMLDivElement>(null);
-  const projectScrollRef = useRef<HTMLDivElement>(null);
 
   const scrollFilter = (direction: 'left' | 'right') => {
     if (filterScrollRef.current) {
@@ -137,22 +126,24 @@ export default function PortfolioSection() {
 
           <div 
             ref={filterScrollRef}
-            className="flex flex-nowrap lg:flex-wrap items-center gap-3 overflow-x-auto lg:overflow-x-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-4 lg:pb-0 relative z-50 snap-x"
+            className="flex flex-nowrap lg:flex-wrap items-center gap-3 overflow-x-auto lg:overflow-x-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden py-4 -my-4 relative z-50 snap-x"
           >
             {topCategories.map((cat) => (
               <div key={cat.id} className="relative shrink-0 snap-start" ref={cat.id === 'Web Development' ? dropdownRef : null}>
                 <button
-                  onClick={() => {
-                    setPortfolioMainFilter(cat.id);
+                  onClick={(e) => {
+                    e.stopPropagation();
                     if (cat.id === 'Web Development') {
                       setIsWebDropdownOpen(!isWebDropdownOpen);
+                      setPortfolioMainFilter('Web Development');
                     } else {
+                      setPortfolioMainFilter(cat.id);
                       setIsWebDropdownOpen(false);
                       setWebsiteType('All');
                     }
                   }}
                   className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 whitespace-nowrap ${portfolioMainFilter === cat.id
-                    ? 'bg-blue-900 text-white shadow-xl shadow-blue-900/20'
+                    ? 'bg-blue-900 text-white'
                     : 'bg-slate-50 text-slate-500 hover:bg-slate-100'
                     }`}
                 >
@@ -168,7 +159,7 @@ export default function PortfolioSection() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="absolute top-full left-0 mt-3 w-64 bg-white border border-slate-100 shadow-2xl rounded-2xl p-2 z-50 overflow-hidden"
+                    className="hidden lg:block absolute top-full left-0 mt-3 w-64 bg-white border border-slate-100 rounded-2xl p-2 z-50 overflow-hidden"
                   >
                     {webSubCategories.map((sub) => (
                       <button
@@ -191,33 +182,77 @@ export default function PortfolioSection() {
               </div>
             ))}
           </div>
+
+          {/* Sub-Filters for Mobile (Absolute Overlay) */}
+          <AnimatePresence>
+            {portfolioMainFilter === 'Web Development' && isWebDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="flex lg:hidden absolute top-full left-0 right-0 flex-wrap gap-2 mt-2 p-4 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl z-[60] shadow-2xl"
+              >
+                {webSubCategories.map((sub) => (
+                  <button
+                    key={sub.id}
+                    onClick={() => {
+                      setWebsiteType(sub.id);
+                      setIsWebDropdownOpen(false); // Close after select on mobile
+                    }}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${websiteType === sub.id
+                      ? 'bg-blue-900 text-white'
+                      : 'bg-slate-50 text-slate-500 border border-slate-100'
+                      }`}
+                  >
+                    {sub.name}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+
+        {/* Projects Carousel */}
+        <div className="relative group/projects w-full">
+          {/* Navigation Buttons (Desktop & Mobile) */}
+          <button
+            onClick={() => scrollProjects('left')}
+            className="absolute -left-4 lg:-left-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 backdrop-blur-md border border-slate-100 text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
+          >
+            <ChevronLeft className="w-5 h-5 lg:w-8 lg:h-8" />
+          </button>
+          <button
+            onClick={() => scrollProjects('right')}
+            className="absolute -right-4 lg:-right-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 backdrop-blur-md border border-slate-100 text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
+          >
+            <ChevronRight className="w-5 h-5 lg:w-8 lg:h-8" />
+          </button>
 
           <motion.div
             ref={projectScrollRef}
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+            className="flex gap-6 lg:gap-8 overflow-x-auto pb-12 pt-4 px-4 -mx-4 lg:px-0 lg:mx-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory touch-pan-x"
           >
             <AnimatePresence mode='popLayout'>
               {currentProjects.map((project: any, idx: number) => (
                 <motion.div
                   key={project.title}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  exit={{ opacity: 0, scale: 0.9 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group cursor-pointer flex flex-col w-full bg-white rounded-4xl overflow-hidden border border-slate-100 hover:border-blue-100 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500"
+                  className="group cursor-pointer flex flex-col flex-none w-[85%] md:w-[45%] lg:w-[calc(33.333%-1.5rem)] bg-white rounded-xl overflow-hidden border border-slate-100 hover:border-blue-100 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 snap-center"
                 >
                   {/* Image Container */}
-                  <div className="relative w-full aspect-4/3 overflow-hidden bg-slate-100">
+                  <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
                     <Image
                       src={project.image}
                       alt={`Proyek ${project.title} - ${project.category}`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="group-hover:scale-110 transition duration-700 ease-in-out object-cover"
+                      className="group-hover:scale-105 transition duration-700 ease-in-out object-contain p-2"
                     />
                     <div className="absolute top-4 left-4 z-10">
                       <span className="px-4 py-1.5 bg-white/95 backdrop-blur-md text-slate-900 text-[10px] font-black uppercase tracking-wider rounded-xl shadow-sm border border-white">
@@ -234,7 +269,7 @@ export default function PortfolioSection() {
                     <p className="text-slate-500 text-sm lg:text-base font-medium leading-relaxed line-clamp-3">
                       {project.desc}
                     </p>
-                    <div className="mt-6 pt-6 border-t border-slate-50 flex items-center text-blue-900 font-bold text-sm group-hover:gap-2 transition-all">
+                    <div className="mt-6 pt-6 border-t border-slate-50 flex items-center text-blue-900 font-bold ml-auto text-sm group-hover:gap-2 transition-all">
                       Lihat Detail <ChevronRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -243,41 +278,18 @@ export default function PortfolioSection() {
             </AnimatePresence>
           </motion.div>
 
-        {/* Desktop Improved Pagination Controls */}
-        {totalPages > 1 && (
-          <div className="mt-10 hidden lg:flex items-center justify-center gap-2">
-            <button
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-              disabled={currentPage === 1}
-              className="w-12 h-12 flex items-center justify-center rounded-2xl border border-slate-100 text-slate-400 hover:text-blue-900 hover:border-indigo-100 transition-all disabled:opacity-30 disabled:pointer-events-none"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            <div className="flex gap-2 mx-4">
-              {[...Array(totalPages)].map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentPage(i + 1)}
-                  className={`w-12 h-12 flex items-center justify-center rounded-2xl font-bold text-sm transition-all ${currentPage === i + 1
-                    ? 'bg-blue-900 text-white shadow-xl shadow-blue-900/20'
-                    : 'bg-slate-50 text-slate-400 hover:bg-slate-100'
-                    }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
+          {/* Mobile indicator line */}
+          <div className="flex lg:hidden justify-center gap-2 mt-2">
+            <div className="w-12 h-1 bg-slate-100 rounded-xl overflow-hidden">
+               <motion.div 
+                className="h-full bg-blue-900/20"
+                initial={{ width: "0%" }}
+                whileInView={{ width: "100%" }}
+                transition={{ duration: 1 }}
+               />
             </div>
-
-            <button
-              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-              disabled={currentPage === totalPages}
-              className="w-12 h-12 flex items-center justify-center rounded-2xl border border-slate-100 text-slate-400 hover:text-blue-900 hover:border-indigo-100 transition-all disabled:opacity-30 disabled:pointer-events-none"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
