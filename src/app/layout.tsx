@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://techsoe.vercel.app"),
+  metadataBase: new URL("https://techsoe.com"),
   alternates: {
     canonical: "/",
   },
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TechSoe | Software House & Jasa Pembuatan Website Terpercaya",
     description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi dengan kualitas premium.",
-    url: "https://techsoe.vercel.app",
+    url: "https://techsoe.com",
     siteName: "TechSoe",
     images: [
       {
@@ -105,10 +105,10 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "LocalBusiness",
-                "@id": "https://techsoe.vercel.app/#organization",
+                "@id": "https://techsoe.com/#organization",
                 "name": "TechSoe Agency",
-                "image": "https://techsoe.vercel.app/projects/logo.png",
-                "url": "https://techsoe.vercel.app",
+                "image": "https://techsoe.com/projects/logo.png",
+                "url": "https://techsoe.com",
                 "telephone": "+6281353424280",
                 "email": "techsoe26@gmail.com",
                 "address": {
@@ -141,10 +141,10 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 "name": "TechSoe",
-                "url": "https://techsoe.vercel.app",
+                "url": "https://techsoe.com",
                 "potentialAction": {
                   "@type": "SearchAction",
-                  "target": "https://techsoe.vercel.app/blog?q={search_term_string}",
+                  "target": "https://techsoe.com/blog?q={search_term_string}",
                   "query-input": "required name=search_term_string"
                 }
               },

@@ -190,7 +190,7 @@ export default function PortfolioSection() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="flex lg:hidden absolute top-full left-0 right-0 flex-wrap gap-2 mt-2 p-4 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl z-[60] shadow-2xl"
+                className="flex lg:hidden absolute top-full left-0 right-0 flex-wrap gap-2 mt-2 p-4 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl z-60 shadow-2xl"
               >
                 {webSubCategories.map((sub) => (
                   <button
