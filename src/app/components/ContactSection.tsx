@@ -21,7 +21,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="kontak" className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">
+    <section id="kontak" className="hidden md:block py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">
       {/* Decorative Blur */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100 dark:bg-blue-900/30 rounded-full blur-[120px] opacity-30 -translate-x-1/2 -translate-y-1/2" />
       

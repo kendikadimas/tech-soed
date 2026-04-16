@@ -15,7 +15,7 @@ export default function LatestArticles() {
     <section className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="max-w-2xl text-center md:text-left">
+          <div className="max-w-2xl text-left">
             <h2 className="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors mb-4 tracking-tight">
               Wawasan <span className="text-blue-900 dark:text-blue-400">Digital Purwokerto</span>
             </h2>

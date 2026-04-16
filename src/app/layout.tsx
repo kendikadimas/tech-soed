@@ -198,7 +198,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased dark:bg-slate-950 transition-colors`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <LangProvider>
             <Navbar />
             <main className="bg-white dark:bg-slate-950 transition-colors">

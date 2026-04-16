@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import { Star, Quote } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { t } from '../translations';
 import { useLang } from './LangContext';
@@ -9,6 +9,16 @@ import { useLang } from './LangContext';
 export default function TestimonialsSection() {
   const { lang } = useLang();
   const testimonials = t[lang].testimonials;
+  const testimonialsScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollTestimonials = (direction: 'left' | 'right') => {
+    if (!testimonialsScrollRef.current) return;
+    const amount = testimonialsScrollRef.current.offsetWidth * 0.8;
+    testimonialsScrollRef.current.scrollBy({
+      left: direction === 'left' ? -amount : amount,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <section id="testimoni" className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors overflow-hidden relative">
@@ -32,8 +42,26 @@ export default function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Testimonial Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Testimonial Carousel */}
+        <div className="relative group/testi">
+          <button
+            onClick={() => scrollTestimonials('left')}
+            className="absolute -left-4 lg:-left-12 top-1/2 -translate-y-1/2 z-20 p-2 lg:p-3 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border border-slate-100 dark:border-slate-800 rounded-xl text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 shadow-lg transition-all hover:scale-105 active:scale-95"
+          >
+            <ChevronLeft className="w-5 h-5 lg:w-6 lg:h-6" />
+          </button>
+
+          <button
+            onClick={() => scrollTestimonials('right')}
+            className="absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 z-20 p-2 lg:p-3 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border border-slate-100 dark:border-slate-800 rounded-xl text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 shadow-lg transition-all hover:scale-105 active:scale-95"
+          >
+            <ChevronRight className="w-5 h-5 lg:w-6 lg:h-6" />
+          </button>
+
+          <div
+            ref={testimonialsScrollRef}
+            className="flex gap-6 lg:gap-8 overflow-x-auto pb-4 px-2 -mx-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
+          >
           {testimonials.map((testi: any, index: number) => (
             <motion.div
               key={index}
@@ -41,7 +69,7 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-slate-50 dark:bg-slate-950 transition-colors border border-slate-100 dark:border-slate-800 transition-colors p-8 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 relative group flex flex-col h-full"
+              className="min-w-[88%] sm:min-w-[60%] lg:min-w-[32%] bg-slate-50 dark:bg-slate-950 transition-colors border border-slate-100 dark:border-slate-800 transition-colors p-8 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 relative group flex flex-col h-full snap-center"
             >
               {/* Quote Icon */}
               <div className="absolute top-6 right-8 text-blue-900/10 group-hover:text-blue-900/20 transition-colors ">
@@ -76,6 +104,7 @@ export default function TestimonialsSection() {
               </div>
             </motion.div>
           ))}
+          </div>
         </div>
       </div>
     </section>

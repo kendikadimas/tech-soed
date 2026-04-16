@@ -233,7 +233,7 @@ export default function PortfolioSection() {
           <motion.div
             ref={projectScrollRef}
             layout
-            className="flex gap-6 lg:gap-8 overflow-x-auto pb-12 pt-4 px-4 -mx-4 lg:px-0 lg:mx-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory touch-pan-x"
+            className="flex gap-6 lg:gap-8 overflow-x-auto pb-12 pt-4 px-4 -mx-4 lg:px-0 lg:mx-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
           >
             <AnimatePresence mode='popLayout'>
               {currentProjects.map((project: any, idx: number) => (
