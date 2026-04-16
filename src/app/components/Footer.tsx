@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+                  href="mailto:hi@techsoe.com"
 import { Mail, MapPin, Instagram } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,7 +25,7 @@ export default function Footer() {
                 <Image src="/projects/logo.png" alt="TechSoe Logo" fill className="object-contain object-left" />
               </div>
             </div>
-            <p className="text-sm lg:text-base text-slate-400 font-medium leading-relaxed max-w-sm">
+                    <p className="font-semibold text-sm">hi@techsoe.com</p>
               {t[lang].footerDesc}
             </p>
             <div className="flex items-center gap-4">
@@ -107,7 +107,7 @@ export default function Footer() {
                   </svg>
                 </div>
                 <div className="text-sm font-bold text-slate-400">
-                  +62 813-5342-4280
+                  +62 858-1417-4267
                 </div>
               </li>
               <li className="flex items-center gap-4">

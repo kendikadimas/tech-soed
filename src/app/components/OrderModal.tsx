@@ -25,7 +25,7 @@ export default function OrderModal({ isOpen, onClose, selectedPackage }: OrderMo
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const message = `${t[lang].orderWaGreeting}%0A%0A${t[lang].orderWaName}: ${form.name}%0A${t[lang].orderWaEmail}: ${form.email || '-'}%0A${t[lang].orderWaPackage}: ${selectedPackage.category} - ${selectedPackage.name} (${selectedPackage.price})%0A${t[lang].orderWaDesc}: ${form.projectDesc}`;
-    window.open(`https://wa.me/6281353424280?text=${message}`, '_blank');
+    window.open(`https://wa.me/6285814174267?text=${message}`, '_blank');
     onClose();
     setForm({ name: '', phone: '', email: '', projectDesc: '' });
   };

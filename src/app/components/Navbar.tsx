@@ -228,7 +228,7 @@ export default function Navbar() {
 
             {/* Mekari Style WhatsApp Button */}
             <a
-              href="https://wa.me/6281353424280"
+              href="https://wa.me/6285814174267"
               target="_blank"
               rel="noreferrer"
               className="bg-[#25D366] text-white px-5 py-2.5 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-[#20bd5a] shadow-md shadow-[#25D366]/20 transition-all hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
@@ -350,7 +350,7 @@ export default function Navbar() {
                 </div>
 
                 <a
-                  href="https://wa.me/6281353424280"
+                  href="https://wa.me/6285814174267"
                   className="bg-[#25D366] text-white p-4 rounded-xl text-center font-bold flex items-center justify-center gap-2 mt-2 shadow-lg shadow-[#25D366]/20 transition-transform active:scale-95"
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">

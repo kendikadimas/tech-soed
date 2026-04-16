@@ -305,7 +305,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
               </p>
             </div>
             <a
-              href={`https://wa.me/6281234567890?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
+              href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3.5 bg-[#25D366] text-white font-bold rounded-2xl hover:bg-[#20bd5a] transition-all shadow-lg shadow-[#25D366]/20 active:scale-95 whitespace-nowrap text-sm min-h-[44px] flex items-center justify-center"
