@@ -46,11 +46,11 @@ export default function LatestArticles() {
                 className="group flex flex-col h-full bg-slate-50 dark:bg-slate-900 transition-colors rounded-3xl border border-slate-100 dark:border-slate-700 overflow-hidden hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-500"
               >
                 <div className="p-6 sm:p-8 flex flex-col flex-1">
-                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <div className="grid grid-cols-[1fr_auto] items-center gap-2 mb-4">
                     <span className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-100 dark:border-blue-800/50 transition-colors">
                       {post.category}
                     </span>
-                    <div className="ml-auto flex items-center gap-1.5 text-slate-400 text-[10px] font-bold whitespace-nowrap shrink-0">
+                    <div className="w-[112px] flex items-center justify-start gap-1.5 text-slate-400 text-[10px] font-bold whitespace-nowrap shrink-0">
                       <Calendar className="w-3 h-3" />
                       {post.date}
                     </div>
