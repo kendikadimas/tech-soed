@@ -32,20 +32,20 @@ export default function Navbar() {
   // Grouped Menu Data
   const menuData = {
     services: [
-      { id: 'web', title: 'Web Development', desc: lang === 'id' ? 'Website modern, cepat & SEO-friendly' : 'Modern, fast & SEO-friendly websites', href: '#harga' },
-      { id: 'mobile', title: 'Mobile Apps', desc: lang === 'id' ? 'Aplikasi Android & iOS kustom' : 'Custom Android & iOS applications', href: '#harga' },
-      { id: 'design', title: 'UI/UX Design', desc: lang === 'id' ? 'Desain antarmuka yang intuitif' : 'Intuitive interface design', href: '#harga' },
-      { id: 'system', title: 'Sistem Informasi', desc: lang === 'id' ? 'Solusi CMS, LMS, ERP & CRM khusus' : 'Custom CMS, LMS, ERP & CRM solutions', href: '#harga' },
-      { id: 'smm', title: 'Social Media', desc: lang === 'id' ? 'Manajemen konten & branding brand' : 'Content management & branding', href: '#harga' },
+      { id: 'web', title: 'Web Development', desc: lang === 'id' ? 'Website modern, cepat & SEO-friendly' : 'Modern, fast & SEO-friendly websites', href: '/#harga' },
+      { id: 'mobile', title: 'Mobile Apps', desc: lang === 'id' ? 'Aplikasi Android & iOS kustom' : 'Custom Android & iOS applications', href: '/#harga' },
+      { id: 'design', title: 'UI/UX Design', desc: lang === 'id' ? 'Desain antarmuka yang intuitif' : 'Intuitive interface design', href: '/#harga' },
+      { id: 'system', title: 'Sistem Informasi', desc: lang === 'id' ? 'Solusi CMS, LMS, ERP & CRM khusus' : 'Custom CMS, LMS, ERP & CRM solutions', href: '/#harga' },
+      { id: 'smm', title: 'Social Media', desc: lang === 'id' ? 'Manajemen konten & branding brand' : 'Content management & branding', href: '/#harga' },
     ],
     company: [
-      { id: 'portfolio', title: lang === 'id' ? 'Project Showcase' : 'Our Work', desc: lang === 'id' ? 'Eksplorasi hasil karya terbaik kami' : 'Explore our best work', href: '#portfolio' },
-      { id: 'testi', title: lang === 'id' ? 'Testimoni' : 'Testimonials', desc: lang === 'id' ? 'Apa kata klien tentang layanan kami' : 'What clients say about our services', href: '#testimoni' },
-      { id: 'about', title: lang === 'id' ? 'Tentang Kami' : 'About Us', desc: lang === 'id' ? 'Misi dan perjalanan TechSoe' : 'TechSoe mission and journey', href: '#tentang' },
+      { id: 'portfolio', title: lang === 'id' ? 'Project Showcase' : 'Our Work', desc: lang === 'id' ? 'Eksplorasi hasil karya terbaik kami' : 'Explore our best work', href: '/#portfolio' },
+      { id: 'testi', title: lang === 'id' ? 'Testimoni' : 'Testimonials', desc: lang === 'id' ? 'Apa kata klien tentang layanan kami' : 'What clients say about our services', href: '/#testimoni' },
+      { id: 'about', title: lang === 'id' ? 'Tentang Kami' : 'About Us', desc: lang === 'id' ? 'Misi dan perjalanan TechSoe' : 'TechSoe mission and journey', href: '/#tentang' },
     ],
     support: [
-      { id: 'pricing', title: lang === 'id' ? 'Daftar Harga' : 'Pricing', href: '#harga' },
-      { id: 'faq', title: 'FAQ', href: '#faq' },
+      { id: 'pricing', title: lang === 'id' ? 'Daftar Harga' : 'Pricing', href: '/#harga' },
+      { id: 'faq', title: 'FAQ', href: '/#faq' },
       { id: 'blog', title: lang === 'id' ? 'Artikel' : 'Blog', href: '/blog' },
     ]
   };
@@ -221,7 +221,7 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <Link href="#portfolio" className="text-sm font-semibold text-blue-600 hover:text-blue-700 transition flex items-center gap-1">
+            <Link href="/#portfolio" className="text-sm font-semibold text-blue-600 hover:text-blue-700 transition flex items-center gap-1">
               <Briefcase className="w-4 h-4" />
               {t[lang].navSignIn}
             </Link>
