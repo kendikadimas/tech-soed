@@ -269,9 +269,6 @@ export default function PortfolioSection() {
                     <p className="text-slate-500 text-sm lg:text-base font-medium leading-relaxed line-clamp-3">
                       {project.desc}
                     </p>
-                    <div className="mt-6 pt-6 border-t border-slate-50 flex items-center text-blue-900 font-bold ml-auto text-sm group-hover:gap-2 transition-all">
-                      Lihat Detail <ChevronRight className="w-4 h-4" />
-                    </div>
                   </div>
                 </motion.div>
               ))}
