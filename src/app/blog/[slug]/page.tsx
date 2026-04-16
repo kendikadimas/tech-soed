@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, User, Clock, Tag } from 'lucide-react';
+import { Calendar, User, Clock, Tag, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { blogPosts } from '@/lib/blogData';
 import { notFound } from 'next/navigation';
@@ -66,6 +66,13 @@ export default async function BlogPostPage({ params }: Props) {
             {/* HERO ARTICLE HEADER */}
             <section className="pt-32 sm:pt-36 pb-10 sm:pb-14 px-5 sm:px-6 relative transition-colors">
                 <div className="animate-blog-header max-w-4xl mx-auto rounded-3xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 sm:p-10 shadow-sm transition-colors">
+                    <Link
+                        href="/blog"
+                        className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-blue-700 dark:hover:text-blue-400 transition-colors mb-5"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Kembali ke Artikel
+                    </Link>
                     <div className="flex items-center gap-3 mb-5">
                         <span className="bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 font-black uppercase tracking-widest text-[10px] sm:text-xs px-3 sm:px-4 py-1.5 rounded-full inline-flex items-center gap-2 border border-blue-100 dark:border-blue-900/40 transition-colors">
                             <Tag className="w-3 h-3" /> {post.category}
