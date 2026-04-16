@@ -65,7 +65,7 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative min-h-[85vh] lg:min-h-screen flex items-center pt-20 lg:pt-26 pb-8 lg:pb-12 px-6 md:px-16 lg:px-32 overflow-hidden bg-white dark:bg-slate-950 transition-colors">
+      <section className="relative min-h-[85vh] lg:min-h-screen flex items-center pt-28 lg:pt-36 pb-8 lg:pb-12 px-6 md:px-16 lg:px-32 overflow-hidden bg-white dark:bg-slate-950 transition-colors">
         {/* Background Subtle Wavy Lines Pattern (SVG) */}
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
           <svg
@@ -134,7 +134,7 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute top-[5%] lg:top-[30%] -right-4 lg:-right-10 scale-[0.5] lg:scale-100 origin-right bg-white dark:bg-slate-950 shadow-2xl shadow-blue-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-blue-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
+                  className="absolute top-[5%] lg:top-[30%] right-2 lg:-right-10 scale-[0.5] sm:scale-75 lg:scale-100 origin-right bg-white dark:bg-slate-950 shadow-2xl shadow-blue-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-blue-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
                 >
                   <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Smartphone className="w-4 h-4 text-white" />
@@ -158,7 +158,7 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute bottom-[20%] lg:bottom-[25%] -left-6 lg:-left-16 scale-[0.5] lg:scale-100 origin-left bg-white dark:bg-slate-950 shadow-2xl shadow-emerald-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-emerald-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
+                  className="absolute bottom-[20%] lg:bottom-[25%] left-2 lg:-left-16 scale-[0.5] sm:scale-75 lg:scale-100 origin-left bg-white dark:bg-slate-950 shadow-2xl shadow-emerald-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-emerald-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
                 >
                   <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Layout className="w-4 h-4 text-white" />
@@ -182,7 +182,7 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     x: { duration: 5, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute top-[15%] lg:top-[25%] -left-4 lg:-left-10 scale-[0.5] lg:scale-100 origin-left bg-white dark:bg-slate-950 shadow-2xl shadow-purple-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-purple-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
+                  className="absolute top-[15%] lg:top-[25%] left-2 lg:-left-10 scale-[0.5] sm:scale-75 lg:scale-100 origin-left bg-white dark:bg-slate-950 shadow-2xl shadow-purple-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-purple-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
                 >
                   <div className="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Palette className="w-4 h-4 text-white" />
@@ -206,7 +206,7 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute bottom-[35%] lg:bottom-[40%] -right-6 lg:-right-16 scale-[0.5] lg:scale-100 origin-right bg-white dark:bg-slate-950 shadow-2xl shadow-pink-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-pink-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
+                  className="absolute bottom-[35%] lg:bottom-[40%] right-2 lg:-right-16 scale-[0.5] sm:scale-75 lg:scale-100 origin-right bg-white dark:bg-slate-950 shadow-2xl shadow-pink-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-pink-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
                 >
                   <div className="w-9 h-9 bg-pink-500 rounded-xl flex items-center justify-center text-white shrink-0">
                     <Share2 className="w-4 h-4 text-white" />
@@ -230,7 +230,7 @@ export default function HeroSection() {
                     scale: { type: "spring", stiffness: 100 },
                     y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
                   }}
-                  className="absolute bottom-[2%] lg:bottom-[20%] -right-2 lg:-right-8 scale-[0.5] lg:scale-100 origin-right bg-slate-900 shadow-2xl shadow-slate-900/40 p-4 rounded-2xl border border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto"
+                  className="absolute bottom-[2%] lg:bottom-[20%] right-2 lg:-right-8 scale-[0.5] sm:scale-75 lg:scale-100 origin-right bg-slate-900 shadow-2xl shadow-slate-900/40 p-4 rounded-2xl border border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto"
                 >
                   <div className="w-9 h-9 bg-blue-500 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/30">
                     <Rocket className="w-4 h-4 text-white" />
