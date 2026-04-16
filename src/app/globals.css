@@ -29,6 +29,34 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep dark-mode blue accents consistent for text/icons without breaking blue backgrounds. */
+.dark :is(
+  [class~="text-blue-50"],
+  [class~="text-blue-100"],
+  [class~="text-blue-200"],
+  [class~="text-blue-300"],
+  [class~="text-blue-400"],
+  [class~="text-blue-500"],
+  [class~="text-blue-600"],
+  [class~="text-blue-700"],
+  [class~="text-blue-800"],
+  [class~="text-blue-900"],
+  [class~="text-blue-950"],
+  [class~="dark:text-blue-50"],
+  [class~="dark:text-blue-100"],
+  [class~="dark:text-blue-200"],
+  [class~="dark:text-blue-300"],
+  [class~="dark:text-blue-400"],
+  [class~="dark:text-blue-500"],
+  [class~="dark:text-blue-600"],
+  [class~="dark:text-blue-700"],
+  [class~="dark:text-blue-800"],
+  [class~="dark:text-blue-900"],
+  [class~="dark:text-blue-950"]
+) {
+  color: #2563eb;
+}
+
 @keyframes blogHeaderReveal {
   0% {
     opacity: 0;
