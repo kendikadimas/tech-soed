@@ -48,8 +48,9 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-1000 transition-all duration-300 ${scrolled ? "bg-white shadow-md py-3" : "bg-white py-5"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-1000 transition-all duration-300 ${
+          scrolled ? "bg-white/95 backdrop-blur-md shadow-md py-3 border-b border-slate-100" : "bg-transparent py-5"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-12">
@@ -57,14 +58,16 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="relative w-9 h-9 lg:w-10 lg:h-10 shrink-0">
                 <Image
-                  src="/projects/logo.png"
+                  src={scrolled ? "/projects/logo.png" : "/projects/iconput.png"}
                   alt="TechSoe Logo"
                   fill
                   className="object-contain"
                   priority
                 />
               </div>
-              <span className="text-xl lg:text-2xl font-black text-slate-900 tracking-tighter group-hover:text-blue-600 transition-colors">
+              <span className={`text-xl lg:text-2xl font-black tracking-tighter transition-colors ${
+                scrolled ? "text-slate-900 group-hover:text-blue-600" : "text-white group-hover:text-cyan-300"
+              }`}>
                 TechSoe
               </span>
             </Link>
@@ -77,9 +80,13 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown('services')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-blue-600 transition">
+                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
+                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
+                }`}>
                   {lang === 'id' ? 'Layanan' : 'Services'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'services' ? 'rotate-180 text-blue-600' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    activeDropdown === 'services' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
+                  }`} />
                 </div>
                 <AnimatePresence>
                   {activeDropdown === 'services' && (
@@ -106,9 +113,13 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown('company')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-blue-600 transition">
+                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
+                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
+                }`}>
                   {lang === 'id' ? 'Perusahaan' : 'Company'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'company' ? 'rotate-180 text-blue-600' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    activeDropdown === 'company' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
+                  }`} />
                 </div>
                 <AnimatePresence>
                   {activeDropdown === 'company' && (
@@ -135,9 +146,13 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown('support')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-blue-600 transition">
+                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
+                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
+                }`}>
                   {lang === 'id' ? 'Dukungan' : 'Support'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'support' ? 'rotate-180 text-blue-600' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    activeDropdown === 'support' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
+                  }`} />
                 </div>
                 <AnimatePresence>
                   {activeDropdown === 'support' && (
@@ -169,7 +184,9 @@ export default function Navbar() {
               onMouseEnter={() => setActiveDropdown('lang')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition">
+              <div className={`flex items-center gap-2 text-sm font-medium transition ${
+                scrolled ? "text-slate-600 hover:text-blue-600" : "text-white/90 hover:text-white"
+              }`}>
                 <Globe className="w-4 h-4" />
                 <span className="uppercase">{lang}</span>
                 <ChevronDown className="w-3 h-3" />
@@ -199,7 +216,9 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <Link href="#portfolio" className="text-sm font-semibold text-blue-600 hover:text-blue-700 transition flex items-center gap-1">
+            <Link href="#portfolio" className={`text-sm font-semibold transition flex items-center gap-1.5 ${
+              scrolled ? "text-blue-600 hover:text-blue-700" : "text-white/90 hover:text-white"
+            }`}>
               <Briefcase className="w-4 h-4" />
               {t[lang].navSignIn}
             </Link>
@@ -220,7 +239,9 @@ export default function Navbar() {
 
           {/* MOBILE TOGGLE */}
           <button
-            className="lg:hidden w-11 h-11 flex items-center justify-center text-slate-700 hover:bg-slate-50 rounded-xl transition-colors"
+            className={`lg:hidden w-11 h-11 flex items-center justify-center rounded-xl transition-colors ${
+              scrolled ? "text-slate-700 hover:bg-slate-50" : "text-white hover:bg-white/10"
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
           >
