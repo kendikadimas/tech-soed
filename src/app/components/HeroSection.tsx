@@ -3,25 +3,120 @@
 import React from 'react';
 import { motion, useInView, animate } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import { t } from '../translations';
 import { useLang } from './LangContext';
 import {
-  Sparkles,
-  Rocket,
   Users,
   CheckCircle2,
   Award,
   Zap,
-  Layout,
-  Smartphone,
-  Palette,
-  Database,
-  Share2
+  Grid
 } from 'lucide-react';
 
+function TransparentVideo({ src }: { src: string }) {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
+
+    let animId: number;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    let hasStarted = false;
+
+    const processFrame = () => {
+      // Only start drawing once the video is actually playing and past the initial load frames
+      if (video.readyState >= 2 && video.currentTime > 0.2 && ctx) {
+        hasStarted = true;
+      }
+
+      if (hasStarted && ctx) {
+        if (canvas.width !== video.videoWidth && video.videoWidth > 0) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+        }
+        if (canvas.width > 0 && canvas.height > 0) {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = frame.data;
+          const len = data.length;
+
+          // Sample background color from a small inset to avoid edge compression artifacts
+          const sampleX = 4;
+          const sampleY = 4;
+          const sampleIdx = (sampleY * canvas.width + sampleX) * 4;
+          const refR = data[sampleIdx] ?? data[0] ?? 0;
+          const refG = data[sampleIdx + 1] ?? data[1] ?? 0;
+          const refB = data[sampleIdx + 2] ?? data[2] ?? 0;
+
+          for (let i = 0; i < len; i += 4) {
+            const r = data[i] ?? 0;
+            const g = data[i + 1] ?? 0;
+            const b = data[i + 2] ?? 0;
+
+            // Calculate distance to the sampled background color
+            const diffR = Math.abs(r - refR);
+            const diffG = Math.abs(g - refG);
+            const diffB = Math.abs(b - refB);
+
+            // Key out pixels that match the background color with a smooth transition
+            if (diffR < 35 && diffG < 35 && diffB < 35) {
+              const maxDiff = Math.max(diffR, diffG, diffB);
+              if (maxDiff < 15) {
+                data[i + 3] = 0; // Fully transparent
+              } else {
+                // Smooth transition gradient
+                data[i + 3] = Math.floor(((maxDiff - 15) / 20) * 255);
+              }
+            }
+          }
+          ctx.putImageData(frame, 0, 0);
+
+          // Smoothly fade-in canvas once processing begins
+          if (canvas.style.opacity !== '1') {
+            canvas.style.opacity = '1';
+          }
+        }
+      }
+      animId = requestAnimationFrame(processFrame);
+    };
+
+    video.play().catch(() => {});
+    animId = requestAnimationFrame(processFrame);
+
+    return () => {
+      cancelAnimationFrame(animId);
+    };
+  }, []);
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center">
+      <video
+        ref={videoRef}
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="hidden"
+      />
+      <canvas
+        ref={canvasRef}
+        style={{
+          opacity: 0,
+          transition: 'opacity 0.4s ease-in-out',
+          filter: 'drop-shadow(0 0 12px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 25px rgba(56, 189, 248, 0.55)) drop-shadow(0 20px 50px rgba(0, 100, 255, 0.3))'
+        }}
+        className="w-full h-full object-contain pointer-events-none"
+      />
+    </div>
+  );
+}
+
 function AnimatedCounter({ text }: { text: string }) {
-  const ref = React.useRef(null);
+  const ref = React.useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [count, setCount] = React.useState(0);
   
@@ -37,7 +132,7 @@ function AnimatedCounter({ text }: { text: string }) {
         ease: "easeOut",
         onUpdate: (val) => setCount(Math.floor(val)),
       });
-      return controls.stop;
+      return () => controls.stop();
     }
   }, [isInView, target]);
 
@@ -65,185 +160,182 @@ export default function HeroSection() {
 
   return (
     <>
-      <section className="relative min-h-[85vh] lg:min-h-screen flex items-center pt-28 lg:pt-36 pb-8 lg:pb-12 px-6 md:px-16 lg:px-32 overflow-hidden bg-white dark:bg-slate-950 transition-colors">
-        {/* Background Subtle Wavy Lines Pattern (SVG) */}
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-          <svg
-            className="w-full h-full text-blue-500"
-            viewBox="0 0 1440 800"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M-100 600C200 400 500 800 800 600C1100 400 1400 600 1600 400"
-              stroke="currentColor"
-              strokeWidth="0.5"
-              strokeDasharray="10 10"
-            />
-            <path
-              d="M-100 650C200 450 500 850 800 650C1100 450 1400 650 1600 450"
-              stroke="currentColor"
-              strokeWidth="0.5"
-              strokeDasharray="10 10"
-            />
-            <path
-              d="M1440 100C1200 300 900 -100 600 100C300 300 0 100 -200 300"
-              stroke="currentColor"
-              strokeWidth="0.5"
-              strokeDasharray="10 10"
-            />
-          </svg>
+      <section className="relative min-h-[85vh] lg:min-h-screen flex items-center pt-28 pb-16 md:pt-28 md:pb-20 lg:pt-28 lg:pb-20 px-6 md:px-16 lg:px-32 overflow-hidden bg-gradient-to-br from-[#0c4cb4] via-[#053787] to-[#01173d] text-white">
+        {/* Background Grid Pattern Overlay */}
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-70 pointer-events-none" />
+        
+        {/* Dot Matrix Pattern */}
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] opacity-80 pointer-events-none" />
+
+        {/* Ambient Glowing Blobs */}
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+        {/* Large Overlapping Translucent Silhouette Shapes */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* Giant Circle 1 - Top Left Layer */}
+          <motion.div
+            animate={{
+              scale: [1, 1.04, 1],
+              rotate: [0, 6, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute -top-[25%] -left-[15%] w-[550px] h-[550px] sm:w-[750px] sm:h-[750px] lg:w-[950px] lg:h-[950px] rounded-full bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/10 backdrop-blur-[1px] pointer-events-none"
+          />
+
+          {/* Giant Circle 2 - Overlapping Top Right & Center */}
+          <motion.div
+            animate={{
+              scale: [1, 1.05, 1],
+              x: [0, 25, 0],
+            }}
+            transition={{
+              duration: 24,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-[5%] left-[20%] sm:left-[30%] w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] lg:w-[850px] lg:h-[850px] rounded-full bg-gradient-to-tl from-cyan-400/10 via-sky-300/5 to-transparent border border-cyan-200/10 pointer-events-none"
+          />
+
+          {/* Giant Circle 3 - Bottom Left Intersecting Layer */}
+          <motion.div
+            animate={{
+              y: [0, -20, 0],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute -bottom-[30%] -left-[10%] w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] lg:w-[750px] lg:h-[750px] rounded-full bg-gradient-to-tr from-white/10 via-white/5 to-transparent border border-white/10 pointer-events-none"
+          />
+
+          {/* Giant Concentric Dashed Ring Silhouette */}
+          <motion.div
+            animate={{
+              rotate: [0, 360],
+            }}
+            transition={{
+              duration: 70,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] sm:w-[1000px] sm:h-[1000px] lg:w-[1250px] lg:h-[1250px] rounded-full border border-dashed border-white/10 pointer-events-none"
+          />
+
+          {/* Soft Curved Silhouette - Bottom Right */}
+          <motion.div
+            animate={{
+              scale: [1, 1.06, 1],
+              rotate: [-4, 4, -4]
+            }}
+            transition={{
+              duration: 22,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute -bottom-[20%] -right-[10%] w-[500px] h-[500px] lg:w-[750px] lg:h-[750px] rounded-full bg-gradient-to-br from-cyan-500/10 via-blue-400/5 to-transparent border border-cyan-400/10 pointer-events-none"
+          />
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-10 items-center relative z-10">
+
+
+        <div className="max-w-[1440px] mx-auto w-full flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-10 items-center relative z-10">
           
-          {/* RIGHT COLUMN: IMAGE/MOCKUP */}
+          {/* RIGHT COLUMN: TRANSPARENT LOGO ANIMATION WITH TILTED OVAL PORTAL */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="relative w-full h-[180px] sm:h-[400px] lg:h-[550px] xl:h-[600px] flex items-center justify-center pointer-events-none order-1 lg:order-2 my-0 lg:-translate-y-8 xl:-translate-y-12"
+            className="relative w-full h-[320px] sm:h-[440px] lg:h-[560px] xl:h-[600px] flex items-center justify-center pointer-events-none order-1 lg:order-2 my-2 lg:my-0"
           >
             {/* Main Visual Container */}
-            <div className="relative w-full h-full pointer-events-auto">
+            <div className="relative w-full h-full pointer-events-auto flex items-center justify-center">
 
-              {/* Main Image - Static */}
-              <div className="absolute inset-0 z-10 w-full h-full">
-                <Image
-                  src="/projects/hero.png"
-                  alt="TechSoe Digital Solution"
-                  fill
-                  className="object-contain object-center lg:object-right select-none transition-opacity duration-500"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
+              {/* TILTED OVAL PORTAL BACKDROP */}
+              <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+                {/* Deep ambient radial glow */}
+                <div className="absolute w-[75%] h-[90%] bg-gradient-to-b from-cyan-300/20 via-sky-400/15 to-blue-600/5 blur-[70px] rounded-full" />
 
-              {/* Info Bubbles - Responsive */}
-              <div className="absolute inset-0 z-20 pointer-events-none">
-                {/* Bubble 2: Mobile Apps */}
+                {/* Portal SVG — portrait-oriented tilted oval layers */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: [0, 10, 0]
-                  }}
-                  transition={{
-                    delay: 1.2,
-                    scale: { type: "spring", stiffness: 100 },
-                    y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="absolute top-[5%] lg:top-[30%] right-2 lg:-right-10 scale-[0.5] sm:scale-75 lg:scale-100 origin-right bg-white dark:bg-slate-950 shadow-2xl shadow-blue-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-blue-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
+                  animate={{ rotate: [0, 1.5, 0, -1.5, 0] }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 flex items-center justify-center"
                 >
-                  <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white shrink-0">
-                    <Smartphone className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-bold text-blue-500 uppercase tracking-widest leading-none mb-1">Mobile App</div>
-                    <div className="text-xs font-black text-slate-900 dark:text-white transition-colors whitespace-nowrap">Android & iOS</div>
-                  </div>
-                </motion.div>
+                  <svg
+                    viewBox="0 0 420 560"
+                    className="w-full h-full max-w-[320px] max-h-[426px] sm:max-w-[440px] sm:max-h-[586px] lg:max-w-[560px] lg:max-h-[746px] xl:max-w-[600px] xl:max-h-[800px]"
+                    style={{ filter: 'drop-shadow(0 0 50px rgba(14,165,233,0.45))' }}
+                  >
+                    <defs>
+                      {/* Centre radial: white → cyan → transparent */}
+                      <radialGradient id="ovalSpotlight" cx="50%" cy="44%" r="50%" fx="50%" fy="44%">
+                        <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
+                        <stop offset="28%"  stopColor="#e0f7ff" stopOpacity="0.96" />
+                        <stop offset="52%"  stopColor="#7dd3fc" stopOpacity="0.75" />
+                        <stop offset="75%"  stopColor="#0ea5e9" stopOpacity="0.30" />
+                        <stop offset="100%" stopColor="#0369a1" stopOpacity="0" />
+                      </radialGradient>
 
-                {/* Bubble 3: Web Dev */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: [0, -8, 0]
-                  }}
-                  transition={{
-                    delay: 1.4,
-                    scale: { type: "spring", stiffness: 100 },
-                    y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="absolute bottom-[20%] lg:bottom-[25%] left-2 lg:-left-16 scale-[0.5] sm:scale-75 lg:scale-100 origin-left bg-white dark:bg-slate-950 shadow-2xl shadow-emerald-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-emerald-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
-                >
-                  <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center text-white shrink-0">
-                    <Layout className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-bold text-emerald-500 uppercase tracking-widest leading-none mb-1">Pembuatan</div>
-                    <div className="text-xs font-black text-slate-900 dark:text-white transition-colors whitespace-nowrap">Website</div>
-                  </div>
-                </motion.div>
+                      {/* Glow filter for oval rings */}
+                      <filter id="ringGlow" x="-15%" y="-15%" width="130%" height="130%">
+                        <feGaussianBlur stdDeviation="4" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                      </filter>
+                    </defs>
 
-                {/* Bubble 4: UI/UX Design */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    x: [0, 5, 0]
-                  }}
-                  transition={{
-                    delay: 1.5,
-                    scale: { type: "spring", stiffness: 100 },
-                    x: { duration: 5, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="absolute top-[15%] lg:top-[25%] left-2 lg:-left-10 scale-[0.5] sm:scale-75 lg:scale-100 origin-left bg-white dark:bg-slate-950 shadow-2xl shadow-purple-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-purple-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
-                >
-                  <div className="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center text-white shrink-0">
-                    <Palette className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-bold text-purple-500 uppercase tracking-widest leading-none mb-1">UI/UX Design</div>
-                    <div className="text-xs font-black text-slate-900 dark:text-white transition-colors whitespace-nowrap">Modern Design</div>
-                  </div>
-                </motion.div>
+                    {/* Filled oval spotlight — slightly taller than wide, tilted ~-8° */}
+                    <ellipse
+                      cx="210" cy="248" rx="155" ry="210"
+                      fill="url(#ovalSpotlight)"
+                      transform="rotate(-8 210 248)"
+                    />
 
-                {/* Bubble 5: Social Media */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: [0, -6, 0]
-                  }}
-                  transition={{
-                    delay: 1.7,
-                    scale: { type: "spring", stiffness: 100 },
-                    y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="absolute bottom-[35%] lg:bottom-[40%] right-2 lg:-right-16 scale-[0.5] sm:scale-75 lg:scale-100 origin-right bg-white dark:bg-slate-950 shadow-2xl shadow-pink-200/50 dark:shadow-slate-900/50 p-3.5 rounded-2xl border border-pink-50 dark:border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto transition-colors"
-                >
-                  <div className="w-9 h-9 bg-pink-500 rounded-xl flex items-center justify-center text-white shrink-0">
-                    <Share2 className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-bold text-pink-500 uppercase tracking-widest leading-none mb-1">Social Media</div>
-                    <div className="text-xs font-black text-slate-900 dark:text-white transition-colors whitespace-nowrap">Management</div>
-                  </div>
-                </motion.div>
+                    {/* Ring 1 — inner glowing border */}
+                    <ellipse
+                      cx="210" cy="248" rx="158" ry="213"
+                      fill="none"
+                      stroke="#38bdf8"
+                      strokeWidth="2"
+                      strokeOpacity="0.9"
+                      transform="rotate(-8 210 248)"
+                      filter="url(#ringGlow)"
+                    />
 
-                {/* Bubble 6: Semua Bisnis */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: [0, 6, 0]
-                  }}
-                  transition={{
-                    delay: 1.6,
-                    scale: { type: "spring", stiffness: 100 },
-                    y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  className="absolute bottom-[2%] lg:bottom-[20%] right-2 lg:-right-8 scale-[0.5] sm:scale-75 lg:scale-100 origin-right bg-slate-900 shadow-2xl shadow-slate-900/40 p-4 rounded-2xl border border-slate-800 flex items-center gap-2.5 z-30 pointer-events-auto"
-                >
-                  <div className="w-9 h-9 bg-blue-500 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/30">
-                    <Rocket className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">Scalable Solution</div>
-                    <div className="text-sm font-black text-white whitespace-nowrap">Untuk Semua Bisnis</div>
-                  </div>
+                    {/* Ring 2 — middle dim ring */}
+                    <ellipse
+                      cx="210" cy="248" rx="188" ry="248"
+                      fill="none"
+                      stroke="#7dd3fc"
+                      strokeWidth="1.2"
+                      strokeOpacity="0.45"
+                      transform="rotate(-8 210 248)"
+                    />
+
+                    {/* Ring 3 — outer faint dashed ring */}
+                    <ellipse
+                      cx="210" cy="248" rx="208" ry="278"
+                      fill="none"
+                      stroke="#bae6fd"
+                      strokeWidth="1"
+                      strokeOpacity="0.25"
+                      strokeDasharray="8 14"
+                      transform="rotate(-8 210 248)"
+                    />
+                  </svg>
                 </motion.div>
               </div>
 
-              {/* Solid Background Blob */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[75%] bg-blue-50/90 dark:bg-slate-950/60 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] z-0 transition-colors" />
+              {/* TRANSPARENT ANIMATED LOGO — scaled, centered on the oval */}
+              <div className="relative z-10 w-full h-full max-w-[350px] max-h-[350px] sm:max-w-[480px] sm:max-h-[480px] lg:max-w-[600px] lg:max-h-[600px] xl:max-w-[650px] xl:max-h-[650px] flex items-center justify-center" style={{ marginTop: '-10%' }}>
+                <TransparentVideo src="/animatelogo.mp4" />
+              </div>
+
             </div>
           </motion.div>
 
@@ -254,16 +346,16 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-start text-left w-full px-4 lg:px-0 lg:pr-4 order-2 lg:order-1 pt-0 lg:-translate-y-12"
           >
-            <h1 className="text-[1.15rem] sm:text-[2rem] lg:text-[2.7rem] xl:text-[3.375rem] font-black leading-[1.2] text-slate-900 dark:text-white mb-3 lg:mb-8 tracking-tight max-w-[18ch] sm:max-w-none">
+            <h1 className="text-[1.35rem] sm:text-[2rem] lg:text-[2.7rem] xl:text-[3.375rem] font-black leading-tight text-white mb-4 lg:mb-8 tracking-tight">
               {t[lang].heroTitle.includes('&') ? (
                 <>
                   {t[lang].heroTitle.split('&')[0]}
-                  <span className="text-blue-900 dark:text-blue-600 transition-colors"> {t[lang].heroTitle.split('&')[1]}</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300"> {t[lang].heroTitle.split('&')[1]}</span>
                 </>
               ) : t[lang].heroTitle.includes('dan') ? (
                 <>
                   {t[lang].heroTitle.split('dan')[0]}
-                  <span className="text-blue-900 dark:text-blue-600 transition-colors"> dan {t[lang].heroTitle.split('dan')[1]}</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300"> dan {t[lang].heroTitle.split('dan')[1]}</span>
                 </>
               ) : (
                 t[lang].heroTitle
@@ -271,25 +363,36 @@ export default function HeroSection() {
             </h1>
 
             {/* Description - Unified for both Mobile & Desktop */}
-            <p className="text-sm sm:text-base lg:text-lg text-slate-500 dark:text-slate-400 max-w-[36ch] sm:max-w-xl leading-relaxed mb-5 lg:mb-10 font-medium opacity-90">
+            <p className="text-sm sm:text-base lg:text-lg text-blue-100/80 max-w-xl leading-relaxed mb-8 lg:mb-10 font-medium opacity-90 px-4 lg:px-0">
               {t[lang].heroDesc}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <Link
                 href="#harga"
-                className="bg-blue-900 text-white min-h-[44px] px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base shadow-2xl shadow-blue-900/30 dark:shadow-blue-900/20 hover:bg-slate-800 hover:-translate-y-1 transition-all duration-300 text-center flex items-center justify-center"
+                className="bg-blue-600 hover:bg-blue-700 text-white min-h-[44px] px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base shadow-2xl shadow-blue-500/20 hover:-translate-y-1 transition-all duration-300 text-center flex items-center justify-center gap-2"
               >
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                </svg>
                 {t[lang].heroBtnStart}
               </Link>
               <Link
                 href="#portfolio"
-                className="bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border-2 border-slate-100 dark:border-slate-800 min-h-[44px] px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base hover:border-blue-900 dark:hover:border-blue-500 hover:bg-blue-50/30 dark:hover:bg-slate-800 hover:-translate-y-1 transition-all duration-300 text-center flex items-center justify-center"
+                className="bg-transparent text-white border-2 border-white/20 min-h-[44px] px-8 py-3.5 lg:py-4 rounded-2xl font-bold text-sm lg:text-base hover:bg-white/10 hover:border-white/40 hover:-translate-y-1 transition-all duration-300 text-center flex items-center justify-center gap-2"
               >
+                <Grid className="w-4 h-4 shrink-0" />
                 {t[lang].heroBtnPort}
               </Link>
             </div>
           </motion.div>
+        </div>
+
+        {/* Bottom Wavy Curve */}
+        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
+          <svg className="relative block w-full h-[40px] md:h-[60px] lg:h-[80px]" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,60 C360,130 1080,10 1440,60 L1440,120 L0,120 Z" fill="#ffffff" />
+          </svg>
         </div>
       </section>
 

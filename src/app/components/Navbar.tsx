@@ -53,10 +53,9 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed z-[1000] transition-all duration-300
-          top-4 left-4 right-4 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-slate-100 dark:border-slate-800 px-2
-          lg:top-0 lg:left-0 lg:right-0 lg:px-0 lg:rounded-none lg:border-none lg:bg-transparent lg:shadow-none lg:backdrop-blur-none
-          ${scrolled ? "lg:bg-white lg:dark:bg-slate-950 lg:shadow-md lg:py-3 py-3" : "py-4 lg:py-5"}`}
+        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
+          scrolled ? "bg-white/95 backdrop-blur-md shadow-md py-3 border-b border-slate-100" : "bg-transparent py-5"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between">
           <div className="flex items-center gap-12">
@@ -64,21 +63,18 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2.5 group pl-2 lg:pl-0">
               <div className="relative w-9 h-9 lg:w-10 lg:h-10 shrink-0">
                 <Image
-                  src="/projects/logo.png"
+                  src={scrolled ? "/projects/logo.png" : "/projects/iconput.png"}
                   alt="TechSoe Logo"
                   fill
                   className="object-contain"
                   priority
                 />
               </div>
-              <div className="flex flex-col leading-none">
-                <span className="text-base lg:text-lg font-black text-slate-900 dark:text-white tracking-[0.05em] group-hover:text-blue-600 transition-colors">
-                  TechSoe
-                </span>
-                <span className="text-[8px] lg:text-[9px] font-semibold text-slate-400 dark:text-slate-500 tracking-[0.2em] uppercase mt-0.5">
-                  Teknologi Inovasi Soedirman
-                </span>
-              </div>
+              <span className={`text-xl lg:text-2xl font-black tracking-tighter transition-colors ${
+                scrolled ? "text-slate-900 group-hover:text-blue-600" : "text-white group-hover:text-cyan-300"
+              }`}>
+                TechSoe
+              </span>
             </Link>
 
             {/* DESKTOP MENU (LEFT ALIGNED) */}
@@ -89,9 +85,13 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown('services')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
+                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
+                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
+                }`}>
                   {lang === 'id' ? 'Layanan' : 'Services'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'services' ? 'rotate-180 text-blue-600 dark:text-blue-400' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    activeDropdown === 'services' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
+                  }`} />
                 </div>
                 <AnimatePresence>
                   {activeDropdown === 'services' && (
@@ -118,9 +118,13 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown('company')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 transition">
+                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
+                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
+                }`}>
                   {lang === 'id' ? 'Perusahaan' : 'Company'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'company' ? 'rotate-180 text-blue-600' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    activeDropdown === 'company' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
+                  }`} />
                 </div>
                 <AnimatePresence>
                   {activeDropdown === 'company' && (
@@ -147,9 +151,13 @@ export default function Navbar() {
                 onMouseEnter={() => setActiveDropdown('support')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
-                <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 transition">
+                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
+                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
+                }`}>
                   {lang === 'id' ? 'Dukungan' : 'Support'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === 'support' ? 'rotate-180 text-blue-600' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    activeDropdown === 'support' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
+                  }`} />
                 </div>
                 <AnimatePresence>
                   {activeDropdown === 'support' && (
@@ -191,7 +199,9 @@ export default function Navbar() {
               onMouseEnter={() => setActiveDropdown('lang')}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
+              <div className={`flex items-center gap-2 text-sm font-medium transition ${
+                scrolled ? "text-slate-600 hover:text-blue-600" : "text-white/90 hover:text-white"
+              }`}>
                 <Globe className="w-4 h-4" />
                 <span className="uppercase">{lang}</span>
                 <ChevronDown className="w-3 h-3" />
@@ -221,7 +231,9 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <Link href="/#portfolio" className="text-sm font-semibold text-blue-600 hover:text-blue-700 transition flex items-center gap-1">
+            <Link href="#portfolio" className={`text-sm font-semibold transition flex items-center gap-1.5 ${
+              scrolled ? "text-blue-600 hover:text-blue-700" : "text-white/90 hover:text-white"
+            }`}>
               <Briefcase className="w-4 h-4" />
               {t[lang].navSignIn}
             </Link>
@@ -240,25 +252,16 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* MOBILE TOGGLE & THEME */}
-          <div className="lg:hidden flex items-center gap-2 pr-1">
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="w-10 h-10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
-                aria-label="Toggle Theme"
-              >
-                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-            )}
-            <button
-              className="w-11 h-11 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 text-lg rounded-full transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle Menu"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+          {/* MOBILE TOGGLE */}
+          <button
+            className={`lg:hidden w-11 h-11 flex items-center justify-center rounded-xl transition-colors ${
+              scrolled ? "text-slate-700 hover:bg-slate-50" : "text-white hover:bg-white/10"
+            }`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
 
         {/* MOBILE MENU PANEL */}
