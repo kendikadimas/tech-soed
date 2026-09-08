@@ -27,22 +27,48 @@ function AdminNavContent({ children }: { children: React.ReactNode }) {
 
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [authChecking, setAuthChecking] = useState(pathname !== '/admin/login');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) {
-        setUserEmail(user.email ?? null);
-      }
-    });
-  }, []);
+    if (pathname === '/admin/login') {
+      setAuthChecking(false);
+      return;
+    }
+
+    try {
+      const supabase = createClient();
+      supabase.auth.getUser().then(({ data: { user }, error }) => {
+        if (user && !error) {
+          setUserEmail(user.email ?? null);
+          setAuthChecking(false);
+        } else {
+          router.replace('/admin/login');
+        }
+      }).catch(() => {
+        router.replace('/admin/login');
+      });
+    } catch {
+      router.replace('/admin/login');
+    }
+  }, [pathname, router]);
 
   // If on login page, render without sidebar chrome
   if (pathname === '/admin/login') {
     return <>{children}</>;
   }
+
+  // Loading state while checking authentication
+  if (authChecking) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
+        <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mb-3" />
+        <p className="text-xs font-bold text-slate-500 tracking-wide">Memeriksa hak akses admin...</p>
+      </div>
+    );
+  }
+
 
   const handleLogout = async () => {
     const supabase = createClient();
