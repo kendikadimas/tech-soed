@@ -4,14 +4,20 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronDown, Globe, Briefcase, Menu, X, Sun, Moon } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { ChevronDown, Globe, Menu, X, Sun, Moon } from 'lucide-react';
 import { t } from '../translations';
 import { useLang } from './LangContext';
 import { useTheme } from 'next-themes';
 
 
 export default function Navbar() {
+  const pathname = usePathname();
   const { lang, setLang } = useLang();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -51,229 +57,218 @@ export default function Navbar() {
   };
 
   return (
-    <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
-          scrolled ? "bg-white/95 backdrop-blur-md shadow-md py-3 border-b border-slate-100" : "bg-transparent py-5"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between">
-          <div className="flex items-center gap-12">
-            {/* LOGO */}
-            <Link href="/" className="flex items-center gap-2.5 group pl-2 lg:pl-0">
-              <div className="relative w-9 h-9 lg:w-10 lg:h-10 shrink-0">
-                <Image
-                  src={scrolled ? "/projects/logo.png" : "/projects/iconput.png"}
-                  alt="TechSoe Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <span className={`text-xl lg:text-2xl font-black tracking-tighter transition-colors ${
-                scrolled ? "text-slate-900 group-hover:text-blue-600" : "text-white group-hover:text-cyan-300"
-              }`}>
-                TechSoe
-              </span>
-            </Link>
-
-            {/* DESKTOP MENU (LEFT ALIGNED) */}
-            <div className="hidden lg:flex items-center gap-2">
-              {/* Layanan Dropdown */}
-              <div
-                className="relative px-3 py-2 group cursor-pointer"
-                onMouseEnter={() => setActiveDropdown('services')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
-                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
-                }`}>
-                  {lang === 'id' ? 'Layanan' : 'Services'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    activeDropdown === 'services' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
-                  }`} />
+    <header className="fixed top-0 left-0 right-0 z-[1000] flex justify-center pointer-events-none transition-all duration-500">
+        <nav
+          className={`pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            scrolled
+              ? "w-[96%] sm:w-[92%] xl:w-[90%] max-w-6xl xl:max-w-7xl mt-3 sm:mt-4 py-2.5 px-5 sm:px-8 rounded-full bg-white/45 dark:bg-slate-950/45 backdrop-blur-2xl border border-white/60 dark:border-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.1)]"
+              : "w-full max-w-full mt-0 py-3.5 sm:py-4 px-4 sm:px-8 lg:px-12 rounded-none bg-white/60 dark:bg-slate-950/60 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-none"
+          }`}
+        >
+          <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-8 xl:gap-12">
+              {/* LOGO */}
+              <Link href="/" className="flex items-center gap-2.5 group pl-1 sm:pl-2 lg:pl-0">
+                <div className={`relative shrink-0 transition-all duration-300 ${scrolled ? 'w-8 h-8' : 'w-9 h-9 lg:w-10 lg:h-10'}`}>
+                  <Image
+                    src="/projects/logo.png"
+                    alt="TechSoe Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
                 </div>
-                <AnimatePresence>
-                  {activeDropdown === 'services' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 w-80 bg-white dark:bg-slate-950 shadow-xl rounded-2xl border border-slate-100 dark:border-slate-800 p-4 mt-2 grid grid-cols-1 gap-1"
-                    >
-                      {menuData.services.map((item) => (
-                        <Link key={item.id} href={item.href} className="p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition group/item">
-                          <div className="font-bold text-sm text-slate-900 dark:text-white group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400">{item.title}</div>
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">{item.desc}</div>
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Company Dropdown */}
-              <div
-                className="relative px-3 py-2 group cursor-pointer"
-                onMouseEnter={() => setActiveDropdown('company')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
-                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
+                <span className={`font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all duration-300 ${
+                  scrolled ? 'text-lg lg:text-xl' : 'text-xl lg:text-2xl'
                 }`}>
-                  {lang === 'id' ? 'Perusahaan' : 'Company'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    activeDropdown === 'company' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
-                  }`} />
-                </div>
-                <AnimatePresence>
-                  {activeDropdown === 'company' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 w-80 bg-white dark:bg-slate-950 shadow-xl rounded-2xl border border-slate-100 dark:border-slate-800 p-4 mt-2 grid grid-cols-1 gap-1"
-                    >
-                      {menuData.company.map((item) => (
-                        <Link key={item.id} href={item.href} className="p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition group/item">
-                          <div className="font-bold text-sm text-slate-900 dark:text-white group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400">{item.title}</div>
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">{item.desc}</div>
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                  TechSoe
+                </span>
+              </Link>
 
-              {/* Support Dropdown */}
-              <div
-                className="relative px-3 py-2 group cursor-pointer"
-                onMouseEnter={() => setActiveDropdown('support')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <div className={`flex items-center gap-1 text-sm font-semibold transition ${
-                  scrolled ? "text-slate-700 hover:text-blue-600" : "text-white/90 hover:text-white"
-                }`}>
-                  {lang === 'id' ? 'Dukungan' : 'Support'}
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    activeDropdown === 'support' ? 'rotate-180 text-blue-600' : scrolled ? 'text-slate-400' : 'text-white/70'
-                  }`} />
+              {/* DESKTOP MENU (LEFT ALIGNED) */}
+              <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+                {/* Layanan Dropdown */}
+                <div
+                  className="relative px-3 py-2 group cursor-pointer"
+                  onMouseEnter={() => setActiveDropdown('services')}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-1.5 rounded-full hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-all">
+                    {lang === 'id' ? 'Layanan' : 'Services'}
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      activeDropdown === 'services' ? 'rotate-180 text-blue-600' : 'text-slate-400 dark:text-slate-400'
+                    }`} />
+                  </div>
+                  <AnimatePresence>
+                    {activeDropdown === 'services' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute top-full left-0 w-80 bg-white dark:bg-slate-950 shadow-xl rounded-2xl border border-slate-100 dark:border-slate-800 p-4 mt-2 grid grid-cols-1 gap-1"
+                      >
+                        {menuData.services.map((item) => (
+                          <Link key={item.id} href={item.href} className="p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition group/item">
+                            <div className="font-bold text-sm text-slate-900 dark:text-white group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400">{item.title}</div>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">{item.desc}</div>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <AnimatePresence>
-                  {activeDropdown === 'support' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 w-64 bg-white dark:bg-slate-950 shadow-xl rounded-2xl border border-slate-100 dark:border-slate-800 p-4 mt-2 grid grid-cols-1 gap-1"
-                    >
-                      {menuData.support.map((item) => (
-                        <Link key={item.id} href={item.href} className="p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition font-bold text-sm text-slate-900 dark:text-white dark:hover:text-blue-400 hover:text-blue-600">
-                          {item.title}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+
+                {/* Company Dropdown */}
+                <div
+                  className="relative px-3 py-2 group cursor-pointer"
+                  onMouseEnter={() => setActiveDropdown('company')}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-1.5 rounded-full hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-all">
+                    {lang === 'id' ? 'Perusahaan' : 'Company'}
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      activeDropdown === 'company' ? 'rotate-180 text-blue-600' : 'text-slate-400 dark:text-slate-400'
+                    }`} />
+                  </div>
+                  <AnimatePresence>
+                    {activeDropdown === 'company' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute top-full left-0 w-80 bg-white dark:bg-slate-950 shadow-xl rounded-2xl border border-slate-100 dark:border-slate-800 p-4 mt-2 grid grid-cols-1 gap-1"
+                      >
+                        {menuData.company.map((item) => (
+                          <Link key={item.id} href={item.href} className="p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition group/item">
+                            <div className="font-bold text-sm text-slate-900 dark:text-white group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400">{item.title}</div>
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">{item.desc}</div>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Support Dropdown */}
+                <div
+                  className="relative px-3 py-2 group cursor-pointer"
+                  onMouseEnter={() => setActiveDropdown('support')}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-1.5 rounded-full hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-all">
+                    {lang === 'id' ? 'Dukungan' : 'Support'}
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      activeDropdown === 'support' ? 'rotate-180 text-blue-600' : 'text-slate-400 dark:text-slate-400'
+                    }`} />
+                  </div>
+                  <AnimatePresence>
+                    {activeDropdown === 'support' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute top-full left-0 w-64 bg-white dark:bg-slate-950 shadow-xl rounded-2xl border border-slate-100 dark:border-slate-800 p-4 mt-2 grid grid-cols-1 gap-1"
+                      >
+                        {menuData.support.map((item) => (
+                          <Link key={item.id} href={item.href} className="p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition font-bold text-sm text-slate-900 dark:text-white dark:hover:text-blue-400 hover:text-blue-600">
+                            {item.title}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="flex-1" />
+            <div className="flex-1" />
 
-          {/* RIGHT TOOLS */}
-          <div className="hidden lg:flex items-center gap-6">
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="w-10 h-10 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors"
-                aria-label="Toggle Theme"
+            {/* RIGHT TOOLS */}
+            <div className="hidden lg:flex items-center gap-4 xl:gap-5">
+              {mounted && (
+                <button
+                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  className="w-9 h-9 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+                  aria-label="Toggle Theme"
+                >
+                  {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
+              )}
+
+              {/* Lang Switcher Mekari style */}
+              <div
+                className="relative group cursor-pointer py-1.5"
+                onMouseEnter={() => setActiveDropdown('lang')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-            )}
-
-            {/* Lang Switcher Mekari style */}
-            <div
-              className="relative group cursor-pointer py-2"
-              onMouseEnter={() => setActiveDropdown('lang')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <div className={`flex items-center gap-2 text-sm font-medium transition ${
-                scrolled ? "text-slate-600 hover:text-blue-600" : "text-white/90 hover:text-white"
-              }`}>
-                <Globe className="w-4 h-4" />
-                <span className="uppercase">{lang}</span>
-                <ChevronDown className="w-3 h-3" />
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 px-2.5 py-1 rounded-full hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition">
+                  <Globe className="w-3.5 h-3.5" />
+                  <span className="uppercase">{lang}</span>
+                  <ChevronDown className="w-3 h-3" />
+                </div>
+                <AnimatePresence>
+                  {activeDropdown === 'lang' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 5 }}
+                      className="absolute top-full right-0 w-32 bg-white dark:bg-slate-950 shadow-xl rounded-xl border border-slate-100 dark:border-slate-800 p-2 mt-1"
+                    >
+                      <button
+                        onClick={() => setLang('id')}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-xs font-bold transition ${lang === 'id' ? 'bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-white' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900'}`}
+                      >
+                        Bindo (ID)
+                      </button>
+                      <button
+                        onClick={() => setLang('en')}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-xs font-bold transition ${lang === 'en' ? 'bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-white' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900'}`}
+                      >
+                        English (EN)
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <AnimatePresence>
-                {activeDropdown === 'lang' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5 }}
-                    className="absolute top-full right-0 w-32 bg-white dark:bg-slate-950 shadow-xl rounded-xl border border-slate-100 dark:border-slate-800 p-2 mt-1"
-                  >
-                    <button
-                      onClick={() => setLang('id')}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-bold transition ${lang === 'id' ? 'bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-white' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900'}`}
-                    >
-                      Bindo (ID)
-                    </button>
-                    <button
-                      onClick={() => setLang('en')}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-bold transition ${lang === 'en' ? 'bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-white' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900'}`}
-                    >
-                      English (EN)
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+
+              {/* Mekari Style WhatsApp Button (Capsule adaptive) */}
+              <a
+                href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
+                target="_blank"
+                rel="noreferrer"
+                className={`text-white text-xs xl:text-sm font-bold flex items-center gap-2 transition-all duration-300 hover:-translate-y-0.5 active:scale-95 ${
+                  scrolled
+                    ? "bg-[#25D366] hover:bg-[#20bd5a] px-4 py-2 rounded-full shadow-md shadow-[#25D366]/25 min-h-[38px]"
+                    : "bg-[#25D366] hover:bg-[#20bd5a] px-5 py-2.5 rounded-xl shadow-md shadow-[#25D366]/20 min-h-[42px]"
+                }`}
+              >
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                </svg>
+                {t[lang].navWhatsApp}
+              </a>
             </div>
 
-            <Link href="#portfolio" className={`text-sm font-semibold transition flex items-center gap-1.5 ${
-              scrolled ? "text-blue-600 hover:text-blue-700" : "text-white/90 hover:text-white"
-            }`}>
-              <Briefcase className="w-4 h-4" />
-              {t[lang].navSignIn}
-            </Link>
-
-            {/* Mekari Style WhatsApp Button */}
-            <a
-              href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-[#25D366] text-white px-5 py-2.5 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-[#20bd5a] shadow-md shadow-[#25D366]/20 transition-all hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
+            {/* MOBILE TOGGLE */}
+            <button
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Menu"
             >
-              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-              </svg>
-              {t[lang].navWhatsApp}
-            </a>
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
 
-          {/* MOBILE TOGGLE */}
-          <button
-            className={`lg:hidden w-11 h-11 flex items-center justify-center rounded-xl transition-colors ${
-              scrolled ? "text-slate-700 hover:bg-slate-50" : "text-white hover:bg-white/10"
-            }`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* MOBILE MENU PANEL */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden absolute top-full left-0 right-0 mt-3 bg-white/95 dark:bg-slate-950/95 backdrop-blur-3xl rounded-3xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden origin-top"
-            >
-              <div className="p-6 flex flex-col gap-4">
+          {/* MOBILE MENU PANEL */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="lg:hidden absolute top-full left-0 right-0 mt-3 bg-white/95 dark:bg-slate-950/95 backdrop-blur-3xl rounded-3xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] overflow-hidden origin-top"
+              >
+                <div className="p-6 flex flex-col gap-4">
                 {/* Services Collapsible */}
                 <div className="border-b border-slate-50 dark:border-slate-800 pb-2">
                   <button
@@ -366,7 +361,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </nav>
-
-    </>
+    </header>
   );
 }

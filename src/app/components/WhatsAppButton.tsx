@@ -2,11 +2,17 @@
 
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { t } from '../translations';
 import { useLang } from './LangContext';
 
 export default function WhatsAppButton() {
   const { lang } = useLang();
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <a

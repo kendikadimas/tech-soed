@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -75,7 +81,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { LangProvider, Navbar, Footer, WhatsAppButton, ThemeProvider } from "./components";
+import { LangProvider, MainLayoutShell, ThemeProvider } from "./components";
 
 export default function RootLayout({
   children,
@@ -196,18 +202,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} antialiased dark:bg-slate-950 transition-colors`}
+        className={`${inter.variable} ${plusJakarta.variable} antialiased dark:bg-slate-950 transition-colors`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <LangProvider>
-            <Navbar />
-            <main className="bg-white dark:bg-slate-950 transition-colors">
+            <MainLayoutShell>
               {children}
-            </main>
-            <div className="bg-slate-50 dark:bg-slate-950 transition-colors">
-              <Footer />
-            </div>
-            <WhatsAppButton />
+            </MainLayoutShell>
           </LangProvider>
         </ThemeProvider>
       </body>

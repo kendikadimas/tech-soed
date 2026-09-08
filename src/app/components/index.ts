@@ -17,3 +17,4 @@ export { default as WhatsAppButton } from './WhatsAppButton';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as OrderModal } from './OrderModal';
 export { default as ContactSection } from './ContactSection';
+export { default as MainLayoutShell } from './MainLayoutShell';

@@ -1,15 +1,53 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { blogPosts } from '@/lib/blogData';
+import { createClient } from '@/lib/supabase/client';
 
 export default function LatestArticles() {
-  // Take the 3 latest posts
-  const recentPosts = [...blogPosts].reverse().slice(0, 3);
+  const [posts, setPosts] = useState<any[]>([...blogPosts].reverse().slice(0, 3));
+
+  useEffect(() => {
+    const fetchLatest = async () => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from('articles')
+          .select('*')
+          .eq('published', true)
+          .order('created_at', { ascending: false })
+          .limit(3);
+
+        if (!error && data && data.length > 0) {
+          const mapped = data.map((art) => ({
+            id: art.id,
+            slug: art.slug,
+            title: art.title,
+            category: art.category,
+            excerpt: art.excerpt,
+            date: art.created_at
+              ? new Date(art.created_at).toLocaleDateString('id-ID', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                })
+              : 'Terbaru',
+          }));
+          setPosts(mapped);
+        }
+      } catch (err) {
+        console.warn('LatestArticles: using fallback blog posts', err);
+      }
+    };
+
+    fetchLatest();
+  }, []);
+
+  const recentPosts = posts;
 
   return (
     <section className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">

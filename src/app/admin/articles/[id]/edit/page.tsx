@@ -1,0 +1,11 @@
+import React from 'react';
+import ArticleEditor from '../../../components/ArticleEditor';
+
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function EditArticlePage({ params }: PageProps) {
+  const { id } = await params;
+  return <ArticleEditor articleId={id} />;
+}
