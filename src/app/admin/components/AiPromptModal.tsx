@@ -132,20 +132,20 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-3xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl shadow-black/30 border border-slate-200 dark:border-slate-800 overflow-hidden z-10 my-8">
+      <div className="relative w-full max-w-3xl bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl shadow-black/30 border border-slate-200 dark:border-slate-800 overflow-hidden z-10 my-4 sm:my-8 flex flex-col" style={{ maxHeight: 'calc(100vh - 2rem)' }}>
         
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-[#172657] via-[#1f3373] to-blue-900 px-6 py-5 text-white flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-              <Sparkles className="w-5 h-5 text-amber-300 animate-pulse" />
+        <div className="bg-gradient-to-r from-[#172657] via-[#1f3373] to-blue-900 px-4 sm:px-6 py-4 text-white flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shrink-0">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 animate-pulse" />
             </div>
             <div>
-              <h3 className="text-lg font-black tracking-tight text-white flex items-center gap-2">
-                Generator Prompt AI & Cover Gambar
+              <h3 className="text-sm sm:text-lg font-black tracking-tight text-white">
+                Generator Prompt AI
               </h3>
-              <p className="text-xs text-blue-200/80 font-medium">
-                Buat prompt naskah artikel SEO & kata kunci gambar sampul otomatis
+              <p className="text-[11px] sm:text-xs text-blue-200/80 font-medium hidden sm:block">
+                Buat prompt naskah artikel SEO &amp; kata kunci gambar sampul otomatis
               </p>
             </div>
           </div>
@@ -158,8 +158,8 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
           </button>
         </div>
 
-        {/* Modal Body */}
-        <div className="p-6 sm:p-8 space-y-6 max-h-[78vh] overflow-y-auto">
+        {/* Modal Body — scrollable */}
+        <div className="p-4 sm:p-6 space-y-5 overflow-y-auto flex-1">
           
           {/* Input 1: Judul / Topik Artikel */}
           <div className="space-y-2">
@@ -247,30 +247,32 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
           </div>
 
           {/* TAB SELECTION: Prompt Naskah vs Prompt/Kata Kunci Gambar */}
-          <div className="flex border-b border-slate-200 dark:border-slate-800 pt-2">
+          <div className="flex border-b border-slate-200 dark:border-slate-800 pt-1">
             <button
               type="button"
               onClick={() => setActiveTab('prompt')}
-              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+              className={`pb-2.5 px-3 sm:px-4 text-xs font-bold border-b-2 transition-all flex items-center gap-1.5 cursor-pointer ${
                 activeTab === 'prompt'
                   ? 'border-blue-600 text-blue-600 dark:text-blue-400'
                   : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400'
               }`}
             >
-              <Wand2 className="w-4 h-4" />
-              Prompt Naskah Artikel AI
+              <Wand2 className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Prompt Naskah Artikel AI</span>
+              <span className="sm:hidden">Prompt Naskah</span>
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('image')}
-              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+              className={`pb-2.5 px-3 sm:px-4 text-xs font-bold border-b-2 transition-all flex items-center gap-1.5 cursor-pointer ${
                 activeTab === 'image'
                   ? 'border-blue-600 text-blue-600 dark:text-blue-400'
                   : 'border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400'
               }`}
             >
-              <ImageIcon className="w-4 h-4" />
-              Kata Kunci & Prompt Foto Sampul (Cover)
+              <ImageIcon className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden sm:inline">Kata Kunci &amp; Prompt Foto Sampul (Cover)</span>
+              <span className="sm:hidden">Prompt Foto Cover</span>
             </button>
           </div>
 
@@ -405,9 +407,9 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
           )}
 
           {/* External Links & Form Action */}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             {/* AI Tools Quick Links */}
-            <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
               <span>Buka AI:</span>
               <a
                 href="https://chatgpt.com"
@@ -436,15 +438,15 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto justify-end">
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               {onOpenPasteModal && (
                 <button
                   type="button"
                   onClick={onOpenPasteModal}
-                  className="px-3.5 sm:px-4 py-2.5 bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 rounded-xl text-xs font-bold border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer flex items-center gap-1.5"
+                  className="flex-1 sm:flex-initial px-3 py-2.5 bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 rounded-xl text-xs font-bold border border-slate-200 hover:border-emerald-300 transition-all cursor-pointer flex items-center justify-center gap-1.5"
                   title="Punya teks hasil dari ChatGPT / Gemini? Tempel langsung di sini"
                 >
-                  <ClipboardCheck className="w-4 h-4 text-emerald-600" />
+                  <ClipboardCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>Tempel Hasil AI</span>
                 </button>
               )}
@@ -452,20 +454,20 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
                 <button
                   type="button"
                   onClick={handleApplyToForm}
-                  className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md transition-all cursor-pointer flex items-center gap-1.5"
+                  className="flex-1 sm:flex-initial px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5"
                 >
-                  <Check className="w-4 h-4" />
-                  <span>Terapkan Judul ke Editor</span>
+                  <Check className="w-4 h-4 shrink-0" />
+                  <span>Terapkan Judul</span>
                 </button>
               )}
               <button
                 type="button"
                 onClick={activeTab === 'prompt' ? handleCopyPrompt : handleCopyImagePrompt}
-                className="px-5 py-2.5 bg-[#172657] hover:bg-[#1f3373] text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer flex items-center gap-2"
+                className="flex-1 sm:flex-initial px-4 py-2.5 bg-[#172657] hover:bg-[#1f3373] text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
-                {copiedPrompt || copiedImagePrompt ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                {copiedPrompt || copiedImagePrompt ? <Check className="w-4 h-4 text-emerald-400 shrink-0" /> : <Copy className="w-4 h-4 shrink-0" />}
                 <span>
-                  {copiedPrompt || copiedImagePrompt ? 'Tersalin!' : activeTab === 'prompt' ? 'Salin Prompt Naskah' : 'Salin Prompt Gambar'}
+                  {copiedPrompt || copiedImagePrompt ? 'Tersalin!' : 'Salin Prompt'}
                 </span>
               </button>
             </div>

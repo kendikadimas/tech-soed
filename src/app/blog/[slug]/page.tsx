@@ -1,11 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
-import { Calendar, User, Clock, Tag, ArrowLeft, Share2, Sparkles, MessageCircle } from 'lucide-react';
+import { Calendar, Clock, Tag, ArrowLeft, Share2, Sparkles, MessageCircle, ChevronLeft, ChevronRight, Hash } from 'lucide-react';
 import Link from 'next/link';
 import { blogPosts } from '@/lib/blogData';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import ReactMarkdown from 'react-markdown';
+import ArticleRenderer, { ReadingProgress } from './ArticleRenderer';
 import { createPublicClient } from '@/lib/supabase/public';
 
 type Props = {
@@ -13,6 +13,47 @@ type Props = {
 }
 
 export const dynamicParams = true;
+
+// All articles (Supabase + static fallback) for prev/next navigation
+async function getAllPosts() {
+    try {
+        const supabase = createPublicClient();
+        const { data, error } = await supabase
+            .from('articles')
+            .select('id, slug, title, category, image_url, created_at, read_time')
+            .eq('published', true)
+            .order('created_at', { ascending: false });
+
+        if (!error && data && data.length > 0) {
+            const dbPosts = data.map((d) => ({
+                slug: d.slug,
+                title: d.title,
+                category: d.category || 'Bisnis & Teknologi',
+                image: d.image_url || '/projects/blog_1.png',
+                readTime: d.read_time || '4 Menit Baca',
+            }));
+            const staticMapped = blogPosts.map((p) => ({
+                slug: p.slug,
+                title: p.title,
+                category: p.category,
+                image: p.image,
+                readTime: p.readTime,
+            }));
+            const seen = new Set(dbPosts.map((p) => p.slug));
+            const merged = [...dbPosts, ...staticMapped.filter((p) => !seen.has(p.slug))];
+            return merged;
+        }
+    } catch (e) {
+        // fallback
+    }
+    return blogPosts.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        category: p.category,
+        image: p.image,
+        readTime: p.readTime,
+    }));
+}
 
 async function getPost(slug: string) {
     try {
@@ -49,6 +90,35 @@ async function getPost(slug: string) {
     }
 
     return blogPosts.find((p) => p.slug === slug) || null;
+}
+
+// Generate article tags from title words + category
+function generateTags(title: string, category: string): string[] {
+    const tags: string[] = [];
+
+    if (category) tags.push(category);
+
+    const stopwords = new Set([
+        'dan', 'untuk', 'yang', 'di', 'ke', 'dari', 'dengan', 'pada', 'adalah',
+        'ini', 'itu', 'juga', 'atau', 'dalam', 'bagi', 'akan', 'para', 'cara',
+        'apa', 'bagaimana', 'mengapa', 'sebuah', 'suatu', 'saat', 'era',
+        'the', 'and', 'for', 'with', 'in', 'of', 'to', 'a', 'an',
+    ]);
+
+    const words = title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/gi, '')
+        .split(/\s+/)
+        .filter((w) => w.length > 3 && !stopwords.has(w));
+
+    words.slice(0, 5).forEach((w) => {
+        const capitalized = w.charAt(0).toUpperCase() + w.slice(1);
+        if (!tags.includes(capitalized)) tags.push(capitalized);
+    });
+
+    tags.push('TechSoe');
+
+    return tags.slice(0, 8);
 }
 
 // Dynamic SEO Generation
@@ -131,7 +201,7 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: Props) {
     const { slug } = await params;
-    const post = await getPost(slug);
+    const [post, allPosts] = await Promise.all([getPost(slug), getAllPosts()]);
 
     if (!post) {
         notFound();
@@ -140,7 +210,15 @@ export default async function BlogPostPage({ params }: Props) {
     const postUrl = `https://techsoe.com/blog/${post.slug}`;
     const imageUrl = post.image.startsWith('http') ? post.image : `https://techsoe.com${post.image}`;
 
-    // Schema.org Structured Data (Google Rich Snippets)
+    // Prev / Next navigation
+    const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
+    const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+    const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+
+    // Tags
+    const tags = generateTags(post.title, post.category);
+
+    // Schema.org Structured Data
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -170,7 +248,7 @@ export default async function BlogPostPage({ params }: Props) {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 pb-24 sm:pb-32 transition-colors">
-            {/* Google Schema.org JSON-LD Structured Data */}
+            <ReadingProgress />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -179,7 +257,6 @@ export default async function BlogPostPage({ params }: Props) {
             {/* HERO ARTICLE HEADER */}
             <section className="pt-32 sm:pt-40 pb-6 sm:pb-10 px-5 sm:px-6 relative">
                 <div className="max-w-4xl mx-auto space-y-6">
-                    {/* Back Link & Breadcrumb */}
                     <div className="flex items-center justify-between">
                         <Link
                             href="/blog"
@@ -193,7 +270,6 @@ export default async function BlogPostPage({ params }: Props) {
                         </span>
                     </div>
 
-                    {/* Category Pill */}
                     <div>
                         <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold uppercase tracking-wider text-xs border border-blue-200 dark:border-blue-800">
                             <Tag className="w-3.5 h-3.5" />
@@ -201,17 +277,14 @@ export default async function BlogPostPage({ params }: Props) {
                         </span>
                     </div>
 
-                    {/* Title */}
                     <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.15] tracking-tight">
                         {post.title}
                     </h1>
 
-                    {/* Excerpt Lead */}
                     <p className="text-slate-600 dark:text-slate-400 text-base sm:text-xl leading-relaxed border-l-4 border-blue-600 pl-4 py-1 italic">
                         {post.excerpt}
                     </p>
 
-                    {/* Meta Bar */}
                     <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400">
                         <div className="flex items-center gap-4 sm:gap-6">
                             <div className="flex items-center gap-2">
@@ -229,7 +302,6 @@ export default async function BlogPostPage({ params }: Props) {
                                 <span>{post.readTime}</span>
                             </div>
                         </div>
-
                         <a
                             href={`https://wa.me/?text=${encodeURIComponent(`${post.title} - Baca selengkapnya di TechSoe: https://techsoe.com/blog/${post.slug}`)}`}
                             target="_blank"
@@ -260,14 +332,89 @@ export default async function BlogPostPage({ params }: Props) {
             )}
 
             {/* MAIN ARTICLE BODY */}
-            <article className="max-w-3xl mx-auto px-5 sm:px-6 mt-6 sm:mt-10 text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-medium pb-16 sm:pb-20 border-b border-slate-200 dark:border-slate-800">
-                <div className="prose prose-base sm:prose-lg prose-slate dark:prose-invert prose-blue max-w-none prose-headings:font-black prose-headings:tracking-tight prose-headings:text-slate-900 dark:prose-headings:text-white prose-img:rounded-3xl prose-img:shadow-lg prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:font-bold prose-p:leading-relaxed prose-li:leading-relaxed">
-                    <ReactMarkdown>{post.content}</ReactMarkdown>
-                </div>
+            <article className="max-w-3xl mx-auto px-5 sm:px-6 mt-6 sm:mt-10">
+                <ArticleRenderer content={post.content} />
             </article>
 
-            {/* AUTHOR BIO & BOTTOM CALL TO ACTION */}
-            <div className="max-w-3xl mx-auto px-5 sm:px-6 mt-12 sm:mt-16 space-y-8">
+            {/* POST-CONTENT SECTION */}
+            <div className="max-w-3xl mx-auto px-5 sm:px-6 mt-10 sm:mt-14 space-y-10">
+
+                {/* DIVIDER */}
+                <hr className="border-slate-200 dark:border-slate-800" />
+
+                {/* TAGS SECTION */}
+                <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                        <Hash className="w-3.5 h-3.5" />
+                        <span>Tag Artikel</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        {tags.map((tag) => (
+                            <Link
+                                key={tag}
+                                href={`/blog?category=${encodeURIComponent(tag)}`}
+                                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 text-xs font-semibold hover:border-blue-400 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 hover:bg-blue-50/60 dark:hover:bg-blue-950/30 transition-all"
+                            >
+                                <Hash className="w-3 h-3 opacity-50" />
+                                {tag}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+
+                {/* PREV / NEXT NAVIGATION */}
+                {(prevPost || nextPost) && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {prevPost ? (
+                            <Link
+                                href={`/blog/${prevPost.slug}`}
+                                className="group flex items-start gap-3 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md transition-all"
+                            >
+                                <div className="shrink-0 w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 dark:group-hover:bg-blue-950 dark:group-hover:text-blue-400 transition-colors mt-0.5">
+                                    <ChevronLeft className="w-4 h-4" />
+                                </div>
+                                <div className="min-w-0">
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-1.5">
+                                        Artikel Sebelumnya
+                                    </p>
+                                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug line-clamp-2">
+                                        {prevPost.title}
+                                    </p>
+                                    <p className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 mt-1.5">
+                                        {prevPost.category}
+                                    </p>
+                                </div>
+                            </Link>
+                        ) : (
+                            <div />
+                        )}
+
+                        {nextPost ? (
+                            <Link
+                                href={`/blog/${nextPost.slug}`}
+                                className="group flex items-start gap-3 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md transition-all sm:flex-row-reverse sm:text-right"
+                            >
+                                <div className="shrink-0 w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-blue-50 group-hover:text-blue-600 dark:group-hover:bg-blue-950 dark:group-hover:text-blue-400 transition-colors mt-0.5">
+                                    <ChevronRight className="w-4 h-4" />
+                                </div>
+                                <div className="min-w-0">
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-1.5">
+                                        Artikel Selanjutnya
+                                    </p>
+                                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug line-clamp-2">
+                                        {nextPost.title}
+                                    </p>
+                                    <p className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 mt-1.5">
+                                        {nextPost.category}
+                                    </p>
+                                </div>
+                            </Link>
+                        ) : (
+                            <div />
+                        )}
+                    </div>
+                )}
+
                 {/* Author Card */}
                 <div className="flex items-center gap-4 p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
                     <div className="w-14 h-14 rounded-2xl bg-[#172657] text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md">
@@ -291,7 +438,7 @@ export default async function BlogPostPage({ params }: Props) {
                             <Sparkles className="w-3.5 h-3.5" /> Konsultasi Gratis
                         </div>
                         <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
-                            Wujudkan Website & Aplikasi Bisnis Impian Anda
+                            Wujudkan Website &amp; Aplikasi Bisnis Impian Anda
                         </h3>
                         <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
                             Konsultasikan kebutuhan digitalisasi perusahaan Anda langsung dengan engineer TechSoe tanpa komitmen dan tanpa biaya tersembunyi.
