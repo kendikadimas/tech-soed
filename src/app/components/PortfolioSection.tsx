@@ -284,7 +284,6 @@ export default function PortfolioSection() {
                       src={project.image}
                       alt={`${project.title} - Jasa Pembuatan Website Purwokerto`}
                       fill
-                      unoptimized
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="group-hover:scale-105 transition duration-700 ease-in-out object-contain p-2"
                     />
@@ -308,12 +307,6 @@ export default function PortfolioSection() {
                        <span className="text-blue-600 dark:text-blue-400 font-bold text-sm lg:text-base flex items-center gap-2 group-hover:gap-3 transition-all">
                           {lang === 'id' ? 'Lihat Detail' : 'View Details'} <ArrowRight className="w-4 h-4" />
                        </span>
-                       {project.live_url && (
-                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 text-xs font-bold shadow-xs">
-                           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                           {lang === 'id' ? 'Live Demo' : 'Live Demo'}
-                         </span>
-                       )}
                     </div>
                   </div>
                 </motion.div>

@@ -30,6 +30,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Mobile performance optimization for off-screen sections */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
+}
+
 /* Keep dark-mode blue accents consistent for text/icons without breaking blue backgrounds. */
 .dark :is(
   [class~="text-blue-50"],

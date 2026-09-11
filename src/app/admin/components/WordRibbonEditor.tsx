@@ -129,65 +129,138 @@ export function htmlToMarkdown(html: string): string {
 export function markdownToHtml(md: string): string {
   if (!md) return '<p><br></p>';
 
-  // If already HTML, return as-is
-  if (/<(p|h[1-6]|div|ul|ol|table|blockquote)[^>]*>/i.test(md)) {
+  // If already HTML (starts with a block-level tag), return as-is
+  if (/^\s*<(p|h[1-6]|div|ul|ol|table|blockquote|pre)[^>]*>/i.test(md)) {
     return md;
   }
 
-  let html = md;
+  // Process line by line using a block-level parser approach
+  const lines = md.split('\n');
+  const outputParts: string[] = [];
+  let i = 0;
 
-  // Code blocks
-  html = html.replace(/```([\s\S]*?)```/g, '<pre style="background:#0f172a;color:#f8fafc;padding:16px;border-radius:12px;overflow-x:auto;"><code>$1</code></pre>');
-  // Inline code
-  html = html.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9;color:#e11d48;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:0.875em;">$1</code>');
+  // Helper: apply inline formatting to a string
+  const inlineFmt = (text: string): string => {
+    // Protect code blocks first with placeholders
+    const codeMap: string[] = [];
+    text = text.replace(/`([^`]+)`/g, (_, c) => {
+      codeMap.push(`<code style="background:#f1f5f9;color:#e11d48;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:0.875em;">${c}</code>`);
+      return `\x00CODE${codeMap.length - 1}\x00`;
+    });
+    // Images before links
+    text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:12px;margin:8px 0;" />');
+    // Links
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:#2563eb;text-decoration:underline;font-weight:600;">$1</a>');
+    // Bold+Italic
+    text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
+    // Bold
+    text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // Italic
+    text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    // Strikethrough
+    text = text.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+    // Restore code
+    text = text.replace(/\x00CODE(\d+)\x00/g, (_, idx) => codeMap[parseInt(idx)]);
+    return text;
+  };
 
-  // Images
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:12px;margin:16px 0;box-shadow:0 10px 25px -5px rgba(0,0,0,0.1);" />');
+  while (i < lines.length) {
+    const line = lines[i];
+    const trimmed = line.trim();
 
-  // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:#2563eb;text-decoration:underline;font-weight:600;">$1</a>');
+    // Skip empty lines
+    if (!trimmed) {
+      i++;
+      continue;
+    }
 
-  // Headers
-  html = html.replace(/^### (.*$)/gim, '<h3 style="font-size:1.35rem;font-weight:700;margin:1.2em 0 0.5em 0;">$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2 style="font-size:1.65rem;font-weight:800;margin:1.4em 0 0.5em 0;">$1</h2>');
-  html = html.replace(/^# (.*$)/gim, '<h1 style="font-size:2.15rem;font-weight:900;margin:1.5em 0 0.6em 0;">$1</h1>');
-
-  // Blockquotes
-  html = html.replace(/^\> (.*$)/gim, '<blockquote style="border-left:4px solid #2563eb;padding:8px 16px;margin:16px 0;font-style:italic;background:rgba(37,99,235,0.06);border-radius:0 8px 8px 0;">$1</blockquote>');
-
-  // Bold & Italic
-  html = html.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  html = html.replace(/~~([^~]+)~~/g, '<del>$1</del>');
-
-  // Horizontal Rule
-  html = html.replace(/^---$/gim, '<hr style="margin:24px 0;border:none;border-top:2px solid #e2e8f0;" />');
-
-  // Lists
-  html = html.replace(/^\s*[-*+]\s+(.*)$/gim, '<li style="margin-left:20px;list-style-type:disc;">$1</li>');
-  html = html.replace(/(<li style="margin-left:20px;list-style-type:disc;">.*<\/li>(\n|$))+/gim, '<ul style="margin:12px 0;padding-left:10px;">$&</ul>');
-
-  // Ordered list
-  html = html.replace(/^\s*\d+\.\s+(.*)$/gim, '<oli style="margin-left:20px;list-style-type:decimal;">$1</oli>');
-  html = html.replace(/(<oli style="margin-left:20px;list-style-type:decimal;">.*<\/oli>(\n|$))+/gim, (match) => {
-    return '<ol style="margin:12px 0;padding-left:10px;">' + match.replace(/<\/?oli/g, '<li') + '</ol>';
-  });
-
-  // Paragraphs
-  const blocks = html.split(/\n{2,}/);
-  const wrapped = blocks
-    .map((block) => {
-      const trimmed = block.trim();
-      if (!trimmed) return '';
-      if (/^<(h[1-6]|ul|ol|blockquote|pre|hr|img|table)/i.test(trimmed)) {
-        return trimmed;
+    // Fenced code block ```
+    if (trimmed.startsWith('```')) {
+      const lang = trimmed.slice(3).trim();
+      i++;
+      const codeLines: string[] = [];
+      while (i < lines.length && !lines[i].trim().startsWith('```')) {
+        codeLines.push(lines[i]);
+        i++;
       }
-      return `<p style="margin-bottom:1em;line-height:1.75;">${trimmed.replace(/\n/g, '<br>')}</p>`;
-    })
-    .join('');
+      i++; // consume closing ```
+      const escaped = codeLines.join('\n').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      outputParts.push(`<pre style="background:#0f172a;color:#f8fafc;padding:16px;border-radius:12px;overflow-x:auto;margin:16px 0;"><code class="language-${lang}">${escaped}</code></pre>`);
+      continue;
+    }
 
-  return wrapped || '<p><br></p>';
+    // Headings
+    const h3 = trimmed.match(/^### (.+)$/);
+    const h2 = trimmed.match(/^## (.+)$/);
+    const h1 = trimmed.match(/^# (.+)$/);
+    if (h1) { outputParts.push(`<h1 style="font-size:2.15rem;font-weight:900;margin:1.5em 0 0.6em 0;">${inlineFmt(h1[1])}</h1>`); i++; continue; }
+    if (h2) { outputParts.push(`<h2 style="font-size:1.65rem;font-weight:800;margin:1.4em 0 0.5em 0;">${inlineFmt(h2[1])}</h2>`); i++; continue; }
+    if (h3) { outputParts.push(`<h3 style="font-size:1.35rem;font-weight:700;margin:1.2em 0 0.5em 0;">${inlineFmt(h3[1])}</h3>`); i++; continue; }
+
+    // H4
+    const h4 = trimmed.match(/^#### (.+)$/);
+    if (h4) { outputParts.push(`<h4 style="font-size:1.1rem;font-weight:700;margin:1em 0 0.4em 0;">${inlineFmt(h4[1])}</h4>`); i++; continue; }
+
+    // Horizontal Rule
+    if (/^(---|\*\*\*|___)$/.test(trimmed)) {
+      outputParts.push('<hr style="margin:24px 0;border:none;border-top:2px solid #e2e8f0;" />');
+      i++;
+      continue;
+    }
+
+    // Blockquote
+    if (trimmed.startsWith('> ')) {
+      const quoteLines: string[] = [];
+      while (i < lines.length && lines[i].trim().startsWith('> ')) {
+        quoteLines.push(lines[i].trim().slice(2));
+        i++;
+      }
+      const inner = quoteLines.map(inlineFmt).join('<br>');
+      outputParts.push(`<blockquote style="border-left:4px solid #2563eb;padding:8px 16px;margin:16px 0;font-style:italic;background:rgba(37,99,235,0.06);border-radius:0 8px 8px 0;">${inner}</blockquote>`);
+      continue;
+    }
+
+    // Unordered List
+    if (/^\s*[-*+]\s+/.test(line)) {
+      const items: string[] = [];
+      while (i < lines.length && /^\s*[-*+]\s+/.test(lines[i])) {
+        const itemText = lines[i].trim().replace(/^[-*+]\s+/, '');
+        items.push(`<li style="margin:4px 0 4px 20px;list-style-type:disc;">${inlineFmt(itemText)}</li>`);
+        i++;
+      }
+      outputParts.push(`<ul style="margin:12px 0;padding-left:8px;">${items.join('')}</ul>`);
+      continue;
+    }
+
+    // Ordered List
+    if (/^\s*\d+\.\s+/.test(line)) {
+      const items: string[] = [];
+      while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+        const itemText = lines[i].trim().replace(/^\d+\.\s+/, '');
+        items.push(`<li style="margin:4px 0 4px 20px;list-style-type:decimal;">${inlineFmt(itemText)}</li>`);
+        i++;
+      }
+      outputParts.push(`<ol style="margin:12px 0;padding-left:8px;">${items.join('')}</ol>`);
+      continue;
+    }
+
+    // Regular paragraph — accumulate consecutive non-blank, non-block lines
+    const paraLines: string[] = [];
+    while (
+      i < lines.length &&
+      lines[i].trim() !== '' &&
+      !/^(#{1,6} |> |\s*[-*+]\s|\s*\d+\.\s|---|```|\*\*\*|___)/.test(lines[i])
+    ) {
+      paraLines.push(lines[i]);
+      i++;
+    }
+    if (paraLines.length > 0) {
+      const inner = paraLines.map(inlineFmt).join('<br>');
+      outputParts.push(`<p style="margin-bottom:1em;line-height:1.75;">${inner}</p>`);
+    }
+  }
+
+  return outputParts.join('') || '<p><br></p>';
 }
 
 export default function WordRibbonEditor({
@@ -347,23 +420,23 @@ export default function WordRibbonEditor({
   return (
     <div className="w-full rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white text-slate-800 flex flex-col font-sans transition-all">
       {/* ================= 1. MICROSOFT WORD TITLE BAR & RIBBON TABS ================= */}
-      <div className="bg-[#f8fafc] border-b border-slate-200 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 select-none">
+      <div className="bg-[#f8fafc] border-b border-slate-200 px-3 sm:px-4 py-2.5 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 select-none overflow-x-auto">
         {/* Document Branding */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-6 h-6 rounded bg-[#2b579a] flex items-center justify-center font-bold text-white text-xs shadow-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded bg-[#2b579a] flex items-center justify-center font-bold text-white text-xs shadow-sm shrink-0">
             W
           </div>
-          <span className="text-xs font-bold text-slate-800">
-            Word WYSIWYG Editor
+          <span className="text-xs font-bold text-slate-800 shrink-0">
+            Word Editor
           </span>
         </div>
 
         {/* Ribbon Tabs Navigation */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 overflow-x-auto">
           <button
             type="button"
             onClick={() => setActiveRibbonTab('beranda')}
-            className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+            className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeRibbonTab === 'beranda'
                 ? 'bg-[#2b579a] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
@@ -375,7 +448,7 @@ export default function WordRibbonEditor({
           <button
             type="button"
             onClick={() => setActiveRibbonTab('sisipkan')}
-            className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+            className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeRibbonTab === 'sisipkan'
                 ? 'bg-[#2b579a] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
@@ -387,7 +460,7 @@ export default function WordRibbonEditor({
           <button
             type="button"
             onClick={() => setActiveRibbonTab('tampilan')}
-            className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+            className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeRibbonTab === 'tampilan'
                 ? 'bg-[#2b579a] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70'
@@ -398,7 +471,7 @@ export default function WordRibbonEditor({
         </div>
 
         {/* View Switcher: Word Sheet / Split Screen / Preview */}
-        <div className="flex items-center bg-slate-200/70 p-1 rounded-lg border border-slate-300/60">
+        <div className="flex items-center bg-slate-200/70 p-1 rounded-lg border border-slate-300/60 overflow-x-auto max-w-full">
           <button
             type="button"
             onClick={() => setViewMode('word')}
@@ -652,7 +725,7 @@ export default function WordRibbonEditor({
                     : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
                 }`}
               >
-                📄 Kertas Putih (Asli Word)
+                Kertas Putih (Asli Word)
               </button>
               <button
                 type="button"
@@ -663,7 +736,7 @@ export default function WordRibbonEditor({
                     : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
                 }`}
               >
-                🌙 Kertas Gelap (Dark Mode)
+                Kertas Gelap (Dark Mode)
               </button>
             </div>
 

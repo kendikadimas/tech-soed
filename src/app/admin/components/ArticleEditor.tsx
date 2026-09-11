@@ -15,10 +15,13 @@ import {
   AlertCircle,
   Sparkles,
   ExternalLink,
+  ClipboardCheck,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { createClient } from '@/lib/supabase/client';
 import WordRibbonEditor from './WordRibbonEditor';
+import AiPromptModal from './AiPromptModal';
+import AiPasteModal from './AiPasteModal';
 
 interface ArticleEditorProps {
   articleId?: string;
@@ -33,6 +36,8 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
   const [uploading, setUploading] = useState(false);
   const [activeTab, setActiveTab] = useState<'write' | 'preview'>('write');
   const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
+  const [isPasteModalOpen, setIsPasteModalOpen] = useState(false);
 
   const [form, setForm] = useState({
     title: '',
@@ -50,6 +55,16 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
     setStatusMsg({ type, text });
     setTimeout(() => setStatusMsg(null), 4000);
   };
+
+  // Check URL query parameter for ?paste=true
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('paste') === 'true') {
+        setIsPasteModalOpen(true);
+      }
+    }
+  }, []);
 
   // Load existing article if editing
   useEffect(() => {
@@ -227,27 +242,44 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+          <button
+            type="button"
+            onClick={() => setIsPasteModalOpen(true)}
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-600/20 cursor-pointer transition-all active:scale-95 whitespace-nowrap"
+            title="Tempel teks lengkap dari ChatGPT / Gemini dan sistem akan otomatis merapikannya"
+          >
+            <ClipboardCheck className="w-4 h-4 shrink-0" />
+            <span>Tempel Hasil AI</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsPromptModalOpen(true)}
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-500/20 cursor-pointer transition-all active:scale-95 whitespace-nowrap"
+          >
+            <Sparkles className="w-4 h-4 text-amber-100 animate-pulse shrink-0" />
+            <span>Buat Prompt AI</span>
+          </button>
           <Link
             href="/admin"
-            className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl border border-transparent hover:border-slate-200 transition-all"
+            className="px-3.5 sm:px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl border border-slate-200 transition-all text-center"
           >
             Batal
           </Link>
           <button
             onClick={handleSubmit}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 bg-[#172657] hover:bg-[#1f3373] disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 cursor-pointer transition-all active:scale-95"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 bg-[#172657] hover:bg-[#1f3373] disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 cursor-pointer transition-all active:scale-95 whitespace-nowrap"
           >
             {saving ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin shrink-0" />
                 <span>Menyimpan...</span>
               </>
             ) : (
               <>
-                <Save className="w-4 h-4" />
-                <span>{articleId ? 'Perbarui Artikel' : 'Terbitkan Artikel'}</span>
+                <Save className="w-4 h-4 shrink-0" />
+                <span>{articleId ? 'Perbarui' : 'Terbitkan'}</span>
               </>
             )}
           </button>
@@ -261,9 +293,29 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
           {/* Title Input */}
           <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                Judul Artikel <span className="text-rose-500">*</span>
-              </label>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Judul Artikel <span className="text-rose-500">*</span>
+                </label>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsPasteModalOpen(true)}
+                    className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 cursor-pointer bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg border border-emerald-200 transition-all"
+                  >
+                    <ClipboardCheck className="w-3.5 h-3.5" />
+                    <span>Tempel Teks AI</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsPromptModalOpen(true)}
+                    className="text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1.5 cursor-pointer bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-lg border border-amber-200 transition-all"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Prompt AI</span>
+                  </button>
+                </div>
+              </div>
               <input
                 type="text"
                 required
@@ -477,6 +529,45 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
           </div>
         </div>
       </form>
+
+      {/* AI Prompt Generator Modal */}
+      <AiPromptModal
+        isOpen={isPromptModalOpen}
+        onClose={() => setIsPromptModalOpen(false)}
+        initialTitle={form.title}
+        onOpenPasteModal={() => {
+          setIsPromptModalOpen(false);
+          setIsPasteModalOpen(true);
+        }}
+        onApplyTitle={(newTitle, newCategory) => {
+          handleTitleChange(newTitle);
+          setForm((prev) => ({
+            ...prev,
+            category: newCategory || prev.category,
+          }));
+          showToast('success', 'Judul & kategori artikel diterapkan!');
+        }}
+      />
+
+      {/* AI Smart Paste & Auto-Parser Modal */}
+      <AiPasteModal
+        isOpen={isPasteModalOpen}
+        onClose={() => setIsPasteModalOpen(false)}
+        onApply={(data) => {
+          if (data.title) {
+            handleTitleChange(data.title);
+          }
+          setForm((prev) => ({
+            ...prev,
+            title: data.title || prev.title,
+            excerpt: data.excerpt || prev.excerpt,
+            content: data.content || prev.content,
+            category: data.category || prev.category,
+            read_time: data.readTime || prev.read_time,
+          }));
+          showToast('success', 'Teks dari AI berhasil dirapikan dan dimasukkan ke form!');
+        }}
+      />
     </div>
   );
 }

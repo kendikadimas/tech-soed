@@ -31,11 +31,7 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
   const getDemoButtonLabel = () => {
     if (!project) return '';
     if (lang !== 'id') return 'Open Application';
-    const cat = (project.category || '').toLowerCase();
-    if (cat.includes('app') || cat.includes('sistem') || cat.includes('lms') || cat.includes('software')) {
-      return 'Buka Aplikasi';
-    }
-    return 'Buka Aplikasi / Demo';
+    return 'Buka Aplikasi';
   };
 
   return (
@@ -75,7 +71,6 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
                   src={project.image}
                   alt={project.title}
                   fill
-                  unoptimized
                   className="object-contain p-4"
                 />
                 {/* Category Badge */}

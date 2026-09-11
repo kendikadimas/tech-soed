@@ -20,9 +20,11 @@ import {
   Loader2,
   ExternalLink,
   ArrowRight,
+  ClipboardCheck,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { blogPosts as defaultBlogPosts } from '@/lib/blogData';
+import AiPromptModal from './components/AiPromptModal';
 
 // 8 Default Hero Projects
 const defaultProjects = [
@@ -43,6 +45,7 @@ function AdminDashboardContent() {
   const [articles, setArticles] = useState<any[]>([]);
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
   const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const supabase = createClient();
@@ -206,12 +209,29 @@ function AdminDashboardContent() {
           </button>
 
           {currentTab === 'articles' ? (
-            <Link
-              href="/admin/articles/new"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#172657] hover:bg-[#1f3373] text-white text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer"
-            >
-              <Plus className="w-4 h-4" /> Tulis Artikel Baru
-            </Link>
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href="/admin/articles/new?paste=true"
+                className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all cursor-pointer whitespace-nowrap"
+              >
+                <ClipboardCheck className="w-4 h-4" />
+                <span>Tempel Teks AI</span>
+              </Link>
+              <button
+                type="button"
+                onClick={() => setIsPromptModalOpen(true)}
+                className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold shadow-md shadow-amber-500/20 transition-all cursor-pointer whitespace-nowrap"
+              >
+                <Sparkles className="w-4 h-4 text-amber-100 animate-pulse" />
+                <span>Prompt AI</span>
+              </button>
+              <Link
+                href="/admin/articles/new"
+                className="flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl bg-[#172657] hover:bg-[#1f3373] text-white text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer whitespace-nowrap"
+              >
+                <Plus className="w-4 h-4" /> Tulis Artikel Baru
+              </Link>
+            </div>
           ) : (
             <Link
               href="/admin/projects/new"
@@ -453,7 +473,7 @@ function AdminDashboardContent() {
                       }`}
                     >
                       <Layers className="w-3.5 h-3.5" />
-                      {proj.featured_hero ? 'Tampil di 3D Hero ✓' : 'Sembunyi dari Hero'}
+                      {proj.featured_hero ? 'Tampil di 3D Hero' : 'Sembunyi dari Hero'}
                     </button>
 
                     <div className="flex items-center justify-end gap-1">
@@ -478,6 +498,12 @@ function AdminDashboardContent() {
           )}
         </div>
       )}
+
+      {/* AI Article Prompt Generator Modal */}
+      <AiPromptModal
+        isOpen={isPromptModalOpen}
+        onClose={() => setIsPromptModalOpen(false)}
+      />
     </div>
   );
 }

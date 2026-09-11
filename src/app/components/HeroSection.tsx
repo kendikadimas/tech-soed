@@ -148,8 +148,8 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] bg-[size:24px_24px] opacity-60 pointer-events-none" />
 
       {/* Subtle Ambient Glowing Mesh Blobs */}
-      <div className="absolute top-1/4 left-1/6 w-[400px] h-[400px] bg-[#172657]/15 dark:bg-blue-600/15 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/6 w-[450px] h-[450px] bg-blue-500/10 dark:bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/6 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-[#172657]/15 dark:bg-blue-600/15 rounded-full blur-2xl sm:blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/6 w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] bg-blue-500/10 dark:bg-blue-500/10 rounded-full blur-2xl sm:blur-[140px] pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto w-full relative z-10 flex flex-col">
         
@@ -160,17 +160,17 @@ export default function HeroSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full mb-4 sm:mb-5 lg:mb-6 text-left"
         >
-          <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] xl:text-[3.25rem] font-extrabold tracking-normal sm:tracking-wide text-slate-900 dark:text-white leading-[1.22] sm:leading-[1.16]">
+          <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] xl:text-[3.25rem] font-extrabold tracking-normal sm:tracking-wide text-slate-900 dark:text-white leading-[1.25] sm:leading-[1.16]">
             {lang === 'id' ? (
               <>
-                <span className="inline-flex flex-wrap items-center">
-                  <span>Jasa Pembuatan</span>
-                  <span className="ml-2 relative inline-flex items-center text-[#172657] dark:text-blue-400 font-extrabold min-h-[1em]">
+                <span className="block sm:inline-flex sm:flex-wrap items-center">
+                  <span className="block sm:inline">Jasa Pembuatan</span>
+                  <span className="inline-flex items-center sm:ml-2 text-[#172657] dark:text-blue-400 font-extrabold min-h-[1.2em] py-0.5">
                     {currentText}
                     <motion.span
                       animate={{ opacity: [1, 0, 1] }}
                       transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                      className="ml-1 sm:ml-2 w-[3px] sm:w-[4px] h-5 sm:h-7 lg:h-9 bg-[#172657] dark:bg-blue-400 rounded-full inline-block"
+                      className="ml-1 sm:ml-2 w-[3px] sm:w-[4px] h-[0.9em] bg-[#172657] dark:bg-blue-400 rounded-full inline-block align-middle"
                     />
                   </span>
                 </span>
@@ -180,14 +180,14 @@ export default function HeroSection() {
               </>
             ) : (
               <>
-                <span className="inline-flex flex-wrap items-center">
-                  <span>Build</span>
-                  <span className="ml-2 relative inline-flex items-center text-[#172657] dark:text-blue-400 font-extrabold min-h-[1em]">
+                <span className="block sm:inline-flex sm:flex-wrap items-center">
+                  <span className="block sm:inline">Build</span>
+                  <span className="inline-flex items-center sm:ml-2 text-[#172657] dark:text-blue-400 font-extrabold min-h-[1.2em] py-0.5">
                     {currentText}
                     <motion.span
                       animate={{ opacity: [1, 0, 1] }}
                       transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                      className="ml-1 sm:ml-2 w-[3px] sm:w-[4px] h-5 sm:h-7 lg:h-9 bg-[#172657] dark:bg-blue-400 rounded-full inline-block"
+                      className="ml-1 sm:ml-2 w-[3px] sm:w-[4px] h-[0.9em] bg-[#172657] dark:bg-blue-400 rounded-full inline-block align-middle"
                     />
                   </span>
                 </span>
@@ -257,13 +257,13 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
             className="lg:col-span-5 xl:col-span-5 relative w-full h-[220px] sm:h-[280px] lg:h-[340px] xl:h-[370px] flex items-center justify-center overflow-visible mt-2 sm:mt-6 lg:-mt-16 xl:-mt-24 2xl:-mt-28"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             {/* Ambient 3D Depth Floor Glow tilted with the cylinder */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] sm:w-[320px] lg:w-[400px] h-[100px] sm:h-[150px] bg-gradient-to-r from-[#172657]/25 via-blue-600/20 to-sky-400/15 blur-[55px] sm:blur-[65px] rounded-full pointer-events-none rotate-[-10deg]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] sm:w-[320px] lg:w-[400px] h-[100px] sm:h-[150px] bg-gradient-to-r from-[#172657]/25 via-blue-600/20 to-sky-400/15 blur-xl sm:blur-[65px] rounded-full pointer-events-none rotate-[-10deg]" />
 
             {/* 3D Perspective Stage Container */}
             <div
@@ -273,7 +273,7 @@ export default function HeroSection() {
                 perspectiveOrigin: '50% 36%',
               }}
             >
-              {/* 3D Tilted Gimbal (Diagonal slant matching Image 2: pitch down + roll slant left-to-right) */}
+              {/* 3D Tilted Gimbal */}
               <div
                 className="relative w-full h-full flex items-center justify-center"
                 style={{
@@ -288,7 +288,7 @@ export default function HeroSection() {
                   }}
                   transition={{
                     rotateY: {
-                      duration: 26,
+                      duration: 32,
                       repeat: Infinity,
                       ease: "linear",
                     },
@@ -322,10 +322,9 @@ export default function HeroSection() {
                             src={card.image}
                             alt={card.title}
                             fill
-                            unoptimized
                             sizes="(max-width: 640px) 100px, (max-width: 1024px) 125px, 160px"
                             className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                            priority={idx < 4}
+                            priority={idx < 2}
                           />
 
                           {/* Gradient Overlay for Text Readability */}
@@ -342,23 +341,15 @@ export default function HeroSection() {
                           </div>
                         </div>
 
-                        {/* BACK FACE: Frosted Translucent Curved Ring Panel */}
+                        {/* BACK FACE: Simplified Ring Backing */}
                         <div
-                          className="absolute inset-0 rounded-lg sm:rounded-xl overflow-hidden border border-white/30 dark:border-slate-600/30 shadow-sm bg-slate-900/40 dark:bg-slate-950/60 backdrop-blur-md opacity-45"
+                          className="absolute inset-0 rounded-lg sm:rounded-xl overflow-hidden border border-white/20 dark:border-slate-700/30 bg-slate-900/80 dark:bg-slate-950/90 opacity-40"
                           style={{
                             transform: 'rotateY(180deg)',
                             backfaceVisibility: 'hidden',
                             WebkitBackfaceVisibility: 'hidden',
                           }}
-                        >
-                          <Image
-                            src={card.image}
-                            alt=""
-                            fill
-                            className="object-cover object-top opacity-30"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-white/10" />
-                        </div>
+                        />
                       </div>
                     );
                   })}
