@@ -6,6 +6,7 @@ import { blogPosts } from '@/lib/blogData';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import ArticleRenderer, { ReadingProgress } from './ArticleRenderer';
+import ArticleViewTracker from './ArticleViewTracker';
 import { createPublicClient } from '@/lib/supabase/public';
 
 type Props = {
@@ -249,6 +250,7 @@ export default async function BlogPostPage({ params }: Props) {
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 pb-24 sm:pb-32 transition-colors">
             <ReadingProgress />
+        <ArticleViewTracker slug={post.slug} />
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

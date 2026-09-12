@@ -16,6 +16,7 @@ import {
   Sparkles,
   ChevronRight,
   LayoutDashboard,
+  BarChart3,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
@@ -79,6 +80,7 @@ function AdminNavContent({ children }: { children: React.ReactNode }) {
 
   const isArticlesActive = pathname === '/admin' && currentTab === 'articles';
   const isProjectsActive = pathname === '/admin' && currentTab === 'projects';
+  const isAnalyticsActive = pathname === '/admin/analytics';
   const isNewArticleActive = pathname === '/admin/articles/new';
   const isNewProjectActive = pathname === '/admin/projects/new';
 
@@ -154,6 +156,22 @@ function AdminNavContent({ children }: { children: React.ReactNode }) {
                 Konten Utama
               </p>
               <nav className="space-y-1">
+                <Link
+                  href="/admin/analytics"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                    isAnalyticsActive
+                      ? 'bg-[#172657] text-white shadow-md shadow-[#172657]/15'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <BarChart3 className={`w-4 h-4 ${isAnalyticsActive ? 'text-blue-300' : 'text-slate-400'}`} />
+                    <span>Dashboard Analytics</span>
+                  </div>
+                  {isAnalyticsActive && <ChevronRight className="w-3.5 h-3.5 text-blue-300" />}
+                </Link>
+
                 <Link
                   href="/admin?tab=articles"
                   onClick={() => setMobileMenuOpen(false)}

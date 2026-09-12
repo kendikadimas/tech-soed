@@ -21,6 +21,7 @@ import {
   ExternalLink,
   ArrowRight,
   ClipboardCheck,
+  BarChart3,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { blogPosts as defaultBlogPosts } from '@/lib/blogData';
@@ -200,7 +201,13 @@ function AdminDashboardContent() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/admin/analytics"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold border border-slate-200 transition-colors shadow-sm"
+          >
+            <BarChart3 className="w-4 h-4 text-slate-700" /> Dashboard Analytics
+          </Link>
           <button
             onClick={fetchData}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold border border-slate-200 transition-colors cursor-pointer shadow-sm"
