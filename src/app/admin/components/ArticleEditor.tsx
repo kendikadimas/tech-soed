@@ -119,20 +119,69 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
     }));
   };
 
-  // File upload to Supabase Storage
+  // ── Image compression via Canvas before upload ──────────────────────────
+  const compressImage = (file: File): Promise<{ blob: Blob; sizeBefore: number; sizeAfter: number }> =>
+    new Promise((resolve, reject) => {
+      const MAX_W = 1280;
+      const MAX_H = 720;
+      const QUALITY = 0.82; // WebP quality 82%
+
+      const img = new window.Image();
+      const url = URL.createObjectURL(file);
+
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+
+        let { width, height } = img;
+
+        // Scale down proportionally
+        if (width > MAX_W || height > MAX_H) {
+          const ratio = Math.min(MAX_W / width, MAX_H / height);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { reject(new Error('Canvas not supported')); return; }
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) { reject(new Error('Compression failed')); return; }
+            resolve({ blob, sizeBefore: file.size, sizeAfter: blob.size });
+          },
+          'image/webp',
+          QUALITY
+        );
+      };
+
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Gagal membaca gambar')); };
+      img.src = url;
+    });
+
+  // File upload to Supabase Storage (with auto-compression)
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setUploading(true);
     try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+      // Compress first
+      const { blob, sizeBefore, sizeAfter } = await compressImage(file);
+      const savedKB = Math.round((sizeBefore - sizeAfter) / 1024);
+      const sizeAfterKB = Math.round(sizeAfter / 1024);
+
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.webp`;
       const filePath = `articles/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from('techsoe-media')
-        .upload(filePath, file, { cacheControl: '3600', upsert: true });
+        .upload(filePath, blob, { contentType: 'image/webp', cacheControl: '31536000', upsert: true });
 
       if (uploadError) throw uploadError;
 
@@ -141,14 +190,17 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
         .getPublicUrl(filePath);
 
       setForm((prev) => ({ ...prev, image_url: publicUrlData.publicUrl }));
-      showToast('success', 'Gambar sampul berhasil diupload!');
+      showToast('success', `Gambar diupload! ${sizeAfterKB} KB (hemat ${savedKB} KB)`);
     } catch (err: any) {
       console.error(err);
       showToast('error', 'Gagal upload gambar: ' + (err.message || 'Error storage'));
     } finally {
       setUploading(false);
+      // Reset input so same file can be re-selected
+      e.target.value = '';
     }
   };
+
 
   // Save Article
   const handleSubmit = async (e: React.FormEvent) => {
@@ -501,12 +553,12 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
                   {uploading ? (
                     <>
                       <Loader2 className="w-3.5 h-3.5 animate-spin text-blue-600" />
-                      <span>Mengupload ke Supabase...</span>
+                      <span>Mengkompresi &amp; upload...</span>
                     </>
                   ) : (
                     <>
                       <Upload className="w-3.5 h-3.5 text-blue-600" />
-                      <span>Upload Gambar dari Perangkat</span>
+                      <span>Upload &amp; Kompresi Otomatis (WebP)</span>
                     </>
                   )}
                 </div>

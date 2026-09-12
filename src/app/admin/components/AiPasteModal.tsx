@@ -103,12 +103,12 @@ export function parseAiArticleText(rawText: string): ParsedArticle {
     // Detect Excerpt
     if (!foundExcerpt) {
       if (
-        /^(ringkasan|excerpt|meta description|deskripsi singkat|ringkasan singkat)\s*[:\-]\s*/i.test(line) ||
-        /^\*\*(ringkasan|excerpt|meta description|ringkasan singkat)\*\*\s*[:\-]?\s*/i.test(line)
+        /^(ringkasan|excerpt|meta description|excerpt\/meta description|deskripsi singkat|ringkasan singkat)\s*[:\-]\s*/i.test(line) ||
+        /^\*\*(ringkasan|excerpt|meta description|excerpt\/meta description|ringkasan singkat)\*\*\s*[:\-]?\s*/i.test(line)
       ) {
         excerpt = line
-          .replace(/^\*\*(ringkasan|excerpt|meta description|ringkasan singkat)\*\*\s*[:\-]?\s*/i, '')
-          .replace(/^(ringkasan|excerpt|meta description|deskripsi singkat|ringkasan singkat)\s*[:\-]\s*/i, '')
+          .replace(/^\*\*(ringkasan|excerpt|meta description|excerpt\/meta description|ringkasan singkat)\*\*\s*[:\-]?\s*/i, '')
+          .replace(/^(ringkasan|excerpt|meta description|excerpt\/meta description|deskripsi singkat|ringkasan singkat)\s*[:\-]\s*/i, '')
           .replace(/^\*\*|\*\*$/g, '')
           .replace(/^["']|["']$/g, '')
           .trim();
@@ -122,6 +122,13 @@ export function parseAiArticleText(rawText: string): ParsedArticle {
   }
 
   let cleanContent = remainingLines.join('\n').trim();
+
+  // Strip any remaining "Excerpt/Meta Description:" lines from content body (catch-all)
+  cleanContent = cleanContent
+    .split('\n')
+    .filter((line) => !/^\*?\*?(excerpt|meta description|excerpt\/meta description|ringkasan singkat|deskripsi singkat)\*?\*?\s*[:\-]/i.test(line.trim()))
+    .join('\n')
+    .trim();
 
   // If title was repeated in content as # Judul, clean it out so it doesn't appear twice
   if (title) {

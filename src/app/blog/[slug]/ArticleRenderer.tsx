@@ -244,20 +244,41 @@ function parseMarkdown(md: string): Block[] {
       continue;
     }
 
-    // Markdown table (starts with |)
-    if (trimmed.startsWith('|')) {
+    // Markdown table — detect both standard (|col|) and non-leading-pipe (col | col) formats
+    // A table is identified by: current line contains '|' AND next line is a separator (---|---)
+    const isSepRow = (line: string) => /^[|\s\-:]+$/.test(line.trim()) && line.includes('-');
+    const hasTablePipes = (line: string) => {
+      const t = line.trim();
+      return t.includes('|') && !t.startsWith('>') && !t.startsWith('#');
+    };
+
+    if (hasTablePipes(raw) && (i + 1 < lines.length) && isSepRow(lines[i + 1])) {
       const tableLines: string[] = [];
-      while (i < lines.length && lines[i].trim().startsWith('|')) {
+      while (i < lines.length && (hasTablePipes(lines[i]) || isSepRow(lines[i]))) {
         tableLines.push(lines[i].trim());
         i++;
       }
       if (tableLines.length >= 2) {
-        const parseRow = (row: string) =>
-          row.split('|').slice(1, -1).map((c) => c.trim());
-        const headers = parseRow(tableLines[0]);
-        // tableLines[1] is the separator line (---|---), skip it
-        const rows = tableLines.slice(2).map(parseRow);
-        blocks.push({ type: 'table', headers, rows });
+        // Parse a row: split by | and trim — handles both leading-pipe and non-leading-pipe
+        const parseRow = (row: string): string[] => {
+          // If leading and trailing pipe, use slice(1,-1)
+          if (row.startsWith('|') && row.endsWith('|')) {
+            return row.split('|').slice(1, -1).map((c) => c.trim()).filter(Boolean);
+          }
+          // Otherwise split by | directly
+          return row.split('|').map((c) => c.trim()).filter(Boolean);
+        };
+        // Find separator row index
+        const sepIdx = tableLines.findIndex((l) => isSepRow(l));
+        const headerRow = sepIdx > 0 ? tableLines[sepIdx - 1] : tableLines[0];
+        const headers = parseRow(headerRow);
+        const rows = tableLines
+          .filter((l) => !isSepRow(l) && l !== headerRow)
+          .map(parseRow);
+        if (headers.length > 0) {
+          blocks.push({ type: 'table', headers, rows });
+          continue;
+        }
       }
       continue;
     }
@@ -286,19 +307,27 @@ function parseMarkdown(md: string): Block[] {
       continue;
     }
 
-    // Paragraph — gather consecutive non-block lines
+    // Paragraph — gather consecutive non-block, non-table lines
     const paraLines: string[] = [];
     while (
       i < lines.length &&
       lines[i].trim() !== '' &&
       !/^(#{1,6}\s|>\s|\s*[-*+]\s|\s*\d+\.\s|---|```|\*\*\*|___)/.test(lines[i]) &&
-      !/^!\[[^\]]*\]\([^)]+\)$/.test(lines[i].trim())
+      !/^!\[[^\]]*\]\([^)]+\)$/.test(lines[i].trim()) &&
+      // stop if this line + next line form a table
+      !(hasTablePipes(lines[i]) && i + 1 < lines.length && isSepRow(lines[i + 1]))
     ) {
-      paraLines.push(lines[i]);
+      const l = lines[i];
+      // Skip lines that look like "Excerpt/Meta Description:" labels
+      if (/^\*?\*?(excerpt|meta description|ringkasan singkat|deskripsi singkat)\*?\*?\s*[:\/]/i.test(l.trim())) {
+        i++;
+        continue;
+      }
+      paraLines.push(l);
       i++;
     }
     if (paraLines.length > 0) {
-      const text = paraLines.join(' ');
+      const text = paraLines.join('\n');
       paraCount++;
       blocks.push({ type: 'p', inlines: parseInlines(text), isLead: paraCount === 1 });
     }
