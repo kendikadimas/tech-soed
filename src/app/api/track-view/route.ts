@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Use service role key to bypass RLS for tracking (read-only tracking table)
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const DEFAULT_SUPABASE_URL = 'https://duvextmdokvbwbirzpua.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_9QHODrht1B-ZDx_uieJaKQ_bcAlFWB6';
+
+function getSupabaseAdmin() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || DEFAULT_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
+  return createClient(url, key);
+}
 
 export async function POST(req: NextRequest) {
   try {
+    const supabaseAdmin = getSupabaseAdmin();
     const { slug } = await req.json();
     if (!slug || typeof slug !== 'string') {
       return NextResponse.json({ error: 'slug required' }, { status: 400 });
