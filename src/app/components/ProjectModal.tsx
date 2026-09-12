@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { X, ArrowRight, Tag, ExternalLink } from 'lucide-react';
@@ -21,6 +21,17 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose, lang }: ProjectModalProps) {
+  useEffect(() => {
+    if (project) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [project]);
+
   const rawDemoUrl = project?.live_url || project?.link;
   const demoUrl = rawDemoUrl && rawDemoUrl.trim()
     ? (rawDemoUrl.trim().startsWith('http://') || rawDemoUrl.trim().startsWith('https://')
@@ -47,20 +58,21 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
             onClick={onClose}
           />
 
-          {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 30 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none"
-          >
-            <div className="relative w-full max-w-xl bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-2xl shadow-black/30 pointer-events-auto border border-slate-100 dark:border-slate-800">
-              {/* Close Button */}
+          {/* Modal Container */}
+          <div className="fixed inset-0 z-[101] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-xl max-h-[85vh] sm:max-h-[90vh] bg-white dark:bg-slate-900 rounded-3xl overflow-y-auto shadow-2xl shadow-black/30 border border-slate-100 dark:border-slate-800 my-auto flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Sticky Close Button */}
               <button
                 onClick={onClose}
                 aria-label="Tutup modal"
-                className="absolute top-3.5 right-3.5 z-10 w-8 h-8 rounded-full bg-white/90 dark:bg-slate-800 shadow-lg flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-all hover:scale-110 active:scale-95 cursor-pointer"
+                className="absolute top-3.5 right-3.5 z-20 w-8 h-8 rounded-full bg-white/90 dark:bg-slate-800 shadow-lg flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-all hover:scale-110 active:scale-95 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -127,8 +139,8 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
                   </button>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
