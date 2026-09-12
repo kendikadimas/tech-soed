@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { X, ArrowRight, Tag, ExternalLink } from 'lucide-react';
@@ -21,6 +22,12 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose, lang }: ProjectModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (project) {
       document.body.style.overflow = 'hidden';
@@ -45,25 +52,31 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
     return 'Buka Aplikasi';
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {project && (
-        <motion.div
-          key="project-modal-backdrop"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-slate-900/70 backdrop-blur-sm overflow-y-auto"
-          onClick={onClose}
-        >
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          {/* Backdrop */}
+          <motion.div
+            key="project-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm"
+            onClick={onClose}
+          />
+
+          {/* Modal Card */}
           <motion.div
             key="project-modal-card"
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-xl max-h-[85vh] sm:max-h-[90vh] bg-white dark:bg-slate-900 rounded-3xl overflow-y-auto shadow-2xl shadow-black/30 border border-slate-100 dark:border-slate-800 my-auto flex flex-col pointer-events-auto"
+            className="relative z-10 w-full max-w-xl max-h-[85vh] sm:max-h-[90vh] bg-white dark:bg-slate-900 rounded-3xl overflow-y-auto shadow-2xl shadow-black/50 border border-slate-100 dark:border-slate-800 my-auto flex flex-col pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Sticky Close Button */}
@@ -138,8 +151,9 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
