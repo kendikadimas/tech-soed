@@ -244,39 +244,63 @@ function parseMarkdown(md: string): Block[] {
       continue;
     }
 
-    // Markdown table — detect both standard (|col|) and non-leading-pipe (col | col) formats
-    // A table is identified by: current line contains '|' AND next line is a separator (---|---)
-    const isSepRow = (line: string) => /^[|\s\-:]+$/.test(line.trim()) && line.includes('-');
-    const hasTablePipes = (line: string) => {
+    // ── Markdown table detection ────────────────────────────────────────────
+    // Handles ALL AI-generated formats (with or without separator row, with or without leading |)
+    const isSepRow = (line: string) =>
+      /^[|\s\-:=]+$/.test(line.trim()) && /\-{2,}/.test(line);
+    const isTableRow = (line: string) => {
       const t = line.trim();
-      return t.includes('|') && !t.startsWith('>') && !t.startsWith('#');
+      return (
+        t.includes('|') &&
+        !t.startsWith('>') &&
+        !t.startsWith('#') &&
+        !t.startsWith('!') &&
+        !/^\s*[-*+]\s/.test(t) &&
+        !/^\s*\d+\.\s/.test(t)
+      );
     };
 
-    if (hasTablePipes(raw) && (i + 1 < lines.length) && isSepRow(lines[i + 1])) {
+    const nextLine2 = i + 1 < lines.length ? lines[i + 1] : '';
+    const isTableStart = isTableRow(raw) && (isSepRow(nextLine2) || isTableRow(nextLine2));
+
+    if (isTableStart) {
       const tableLines: string[] = [];
-      while (i < lines.length && (hasTablePipes(lines[i]) || isSepRow(lines[i]))) {
+      while (i < lines.length && (isTableRow(lines[i]) || isSepRow(lines[i]))) {
         tableLines.push(lines[i].trim());
         i++;
       }
-      if (tableLines.length >= 2) {
-        // Parse a row: split by | and trim — handles both leading-pipe and non-leading-pipe
-        const parseRow = (row: string): string[] => {
-          // If leading and trailing pipe, use slice(1,-1)
-          if (row.startsWith('|') && row.endsWith('|')) {
-            return row.split('|').slice(1, -1).map((c) => c.trim()).filter(Boolean);
-          }
-          // Otherwise split by | directly
-          return row.split('|').map((c) => c.trim()).filter(Boolean);
-        };
-        // Find separator row index
-        const sepIdx = tableLines.findIndex((l) => isSepRow(l));
-        const headerRow = sepIdx > 0 ? tableLines[sepIdx - 1] : tableLines[0];
-        const headers = parseRow(headerRow);
-        const rows = tableLines
-          .filter((l) => !isSepRow(l) && l !== headerRow)
-          .map(parseRow);
+
+      const parseRow = (row: string): string[] => {
+        if (row.startsWith('|') && row.endsWith('|')) {
+          return row.split('|').slice(1, -1).map((c) => c.trim()).filter((c) => c.length > 0);
+        }
+        if (row.startsWith('|')) {
+          return row.split('|').slice(1).map((c) => c.trim()).filter((c) => c.length > 0);
+        }
+        return row.split('|').map((c) => c.trim()).filter((c) => c.length > 0);
+      };
+
+      const nonSepLines = tableLines.filter((l) => !isSepRow(l));
+      if (nonSepLines.length >= 1) {
+        const hasSep = tableLines.some((l) => isSepRow(l));
+        let headers: string[];
+        let dataRows: string[][];
+
+        if (hasSep) {
+          const sepIdx = tableLines.findIndex((l) => isSepRow(l));
+          const headerRow = sepIdx > 0 ? tableLines[sepIdx - 1] : tableLines[0];
+          headers = parseRow(headerRow);
+          dataRows = tableLines
+            .filter((l) => !isSepRow(l) && l !== headerRow)
+            .map(parseRow);
+        } else {
+          // No separator row: first line = header, rest = data
+          headers = parseRow(nonSepLines[0]);
+          dataRows = nonSepLines.slice(1).map(parseRow);
+        }
+
         if (headers.length > 0) {
-          blocks.push({ type: 'table', headers, rows });
+          blocks.push({ type: 'table', headers, rows: dataRows });
           continue;
         }
       }
@@ -314,12 +338,12 @@ function parseMarkdown(md: string): Block[] {
       lines[i].trim() !== '' &&
       !/^(#{1,6}\s|>\s|\s*[-*+]\s|\s*\d+\.\s|---|```|\*\*\*|___)/.test(lines[i]) &&
       !/^!\[[^\]]*\]\([^)]+\)$/.test(lines[i].trim()) &&
-      // stop if this line + next line form a table
-      !(hasTablePipes(lines[i]) && i + 1 < lines.length && isSepRow(lines[i + 1]))
+      // stop before a table block
+      !(isTableRow(lines[i]) && i + 1 < lines.length && (isSepRow(lines[i + 1]) || isTableRow(lines[i + 1])))
     ) {
       const l = lines[i];
-      // Skip lines that look like "Excerpt/Meta Description:" labels
-      if (/^\*?\*?(excerpt|meta description|ringkasan singkat|deskripsi singkat)\*?\*?\s*[:\/]/i.test(l.trim())) {
+      // Skip stray Excerpt/Meta Description labels
+      if (/^\*?\*?(excerpt|meta description|ringkasan singkat|deskripsi singkat)\*?\*?\s*[:/]/i.test(l.trim())) {
         i++;
         continue;
       }
