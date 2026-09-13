@@ -2,11 +2,17 @@
 import { Mail, MapPin, Instagram } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { t } from '../translations';
 import { useLang } from './LangContext';
 
 export default function Footer() {
   const { lang } = useLang();
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <footer className="bg-slate-900 dark:bg-slate-900 transition-colors text-slate-300 py-20 px-6 lg:px-12 rounded-t-[3rem] relative overflow-hidden">
