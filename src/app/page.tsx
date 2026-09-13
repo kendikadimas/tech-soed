@@ -5,7 +5,6 @@ import {
   HeroSection,
   AboutSection,
   ServicesSection,
-  ClientsSection,
   PortfolioSection,
   PricingSection,
   TestimonialsSection,
@@ -50,16 +49,17 @@ function LandingPageContent() {
       `}} />
 
       <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <ClientsSection />
-      <PortfolioSection />
-      <PricingSection onOrderClick={handleOrderClick} />
-      <TestimonialsSection />
-      <LatestArticles />
-      <FaqSection />
-      <CtaSection />
-      <ContactSection />
+      <div className="content-auto">
+        <AboutSection />
+        <ServicesSection />
+        <PortfolioSection />
+        <PricingSection onOrderClick={handleOrderClick} />
+        <TestimonialsSection />
+        <LatestArticles />
+        <FaqSection />
+        <CtaSection />
+        <ContactSection />
+      </div>
       <ScrollToTop visible={scrolled} />
       <OrderModal
         isOpen={isOrderModalOpen}

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { t } from '../translations';
 import { useLang } from './LangContext';
 import ProjectModal from './ProjectModal';
+import { createClient } from '@/lib/supabase/client';
 
 export default function PortfolioSection() {
   const { lang } = useLang();
@@ -14,7 +15,36 @@ export default function PortfolioSection() {
   const [websiteType, setWebsiteType] = useState('All');
   const [isWebDropdownOpen, setIsWebDropdownOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [supabaseProjects, setSupabaseProjects] = useState<any[] | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Fetch projects from Supabase
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('order_index', { ascending: true });
+        if (!error && data && data.length > 0) {
+          const mapped = data.map((p) => ({
+            title: p.title,
+            category: p.sub_category || p.category,
+            image: p.image_url || '/projects/larasena.png',
+            desc: p.description || '',
+            size: 'large',
+            live_url: p.live_url || '',
+            link: p.live_url || '',
+          }));
+          setSupabaseProjects(mapped);
+        }
+      } catch (err) {
+        console.warn('PortfolioSection: using default projects fallback', err);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   // Carousel Ref
   const projectScrollRef = useRef<HTMLDivElement>(null);
@@ -48,7 +78,7 @@ export default function PortfolioSection() {
     { id: 'E-Commerce', name: 'E-Commerce' },
   ];
 
-  const projectsData = t[lang].projectsData;
+  const projectsData = supabaseProjects && supabaseProjects.length > 0 ? supabaseProjects : t[lang].projectsData;
 
   const filteredProjects = projectsData.filter((p: any) => {
     if (portfolioMainFilter === 'All') return true;

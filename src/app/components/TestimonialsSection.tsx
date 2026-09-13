@@ -89,13 +89,18 @@ export default function TestimonialsSection() {
               </p>
 
               {/* Client Info */}
-              <div className="border-t border-slate-200/60 dark:border-slate-700/60 transition-colors pt-6">
-                <h3 className="text-sm lg:text-base font-black text-slate-900 dark:text-white transition-colors leading-tight">
-                  {testi.name}
-                </h3>
-                <p className="text-xs text-slate-400 dark:text-slate-500 font-medium mt-0.5">
-                  {testi.role}
-                </p>
+              <div className="flex items-center gap-4 border-t border-slate-200/60 dark:border-slate-700/60 transition-colors pt-6">
+                <div className="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center shrink-0 border-2 border-white shadow-sm text-white font-black text-lg">
+                  {testi.name.charAt(0)}
+                </div>
+                <div>
+                  <h3 className="text-sm lg:text-base font-black text-slate-900 dark:text-white transition-colors leading-tight">
+                    {testi.name}
+                  </h3>
+                  <p className="text-blue-600 font-bold text-[10px] lg:text-[11px] uppercase tracking-widest mt-0.5">
+                    {testi.role}
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}

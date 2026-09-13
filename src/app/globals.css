@@ -10,6 +10,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
+  --font-heading: var(--font-heading);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,6 +28,12 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Mobile performance optimization for off-screen sections */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
 
 /* Keep dark-mode blue accents consistent for text/icons without breaking blue backgrounds. */
