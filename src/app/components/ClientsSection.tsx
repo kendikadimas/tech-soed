@@ -61,22 +61,19 @@ export const CLIENTS_DATA: ClientItem[] = [
 export default function ClientsSection() {
   const { lang } = useLang();
 
-  // Seamless looping array for the marquee ticker (repeat 5x for continuous scroll)
-  const marqueeItems = [...CLIENTS_DATA, ...CLIENTS_DATA, ...CLIENTS_DATA, ...CLIENTS_DATA, ...CLIENTS_DATA];
-
   return (
-    <section id="clients" className="py-14 lg:py-20 px-6 lg:px-12 bg-slate-50/60 dark:bg-slate-950/60 border-y border-slate-200/60 dark:border-slate-800/60 transition-colors overflow-hidden relative">
+    <section id="clients" className="py-16 lg:py-24 px-6 lg:px-12 bg-slate-50/60 dark:bg-slate-950/60 border-y border-slate-200/60 dark:border-slate-800/60 transition-colors overflow-hidden relative">
       {/* Background Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-blue-500/10 dark:bg-blue-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center space-y-3 mb-10 lg:mb-14"
+          className="text-center space-y-3 mb-14 lg:mb-20"
         >
           <h2 className="text-3xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors tracking-tight">
             {t[lang]?.clientsTitle || "Dipercaya oleh Instansi & Perusahaan Terkemuka"}
@@ -87,30 +84,27 @@ export default function ClientsSection() {
           </p>
         </motion.div>
 
-        {/* Continuous Marquee Ticker - Pure Floating Logos (No Cards/Borders) */}
-        <div className="relative w-full overflow-hidden py-4 group/marquee">
-          {/* Left Gradient Fade */}
-          <div className="absolute top-0 bottom-0 left-0 w-24 lg:w-40 bg-gradient-to-r from-slate-50/90 dark:from-slate-950/90 to-transparent z-10 pointer-events-none" />
-          {/* Right Gradient Fade */}
-          <div className="absolute top-0 bottom-0 right-0 w-24 lg:w-40 bg-gradient-to-l from-slate-50/90 dark:from-slate-950/90 to-transparent z-10 pointer-events-none" />
-
-          <div className="flex w-max animate-scroll gap-12 lg:gap-20 items-center">
-            {marqueeItems.map((client, idx) => (
-              <div
-                key={`${client.id}-marquee-${idx}`}
-                title={client.fullName}
-                className="flex items-center justify-center shrink-0 h-16 lg:h-20 transition-all group"
-              >
-                <Image
-                  src={client.logo}
-                  alt={client.fullName}
-                  width={160}
-                  height={80}
-                  className="max-h-12 lg:max-h-16 w-auto object-contain filter grayscale opacity-60 dark:opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"
-                />
-              </div>
-            ))}
-          </div>
+        {/* Static Clean Floating Logos Layout - 1.5x Larger & Max 3 Logos per Row */}
+        <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-x-12 sm:gap-x-16 lg:gap-x-24 gap-y-10 lg:gap-y-16">
+          {CLIENTS_DATA.map((client, index) => (
+            <motion.div
+              key={client.id}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              title={client.fullName}
+              className="group flex items-center justify-center h-20 sm:h-24 lg:h-32 w-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[320px] p-2 transition-all"
+            >
+              <Image
+                src={client.logo}
+                alt={client.fullName}
+                width={280}
+                height={140}
+                className="max-h-16 sm:max-h-22 lg:max-h-28 w-auto object-contain filter grayscale opacity-65 dark:opacity-55 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"
+              />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
