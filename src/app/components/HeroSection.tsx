@@ -11,8 +11,8 @@ import { createClient } from '@/lib/supabase/client';
 
 function AnimatedCounter({ text }: { text: string }) {
   const ref = React.useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [count, setCount] = useState(0);
+  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const [count, setCount] = useState<number | null>(null);
 
   const target = React.useMemo(() => {
     const match = text.match(/\d+/);
@@ -22,7 +22,7 @@ function AnimatedCounter({ text }: { text: string }) {
   React.useEffect(() => {
     if (isInView && target !== null) {
       const controls = animate(0, target, {
-        duration: 2.5,
+        duration: 2,
         ease: "easeOut",
         onUpdate: (val) => setCount(Math.floor(val)),
       });
@@ -38,7 +38,7 @@ function AnimatedCounter({ text }: { text: string }) {
 
   return (
     <span ref={ref}>
-      {prefix}{isInView ? count : 0}{suffix}
+      {prefix}{count !== null ? count : target}{suffix}
     </span>
   );
 }
@@ -77,11 +77,23 @@ export default function HeroSection() {
   const [isHovered, setIsHovered] = useState(false);
   const [projectCards, setProjectCards] = useState(defaultProjectCards);
 
-  // Fetch dynamic projects from Supabase
+  const [dynamicProjectCount, setDynamicProjectCount] = useState<string | null>(null);
+
+  // Fetch dynamic projects & count from Supabase
   useEffect(() => {
     const fetchHeroProjects = async () => {
       try {
         const supabase = createClient();
+
+        // Fetch total count of projects in database
+        const { count, error: countError } = await supabase
+          .from('projects')
+          .select('*', { count: 'exact', head: true });
+
+        if (!countError && count !== null && count > 0) {
+          setDynamicProjectCount(`${count}+`);
+        }
+
         const { data, error } = await supabase
           .from('projects')
           .select('title, category, image_url')
@@ -239,16 +251,19 @@ export default function HeroSection() {
             {/* Integrated Honest Stats Counter directly in Hero Left Column */}
             <div className="pt-4 sm:pt-6 border-t border-slate-100 dark:border-slate-800/80 w-full">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
-                {heroStats.map((stat: any, index: number) => (
-                  <div key={index} className="flex flex-col">
-                    <span className="font-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#172657] dark:text-blue-400 tracking-tight">
-                      <AnimatedCounter text={stat.value} />
-                    </span>
-                    <span className="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 uppercase tracking-wider">
-                      {stat.label}
-                    </span>
-                  </div>
-                ))}
+                {heroStats.map((stat: any, index: number) => {
+                  const val = (index === 0 && dynamicProjectCount) ? dynamicProjectCount : stat.value;
+                  return (
+                    <div key={index} className="flex flex-col">
+                      <span className="font-heading text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#172657] dark:text-blue-400 tracking-tight">
+                        <AnimatedCounter text={val} />
+                      </span>
+                      <span className="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 uppercase tracking-wider">
+                        {stat.label}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

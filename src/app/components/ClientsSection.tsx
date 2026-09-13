@@ -76,7 +76,7 @@ export default function ClientsSection() {
           className="text-center space-y-3 mb-14 lg:mb-20"
         >
           <h2 className="text-3xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors tracking-tight">
-            {t[lang]?.clientsTitle || "Dipercaya oleh Instansi & Perusahaan Terkemuka"}
+            {t[lang]?.clientsTitle || "Klien Kami"}
           </h2>
           
           <p className="text-slate-600 dark:text-slate-400 transition-colors font-medium max-w-2xl mx-auto text-sm lg:text-base leading-relaxed">
