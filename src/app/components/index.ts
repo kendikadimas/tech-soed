@@ -6,6 +6,7 @@ export { default as Navbar } from './Navbar';
 export { default as HeroSection } from './HeroSection';
 export { default as AboutSection } from './AboutSection';
 export { default as ServicesSection } from './ServicesSection';
+export { default as ClientsSection } from './ClientsSection';
 export { default as PortfolioSection } from './PortfolioSection';
 export { default as PricingSection } from './PricingSection';
 export { default as TestimonialsSection } from './TestimonialsSection';

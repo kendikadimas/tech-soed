@@ -5,6 +5,7 @@ import {
   HeroSection,
   AboutSection,
   ServicesSection,
+  ClientsSection,
   PortfolioSection,
   PricingSection,
   TestimonialsSection,
@@ -51,6 +52,7 @@ function LandingPageContent() {
       <HeroSection />
       <AboutSection />
       <ServicesSection />
+      <ClientsSection />
       <PortfolioSection />
       <PricingSection onOrderClick={handleOrderClick} />
       <TestimonialsSection />
