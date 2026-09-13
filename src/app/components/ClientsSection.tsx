@@ -101,7 +101,7 @@ export default function ClientsSection() {
                 alt={client.fullName}
                 width={280}
                 height={140}
-                className="max-h-16 sm:max-h-22 lg:max-h-28 w-auto object-contain filter grayscale opacity-65 dark:opacity-55 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"
+                className="max-h-16 sm:max-h-22 lg:max-h-28 w-auto object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105"
               />
             </motion.div>
           ))}
