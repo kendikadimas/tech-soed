@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   HeroSection,
+  ClientsSection,
   AboutSection,
   ServicesSection,
   PortfolioSection,
@@ -49,6 +50,7 @@ function LandingPageContent() {
       `}} />
 
       <HeroSection />
+      <ClientsSection />
       <div className="content-auto">
         <AboutSection />
         <ServicesSection />

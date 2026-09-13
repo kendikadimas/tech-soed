@@ -53,6 +53,10 @@ export const t = {
         priceConsultText: "Masih bingung memilih paket yang tepat?",
         testiTag: "Testimoni Klien",
         testiTitle: "Apa Kata Mereka Tentang Kami",
+        clientsTag: "Mitra & Klien Kami",
+        clientsTitle: "Dipercaya oleh Instansi & Perusahaan Terkemuka",
+        clientsDesc: "Bangga menjadi mitra transformasi digital bagi instansi pemerintah, perguruan tinggi, BUMN, hingga badan usaha daerah.",
+        clientsGrowing: "Dan terus bertambah seiring kepercayaan mitra kami",
         faqH2: "Pertanyaan yang Sering Diajukan",
         faqDesc: "Menghapus keraguan Anda sebelum memulai kerja sama dengan TechSoe.",
         faqData: [
@@ -462,6 +466,10 @@ export const t = {
         priceConsultText: "Still confused about choosing the right package?",
         testiTag: "Client Testimonials",
         testiTitle: "What They Say About Us",
+        clientsTag: "Our Clients & Partners",
+        clientsTitle: "Trusted by Leading Institutions & Enterprises",
+        clientsDesc: "Proud digital transformation partner for government agencies, universities, state-owned enterprises, and regional businesses.",
+        clientsGrowing: "And growing continuously as we build new partnerships",
         faqH2: "Frequently Asked Questions",
         faqDesc: "Clearing your doubts before starting a collaboration with TechSoe.",
         faqData: [
