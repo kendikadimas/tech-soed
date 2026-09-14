@@ -29,7 +29,7 @@ export default function AboutSection() {
           <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
             {/* Left Content */}
             <div className="text-white space-y-6 max-w-xl">
-              <h2 className="text-2xl lg:text-4xl font-extrabold leading-tight tracking-tight">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-tight tracking-tight">
                 {t[lang].aboutTitle}
               </h2>
               <p className="text-blue-100/80 text-sm lg:text-base leading-relaxed font-medium">

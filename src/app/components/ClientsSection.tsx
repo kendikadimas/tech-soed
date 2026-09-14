@@ -75,7 +75,7 @@ export default function ClientsSection() {
           transition={{ duration: 0.5 }}
           className="text-center space-y-3 mb-14 lg:mb-20"
         >
-          <h2 className="text-3xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors tracking-tight">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white transition-colors tracking-tight">
             {t[lang]?.clientsTitle || "Klien Kami"}
           </h2>
           

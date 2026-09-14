@@ -18,5 +18,7 @@ export { default as ScrollToTop } from './ScrollToTop';
 export { default as OrderModal } from './OrderModal';
 export { default as ContactSection } from './ContactSection';
 export { default as ClientsSection } from './ClientsSection';
+export { default as OrderProcessSection } from './OrderProcessSection';
 export { default as MainLayoutShell } from './MainLayoutShell';
+
 

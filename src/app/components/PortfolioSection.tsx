@@ -127,11 +127,11 @@ export default function PortfolioSection() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-3xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors leading-tight mb-4"
+            className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors leading-tight mb-3"
           >
             {t[lang].portTitle}
           </motion.h2>
-          <p className="text-lg text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl">
+          <p className="text-xs sm:text-sm lg:text-base text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl">
             {t[lang].portDesc}
           </p>
         </div>

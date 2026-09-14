@@ -66,7 +66,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors leading-[1.1] mb-6"
+            className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors leading-[1.1] mb-4"
           >
             {t[lang].svcTitle}
           </motion.h2>
@@ -75,7 +75,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl"
+            className="text-xs sm:text-sm lg:text-base text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl"
           >
             {t[lang].svcText}
           </motion.p>

@@ -34,7 +34,7 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center space-y-4"
         >
-          <h2 className="text-3xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors ">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors">
             {t[lang].testiTitle}
           </h2>
           <p className="text-slate-500 dark:text-slate-400 transition-colors font-medium max-w-2xl mx-auto text-sm lg:text-base">

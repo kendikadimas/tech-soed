@@ -77,7 +77,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
       <div className="max-w-[1400px] mx-auto flex flex-col items-center">
         {/* Header */}
         <div className="text-center space-y-4 max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl lg:text-5xl font-black leading-tight text-slate-900 dark:text-white transition-colors ">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight text-slate-900 dark:text-white transition-colors">
             {t[lang].priceTitle}
           </h2>
           <p className="text-base text-slate-600 dark:text-slate-400 transition-colors font-medium">

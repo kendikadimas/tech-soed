@@ -8,6 +8,7 @@ import {
   ServicesSection,
   PortfolioSection,
   PricingSection,
+  OrderProcessSection,
   TestimonialsSection,
   FaqSection,
   LatestArticles,
@@ -56,6 +57,7 @@ function LandingPageContent() {
         <ServicesSection />
         <PortfolioSection />
         <PricingSection onOrderClick={handleOrderClick} />
+        <OrderProcessSection />
         <TestimonialsSection />
         <LatestArticles />
         <FaqSection />

@@ -38,7 +38,7 @@ export default function ContactSection() {
           >
             <div>
               {/* <SectionTag text={t[lang].contactTag} variant="dark" /> */}
-              <h2 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white transition-colors mt-4 mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors mt-4 mb-6 leading-tight">
                 {t[lang].contactTitle}
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 transition-colors max-w-md">
