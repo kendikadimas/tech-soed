@@ -17,6 +17,7 @@ import {
   ChevronRight,
   LayoutDashboard,
   BarChart3,
+  Quote,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
@@ -80,6 +81,7 @@ function AdminNavContent({ children }: { children: React.ReactNode }) {
 
   const isArticlesActive = pathname === '/admin' && currentTab === 'articles';
   const isProjectsActive = pathname === '/admin' && currentTab === 'projects';
+  const isTestimonialsActive = pathname === '/admin' && currentTab === 'testimonials';
   const isAnalyticsActive = pathname === '/admin/analytics';
   const isNewArticleActive = pathname === '/admin/articles/new';
   const isNewProjectActive = pathname === '/admin/projects/new';
@@ -202,6 +204,22 @@ function AdminNavContent({ children }: { children: React.ReactNode }) {
                     <span>Proyek & Hero 3D</span>
                   </div>
                   {isProjectsActive && <ChevronRight className="w-3.5 h-3.5 text-blue-300" />}
+                </Link>
+
+                <Link
+                  href="/admin?tab=testimonials"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                    isTestimonialsActive
+                      ? 'bg-[#172657] text-white shadow-md shadow-[#172657]/15'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Quote className={`w-4 h-4 ${isTestimonialsActive ? 'text-blue-300' : 'text-slate-400'}`} />
+                    <span>Testimoni Klien</span>
+                  </div>
+                  {isTestimonialsActive && <ChevronRight className="w-3.5 h-3.5 text-blue-300" />}
                 </Link>
               </nav>
             </div>

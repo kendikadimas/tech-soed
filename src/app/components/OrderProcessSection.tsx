@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { MessageSquareCode, Wallet, Code2, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
+import { MessageSquareCode, Wallet, Code2, CheckCircle2 } from 'lucide-react';
 import { useLang } from './LangContext';
 import { t } from '../translations';
 
@@ -217,42 +217,6 @@ export default function OrderProcessSection() {
             })}
           </div>
         </div>
-
-        {/* Payment Policy Guarantee Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="bg-gradient-to-r from-[#172657] via-[#1a2b63] to-slate-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 border border-blue-900/50"
-        >
-          {/* Decorative Glow Blobs */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="flex items-center gap-4 sm:gap-5 z-10 max-w-2xl">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
-            </div>
-            <div>
-              <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white mb-1">
-                {t[lang]?.processBannerTitle || "Skema Pembayaran 50% : 50% Transparan"}
-              </h3>
-              <p className="text-blue-200/90 text-xs sm:text-sm leading-relaxed">
-                {t[lang]?.processBannerDesc || "50% DP saat sepakat deal, dan 50% pelunasan setelah website Anda 100% siap dan disetujui. Tanpa biaya tersembunyi!"}
-              </p>
-            </div>
-          </div>
-
-          <a
-            href={`https://wa.me/6285814174267?text=${encodeURIComponent("Halo TechSoe, saya ingin berkonsultasi mengenai pembuatan website dengan skema DP 50%.")}`}
-            target="_blank"
-            rel="noreferrer"
-            className="z-10 w-full sm:w-auto shrink-0 bg-white hover:bg-blue-50 text-[#172657] font-bold px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 hover:gap-3"
-          >
-            <span>Konsultasi Sekarang</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </motion.div>
       </div>
     </section>
   );

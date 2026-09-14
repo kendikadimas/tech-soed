@@ -1,15 +1,50 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { createClient } from '@/lib/supabase/client';
+
+interface TestimonialItem {
+  id?: string;
+  name: string;
+  role: string;
+  text: string;
+  rating?: number;
+  avatar_url?: string;
+  published?: boolean;
+}
 
 export default function TestimonialsSection() {
   const { lang } = useLang();
-  const testimonials = t[lang].testimonials;
+  const staticTestimonials = t[lang].testimonials;
+  const [dbTestimonials, setDbTestimonials] = useState<TestimonialItem[]>([]);
   const testimonialsScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from('testimonials')
+          .select('*')
+          .eq('published', true)
+          .order('created_at', { ascending: false });
+
+        if (data && data.length > 0 && !error) {
+          setDbTestimonials(data);
+        }
+      } catch {
+        // Silent fallback to static translations
+      }
+    }
+    fetchTestimonials();
+  }, []);
+
+  const testimonials = dbTestimonials.length > 0 ? dbTestimonials : staticTestimonials;
 
   const scrollTestimonials = (direction: 'left' | 'right') => {
     if (!testimonialsScrollRef.current) return;
@@ -90,9 +125,21 @@ export default function TestimonialsSection() {
 
               {/* Client Info */}
               <div className="flex items-center gap-4 border-t border-slate-200/60 dark:border-slate-700/60 transition-colors pt-6">
-                <div className="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center shrink-0 border-2 border-white shadow-sm text-white font-black text-lg">
-                  {testi.name.charAt(0)}
-                </div>
+                {testi.avatar_url ? (
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-white dark:border-slate-800 shadow-sm bg-[#172657]">
+                    <Image
+                      src={testi.avatar_url}
+                      alt={testi.name}
+                      fill
+                      unoptimized
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center shrink-0 border-2 border-white shadow-sm text-white font-black text-lg">
+                    {testi.name ? testi.name.charAt(0) : 'K'}
+                  </div>
+                )}
                 <div>
                   <h3 className="text-sm lg:text-base font-black text-slate-900 dark:text-white transition-colors leading-tight">
                     {testi.name}
