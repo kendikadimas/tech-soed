@@ -109,7 +109,7 @@ export default function OrderProcessSection() {
         {/* Vertical Timeline Interactive Layout Container */}
         <div ref={containerRef} className="relative max-w-5xl mx-auto mb-16 lg:mb-20">
           {/* Central Vertical Track Line (Desktop Centered / Mobile Left) */}
-          <div className="absolute top-0 bottom-0 left-5 sm:left-6 md:left-1/2 -translate-x-1/2 w-1 bg-slate-200 dark:bg-slate-800/80 rounded-full overflow-hidden">
+          <div className="absolute top-0 bottom-0 left-7 sm:left-8 md:left-1/2 -translate-x-1/2 w-1 bg-slate-200 dark:bg-slate-800/80 rounded-full overflow-hidden">
             {/* Animated Scroll Progress Line - Solid Full Navy Blue */}
             <motion.div
               style={{ height: lineHeight }}
@@ -134,9 +134,9 @@ export default function OrderProcessSection() {
                   <motion.div
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true, amount: 0.1 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
-                    className="absolute left-5 sm:left-6 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center"
+                    className="absolute left-7 sm:left-8 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center"
                   >
                     <div className="relative group">
                       {/* Solid Navy Pulse Ring Glow */}
@@ -165,11 +165,11 @@ export default function OrderProcessSection() {
                   </div>
 
                   {/* Timeline Card Container - 100% Mobile Responsive */}
-                  <div className={`w-full md:w-1/2 pl-12 sm:pl-16 md:pl-0 ${isEven ? "md:pr-10 lg:pr-16" : "md:pl-10 lg:pl-16"}`}>
+                  <div className={`w-full md:w-1/2 pl-14 sm:pl-16 md:pl-0 ${isEven ? "md:pr-10 lg:pr-16" : "md:pl-10 lg:pl-16"}`}>
                     <motion.div
                       initial={{ opacity: 0, y: 25 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
+                      viewport={{ once: true, amount: 0.1 }}
                       transition={{ duration: 0.5, ease: "easeOut" }}
                       className="group relative bg-slate-50/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200/80 dark:border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 hover:shadow-xl hover:border-[#172657] dark:hover:border-blue-500 transition-all duration-300"
                     >
