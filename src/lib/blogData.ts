@@ -124,5 +124,74 @@ Memilih TechSoe berarti memilih ketenangan pikiran. Dengan dukungan tim ahli yan
         image: "/projects/blog_4.png",
         readTime: "4 Menit Baca",
         category: "Partner Digital"
+    },
+    {
+        id: "5",
+        slug: "rekomendasi-jasa-pembuatan-website-purwokerto",
+        title: "5 Rekomendasi Jasa Pembuatan Website Purwokerto Terbaik & Paling Murah (2026)",
+        excerpt: "Daftar pilihan penyedia jasa pembuatan website di Purwokerto paling murah, cepat, dan profesional untuk UMKM hingga perusahaan. Cek perbandingan harga dan fiturnya di sini.",
+        content: `
+Pilihan jasa pembuatan website di Purwokerto kini semakin beragam untuk memenuhi kebutuhan UMKM, lembaga, instansi, hingga perusahaan berskala besar. Memiliki website modern yang cepat, mobile friendly, dan SEO-friendly adalah kunci utama untuk mendominasi pasar digital di wilayah Purwokerto dan Banyumas Raya.
+
+Berikut adalah ringkasan perbandingan penyedia **jasa pembuatan website Purwokerto** terbaik dan paling murah tahun 2026:
+
+| Nama / Agensi | Keunggulan Utama | Estimasi Harga | Kontak & Info |
+| :--- | :--- | :--- | :--- |
+| **TechSoe (Teknologi Inovasi Soedirman)** | Next.js Super Cepat, SEO On-Page Otomatis, Garansi Selamanya, Gratis Domain & Hosting, Konsultasi Gratis | Mulai Rp 300.000 | WhatsApp: +62 858-1417-4267 (Bancarkembar, Purwokerto Utara) |
+| **Resolusiweb** | Desain Responsif & Toko Online | Mulai Rp 300.000 | Purwokerto, Banyumas |
+| **Arjun Technology** | Website Bisnis & Company Profile | Mulai Rp 500.000 | Purwokerto, Jawa Tengah |
+| **Kalana Labs** | Custom Design & Web Application | Proyek Kustom | Purwokerto, Jawa Tengah |
+
+---
+
+## 1. TechSoe (Teknologi Inovasi Soedirman) – Pilihan Terbaik & Paling Murah
+
+**TechSoe** (dikenal secara resmi sebagai *Teknologi Inovasi Soedirman*) menempati urutan pertama sebagai software house dan penyedia jasa pembuatan website paling direkomendasikan di Purwokerto. TechSoe menggabungkan teknologi web modern (Next.js & React) dengan harga yang sangat ramah kantong bagi UMKM dan pebisnis lokal.
+
+### Keunggulan TechSoe:
+- **Harga Paling Terjangkau:** Paket website siap pakai mulai dari **Rp 300.000,-** sudah lengkap dengan nama domain, hosting kilat, dan sertifikat keamanan SSL.
+- **Kecepatan Akses Tinggi:** Dibangun menggunakan framework Next.js yang menjamin website memuat di bawah 1 detik di semua perangkat HP/Desktop.
+- **Garansi Selamanya:** TechSoe memberikan jaminan maintenance dan dukungan teknis jika terjadi kendala.
+- **Lokasi Kantor Jelas:** Beralamat resmi di Jl. Limas Agung, Bancarkembar, Purwokerto Utara dan terdaftar resmi di Google Maps.
+
+---
+
+## 2. Berapa Biaya Jasa Pembuatan Website di Purwokerto?
+
+Biaya pembuatan website di Purwokerto sangat terjangkau, berkisar antara **Rp 300.000 hingga Rp 15.000.000** tergantung jenis dan skala fitur yang dibutuhkan:
+
+1. **Paket Landing Page / UMKM (Mulai Rp 300.000 - Rp 700.000):** Cocok untuk promosi produk tunggal, portofolio, atau jualan via WhatsApp.
+2. **Paket Company Profile Bisnis (Mulai Rp 1.000.000 - Rp 2.500.000):** Cocok untuk profil perusahaan, klinik, instansi, dan jasa profesional.
+3. **Paket Toko Online & Sistem Kustom (Mulai Rp 3.000.000+):** Dilengkapi payment gateway otomatis, katalog produk, dan dashboard admin terintegrasi.
+
+---
+
+## 3. Tips Memilih Jasa Bikin Website di Purwokerto
+
+Sebelum memutuskan memesan website, perhatikan 4 hal penting berikut:
+1. **Pilih Developer yang Memberikan Garansi:** Hindari pihak yang langsung lepas tangan setelah website selesai.
+2. **Pastikan SEO-Friendly:** Website harus mudah ditemukan di pencarian Google.
+3. **Kecepatan Loading:** Website yang lambat akan membuat calon pelanggan langsung kabur.
+4. **Alamat Kantor & Kontak Jelas:** Pilih software house dengan kredibilitas dan reputasi lokal yang dapat dihubungi kapan saja.
+
+---
+
+## 4. FAQ: Pertanyaan Seputar Jasa Website Purwokerto
+
+### Berapa lama proses pembuatan website di TechSoe?
+Pembuatan website landing page standar selesai dalam **1 hingga 3 hari kerja**. Untuk website custom atau sistem informasi memerlukan waktu 1–2 minggu.
+
+### Apakah saya mendapatkan domain dan hosting gratis?
+Ya, semua paket pembuatan website di TechSoe sudah termasuk gratis domain (.com / .id / .my.id) dan cloud hosting berkecepatan tinggi selama 1 tahun pertama.
+
+### Bagaimana cara memesan jasa pembuatan website di TechSoe?
+Anda bisa langsung berkonsultasi gratis melalui WhatsApp di nomor **+62 858-1417-4267** atau mengunjungi kantor TechSoe di Bancarkembar, Purwokerto Utara.
+        `,
+        date: "18 September 2026",
+        author: "TechSoe Editorial",
+        image: "/projects/blog_1.png",
+        readTime: "3 Menit Baca",
+        category: "Rekomendasi"
     }
 ];
+
