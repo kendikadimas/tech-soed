@@ -19,22 +19,27 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "Jasa Pembuatan Website Purwokerto & Partner Digital Professional | TechSoe",
-  description: "Solusi Software House & Partner Digital terbaik di Purwokerto. Kami membantu digitalisasi bisnis Anda melalui jasa pembuatan website, aplikasi mobile, dan sistem informasi dengan kualitas premium & SEO-friendly.",
+  title: "Jasa Pembuatan Website Purwokerto Paling Murah & Profesional | Mulai Rp 300rb TechSoe",
+  description: "Jasa pembuatan website Purwokerto paling murah & profesional mulai Rp 300.000,- garansi selamanya. Solusi bikin website kilat, aplikasi mobile, sistem informasi, SEO-friendly gratis domain & hosting.",
   keywords: [
+    "jasa pembuatan website purwokerto",
+    "jasa pembuatan website purwokerto paling murah",
+    "jasa pembuatan web purwokerto paling murah",
+    "website purwokerto paling murah",
+    "jasa bikin website purwokerto termurah",
+    "bikin web murah purwokerto",
+    "jasa pembuatan website murah purwokerto",
+    "jasa website purwokerto mulai 300rb",
     "jasa pembuatan website",
     "jasa pembuatan web",
     "jasa pembuatan aplikasi",
     "jasa pembuatan aplikasi mobile",
-    "jasa pembuatan sistem",
     "jasa pembuatan sistem informasi",
-    "jasa bikin website purwokerto",
     "web developer purwokerto",
     "software house purwokerto",
-    "sistem informasi",
-    "bikin aplikasi android purwokerto",
-    "digital agency purwokerto",
+    "teknologi inovasi soedirman",
     "techsoe",
+    "tech soe",
     "banyumas",
     "jawa tengah"
   ],
@@ -45,16 +50,16 @@ export const metadata: Metadata = {
     apple: '/icon.png',
   },
   openGraph: {
-    title: "TechSoe | Software House & Jasa Pembuatan Website Terpercaya",
-    description: "Spesialis jasa pembuatan website, aplikasi mobile, web development, dan solusi sistem informasi terintegrasi dengan kualitas premium.",
+    title: "Jasa Pembuatan Website Purwokerto Paling Murah & Profesional | TechSoe",
+    description: "Jasa pembuatan website Purwokerto paling murah & profesional mulai Rp 300.000,- garansi selamanya. Spesialis website modern, aplikasi mobile, dan sistem informasi.",
     url: "https://techsoe.com",
-    siteName: "TechSoe",
+    siteName: "TechSoe (Teknologi Inovasi Soedirman)",
     images: [
       {
         url: "/projects/hero.png",
         width: 1200,
         height: 630,
-        alt: "Jasa Pembuatan Website Purwokerto - TechSoe Software House",
+        alt: "Jasa Pembuatan Website Purwokerto Paling Murah - TechSoe Software House",
       },
     ],
     locale: "id_ID",
@@ -62,8 +67,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TechSoe | Jasa Pembuatan Website & Aplikasi",
-    description: "Solusi digital terbaik untuk bisnis Anda. Jasa pembuatan website dan aplikasi mobile profesional.",
+    title: "TechSoe | Jasa Pembuatan Website Purwokerto Paling Murah",
+    description: "Jasa pembuatan website Purwokerto mulai Rp 300.000,- garansi selamanya. Solusi digital terbaik untuk bisnis Anda.",
     images: ["/projects/hero.png"],
   },
   verification: {
@@ -102,34 +107,52 @@ export default function RootLayout({
                 "name": "TechSoe Application Suite",
                 "operatingSystem": "Web, Android, iOS",
                 "applicationCategory": "BusinessApplication",
-                "description": "TechSoe melayani jasa pembuatan website, pengembangan aplikasi mobile, dan perancangan sistem informasi bisnis terintegrasi.",
+                "description": "TechSoe melayani jasa pembuatan website, pengembangan aplikasi mobile, dan perancangan sistem informasi bisnis terintegrasi di Purwokerto.",
                 "offers": {
                   "@type": "Offer",
-                  "price": "0",
+                  "price": "300000",
                   "priceCurrency": "IDR"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "5.0",
+                  "bestRating": "5",
+                  "worstRating": "1",
+                  "ratingCount": "7",
+                  "reviewCount": "7"
                 }
               },
               {
                 "@context": "https://schema.org",
-                "@type": "LocalBusiness",
+                "@type": ["LocalBusiness", "ProfessionalService"],
                 "@id": "https://techsoe.com/#organization",
-                "name": "TechSoe Agency",
+                "name": "Teknologi Inovasi Soedirman (TechSoe)",
+                "legalName": "Teknologi Inovasi Soedirman",
+                "alternateName": [
+                  "TechSoe",
+                  "Teknologi Inovasi Soedirman",
+                  "Tech Soed",
+                  "Jasa Pembuatan Website Purwokerto TechSoe"
+                ],
+                "description": "Jasa pembuatan website Purwokerto paling murah & profesional mulai Rp 300.000,- garansi selamanya. Partner software house dan transformasi digital terbaik di Purwokerto dan Banyumas.",
                 "image": "https://techsoe.com/projects/logo.png",
                 "url": "https://techsoe.com",
                 "telephone": "+6285814174267",
                 "email": "hi@techsoe.com",
+                "priceRange": "Rp 300.000 - Rp 15.000.000",
+                "hasMap": "https://maps.app.goo.gl/ss9S1x2hRGXseBW76",
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "Purwokerto",
-                  "addressLocality": "Purwokerto",
+                  "streetAddress": "Jl. Limas Agung, Glempang, Bancarkembar",
+                  "addressLocality": "Purwokerto Utara",
                   "addressRegion": "Jawa Tengah",
-                  "postalCode": "53123",
+                  "postalCode": "53121",
                   "addressCountry": "ID"
                 },
                 "geo": {
                   "@type": "GeoCoordinates",
-                  "latitude": -7.4244,
-                  "longitude": 109.2303
+                  "latitude": -7.4082,
+                  "longitude": 109.2458
                 },
                 "openingHoursSpecification": {
                   "@type": "OpeningHoursSpecification",
@@ -139,15 +162,57 @@ export default function RootLayout({
                   "opens": "08:00",
                   "closes": "17:00"
                 },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "5.0",
+                  "bestRating": "5",
+                  "worstRating": "1",
+                  "ratingCount": "7",
+                  "reviewCount": "7"
+                },
                 "sameAs": [
+                  "https://maps.app.goo.gl/ss9S1x2hRGXseBW76",
                   "https://www.instagram.com/techsoe",
                   "https://github.com/kendikadimas"
                 ]
               },
               {
                 "@context": "https://schema.org",
+                "@type": "Product",
+                "name": "Jasa Pembuatan Website Purwokerto",
+                "image": "https://techsoe.com/projects/hero.png",
+                "description": "Jasa pembuatan website Purwokerto paling murah & profesional mulai Rp 300.000,- garansi selamanya. Desain modern & mobile-friendly. Free hosting, domain dan email bisnis.",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "TechSoe"
+                },
+                "offers": {
+                  "@type": "AggregateOffer",
+                  "lowPrice": "300000",
+                  "highPrice": "15000000",
+                  "priceCurrency": "IDR",
+                  "offerCount": "8",
+                  "priceValidUntil": "2030-12-31",
+                  "availability": "https://schema.org/InStock",
+                  "seller": {
+                    "@type": "Organization",
+                    "name": "Teknologi Inovasi Soedirman (TechSoe)"
+                  }
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "5.0",
+                  "bestRating": "5",
+                  "worstRating": "1",
+                  "ratingCount": "7",
+                  "reviewCount": "7"
+                }
+              },
+              {
+                "@context": "https://schema.org",
                 "@type": "WebSite",
                 "name": "TechSoe",
+                "alternateName": "Teknologi Inovasi Soedirman",
                 "url": "https://techsoe.com",
                 "potentialAction": {
                   "@type": "SearchAction",
@@ -157,11 +222,61 @@ export default function RootLayout({
               },
               {
                 "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "TechSoe Navigation Sitelinks",
+                "description": "Daftar navigasi menu utama website TechSoe",
+                "itemListElement": [
+                  {
+                    "@type": "SiteNavigationElement",
+                    "position": 1,
+                    "name": "Layanan Web & Aplikasi",
+                    "description": "Jasa pembuatan website modern, kilat, SEO-friendly serta pengembangan aplikasi mobile Android & iOS.",
+                    "url": "https://techsoe.com/#harga"
+                  },
+                  {
+                    "@type": "SiteNavigationElement",
+                    "position": 2,
+                    "name": "Tentang TechSoe",
+                    "description": "Profil software house dan partner transformasi digital profesional di Purwokerto dan Banyumas.",
+                    "url": "https://techsoe.com/tentang"
+                  },
+                  {
+                    "@type": "SiteNavigationElement",
+                    "position": 3,
+                    "name": "Blog & Wawasan Teknologi",
+                    "description": "Kumpulan artikel edukasi teknologi, web development, SEO, dan digitalisasi bisnis.",
+                    "url": "https://techsoe.com/blog"
+                  },
+                  {
+                    "@type": "SiteNavigationElement",
+                    "position": 4,
+                    "name": "Portfolio & Showcase Proyek",
+                    "description": "Eksplorasi portofolio karya aplikasi dan website klien yang sukses ditangani TechSoe.",
+                    "url": "https://techsoe.com/#portfolio"
+                  },
+                  {
+                    "@type": "SiteNavigationElement",
+                    "position": 5,
+                    "name": "Testimoni Klien",
+                    "description": "Ulasan kepuasan klien dan pengalaman bermitra bersama tim TechSoe.",
+                    "url": "https://techsoe.com/#testimoni"
+                  },
+                  {
+                    "@type": "SiteNavigationElement",
+                    "position": 6,
+                    "name": "Tanya Jawab (FAQ)",
+                    "description": "Pertanyaan umum seputar alur kerja, waktu pembuatan, biaya, dan garansi website.",
+                    "url": "https://techsoe.com/#faq"
+                  }
+                ]
+              },
+              {
+                "@context": "https://schema.org",
                 "@type": "Service",
                 "serviceType": "Jasa Pembuatan Website & Aplikasi",
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "TechSoe"
+                  "name": "Teknologi Inovasi Soedirman (TechSoe)"
                 },
                 "areaServed": {
                   "@type": "Country",
@@ -176,7 +291,7 @@ export default function RootLayout({
                       "itemOffered": {
                         "@type": "Service",
                         "name": "Web Development",
-                        "description": "Jasa pembuatan website modern dengan Next.js dan Laravel."
+                        "description": "Jasa pembuatan website modern mulai Rp 300rb dengan Next.js dan Laravel."
                       }
                     },
                     {

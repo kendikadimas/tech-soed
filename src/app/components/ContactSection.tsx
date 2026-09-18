@@ -69,15 +69,20 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-slate-50 dark:bg-slate-950 transition-colors rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 dark:border-slate-800 transition-colors text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+              <a
+                href="https://maps.app.goo.gl/ss9S1x2hRGXseBW76"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-start gap-4 group cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-slate-50 dark:bg-slate-950 transition-colors rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 dark:border-slate-800 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 dark:text-white transition-colors ">Office</h4>
-                  <p className="text-slate-500 dark:text-slate-400 transition-colors ">{t[lang].contactInfoAddress}</p>
+                  <h4 className="font-bold text-slate-900 dark:text-white transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400">Office</h4>
+                  <p className="text-slate-500 dark:text-slate-400 transition-colors">{t[lang].contactInfoAddress}</p>
                 </div>
-              </div>
+              </a>
 
               <div className="flex items-start gap-4 group">
                 <div className="w-12 h-12 bg-slate-50 dark:bg-slate-950 transition-colors rounded-2xl flex items-center justify-center shadow-sm border border-slate-100 dark:border-slate-800 transition-colors text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
