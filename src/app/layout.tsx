@@ -222,6 +222,52 @@ export default function RootLayout({
               },
               {
                 "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "Berapa biaya jasa pembuatan website di Purwokerto melalui TechSoe?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Biaya jasa pembuatan website di TechSoe mulai dari Rp 300.000,- untuk landing page promosi dan UMKM, sudah termasuk domain gratis, hosting kilat, serta garansi selamanya."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Apakah website yang dibuat di TechSoe sudah SEO-friendly dan mobile friendly?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Ya, seluruh website yang dikembangkan TechSoe menggunakan teknologi Next.js dengan prinsip Mobile-First Design, Semantic HTML, struktur schema.org, dan optimasi kecepatan loading agar mudah masuk halaman 1 Google."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Berapa lama estimasi waktu pengerjaan website?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Untuk landing page atau website standar selesai dalam 1 hingga 3 hari kerja. Untuk sistem informasi kustom atau website e-commerce kompleks memerlukan waktu 1 hingga 3 minggu."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Apakah klien mendapatkan kepemilikan penuh atas source code?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Ya, TechSoe memberikan kepemilikan penuh 100% atas source code setelah pelunasan tanpa sistem sewa terkunci."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Di mana lokasi kantor TechSoe di Purwokerto?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "TechSoe (Teknologi Inovasi Soedirman) berlokasi di Jl. Limas Agung, Bancarkembar, Kec. Purwokerto Utara, Kabupaten Banyumas, Jawa Tengah 53121."
+                    }
+                  }
+                ]
+              },
+              {
+                "@context": "https://schema.org",
                 "@type": "ItemList",
                 "name": "TechSoe Navigation Sitelinks",
                 "description": "Daftar navigasi menu utama website TechSoe",

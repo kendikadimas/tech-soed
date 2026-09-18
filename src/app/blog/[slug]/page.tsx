@@ -220,32 +220,58 @@ export default async function BlogPostPage({ params }: Props) {
     const tags = generateTags(post.title, post.category);
 
     // Schema.org Structured Data
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description: post.excerpt,
-        image: imageUrl,
-        datePublished: post.date,
-        author: {
-            '@type': 'Organization',
-            name: post.author || 'TechSoe Team',
-            url: 'https://techsoe.com',
-        },
-        publisher: {
-            '@type': 'Organization',
-            name: 'TechSoe',
-            url: 'https://techsoe.com',
-            logo: {
-                '@type': 'ImageObject',
-                url: 'https://techsoe.com/projects/logo.png',
+    const jsonLd = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.title,
+            description: post.excerpt,
+            image: imageUrl,
+            datePublished: post.date,
+            author: {
+                '@type': 'Organization',
+                name: post.author || 'TechSoe Team',
+                url: 'https://techsoe.com',
+            },
+            publisher: {
+                '@type': 'Organization',
+                name: 'TechSoe (Teknologi Inovasi Soedirman)',
+                url: 'https://techsoe.com',
+                logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://techsoe.com/projects/logo.png',
+                },
+            },
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': postUrl,
             },
         },
-        mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': postUrl,
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Beranda',
+                    item: 'https://techsoe.com',
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Blog',
+                    item: 'https://techsoe.com/blog',
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: post.title,
+                    item: postUrl,
+                },
+            ],
         },
-    };
+    ];
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 pb-24 sm:pb-32 transition-colors">
