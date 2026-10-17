@@ -23,7 +23,7 @@ export default function CtaSection() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-400/20 dark:bg-indigo-900/10 blur-[100px] rounded-full" />
 
         <div className="relative z-10 flex flex-col items-center">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-tight mb-4 max-w-[18ch] sm:max-w-3xl text-balance">
+          <h2 className="font-geist text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.65rem] font-bold text-white leading-[1.2] sm:leading-[1.18] mb-4 max-w-[18ch] sm:max-w-3xl text-balance tracking-[-0.03em]">
             {t[lang].ctaTitle}
           </h2>
 

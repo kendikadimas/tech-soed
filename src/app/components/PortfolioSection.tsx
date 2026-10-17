@@ -127,11 +127,11 @@ export default function PortfolioSection() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors leading-tight mb-3"
+            className="font-geist text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.65rem] font-bold text-slate-900 dark:text-white transition-colors leading-[1.2] sm:leading-[1.18] mb-4 tracking-[-0.03em]"
           >
             {t[lang].portTitle}
           </motion.h2>
-          <p className="text-xs sm:text-sm lg:text-base text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl">
+          <p className="font-geist text-xs sm:text-sm lg:text-base xl:text-lg text-slate-500 dark:text-slate-400 transition-colors font-normal leading-relaxed max-w-2xl">
             {t[lang].portDesc}
           </p>
         </div>
@@ -174,16 +174,13 @@ export default function PortfolioSection() {
                       setWebsiteType('All');
                     }
                   }}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 whitespace-nowrap ${portfolioMainFilter === cat.id
-                    ? 'bg-blue-900 text-white'
-                    : 'bg-slate-50 dark:bg-slate-950 transition-colors text-slate-500 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors '
-                    }`}
+                  className={`btn-3d-filter ${portfolioMainFilter === cat.id ? 'btn-3d-filter-active' : 'btn-3d-filter-inactive'}`}
                 >
                   {cat.id === 'Web Development' && portfolioMainFilter === 'Web Development' && websiteType !== 'All'
                     ? websiteType
                     : cat.name}
                   {cat.id === 'Web Development' && (
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isWebDropdownOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 ml-1.5 transition-transform duration-300 ${isWebDropdownOpen ? 'rotate-180' : ''}`} />
                   )}
                 </button>
 
@@ -191,7 +188,7 @@ export default function PortfolioSection() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="hidden lg:block absolute top-full left-0 mt-3 w-64 bg-slate-50 dark:bg-slate-950 transition-colors border border-slate-100 dark:border-slate-800 transition-colors rounded-2xl p-2 z-50 overflow-hidden"
+                    className="hidden lg:block absolute top-full left-0 mt-3 w-64 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl p-2 z-50 shadow-xl overflow-hidden"
                   >
                     {webSubCategories.map((sub) => (
                       <button
@@ -201,9 +198,9 @@ export default function PortfolioSection() {
                           setWebsiteType(sub.id);
                           setIsWebDropdownOpen(false);
                         }}
-                        className={`w-full text-left px-4 py-2.5 rounded-xl text-sm transition-all ${websiteType === sub.id
-                          ? 'bg-indigo-50 dark:bg-blue-900/30 text-indigo-700 dark:text-indigo-200 font-bold'
-                          : 'text-slate-600 dark:text-slate-400 transition-colors hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors '
+                        className={`w-full text-left px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${websiteType === sub.id
+                          ? 'bg-blue-600 text-white font-bold'
+                          : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                           }`}
                       >
                         {sub.name}
@@ -222,19 +219,16 @@ export default function PortfolioSection() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="flex lg:hidden absolute top-full left-0 right-0 flex-wrap gap-2 mt-2 p-4 bg-white/95 dark:bg-slate-950/95 transition-colors backdrop-blur-md border border-slate-100 dark:border-slate-800 transition-colors rounded-2xl z-60 shadow-2xl"
+                className="flex lg:hidden absolute top-full left-0 right-0 flex-wrap gap-2 mt-2 p-4 bg-white/95 dark:bg-slate-950/95 transition-colors backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-2xl z-60 shadow-2xl"
               >
                 {webSubCategories.map((sub) => (
                   <button
                     key={sub.id}
                     onClick={() => {
                       setWebsiteType(sub.id);
-                      setIsWebDropdownOpen(false); // Close after select on mobile
+                      setIsWebDropdownOpen(false);
                     }}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${websiteType === sub.id
-                      ? 'bg-blue-900 text-white'
-                      : 'bg-white dark:bg-slate-950 transition-colors text-slate-500 dark:text-slate-400 transition-colors border border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors '
-                      }`}
+                    className={`btn-3d-filter !py-1.5 !px-3.5 !text-xs ${websiteType === sub.id ? 'btn-3d-filter-active' : 'btn-3d-filter-inactive'}`}
                   >
                     {sub.name}
                   </button>
@@ -246,18 +240,20 @@ export default function PortfolioSection() {
 
         {/* Projects Carousel */}
         <div className="relative group/projects w-full">
-          {/* Navigation Buttons (Desktop & Mobile) */}
+          {/* Navigation Buttons (Desktop & Mobile) with 3D feel */}
           <button
             onClick={() => scrollProjects('left')}
-            className="absolute -left-4 lg:-left-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 dark:bg-slate-950/90 transition-colors backdrop-blur-md border border-slate-100 dark:border-slate-800 transition-colors text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
+            className="absolute -left-4 lg:-left-20 top-1/2 -translate-y-1/2 p-2.5 lg:p-4 btn-3d-filter-inactive rounded-2xl shadow-md transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer"
+            aria-label="Previous Projects"
           >
-            <ChevronLeft className="w-5 h-5 lg:w-8 lg:h-8" />
+            <ChevronLeft className="w-5 h-5 lg:w-7 lg:h-7" />
           </button>
           <button
             onClick={() => scrollProjects('right')}
-            className="absolute -right-4 lg:-right-20 top-1/2 -translate-y-1/2 p-2 lg:p-4 bg-white/90 dark:bg-slate-950/90 transition-colors backdrop-blur-md border border-slate-100 dark:border-slate-800 transition-colors text-slate-400 hover:text-blue-900 hover:border-blue-100 rounded-xl shadow-xl transition-all z-30 hover:scale-110 active:scale-95"
+            className="absolute -right-4 lg:-right-20 top-1/2 -translate-y-1/2 p-2.5 lg:p-4 btn-3d-filter-inactive rounded-2xl shadow-md transition-all z-30 hover:scale-110 active:scale-95 cursor-pointer"
+            aria-label="Next Projects"
           >
-            <ChevronRight className="w-5 h-5 lg:w-8 lg:h-8" />
+            <ChevronRight className="w-5 h-5 lg:w-7 lg:h-7" />
           </button>
 
           <motion.div
@@ -275,37 +271,41 @@ export default function PortfolioSection() {
                   viewport={{ once: true }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group cursor-pointer flex flex-col flex-none w-[85%] md:w-[45%] lg:w-[calc(33.333%-1.5rem)] bg-slate-50 dark:bg-slate-950 transition-colors rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-colors hover:border-blue-100 dark:hover:border-blue-800 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 snap-center"
+                  className="card-3d-seamless group cursor-pointer flex flex-col flex-none w-[85%] md:w-[45%] lg:w-[calc(33.333%-1.5rem)] rounded-2xl overflow-hidden snap-center"
                   onClick={() => setSelectedProject(project)}
                 >
-                  {/* Image Container */}
-                  <div className="relative w-full aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800 transition-colors ">
+                  {/* Image Container - Full Bleed Edge-to-Edge (Tanpa Jeda / Padding) */}
+                  <div className="relative w-full aspect-video overflow-hidden bg-slate-900 border-b border-slate-100 dark:border-slate-800">
                     <Image
                       src={project.image}
                       alt={`${project.title} - Jasa Pembuatan Website Purwokerto`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="group-hover:scale-105 transition duration-700 ease-in-out object-contain p-2"
+                      className="group-hover:scale-105 transition duration-700 ease-out object-cover object-top"
                     />
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="px-4 py-1.5 bg-white/95 dark:bg-slate-950/95 transition-colors backdrop-blur-md text-slate-900 dark:text-white transition-colors text-[10px] font-black uppercase tracking-wider rounded-xl shadow-sm border border-white">
-                        {project.category}
-                      </span>
-                    </div>
                   </div>
 
-                  {/* Content Container */}
-                  <div className="p-6 lg:p-8 flex flex-col flex-1">
-                    <h3 className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white transition-colors mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors ">
+                  {/* Content Container with Badge Placed Below Image */}
+                  <div className="p-6 lg:p-7 flex flex-col flex-1">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="inline-flex items-center px-3 py-1 rounded-lg text-[10.5px] font-bold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/60 text-[#172657] dark:text-blue-300 border border-blue-200/70 dark:border-blue-800/80 shadow-xs">
+                        {project.category}
+                      </span>
+                      <span className="text-[11px] font-medium text-slate-400 dark:text-slate-500">
+                        {lang === 'id' ? 'Portofolio' : 'Portfolio'}
+                      </span>
+                    </div>
+
+                    <h3 className="font-geist text-lg lg:text-xl font-bold text-slate-900 dark:text-white transition-colors mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                       {project.title}
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 transition-colors text-sm lg:text-base font-medium leading-relaxed line-clamp-3 mb-4">
+                    <p className="font-geist text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4 font-normal">
                       {project.desc}
                     </p>
 
-                    <div className="mt-auto pt-6 border-t border-slate-100 dark:border-slate-800 transition-colors flex items-center justify-between">
-                       <span className="text-blue-600 dark:text-blue-400 font-bold text-sm lg:text-base flex items-center gap-2 group-hover:gap-3 transition-all">
-                          {lang === 'id' ? 'Lihat Detail' : 'View Details'} <ArrowRight className="w-4 h-4" />
+                    <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                       <span className="font-geist text-blue-600 dark:text-blue-400 font-bold text-xs sm:text-sm flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                          {lang === 'id' ? 'Lihat Detail' : 'View Details'} <ArrowRight className="w-3.5 h-3.5" />
                        </span>
                     </div>
                   </div>

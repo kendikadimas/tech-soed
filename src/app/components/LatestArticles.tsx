@@ -49,14 +49,14 @@ export default function LatestArticles() {
   const recentPosts = posts;
 
   return (
-    <section className="py-14 lg:py-16 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">
+    <section className="py-20 lg:py-24 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-          <div className="max-w-2xl text-left">
-            <h2 className="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white transition-colors mb-2 tracking-tight">
-              Wawasan <span className="text-blue-900 dark:text-blue-400">Digital Purwokerto</span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 lg:mb-14 gap-4">
+          <div className="max-w-3xl text-left">
+            <h2 className="font-geist text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.65rem] font-bold text-slate-900 dark:text-white transition-colors leading-[1.2] sm:leading-[1.18] mb-3 tracking-[-0.03em]">
+              Wawasan <span className="text-[#172657] dark:text-blue-400">Digital Purwokerto</span>
             </h2>
-            <p className="text-xs lg:text-sm text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed">
+            <p className="font-geist text-xs sm:text-sm lg:text-base xl:text-lg text-slate-500 dark:text-slate-400 transition-colors font-normal leading-relaxed">
               Tips dan strategi pengembangan website, aplikasi mobile, serta solusi IT terintegrasi sebagai Partner Digital Professional Anda di Banyumas.
             </p>
           </div>
@@ -68,7 +68,7 @@ export default function LatestArticles() {
           </Link>
         </div>
 
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pb-6 md:pb-0 snap-x snap-mandatory scrollbar-hide">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 pt-4 pb-8 sm:py-6 px-2 -mx-2 snap-x snap-mandatory scrollbar-hide">
           {recentPosts.map((post, index) => (
             <motion.div
               key={post.id}
@@ -76,11 +76,11 @@ export default function LatestArticles() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="min-w-[85%] md:min-w-0 snap-center"
+              className="min-w-[85%] md:min-w-0 snap-center py-2"
             >
               <Link 
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col h-full bg-slate-50 dark:bg-slate-900 transition-colors rounded-2xl border border-slate-100 dark:border-slate-800 overflow-hidden hover:shadow-xl hover:shadow-blue-900/10 transition-all duration-300"
+                className="group flex flex-col h-full bg-white dark:bg-slate-900 transition-colors rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-blue-950/10 hover:-translate-y-2 hover:border-blue-300/80 dark:hover:border-blue-800/80 transition-all duration-300"
               >
                 <div className="p-4 sm:p-5 lg:p-6 flex flex-col flex-1">
                   <div className="flex items-center justify-between gap-2 mb-3">

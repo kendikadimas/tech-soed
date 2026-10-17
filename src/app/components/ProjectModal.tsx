@@ -98,7 +98,7 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
               />
               {/* Category Badge */}
               <div className="absolute bottom-4 left-4">
-                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#172657]/90 backdrop-blur-sm text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-sm">
+                <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-[#172657]/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-widest rounded-xl shadow-sm">
                   <Tag className="w-3 h-3 text-blue-300" />
                   {project.category}
                 </span>
@@ -107,7 +107,7 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
 
             {/* Content */}
             <div className="p-6 sm:p-7 flex flex-col flex-1 overflow-y-auto">
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">
                 {project.title}
               </h2>
               <p className="text-slate-600 dark:text-slate-400 font-medium text-sm leading-relaxed mb-6">

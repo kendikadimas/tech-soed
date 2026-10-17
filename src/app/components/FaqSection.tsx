@@ -21,10 +21,10 @@ export default function FaqSection() {
           transition={{ duration: 0.5 }}
           className="text-left mb-10"
         >
-          <h2 className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white transition-colors leading-tight mb-2">
+          <h2 className="font-geist text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.65rem] font-bold text-slate-900 dark:text-white transition-colors leading-[1.2] sm:leading-[1.18] mb-3 tracking-[-0.03em]">
             {t[lang].faqH2}
           </h2>
-          <p className="text-xs lg:text-sm text-slate-600 dark:text-slate-400 transition-colors font-medium max-w-2xl">
+          <p className="font-geist text-xs sm:text-sm lg:text-base xl:text-lg text-slate-500 dark:text-slate-400 transition-colors font-normal max-w-2xl">
             {t[lang].faqDesc}
           </p>
         </motion.div>

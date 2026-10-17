@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "Jasa Pembuatan Website Purwokerto Paling Murah & Profesional | Mulai Rp 300rb TechSoe",
+  title: "TechSoe - Jasa Pembuatan Website Purwokerto Paling Murah & Profesional | Mulai Rp 300rb",
   description: "Jasa pembuatan website Purwokerto paling murah & profesional mulai Rp 300.000,- garansi selamanya. Solusi bikin website kilat, aplikasi mobile, sistem informasi, SEO-friendly gratis domain & hosting.",
   keywords: [
     "jasa pembuatan website purwokerto",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     apple: '/icon.png',
   },
   openGraph: {
-    title: "Jasa Pembuatan Website Purwokerto Paling Murah & Profesional | TechSoe",
+    title: "TechSoe - Jasa Pembuatan Website Purwokerto Paling Murah & Profesional",
     description: "Jasa pembuatan website Purwokerto paling murah & profesional mulai Rp 300.000,- garansi selamanya. Spesialis website modern, aplikasi mobile, dan sistem informasi.",
     url: "https://techsoe.com",
     siteName: "TechSoe (Teknologi Inovasi Soedirman)",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TechSoe | Jasa Pembuatan Website Purwokerto Paling Murah",
+    title: "TechSoe - Jasa Pembuatan Website Purwokerto Paling Murah & Profesional",
     description: "Jasa pembuatan website Purwokerto mulai Rp 300.000,- garansi selamanya. Solusi digital terbaik untuk bisnis Anda.",
     images: ["/projects/hero.png"],
   },

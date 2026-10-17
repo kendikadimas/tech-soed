@@ -99,11 +99,11 @@ export default function ClientsSection() {
           transition={{ duration: 0.5 }}
           className="text-center space-y-3 mb-14 lg:mb-20"
         >
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 dark:text-white transition-colors tracking-tight">
+          <h2 className="font-geist text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.65rem] font-bold text-slate-900 dark:text-white transition-colors leading-[1.2] sm:leading-[1.18] tracking-[-0.03em]">
             {t[lang]?.clientsTitle || "Klien Kami"}
           </h2>
           
-          <p className="text-slate-600 dark:text-slate-400 transition-colors font-medium max-w-2xl mx-auto text-sm lg:text-base leading-relaxed">
+          <p className="font-geist text-slate-500 dark:text-slate-400 transition-colors font-normal max-w-2xl mx-auto text-sm lg:text-base xl:text-lg leading-relaxed">
             {t[lang]?.clientsDesc || "Bangga menjadi mitra transformasi digital bagi instansi pemerintah, perguruan tinggi, BUMN, hingga badan usaha daerah."}
           </p>
         </motion.div>

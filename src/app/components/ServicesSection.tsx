@@ -59,14 +59,14 @@ export default function ServicesSection() {
     <section className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-left max-w-3xl mb-16 relative">
+        <div className="text-left max-w-4xl mb-14 lg:mb-16 relative">
           <div className="absolute -top-10 -left-6 w-32 h-32 bg-blue-100/50 dark:bg-blue-900/20 blur-3xl rounded-full -z-10" />
           <motion.h2
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-white transition-colors leading-[1.1] mb-4"
+            className="font-geist text-2xl sm:text-3xl lg:text-[2.25rem] xl:text-[2.65rem] font-bold text-slate-900 dark:text-white transition-colors leading-[1.2] sm:leading-[1.18] mb-4 tracking-[-0.03em]"
           >
             {t[lang].svcTitle}
           </motion.h2>
@@ -75,7 +75,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xs sm:text-sm lg:text-base text-slate-500 dark:text-slate-400 transition-colors font-medium leading-relaxed max-w-2xl"
+            className="font-geist text-xs sm:text-sm lg:text-base xl:text-lg text-slate-500 dark:text-slate-400 transition-colors font-normal leading-relaxed max-w-2xl"
           >
             {t[lang].svcText}
           </motion.p>
