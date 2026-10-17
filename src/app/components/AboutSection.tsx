@@ -38,7 +38,7 @@ export default function AboutSection() {
 
               <Link 
                 href="#portfolio" 
-                className="bg-transparent text-white border-2 border-white/30 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-white/10 dark:bg-slate-950/10 transition-colors hover:border-white transition-all duration-300 text-center min-h-[44px] flex items-center justify-center w-fit"
+                className="btn-3d-base btn-3d-white px-8 py-3.5 rounded-xl font-extrabold text-sm sm:text-base tracking-wider text-center min-h-[46px] flex items-center justify-center w-fit"
               >
                 {t[lang].heroBtnPort}
               </Link>

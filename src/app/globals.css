@@ -10,6 +10,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
+  --font-geist: var(--font-geist);
   --font-heading: var(--font-heading);
 }
 
@@ -103,4 +104,245 @@ html {
   .animate-blog-body {
     animation: none;
   }
+}
+
+/* ==========================================================================
+   Tactile 3D Button System (Eye-Catching, Elegant, Luxurious & Simple)
+   ========================================================================== */
+
+.btn-3d-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, filter;
+}
+
+/* --- Green Emerald 3D (Reference Match: "MINTA DEMO") --- */
+.btn-3d-green {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #2fd568 0%, #20b857 52%, #139644 100%);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-bottom: 1px solid rgba(13, 107, 48, 0.65);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2.5px 0 0 rgba(0, 0, 0, 0.25);
+  text-shadow: none;
+}
+
+.btn-3d-green:hover {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #3ae477 0%, #26c961 52%, #16a34b 100%);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2.5px 0 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1.5px);
+  filter: brightness(1.03);
+}
+
+.btn-3d-green:active {
+  background: linear-gradient(180deg, #1fa851 0%, #179644 52%, #11813a 100%);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.28);
+  transform: translateY(1.5px);
+  filter: brightness(0.98);
+}
+
+/* --- Blue Brand 3D --- */
+.btn-3d-blue {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 52%, #1d4ed8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-bottom: 1px solid rgba(15, 45, 130, 0.6);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2.5px 0 0 rgba(0, 0, 0, 0.25);
+  text-shadow: none;
+}
+
+.btn-3d-blue:hover {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #4f91ff 0%, #306df4 52%, #2156ea 100%);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2.5px 0 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-1.5px);
+  filter: brightness(1.03);
+}
+
+.btn-3d-blue:active {
+  background: linear-gradient(180deg, #1e40af 0%, #1d4ed8 52%, #1e3a8a 100%);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.28);
+  transform: translateY(1.5px);
+  filter: brightness(0.98);
+}
+
+/* --- Dark / Obsidian 3D --- */
+.btn-3d-dark {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #334155 0%, #1e293b 52%, #0f172a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2.5px 0 0 rgba(0, 0, 0, 0.4);
+  text-shadow: none;
+}
+
+.btn-3d-dark:hover {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #475569 0%, #334155 52%, #1e293b 100%);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2.5px 0 0 rgba(0, 0, 0, 0.45);
+  transform: translateY(-1.5px);
+  filter: brightness(1.03);
+}
+
+.btn-3d-dark:active {
+  background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.35);
+  transform: translateY(1.5px);
+}
+
+/* --- Ceramic White / Light 3D --- */
+.btn-3d-white {
+  color: #0f172a !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 52%, #e2e8f0 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -2.5px 0 0 rgba(148, 163, 184, 0.35);
+  text-shadow: none;
+}
+
+.btn-3d-white:hover {
+  color: #0f172a !important;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 52%, #f1f5f9 100%);
+  box-shadow:
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 -2.5px 0 0 rgba(148, 163, 184, 0.4);
+  transform: translateY(-1.5px);
+}
+
+.btn-3d-white:active {
+  background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 0 rgba(148, 163, 184, 0.35);
+  transform: translateY(1.5px);
+}
+
+/* --- Capsule Language Switcher Pill --- */
+.capsule-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .capsule-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.capsule-toggle-item {
+  position: relative;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  color: #64748b;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.dark .capsule-toggle-item {
+  color: #94a3b8;
+}
+
+.capsule-toggle-item:hover {
+  color: #0f172a;
+}
+
+.dark .capsule-toggle-item:hover {
+  color: #ffffff;
+}
+
+.capsule-toggle-item.active {
+  color: #0f172a;
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.dark .capsule-toggle-item.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+/* --- 3D Hero Diagonal Marquee (Miring Berjajar dari Pojok Atas Kanan ke Tengah) --- */
+@keyframes heroDiagonalMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@-webkit-keyframes heroDiagonalMarquee {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-hero-marquee-1 {
+  animation: heroDiagonalMarquee 80s linear infinite;
+  -webkit-animation: heroDiagonalMarquee 80s linear infinite;
+}
+
+.animate-hero-marquee-2 {
+  animation: heroDiagonalMarquee 80s linear infinite;
+  -webkit-animation: heroDiagonalMarquee 80s linear infinite;
+}
+
+.animate-hero-marquee-mobile {
+  animation: heroDiagonalMarquee 55s linear infinite;
+  -webkit-animation: heroDiagonalMarquee 55s linear infinite;
+}
+
+.hero-marquee-container:hover .animate-hero-marquee-1,
+.hero-marquee-container:hover .animate-hero-marquee-2,
+.hero-marquee-container:hover .animate-hero-marquee-mobile {
+  animation-play-state: paused;
+  -webkit-animation-play-state: paused;
 }

@@ -141,10 +141,10 @@ export default function ContactSection() {
 
               <button 
                 type="submit"
-                className="w-full bg-blue-600 text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 active:scale-95"
+                className="btn-3d-base btn-3d-blue w-full py-4 rounded-2xl font-extrabold text-sm sm:text-base tracking-wider flex items-center justify-center gap-3 min-h-[50px]"
               >
                 <span>{t[lang].contactBtn}</span>
-                <Send className="w-5 h-5" />
+                <Send className="w-5 h-5 shrink-0" />
               </button>
             </form>
           </motion.div>

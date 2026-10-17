@@ -121,9 +121,9 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
                     href={demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 bg-[#172657] hover:bg-[#1f3373] text-white font-bold rounded-2xl transition-all shadow-lg shadow-[#172657]/25 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 text-xs sm:text-sm cursor-pointer"
+                    className="btn-3d-base btn-3d-blue flex-1 px-5 py-3 rounded-xl font-extrabold text-xs sm:text-sm tracking-wider flex items-center justify-center gap-2 min-h-[44px]"
                   >
-                    <ExternalLink className="w-4 h-4 text-blue-400 shrink-0" />
+                    <ExternalLink className="w-4 h-4 text-blue-200 shrink-0" />
                     <span>{getDemoButtonLabel()}</span>
                   </a>
                 )}
@@ -136,15 +136,15 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 bg-[#25D366] text-white font-bold rounded-2xl hover:bg-[#20bd5a] transition-all shadow-lg shadow-green-600/20 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 text-xs sm:text-sm cursor-pointer"
+                  className="btn-3d-base btn-3d-green flex-1 px-5 py-3 rounded-xl font-extrabold text-xs sm:text-sm tracking-wider flex items-center justify-center gap-2 min-h-[44px]"
                 >
-                  <span>{lang === 'id' ? 'Diskusikan Proyek Saya' : 'Discuss My Project'}</span>
+                  <span>{lang === 'id' ? 'Diskusikan Proyek' : 'Discuss Project'}</span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </a>
 
                 <button
                   onClick={onClose}
-                  className="px-5 py-3.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-xs sm:text-sm active:scale-95 cursor-pointer"
+                  className="btn-3d-base btn-3d-white dark:btn-3d-dark px-5 py-3 rounded-xl font-extrabold text-xs sm:text-sm tracking-wider min-h-[44px]"
                 >
                   {lang === 'id' ? 'Tutup' : 'Close'}
                 </button>

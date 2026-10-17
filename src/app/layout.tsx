@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -364,7 +369,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${plusJakarta.variable} antialiased dark:bg-slate-950 transition-colors`}
+        className={`${inter.variable} ${plusJakarta.variable} ${geist.variable} antialiased dark:bg-slate-950 transition-colors`}
       >
         {/* Google Analytics 4 */}
         {(() => {

@@ -74,7 +74,6 @@ const servicesListEn = [
 export default function HeroSection() {
   const { lang } = useLang();
   const heroStats = t[lang].heroStats || [];
-  const [isHovered, setIsHovered] = useState(false);
   const [projectCards, setProjectCards] = useState(defaultProjectCards);
 
   const [dynamicProjectCount, setDynamicProjectCount] = useState<string | null>(null);
@@ -163,55 +162,173 @@ export default function HeroSection() {
       <div className="absolute top-1/4 left-1/6 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-[#172657]/15 dark:bg-blue-600/15 rounded-full blur-2xl sm:blur-[130px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/6 w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] bg-blue-500/10 dark:bg-blue-500/10 rounded-full blur-2xl sm:blur-[140px] pointer-events-none" />
 
+      {/* DESKTOP ONLY: 45-Degree Diagonal Slanted Marquee (Pojok Kanan Atas ke Bagian Bawah Section) */}
+      <div className="hidden lg:block absolute inset-0 z-0 pointer-events-auto hero-marquee-container select-none opacity-90 dark:opacity-85 hover:opacity-100 transition-opacity duration-300 overflow-hidden">
+        
+        {/* Ambient Glow along the 45-degree diagonal line */}
+        <div className="absolute top-1/3 right-1/4 w-[600px] h-[300px] bg-gradient-to-br from-blue-600/15 via-indigo-600/10 to-transparent blur-3xl rounded-full pointer-events-none -rotate-[45deg]" />
+
+        {/* 45-Degree Slanted Container (Miring 45 Derajat dari Pojok Kanan Atas ke Bagian Bawah Section) */}
+        <div 
+          className="absolute -top-16 right-16 sm:right-24 flex flex-col gap-5 xl:gap-6 w-[2800px] -rotate-[45deg]"
+          style={{ transformOrigin: 'top right' }}
+        >
+          {/* ROW 1: Gliding smoothly along 45-deg line from top-right to bottom */}
+          <div className="flex gap-4 xl:gap-5 w-max animate-hero-marquee-1 will-change-transform">
+            {[...projectCards, ...projectCards].map((card, idx) => (
+              <Link
+                key={`desk-r1-${idx}`}
+                href="#portfolio"
+                className="relative group shrink-0 w-[200px] lg:w-[230px] xl:w-[255px] aspect-[16/10] rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/90 shadow-md dark:shadow-xl bg-slate-900 transition-all duration-300 hover:scale-105 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer block"
+              >
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  sizes="(max-width: 1024px) 230px, 255px"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-108"
+                  priority={idx < 2}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 p-2.5 sm:p-3 text-white z-10 flex flex-col justify-end">
+                  <div className="flex items-center justify-between gap-1 mb-1">
+                    <span className="px-2 py-0.5 rounded text-[8.5px] sm:text-[9.5px] font-bold bg-[#172657] text-white shadow-xs border border-white/20">
+                      {card.category}
+                    </span>
+                    <span className="text-[8.5px] sm:text-[9.5px] text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5 font-medium">
+                      Lihat Portofolio →
+                    </span>
+                  </div>
+                  <h4 className="text-[10px] sm:text-[11.5px] font-bold text-white leading-tight drop-shadow-md truncate">
+                    {card.title}
+                  </h4>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* ROW 2: Parallel 45-deg Track (Corridor 2, as drawn in the 2nd yellow line) */}
+          <div className="flex gap-4 xl:gap-5 w-max animate-hero-marquee-2 will-change-transform -ml-28 xl:-ml-36">
+            {[...projectCards.slice(4), ...projectCards.slice(0, 4), ...projectCards.slice(4), ...projectCards.slice(0, 4)].map((card, idx) => (
+              <Link
+                key={`desk-r2-${idx}`}
+                href="#portfolio"
+                className="relative group shrink-0 w-[200px] lg:w-[230px] xl:w-[255px] aspect-[16/10] rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/90 shadow-md dark:shadow-xl bg-slate-900 transition-all duration-300 hover:scale-105 hover:border-blue-400 dark:hover:border-blue-400 cursor-pointer block"
+              >
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  sizes="(max-width: 1024px) 230px, 255px"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-108"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 p-2.5 sm:p-3 text-white z-10 flex flex-col justify-end">
+                  <div className="flex items-center justify-between gap-1 mb-1">
+                    <span className="px-2 py-0.5 rounded text-[8.5px] sm:text-[9.5px] font-bold bg-[#172657] text-white shadow-xs border border-white/20">
+                      {card.category}
+                    </span>
+                    <span className="text-[8.5px] sm:text-[9.5px] text-blue-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5 font-medium">
+                      Lihat Portofolio →
+                    </span>
+                  </div>
+                  <h4 className="text-[10px] sm:text-[11.5px] font-bold text-white leading-tight drop-shadow-md truncate">
+                    {card.title}
+                  </h4>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+        </div>
+      </div>
+
       <div className="max-w-[1440px] mx-auto w-full relative z-10 flex flex-col">
         
-        {/* TOP: Full-width Expansive Headline with Dynamic Typewriter Effect */}
+        {/* MOBILE ONLY: Horizontal Marquee di paling atas sebelum header (Bebas Tabrakan) */}
+        <div className="block lg:hidden w-full overflow-hidden mb-5 sm:mb-6 -mt-2 hero-marquee-container">
+          <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex gap-2.5 sm:gap-3 w-max animate-hero-marquee-mobile will-change-transform py-0.5">
+              {[...projectCards, ...projectCards].map((card, idx) => (
+                <Link
+                  key={`mob-${idx}`}
+                  href="#portfolio"
+                  className="relative shrink-0 w-[145px] sm:w-[170px] aspect-[16/10] rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 shadow-xs bg-slate-900 block"
+                >
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    sizes="170px"
+                    className="object-cover object-top"
+                    priority={idx < 2}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
+                  <div className="absolute bottom-0 inset-x-0 p-1.5 text-white z-10 flex flex-col justify-end">
+                    <span className="self-start px-1.5 py-0.5 rounded text-[7px] sm:text-[8px] font-bold bg-[#172657] text-white border border-white/20 mb-0.5 leading-none">
+                      {card.category}
+                    </span>
+                    <h4 className="text-[8.5px] sm:text-[9.5px] font-bold text-white leading-tight truncate">
+                      {card.title}
+                    </h4>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* TOP: Headline with Dynamic Typewriter Effect & Two-Tone Reference Typography */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full mb-4 sm:mb-5 lg:mb-6 text-left"
         >
-          <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] xl:text-[3.25rem] font-extrabold tracking-normal sm:tracking-wide text-slate-900 dark:text-white leading-[1.25] sm:leading-[1.16]">
+          <h1 className="font-geist text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem] xl:text-[2.65rem] tracking-[-0.03em] leading-[1.2] sm:leading-[1.18] max-w-4xl lg:max-w-[66%] xl:max-w-[62%]">
             {lang === 'id' ? (
               <>
-                <span className="block sm:inline-flex sm:flex-wrap items-center">
-                  <span className="block sm:inline">Jasa Pembuatan</span>
-                  <span className="inline-flex items-center sm:ml-2 text-[#172657] dark:text-blue-400 font-extrabold min-h-[1.2em] py-0.5">
+                <span className="font-bold text-slate-900 dark:text-white inline-flex flex-wrap sm:flex-nowrap items-center">
+                  <span className="whitespace-nowrap">Jasa Pembuatan</span>
+                  <span className="inline-flex items-center ml-2 sm:ml-2.5 text-[#172657] dark:text-blue-400 font-bold min-h-[1.2em] py-0.5 whitespace-nowrap">
                     {currentText}
                     <motion.span
                       animate={{ opacity: [1, 0, 1] }}
                       transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                      className="ml-1 sm:ml-2 w-[3px] sm:w-[4px] h-[0.9em] bg-[#172657] dark:bg-blue-400 rounded-full inline-block align-middle"
+                      className="ml-1 sm:ml-2 w-[2.5px] sm:w-[3.5px] h-[0.85em] bg-[#172657] dark:bg-blue-400 rounded-full inline-block align-middle"
                     />
+                    <span className="text-slate-900 dark:text-white font-bold ml-0.5">,</span>
                   </span>
                 </span>
-                <span className="block mt-1 sm:mt-2 text-slate-900 dark:text-white">
-                  Lebih Cepat dengan Solusi Digital TechSoe
+                <span className="block mt-1 sm:mt-1.5 font-normal text-slate-400 dark:text-slate-400">
+                  lebih cepat dengan solusi digital TechSoe.
                 </span>
               </>
             ) : (
               <>
-                <span className="block sm:inline-flex sm:flex-wrap items-center">
-                  <span className="block sm:inline">Build</span>
-                  <span className="inline-flex items-center sm:ml-2 text-[#172657] dark:text-blue-400 font-extrabold min-h-[1.2em] py-0.5">
+                <span className="font-bold text-slate-900 dark:text-white inline-flex flex-wrap sm:flex-nowrap items-center">
+                  <span className="whitespace-nowrap">Build</span>
+                  <span className="inline-flex items-center ml-2 sm:ml-2.5 text-[#172657] dark:text-blue-400 font-bold min-h-[1.2em] py-0.5 whitespace-nowrap">
                     {currentText}
                     <motion.span
                       animate={{ opacity: [1, 0, 1] }}
                       transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                      className="ml-1 sm:ml-2 w-[3px] sm:w-[4px] h-[0.9em] bg-[#172657] dark:bg-blue-400 rounded-full inline-block align-middle"
+                      className="ml-1 sm:ml-2 w-[2.5px] sm:w-[3.5px] h-[0.85em] bg-[#172657] dark:bg-blue-400 rounded-full inline-block align-middle"
                     />
+                    <span className="text-slate-900 dark:text-white font-bold ml-0.5">,</span>
                   </span>
                 </span>
-                <span className="block mt-1 sm:mt-2 text-slate-900 dark:text-white">
-                  Faster with Our AI-Powered Dev
+                <span className="block mt-1 sm:mt-1.5 font-normal text-slate-400 dark:text-slate-400">
+                  faster with our AI-powered dev solutions.
                 </span>
               </>
             )}
           </h1>
         </motion.div>
 
-        {/* BOTTOM: 2 Columns (Left: Desc, CTA Buttons, Stats; Right: 3D Slanted Carousel) */}
+        {/* BOTTOM: Left Column for Content, Right Space Clear for Background Overview */}
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
           
           {/* LEFT COLUMN: Subtitle Description, Buttons & Honest Stats */}
@@ -221,8 +338,8 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="lg:col-span-7 xl:col-span-7 flex flex-col items-start text-left w-full pr-0 lg:pr-6"
           >
-            {/* Subtitle Description */}
-            <p className="text-xs sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed mb-5 sm:mb-6 font-normal">
+            {/* Subtitle Description (Matching reference typography) */}
+            <p className="font-geist text-sm sm:text-base lg:text-[1.05rem] text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed mb-6 font-normal">
               {t[lang].heroDesc}
             </p>
 
@@ -232,7 +349,7 @@ export default function HeroSection() {
                 href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-[#172657] hover:bg-[#1f3373] dark:bg-blue-600 dark:hover:bg-blue-500 text-white min-h-[44px] sm:min-h-[48px] px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm lg:text-base shadow-lg shadow-[#172657]/25 dark:shadow-blue-600/25 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 text-center flex items-center justify-center gap-1.5 sm:gap-2.5"
+                className="btn-3d-base btn-3d-green min-h-[46px] sm:min-h-[50px] px-4 sm:px-8 py-3 sm:py-3.5 rounded-xl font-extrabold text-xs sm:text-sm lg:text-base tracking-wider text-center flex items-center justify-center gap-2 sm:gap-2.5"
               >
                 <svg viewBox="0 0 24 24" className="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -241,9 +358,9 @@ export default function HeroSection() {
               </a>
               <Link
                 href="#portfolio"
-                className="bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-white min-h-[44px] sm:min-h-[48px] px-3 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm lg:text-base border border-slate-200 dark:border-slate-800 hover:-translate-y-0.5 transition-all duration-200 text-center flex items-center justify-center gap-1.5 sm:gap-2"
+                className="btn-3d-base btn-3d-white dark:btn-3d-dark min-h-[46px] sm:min-h-[50px] px-4 sm:px-8 py-3 sm:py-3.5 rounded-xl font-extrabold text-xs sm:text-sm lg:text-base tracking-wider text-center flex items-center justify-center gap-2 sm:gap-2.5"
               >
-                <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 dark:text-slate-400 shrink-0" />
+                <Grid className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500 dark:text-slate-300 shrink-0" />
                 <span className="truncate">{t[lang].heroBtnPort}</span>
               </Link>
             </div>
@@ -268,110 +385,8 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* RIGHT COLUMN: 3D Slanted Tilted Cylinder Carousel (Timedoor Aesthetic) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-            className="lg:col-span-5 xl:col-span-5 relative w-full h-[220px] sm:h-[280px] lg:h-[340px] xl:h-[370px] flex items-center justify-center overflow-visible mt-2 sm:mt-6 lg:-mt-16 xl:-mt-24 2xl:-mt-28"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {/* Ambient 3D Depth Floor Glow tilted with the cylinder */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] sm:w-[320px] lg:w-[400px] h-[100px] sm:h-[150px] bg-gradient-to-r from-[#172657]/25 via-blue-600/20 to-sky-400/15 blur-xl sm:blur-[65px] rounded-full pointer-events-none rotate-[-10deg]" />
-
-            {/* 3D Perspective Stage Container */}
-            <div
-              className="relative w-full h-full flex items-center justify-center overflow-visible [--radius:115px] sm:[--radius:155px] lg:[--radius:195px] xl:[--radius:215px]"
-              style={{
-                perspective: '1000px',
-                perspectiveOrigin: '50% 36%',
-              }}
-            >
-              {/* 3D Tilted Gimbal */}
-              <div
-                className="relative w-full h-full flex items-center justify-center"
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transform: 'rotateX(-15deg) rotateZ(-10deg) rotateY(6deg)',
-                }}
-              >
-                {/* Continuously Rotating 3D Cylindrical Ring */}
-                <motion.div
-                  animate={{
-                    rotateY: isHovered ? [0, 0] : [0, -360],
-                  }}
-                  transition={{
-                    rotateY: {
-                      duration: 32,
-                      repeat: Infinity,
-                      ease: "linear",
-                    },
-                  }}
-                  className="relative w-0 h-0 flex items-center justify-center"
-                  style={{
-                    transformStyle: 'preserve-3d',
-                  }}
-                >
-                  {projectCards.map((card, idx) => {
-                    const angle = idx * (360 / projectCards.length);
-                    return (
-                      <div
-                        key={idx}
-                        className="absolute top-1/2 left-1/2 -ml-[45px] -mt-[25px] sm:-ml-[60px] sm:-mt-[34px] lg:-ml-[72px] lg:-mt-[40px] xl:-ml-[80px] xl:-mt-[45px] w-[90px] sm:w-[120px] lg:w-[145px] xl:w-[160px] aspect-[16/9] transition-all duration-300"
-                        style={{
-                          transform: `rotateY(${angle}deg) translateZ(var(--radius))`,
-                          transformStyle: 'preserve-3d',
-                        }}
-                      >
-
-                        {/* FRONT FACE: Crisp 16:9 Project Card */}
-                        <div
-                          className="absolute inset-0 rounded-lg sm:rounded-xl overflow-hidden border border-white/80 dark:border-slate-700/80 shadow-[0_10px_24px_rgba(0,0,0,0.14)] dark:shadow-[0_14px_32px_rgba(0,0,0,0.7)] bg-white dark:bg-slate-900 group"
-                          style={{
-                            backfaceVisibility: 'hidden',
-                            WebkitBackfaceVisibility: 'hidden',
-                          }}
-                        >
-                          <Image
-                            src={card.image}
-                            alt={card.title}
-                            fill
-                            sizes="(max-width: 640px) 100px, (max-width: 1024px) 125px, 160px"
-                            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                            priority={idx < 2}
-                          />
-
-                          {/* Gradient Overlay for Text Readability */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
-
-                          {/* Bottom Card Information */}
-                          <div className="absolute bottom-0 left-0 right-0 p-1 sm:p-1.5 text-white z-10 flex flex-col justify-end">
-                            <span className="self-start px-1.5 py-0.5 mb-0.5 rounded text-[7px] sm:text-[8px] font-bold bg-[#172657] text-white shadow-sm leading-none border border-white/20">
-                              {card.category}
-                            </span>
-                            <h4 className="text-[8px] sm:text-[9.5px] font-bold text-white leading-tight drop-shadow-md truncate">
-                              {card.title}
-                            </h4>
-                          </div>
-                        </div>
-
-                        {/* BACK FACE: Simplified Ring Backing */}
-                        <div
-                          className="absolute inset-0 rounded-lg sm:rounded-xl overflow-hidden border border-white/20 dark:border-slate-700/30 bg-slate-900/80 dark:bg-slate-950/90 opacity-40"
-                          style={{
-                            transform: 'rotateY(180deg)',
-                            backfaceVisibility: 'hidden',
-                            WebkitBackfaceVisibility: 'hidden',
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
+          {/* RIGHT COLUMN: Open area allowing background overview marquee to shine freely */}
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 min-h-[300px] pointer-events-none" />
 
         </div>
 

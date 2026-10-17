@@ -35,10 +35,10 @@ export default function CtaSection() {
             href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex w-full sm:w-auto items-center justify-center gap-3 px-6 sm:px-10 py-3.5 sm:py-4 bg-white text-blue-900 hover:bg-slate-50 transition-all font-black text-sm sm:text-base rounded-2xl shadow-xl hover:-translate-y-1 active:scale-95 min-h-[44px]"
+            className="btn-3d-base btn-3d-white w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base font-extrabold tracking-wider min-h-[48px] flex items-center justify-center gap-3"
           >
             <span>{t[lang].ctaBtn}</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
       </motion.div>

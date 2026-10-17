@@ -20,5 +20,6 @@ export { default as ContactSection } from './ContactSection';
 export { default as ClientsSection } from './ClientsSection';
 export { default as OrderProcessSection } from './OrderProcessSection';
 export { default as MainLayoutShell } from './MainLayoutShell';
+export { default as Button3D } from './Button3D';
 
 

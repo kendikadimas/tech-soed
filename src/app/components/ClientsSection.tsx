@@ -56,6 +56,30 @@ export const CLIENTS_DATA: ClientItem[] = [
     category: 'Pemberdayaan Ekonomi Desa',
     description: 'Pilar Ekonomi & Usaha Desa Mandiri',
   },
+  {
+    id: 'sadayaemas',
+    name: 'Sadaya Emas',
+    fullName: 'Sadaya Emas',
+    logo: '/logo-client/logo-sadayaemas.svg',
+    category: 'Bisnis & Perdagangan',
+    description: 'Perusahaan Investasi & Perdagangan Emas',
+  },
+  {
+    id: 'tuksirah',
+    name: 'Tuk Sirah',
+    fullName: 'Tuk Sirah Kali Pemali',
+    logo: '/logo-client/logo-tuksirah.webp',
+    category: 'Pariwisata & Konservasi',
+    description: 'Destinasi Ekowisata & Konservasi Sumber Air',
+  },
+  {
+    id: 'sdn9gandasil',
+    name: 'SDN 9 Gandasil',
+    fullName: 'SD Negeri 9 Gandasil',
+    logo: '/logo-client/sdn9-gandasil.webp',
+    category: 'Pendidikan & Sekolah Dasar',
+    description: 'Institusi Pendidikan Dasar Berkualitas',
+  },
 ];
 
 export default function ClientsSection() {
@@ -84,24 +108,25 @@ export default function ClientsSection() {
           </p>
         </motion.div>
 
-        {/* Static Clean Floating Logos Layout - 1.5x Larger & Max 3 Logos per Row */}
-        <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-x-12 sm:gap-x-16 lg:gap-x-24 gap-y-10 lg:gap-y-16">
+        {/* Static Clean Floating Logos Layout */}
+        <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 lg:gap-x-18 gap-y-8 sm:gap-y-12">
           {CLIENTS_DATA.map((client, index) => (
             <motion.div
               key={client.id}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
+              transition={{ duration: 0.4, delay: index * 0.06 }}
               title={client.fullName}
-              className="group flex items-center justify-center h-20 sm:h-24 lg:h-32 w-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[320px] p-2 transition-all"
+              className="group flex items-center justify-center h-18 sm:h-22 lg:h-26 w-auto max-w-[200px] sm:max-w-[240px] lg:max-w-[280px] p-2 transition-all"
             >
               <Image
                 src={client.logo}
                 alt={client.fullName}
-                width={280}
-                height={140}
-                className="max-h-16 sm:max-h-22 lg:max-h-28 w-auto object-contain opacity-95 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105"
+                width={260}
+                height={130}
+                unoptimized={client.logo.endsWith('.svg')}
+                className="max-h-14 sm:max-h-18 lg:max-h-22 w-auto object-contain rounded-lg opacity-95 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105"
               />
             </motion.div>
           ))}
