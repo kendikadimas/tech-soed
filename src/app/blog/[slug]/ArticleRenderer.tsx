@@ -147,13 +147,14 @@ type Inline =
   | { kind: 'italic'; value: string }
   | { kind: 'bolditalic'; value: string }
   | { kind: 'code'; value: string }
+  | { kind: 'blur'; value: string }
   | { kind: 'link'; href: string; label: string }
   | { kind: 'img'; src: string; alt: string };
 
 function parseInlines(raw: string): Inline[] {
   const result: Inline[] = [];
-  // Regex matches: inline-code, image, link, bold+italic, bold, italic
-  const re = /`([^`]+)`|!\[([^\]]*)\]\(([^)]+)\)|\[([^\]]+)\]\(([^)]+)\)|\*\*\*([^*]+)\*\*\*|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+  // Regex matches: blur tag ::blur[...], inline-code, image, link, bold+italic, bold, italic
+  const re = /::blur\[(.*?)\]::|`([^`]+)`|!\[([^\]]*)\]\(([^)]+)\)|\[([^\]]+)\]\(([^)]+)\)|\*\*\*([^*]+)\*\*\*|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
   let last = 0;
   let m;
   while ((m = re.exec(raw)) !== null) {
@@ -161,17 +162,19 @@ function parseInlines(raw: string): Inline[] {
       result.push({ kind: 'text', value: raw.slice(last, m.index) });
     }
     if (m[1] !== undefined) {
-      result.push({ kind: 'code', value: m[1] });
+      result.push({ kind: 'blur', value: m[1] });
     } else if (m[2] !== undefined) {
-      result.push({ kind: 'img', src: m[3], alt: m[2] });
-    } else if (m[4] !== undefined) {
-      result.push({ kind: 'link', href: m[5], label: m[4] });
-    } else if (m[6] !== undefined) {
-      result.push({ kind: 'bolditalic', value: m[6] });
+      result.push({ kind: 'code', value: m[2] });
+    } else if (m[3] !== undefined) {
+      result.push({ kind: 'img', src: m[4], alt: m[3] });
+    } else if (m[5] !== undefined) {
+      result.push({ kind: 'link', href: m[6], label: m[5] });
     } else if (m[7] !== undefined) {
-      result.push({ kind: 'bold', value: m[7] });
+      result.push({ kind: 'bolditalic', value: m[7] });
     } else if (m[8] !== undefined) {
-      result.push({ kind: 'italic', value: m[8] });
+      result.push({ kind: 'bold', value: m[8] });
+    } else if (m[9] !== undefined) {
+      result.push({ kind: 'italic', value: m[9] });
     }
     last = re.lastIndex;
   }
@@ -381,6 +384,16 @@ function InlineContent({ inlines }: { inlines: Inline[] }) {
               <code key={idx} className="bg-slate-100 dark:bg-slate-800 text-rose-600 dark:text-rose-400 rounded-md px-1.5 py-0.5 text-[0.85em] font-mono">
                 {node.value}
               </code>
+            );
+          case 'blur':
+            return (
+              <span
+                key={idx}
+                className="inline-block blur-[4px] hover:blur-none select-none transition-all duration-300 opacity-80 cursor-default bg-slate-200/50 dark:bg-slate-700/50 rounded px-1"
+                title="Nama disamarkan untuk privasi"
+              >
+                {node.value}
+              </span>
             );
           case 'link':
             return (

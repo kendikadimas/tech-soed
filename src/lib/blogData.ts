@@ -138,9 +138,9 @@ Berikut adalah ringkasan perbandingan penyedia **jasa pembuatan website Purwoker
 | Nama / Agensi | Keunggulan Utama | Estimasi Harga | Kontak & Info |
 | :--- | :--- | :--- | :--- |
 | **TechSoe (Teknologi Inovasi Soedirman)** | Next.js Super Cepat, SEO On-Page Otomatis, Garansi Selamanya, Gratis Domain & Hosting, Konsultasi Gratis | Mulai Rp 300.000 | WhatsApp: +62 858-1417-4267 (Bancarkembar, Purwokerto Utara) |
-| **Resolusiweb** | Desain Responsif & Toko Online | Mulai Rp 300.000 | Purwokerto, Banyumas |
-| **Arjun Technology** | Website Bisnis & Company Profile | Mulai Rp 500.000 | Purwokerto, Jawa Tengah |
-| **Kalana Labs** | Custom Design & Web Application | Proyek Kustom | Purwokerto, Jawa Tengah |
+| **::blur[Resolusiweb Agency]::** | Desain Responsif & Toko Online | Mulai Rp 300.000 | Purwokerto, Banyumas |
+| **::blur[Arjun Technology Lab]::** | Website Bisnis & Company Profile | Mulai Rp 500.000 | Purwokerto, Jawa Tengah |
+| **::blur[Kalana Labs Studio]::** | Custom Design & Web Application | Proyek Kustom | Purwokerto, Jawa Tengah |
 
 ---
 
