@@ -153,8 +153,8 @@ type Inline =
 
 function parseInlines(raw: string): Inline[] {
   const result: Inline[] = [];
-  // Regex matches: blur tag ::blur[...], inline-code, image, link, bold+italic, bold, italic
-  const re = /::blur\[(.*?)\]::|`([^`]+)`|!\[([^\]]*)\]\(([^)]+)\)|\[([^\]]+)\]\(([^)]+)\)|\*\*\*([^*]+)\*\*\*|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+  // Regex matches: <span class="blur-name">...</span>, ::blur[...], inline-code, image, link, bold+italic, bold, italic
+  const re = /<span class=["']blur-name["']>([\s\S]*?)<\/span>|::blur\[(.*?)\]::|`([^`]+)`|!\[([^\]]*)\]\(([^)]+)\)|\[([^\]]+)\]\(([^)]+)\)|\*\*\*([^*]+)\*\*\*|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
   let last = 0;
   let m;
   while ((m = re.exec(raw)) !== null) {
@@ -164,17 +164,19 @@ function parseInlines(raw: string): Inline[] {
     if (m[1] !== undefined) {
       result.push({ kind: 'blur', value: m[1] });
     } else if (m[2] !== undefined) {
-      result.push({ kind: 'code', value: m[2] });
+      result.push({ kind: 'blur', value: m[2] });
     } else if (m[3] !== undefined) {
-      result.push({ kind: 'img', src: m[4], alt: m[3] });
-    } else if (m[5] !== undefined) {
-      result.push({ kind: 'link', href: m[6], label: m[5] });
-    } else if (m[7] !== undefined) {
-      result.push({ kind: 'bolditalic', value: m[7] });
+      result.push({ kind: 'code', value: m[3] });
+    } else if (m[4] !== undefined) {
+      result.push({ kind: 'img', src: m[5], alt: m[4] });
+    } else if (m[6] !== undefined) {
+      result.push({ kind: 'link', href: m[7], label: m[6] });
     } else if (m[8] !== undefined) {
-      result.push({ kind: 'bold', value: m[8] });
+      result.push({ kind: 'bolditalic', value: m[8] });
     } else if (m[9] !== undefined) {
-      result.push({ kind: 'italic', value: m[9] });
+      result.push({ kind: 'bold', value: m[9] });
+    } else if (m[10] !== undefined) {
+      result.push({ kind: 'italic', value: m[10] });
     }
     last = re.lastIndex;
   }
@@ -389,7 +391,7 @@ function InlineContent({ inlines }: { inlines: Inline[] }) {
             return (
               <span
                 key={idx}
-                className="inline-block blur-[4px] hover:blur-none select-none transition-all duration-300 opacity-80 cursor-default bg-slate-200/50 dark:bg-slate-700/50 rounded px-1"
+                className="blur-name font-bold text-slate-800 dark:text-slate-200 cursor-default"
                 title="Nama disamarkan untuk privasi"
               >
                 {node.value}

@@ -478,3 +478,25 @@ html {
   animation-play-state: paused;
   -webkit-animation-play-state: paused;
 }
+
+/* Censored blur for sensitive competitor brand names */
+.blur-name {
+  display: inline-block;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  user-select: none;
+  -webkit-user-select: none;
+  opacity: 0.75;
+  transition: all 0.3s ease;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  background-color: rgba(148, 163, 184, 0.2);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.blur-name:hover {
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+  opacity: 1;
+}
