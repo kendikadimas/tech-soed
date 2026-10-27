@@ -82,13 +82,70 @@ export default function ClientModal({
 
   if (!isOpen) return null;
 
-  // Handle Logo Upload to Supabase Storage
+  // ── Auto-compress Logo via Canvas (WebP/PNG transparent, Max 600px width/height) ──
+  const compressLogo = (file: File): Promise<{ blob: Blob; ext: string }> =>
+    new Promise((resolve, reject) => {
+      // If SVG, keep as is
+      if (file.type === 'image/svg+xml') {
+        resolve({ blob: file, ext: 'svg' });
+        return;
+      }
+
+      const MAX_W = 600;
+      const MAX_H = 400;
+      const img = new window.Image();
+      const url = URL.createObjectURL(file);
+
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        let { width, height } = img;
+
+        if (width > MAX_W || height > MAX_H) {
+          const ratio = Math.min(MAX_W / width, MAX_H / height);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve({ blob: file, ext: file.name.split('.').pop() || 'png' });
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert to WebP format with high quality (preserving transparency)
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              resolve({ blob: file, ext: file.name.split('.').pop() || 'png' });
+              return;
+            }
+            resolve({ blob, ext: 'webp' });
+          },
+          'image/webp',
+          0.90
+        );
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error('Gagal membaca file gambar'));
+      };
+      img.src = url;
+    });
+
+  // Handle Logo Upload to Supabase Storage with Auto-Compression
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-      setErrorMsg('Ukuran file logo maksimal 5MB.');
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMsg('Ukuran file logo terlalu besar. Maksimal 10MB.');
       return;
     }
 
@@ -96,14 +153,20 @@ export default function ClientModal({
     setErrorMsg(null);
 
     try {
+      // 1. Auto Compress Logo
+      const { blob: compressedBlob, ext: targetExt } = await compressLogo(file);
+
       const supabase = createClient();
-      const fileExt = file.name.split('.').pop();
-      const fileName = `client_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const fileName = `client_${Date.now()}_${Math.random().toString(36).substring(7)}.${targetExt}`;
       const filePath = `clients/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from('techsoe-media')
-        .upload(filePath, file, { cacheControl: '3600', upsert: true });
+        .upload(filePath, compressedBlob, {
+          contentType: targetExt === 'webp' ? 'image/webp' : targetExt === 'svg' ? 'image/svg+xml' : file.type,
+          cacheControl: '31536000',
+          upsert: true,
+        });
 
       if (uploadError) {
         // Fallback convert to Base64 data URL if storage bucket is not configured yet
@@ -112,7 +175,7 @@ export default function ClientModal({
           setFormData((prev) => ({ ...prev, logo_url: reader.result as string }));
           setUploading(false);
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(compressedBlob);
         return;
       }
 
