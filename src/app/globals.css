@@ -479,24 +479,19 @@ html {
   -webkit-animation-play-state: paused;
 }
 
-/* Censored blur for sensitive competitor brand names */
+/* Censored blur for sensitive competitor brand names (Permanent Blur) */
 .blur-name {
   display: inline-block;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  user-select: none;
-  -webkit-user-select: none;
-  opacity: 0.75;
-  transition: all 0.3s ease;
+  filter: blur(5px) !important;
+  -webkit-filter: blur(5px) !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  pointer-events: none;
+  opacity: 0.7;
   font-weight: 700;
   letter-spacing: -0.01em;
-  background-color: rgba(148, 163, 184, 0.2);
+  background-color: rgba(148, 163, 184, 0.25);
   padding: 1px 6px;
   border-radius: 4px;
 }
 
-.blur-name:hover {
-  filter: blur(0px);
-  -webkit-filter: blur(0px);
-  opacity: 1;
-}

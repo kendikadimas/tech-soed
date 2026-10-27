@@ -10,6 +10,28 @@ function getSupabaseAdmin() {
   return createClient(url, key);
 }
 
+export async function GET(req: NextRequest) {
+  try {
+    const supabaseAdmin = getSupabaseAdmin();
+    const { searchParams } = new URL(req.url);
+    const slug = searchParams.get('slug');
+
+    if (!slug) {
+      return NextResponse.json({ error: 'slug required' }, { status: 400 });
+    }
+
+    const { data } = await supabaseAdmin
+      .from('article_views')
+      .select('view_count')
+      .eq('slug', slug)
+      .maybeSingle();
+
+    return NextResponse.json({ views: data?.view_count || 0 });
+  } catch {
+    return NextResponse.json({ views: 0 });
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const supabaseAdmin = getSupabaseAdmin();
@@ -18,10 +40,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'slug required' }, { status: 400 });
     }
 
-    // Upsert view count — increment if exists, insert if not
-    const { error } = await supabaseAdmin.rpc('increment_article_views', { p_slug: slug });
+    let views = 1;
 
-    if (error) {
+    // Upsert view count — increment if exists, insert if not
+    const { data: rpcViews, error } = await supabaseAdmin.rpc('increment_article_views', { p_slug: slug });
+
+    if (!error && typeof rpcViews === 'number') {
+      views = rpcViews;
+    } else {
       // Fallback: manual upsert if RPC not created yet
       const { data: existing } = await supabaseAdmin
         .from('article_views')
@@ -30,20 +56,22 @@ export async function POST(req: NextRequest) {
         .maybeSingle();
 
       if (existing) {
+        views = (existing.view_count || 0) + 1;
         await supabaseAdmin
           .from('article_views')
-          .update({ view_count: existing.view_count + 1, last_viewed_at: new Date().toISOString() })
+          .update({ view_count: views, last_viewed_at: new Date().toISOString() })
           .eq('id', existing.id);
       } else {
+        views = 1;
         await supabaseAdmin
           .from('article_views')
           .insert({ slug, view_count: 1, last_viewed_at: new Date().toISOString() });
       }
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, views });
   } catch (e) {
     // Silently fail — tracking should never break the page
-    return NextResponse.json({ ok: false }, { status: 200 });
+    return NextResponse.json({ ok: false, views: 0 }, { status: 200 });
   }
 }
