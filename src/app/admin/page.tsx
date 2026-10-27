@@ -29,11 +29,14 @@ import {
   Copy,
   Check,
   Terminal,
+  Building2,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { blogPosts as defaultBlogPosts } from '@/lib/blogData';
+import { CLIENTS_DATA as defaultClientsData } from '../components/ClientsSection';
 import AiPromptModal from './components/AiPromptModal';
 import TestimonialModal, { TestimonialData } from './components/TestimonialModal';
+import ClientModal, { ClientData } from './components/ClientModal';
 
 // 8 Default Hero Projects
 const defaultProjects = [
@@ -76,6 +79,27 @@ CREATE POLICY "Allow anon insert testimonials" ON public.testimonials FOR INSERT
 CREATE POLICY "Allow anon update testimonials" ON public.testimonials FOR UPDATE USING (true);
 CREATE POLICY "Allow anon delete testimonials" ON public.testimonials FOR DELETE USING (true);`;
 
+const clientsSqlScript = `-- Jalankan skrip ini di Supabase Dashboard -> SQL Editor
+CREATE TABLE IF NOT EXISTS public.clients (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    name TEXT NOT NULL,
+    full_name TEXT,
+    logo_url TEXT NOT NULL,
+    category TEXT,
+    description TEXT,
+    order_index INTEGER DEFAULT 0,
+    published BOOLEAN DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+ALTER TABLE public.clients ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Allow public read clients" ON public.clients FOR SELECT USING (true);
+CREATE POLICY "Allow authenticated full access clients" ON public.clients FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow anon insert clients" ON public.clients FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow anon update clients" ON public.clients FOR UPDATE USING (true);
+CREATE POLICY "Allow anon delete clients" ON public.clients FOR DELETE USING (true);`;
+
 function AdminDashboardContent() {
   const searchParams = useSearchParams();
   const currentTab = searchParams.get('tab') || 'articles';
@@ -83,12 +107,17 @@ function AdminDashboardContent() {
   const [articles, setArticles] = useState<any[]>([]);
   const [projects, setProjects] = useState<any[]>([]);
   const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [clients, setClients] = useState<any[]>([]);
   const [missingTestimonialsTable, setMissingTestimonialsTable] = useState(false);
+  const [missingClientsTable, setMissingClientsTable] = useState(false);
   const [copiedSql, setCopiedSql] = useState(false);
+  const [copiedClientsSql, setCopiedClientsSql] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
   const [editingTestimonial, setEditingTestimonial] = useState<TestimonialData | null>(null);
+  const [isClientModalOpen, setIsClientModalOpen] = useState(false);
+  const [editingClient, setEditingClient] = useState<ClientData | null>(null);
   const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const supabase = createClient();
@@ -97,10 +126,11 @@ function AdminDashboardContent() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [artRes, projRes, testiRes] = await Promise.all([
+      const [artRes, projRes, testiRes, clientRes] = await Promise.all([
         supabase.from('articles').select('*').order('created_at', { ascending: false }),
         supabase.from('projects').select('*').order('order_index', { ascending: true }),
         supabase.from('testimonials').select('*').order('created_at', { ascending: false }),
+        supabase.from('clients').select('*').order('order_index', { ascending: true }),
       ]);
 
       if (artRes.data) setArticles(artRes.data);
@@ -117,6 +147,19 @@ function AdminDashboardContent() {
       } else if (testiRes.data) {
         setTestimonials(testiRes.data);
         setMissingTestimonialsTable(false);
+      }
+
+      if (clientRes.error) {
+        if (
+          clientRes.error.message.includes('clients') ||
+          clientRes.error.message.includes('schema cache') ||
+          clientRes.error.code === '42P01'
+        ) {
+          setMissingClientsTable(true);
+        }
+      } else if (clientRes.data) {
+        setClients(clientRes.data);
+        setMissingClientsTable(false);
       }
     } catch (err: any) {
       console.error(err);
@@ -210,6 +253,49 @@ function AdminDashboardContent() {
     }
   };
 
+  // Seed Default Clients
+  const handleSeedClients = async () => {
+    if (!confirm('Masukkan 8 klien & mitra bawaan ke Supabase?')) return;
+    setLoading(true);
+    try {
+      const formatted = defaultClientsData.map((c, idx) => ({
+        name: c.name,
+        full_name: c.fullName,
+        logo_url: c.logo,
+        category: c.category,
+        description: c.description,
+        order_index: idx + 1,
+        published: true,
+      }));
+
+      const { error } = await supabase.from('clients').insert(formatted);
+      if (error) {
+        if (
+          error.message.includes('clients') ||
+          error.message.includes('schema cache') ||
+          error.code === '42P01'
+        ) {
+          setMissingClientsTable(true);
+          throw new Error('Tabel public.clients belum dibuat di Supabase. Silakan buat tabel menggunakan Skrip SQL di bawah terlebih dahulu.');
+        }
+        throw error;
+      }
+      showToast('success', '8 Klien awal berhasil dimasukkan ke Supabase!');
+      setMissingClientsTable(false);
+      fetchData();
+    } catch (err: any) {
+      showToast('error', err.message || 'Gagal menyimpan klien');
+      setLoading(false);
+    }
+  };
+
+  const handleCopyClientsSql = () => {
+    navigator.clipboard.writeText(clientsSqlScript);
+    setCopiedClientsSql(true);
+    showToast('success', 'Skrip SQL tabel klien berhasil disalin ke clipboard!');
+    setTimeout(() => setCopiedClientsSql(false), 3000);
+  };
+
   // Delete Article
   const handleDeleteArticle = async (id: string) => {
     if (!confirm('Apakah Anda yakin ingin menghapus artikel ini?')) return;
@@ -266,6 +352,36 @@ function AdminDashboardContent() {
     }
   };
 
+  // Delete Client
+  const handleDeleteClient = async (id: string) => {
+    if (!confirm('Apakah Anda yakin ingin menghapus data klien ini?')) return;
+    try {
+      const { error } = await supabase.from('clients').delete().eq('id', id);
+      if (error) throw error;
+      setClients((prev) => prev.filter((c) => c.id !== id));
+      showToast('success', 'Klien berhasil dihapus!');
+    } catch (err: any) {
+      showToast('error', err.message);
+    }
+  };
+
+  // Toggle Publish Client
+  const handleTogglePublishClient = async (id: string, currentVal: boolean) => {
+    try {
+      const { error } = await supabase
+        .from('clients')
+        .update({ published: !currentVal })
+        .eq('id', id);
+      if (error) throw error;
+      setClients((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, published: !currentVal } : c))
+      );
+      showToast('success', `Klien ${!currentVal ? 'ditampilkan' : 'disembunyikan'}!`);
+    } catch (err: any) {
+      showToast('error', err.message);
+    }
+  };
+
   // Toggle Featured Hero Directly
   const handleToggleHero = async (id: string, currentVal: boolean) => {
     try {
@@ -315,6 +431,8 @@ function AdminDashboardContent() {
               ? 'Kelola Artikel Blog'
               : currentTab === 'testimonials'
               ? 'Kelola Testimoni Klien'
+              : currentTab === 'clients'
+              ? 'Kelola Logo Klien & Mitra'
               : 'Kelola Proyek Portofolio'}
           </h1>
           <p className="text-slate-500 text-sm mt-1">
@@ -322,6 +440,8 @@ function AdminDashboardContent() {
               ? `Terdapat total ${articles.length} artikel yang terdaftar di database Supabase.`
               : currentTab === 'testimonials'
               ? `Terdapat total ${testimonials.length} testimoni yang terdaftar di database Supabase.`
+              : currentTab === 'clients'
+              ? `Terdapat total ${clients.length} logo klien & instansi mitra di database Supabase.`
               : `Terdapat total ${projects.length} proyek portofolio, termasuk proyek silinder 3D Hero.`}
           </p>
         </div>
@@ -374,6 +494,17 @@ function AdminDashboardContent() {
               className="flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl bg-[#172657] hover:bg-[#1f3373] text-white text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer whitespace-nowrap"
             >
               <Plus className="w-4 h-4" /> Tambah Testimoni Baru
+            </button>
+          ) : currentTab === 'clients' ? (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingClient(null);
+                setIsClientModalOpen(true);
+              }}
+              className="flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-xl bg-[#172657] hover:bg-[#1f3373] text-white text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer whitespace-nowrap"
+            >
+              <Plus className="w-4 h-4" /> Tambah Klien Baru
             </button>
           ) : (
             <Link
@@ -853,6 +984,201 @@ function AdminDashboardContent() {
               fetchData();
             }}
             testimonialToEdit={editingTestimonial}
+          />
+        </div>
+      )}
+
+      {/* ================= TAB 4: KLIEN & MITRA ================= */}
+      {currentTab === 'clients' && (
+        <div className="space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              Daftar Logo Klien & Mitra ({clients.length})
+            </h2>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleSeedClients}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold border border-blue-200 transition cursor-pointer"
+                title="Masukkan 8 klien default (UNSOED, BI, Pertamina, dll) ke Supabase"
+              >
+                <Sparkles className="w-3.5 h-3.5" /> Muat 8 Klien Bawaan
+              </button>
+            </div>
+          </div>
+
+          {/* Warning Banner if Table Missing */}
+          {missingClientsTable && (
+            <div className="p-6 bg-amber-50/90 border border-amber-300 rounded-3xl space-y-4 shadow-sm animate-in fade-in duration-300">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                    <Database className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-amber-900">
+                      Tabel <code className="bg-amber-100 px-1.5 py-0.5 rounded text-amber-950 font-mono">public.clients</code> Belum Dibuat di Supabase
+                    </h3>
+                    <p className="text-xs text-amber-800 mt-1 max-w-2xl leading-relaxed">
+                      Untuk menyimpan dan mengelola logo klien secara dinamis, jalankan skrip SQL berikut di SQL Editor Supabase Anda.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleCopyClientsSql}
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-700 hover:bg-amber-800 text-white text-xs font-bold transition shadow-sm shrink-0 cursor-pointer"
+                >
+                  {copiedClientsSql ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  <span>{copiedClientsSql ? 'Tersalin!' : 'Salin Skrip SQL'}</span>
+                </button>
+              </div>
+
+              {/* Collapsible SQL Script Box */}
+              <div className="bg-slate-900 text-slate-100 p-4 rounded-2xl text-[11px] font-mono overflow-x-auto relative group">
+                <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-slate-400 text-[10px]">
+                  <span className="flex items-center gap-1.5">
+                    <Terminal className="w-3 h-3 text-emerald-400" /> Skrip SQL Tabel Klien
+                  </span>
+                  <span>PostgreSQL (Supabase)</span>
+                </div>
+                <pre className="text-slate-300 leading-relaxed whitespace-pre-wrap">{clientsSqlScript}</pre>
+              </div>
+
+              <div className="text-xs text-slate-700 bg-white/80 border border-amber-200 p-4 rounded-2xl space-y-1.5">
+                <p className="font-bold text-slate-900">Cara mudah membuat tabel di Supabase:</p>
+                <ol className="list-decimal list-inside space-y-1 text-slate-600">
+                  <li>Klik tombol <strong>"Salin Skrip SQL"</strong> di atas.</li>
+                  <li>Buka Dashboard Supabase Anda &rarr; Pilih menu <strong>SQL Editor</strong> &rarr; Klik <strong>New query</strong>.</li>
+                  <li>Tempel (Paste) kode SQL di atas lalu tekan <strong>Run</strong>.</li>
+                  <li>Setelah itu kembali ke halaman ini dan tekan <strong>Refresh Data</strong> (atau <strong>Muat 8 Klien Bawaan</strong>).</li>
+                </ol>
+              </div>
+            </div>
+          )}
+
+          {loading ? (
+            <div className="p-16 text-center text-slate-500 bg-white rounded-3xl border border-slate-200 shadow-sm">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto mb-3 text-blue-600" />
+              <p className="text-sm font-semibold">Memuat logo klien dari Supabase...</p>
+            </div>
+          ) : clients.length === 0 ? (
+            <div className="p-16 text-center bg-white rounded-3xl border border-slate-200 shadow-sm text-slate-500">
+              <Building2 className="w-14 h-14 mx-auto text-slate-300 mb-4" />
+              <h3 className="text-slate-900 font-bold text-lg mb-1">Belum ada logo klien di database</h3>
+              <p className="text-xs text-slate-500 mb-6 max-w-sm mx-auto">
+                Gunakan tombol di bawah untuk memasukkan 8 logo klien bawaan TechSoe atau tambahkan klien baru secara manual.
+              </p>
+              <div className="flex items-center justify-center gap-3">
+                <button
+                  onClick={handleSeedClients}
+                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold cursor-pointer transition shadow-sm"
+                >
+                  Muat 8 Klien Bawaan
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingClient(null);
+                    setIsClientModalOpen(true);
+                  }}
+                  className="px-5 py-2.5 bg-[#172657] hover:bg-[#1f3373] text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 transition"
+                >
+                  Tambah Klien Baru
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {clients.map((item) => (
+                <div
+                  key={item.id}
+                  className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between hover:shadow-lg hover:border-slate-300 transition-all duration-300 relative group"
+                >
+                  <div>
+                    {/* Header: Category & Published Status */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 truncate max-w-[140px]">
+                        {item.category || 'Mitra'}
+                      </span>
+                      <button
+                        onClick={() => handleTogglePublishClient(item.id, item.published)}
+                        className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border transition cursor-pointer flex items-center gap-1 ${
+                          item.published
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+                            : 'bg-slate-100 text-slate-500 border-slate-200 hover:bg-slate-200'
+                        }`}
+                        title="Klik untuk mengubah status visibilitas"
+                      >
+                        {item.published ? <Eye className="w-3 h-3" /> : <EyeOff className="w-3 h-3" />}
+                        <span>{item.published ? 'Tampil' : 'Sembunyi'}</span>
+                      </button>
+                    </div>
+
+                    {/* Logo Box */}
+                    <div className="relative w-full h-24 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center p-3 mb-4 group-hover:bg-blue-50/20 transition">
+                      <Image
+                        src={item.logo_url}
+                        alt={item.name}
+                        fill
+                        unoptimized
+                        className="object-contain p-2"
+                      />
+                    </div>
+
+                    {/* Client Info */}
+                    <h3 className="font-bold text-slate-900 text-sm leading-snug truncate">
+                      {item.name}
+                    </h3>
+                    <p className="text-xs text-slate-600 font-medium truncate mt-0.5">
+                      {item.full_name || item.name}
+                    </p>
+                    {item.description && (
+                      <p className="text-[11px] text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Footer Actions */}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
+                    <span className="text-[11px] text-slate-400 font-mono">
+                      Urutan: #{item.order_index ?? 0}
+                    </span>
+
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => {
+                          setEditingClient(item);
+                          setIsClientModalOpen(true);
+                        }}
+                        className="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition cursor-pointer"
+                        title="Edit Klien"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteClient(item.id)}
+                        className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition cursor-pointer"
+                        title="Hapus Klien"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Client Modal */}
+          <ClientModal
+            isOpen={isClientModalOpen}
+            onClose={() => setIsClientModalOpen(false)}
+            onSuccess={(msg) => {
+              showToast('success', msg);
+              fetchData();
+            }}
+            clientToEdit={editingClient}
           />
         </div>
       )}

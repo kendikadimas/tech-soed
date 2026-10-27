@@ -84,6 +84,37 @@ export const CLIENTS_DATA: ClientItem[] = [
 
 export default function ClientsSection() {
   const { lang } = useLang();
+  const [clients, setClients] = React.useState<ClientItem[]>(CLIENTS_DATA);
+
+  React.useEffect(() => {
+    async function fetchDynamicClients() {
+      try {
+        const { createPublicClient } = await import('@/lib/supabase/public');
+        const supabase = createPublicClient();
+        const { data, error } = await supabase
+          .from('clients')
+          .select('*')
+          .eq('published', true)
+          .order('order_index', { ascending: true });
+
+        if (!error && data && data.length > 0) {
+          const mapped: ClientItem[] = data.map((d: any) => ({
+            id: d.id,
+            name: d.name,
+            fullName: d.full_name || d.name,
+            logo: d.logo_url,
+            category: d.category || 'Mitra',
+            description: d.description || '',
+          }));
+          setClients(mapped);
+        }
+      } catch {
+        // fallback to default CLIENTS_DATA
+      }
+    }
+
+    fetchDynamicClients();
+  }, []);
 
   return (
     <section id="clients" className="py-16 lg:py-24 px-6 lg:px-12 bg-slate-50/60 dark:bg-slate-950/60 border-y border-slate-200/60 dark:border-slate-800/60 transition-colors overflow-hidden relative">
@@ -110,7 +141,7 @@ export default function ClientsSection() {
 
         {/* Static Clean Floating Logos Layout */}
         <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 lg:gap-x-18 gap-y-8 sm:gap-y-12">
-          {CLIENTS_DATA.map((client, index) => (
+          {clients.map((client, index) => (
             <motion.div
               key={client.id}
               initial={{ opacity: 0, y: 15 }}
@@ -125,7 +156,7 @@ export default function ClientsSection() {
                 alt={client.fullName}
                 width={260}
                 height={130}
-                unoptimized={client.logo.endsWith('.svg')}
+                unoptimized
                 className="max-h-14 sm:max-h-18 lg:max-h-22 w-auto object-contain rounded-lg opacity-95 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105"
               />
             </motion.div>
