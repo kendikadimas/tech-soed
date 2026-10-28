@@ -1,39 +1,15 @@
 import { MetadataRoute } from 'next';
 import { createPublicClient } from '@/lib/supabase/public';
+import { getPortfolioImageUrls } from '@/lib/projects';
 import { blogPosts } from '@/lib/blogData';
+
+export const revalidate = 60;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://techsoe.com';
 
-  const defaultPortfolioImages = [
-    `${baseUrl}/projects/larasena.png`,
-    `${baseUrl}/projects/jemari.png`,
-    `${baseUrl}/projects/differlok.png`,
-    `${baseUrl}/projects/damarwulan.png`,
-    `${baseUrl}/projects/kalisabuk.png`,
-    `${baseUrl}/projects/ricocapital.png`,
-  ];
-
-  let portfolioImages = [...defaultPortfolioImages];
-
-  try {
-    const supabase = createPublicClient();
-    const { data: dbProjects } = await supabase
-      .from('projects')
-      .select('image_url')
-      .order('order_index', { ascending: true });
-
-    if (dbProjects && dbProjects.length > 0) {
-      const dbImages = dbProjects
-        .map((p) => (p.image_url?.startsWith('http') ? p.image_url : `${baseUrl}${p.image_url}`))
-        .filter(Boolean);
-      if (dbImages.length > 0) {
-        portfolioImages = Array.from(new Set([...portfolioImages, ...dbImages]));
-      }
-    }
-  } catch (err) {
-    // fallback to default
-  }
+  // Retrieve dynamic portfolio images from Supabase storage / database
+  const portfolioImages = await getPortfolioImageUrls();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -75,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const supabase = createPublicClient();
     const { data: articles } = await supabase
       .from('articles')
-      .select('slug, updated_at, created_at')
+      .select('slug, updated_at, created_at, image_url')
       .eq('published', true);
 
     if (articles && articles.length > 0) {
@@ -84,6 +60,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(art.updated_at || art.created_at || new Date()),
         changeFrequency: 'weekly',
         priority: 0.8,
+        images: art.image_url
+          ? [art.image_url.startsWith('http') ? art.image_url : `${baseUrl}${art.image_url.startsWith('/') ? '' : '/'}${art.image_url}`]
+          : undefined,
       }));
     } else {
       articleRoutes = blogPosts.map((post) => ({

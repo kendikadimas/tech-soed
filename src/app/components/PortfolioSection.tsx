@@ -9,13 +9,31 @@ import { useLang } from './LangContext';
 import ProjectModal from './ProjectModal';
 import { createClient } from '@/lib/supabase/client';
 
-export default function PortfolioSection() {
+interface PortfolioSectionProps {
+  initialProjects?: any[];
+}
+
+export default function PortfolioSection({ initialProjects }: PortfolioSectionProps = {}) {
   const { lang } = useLang();
   const [portfolioMainFilter, setPortfolioMainFilter] = useState('All');
   const [websiteType, setWebsiteType] = useState('All');
   const [isWebDropdownOpen, setIsWebDropdownOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
-  const [supabaseProjects, setSupabaseProjects] = useState<any[] | null>(null);
+
+  const mappedInitial = React.useMemo(() => {
+    if (!initialProjects || initialProjects.length === 0) return null;
+    return initialProjects.map((p) => ({
+      title: p.title,
+      category: p.sub_category || p.category,
+      image: p.image_url || p.image || '/projects/larasena.png',
+      desc: p.description || p.desc || '',
+      size: 'large',
+      live_url: p.live_url || '',
+      link: p.live_url || '',
+    }));
+  }, [initialProjects]);
+
+  const [supabaseProjects, setSupabaseProjects] = useState<any[] | null>(mappedInitial);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Fetch projects from Supabase
@@ -273,13 +291,23 @@ export default function PortfolioSection() {
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   className="card-3d-seamless group cursor-pointer flex flex-col flex-none w-[85%] md:w-[45%] lg:w-[calc(33.333%-1.5rem)] rounded-2xl overflow-hidden snap-center"
                   onClick={() => setSelectedProject(project)}
+                  itemScope
+                  itemType="https://schema.org/CreativeWork"
                 >
+                  <meta itemProp="name" content={project.title} />
+                  <meta itemProp="image" content={project.image} />
+                  <meta itemProp="thumbnailUrl" content={project.image} />
+                  {project.desc && <meta itemProp="description" content={project.desc} />}
+                  {project.live_url && <meta itemProp="url" content={project.live_url} />}
+
                   {/* Image Container - Full Bleed Edge-to-Edge (Tanpa Jeda / Padding) */}
                   <div className="relative w-full aspect-video overflow-hidden bg-slate-900 border-b border-slate-100 dark:border-slate-800">
                     <Image
                       src={project.image}
-                      alt={`${project.title} - Jasa Pembuatan Website Purwokerto`}
+                      alt={`${project.title} - Portofolio Jasa Pembuatan Website Purwokerto TechSoe`}
+                      title={`${project.title} - TechSoe Portfolio Highlight`}
                       fill
+                      priority={idx < 3}
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="group-hover:scale-105 transition duration-700 ease-out object-cover object-top"
                     />

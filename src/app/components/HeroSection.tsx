@@ -71,12 +71,29 @@ const servicesListEn = [
   "Social Media",
 ];
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  initialProjects?: any[];
+}
+
+export default function HeroSection({ initialProjects }: HeroSectionProps = {}) {
   const { lang } = useLang();
   const heroStats = t[lang].heroStats || [];
-  const [projectCards, setProjectCards] = useState(defaultProjectCards);
 
-  const [dynamicProjectCount, setDynamicProjectCount] = useState<string | null>(null);
+  const initialCards = React.useMemo(() => {
+    if (!initialProjects || initialProjects.length === 0) return defaultProjectCards;
+    const filtered = initialProjects.filter((p: any) => p.featured_hero !== false);
+    if (filtered.length === 0) return defaultProjectCards;
+    return filtered.map((p: any) => ({
+      title: p.title,
+      category: p.category,
+      image: p.image_url || p.image || '/projects/larasena.png',
+    }));
+  }, [initialProjects]);
+
+  const [projectCards, setProjectCards] = useState(initialCards);
+  const [dynamicProjectCount, setDynamicProjectCount] = useState<string | null>(
+    initialProjects && initialProjects.length > 0 ? `${initialProjects.length}+` : null
+  );
 
   // Fetch dynamic projects & count from Supabase
   useEffect(() => {
