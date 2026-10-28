@@ -140,7 +140,20 @@ export default function RootLayout({
                   "Jasa Pembuatan Website Purwokerto TechSoe"
                 ],
                 "description": "Jasa pembuatan website Purwokerto paling murah & profesional mulai Rp 300.000,- garansi selamanya. Partner software house dan transformasi digital terbaik di Purwokerto dan Banyumas.",
-                "image": "https://techsoe.com/projects/logo.png",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://techsoe.com/projects/logo.png",
+                  "caption": "Logo TechSoe - Teknologi Inovasi Soedirman"
+                },
+                "image": [
+                  "https://techsoe.com/projects/logo.png",
+                  "https://techsoe.com/projects/larasena.png",
+                  "https://techsoe.com/projects/jemari.png",
+                  "https://techsoe.com/projects/differlok.png",
+                  "https://techsoe.com/projects/damarwulan.png",
+                  "https://techsoe.com/projects/kalisabuk.png",
+                  "https://techsoe.com/projects/ricocapital.png"
+                ],
                 "url": "https://techsoe.com",
                 "telephone": "+6285814174267",
                 "email": "hi@techsoe.com",
@@ -363,6 +376,58 @@ export default function RootLayout({
                     }
                   ]
                 }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "ImageGallery",
+                "@id": "https://techsoe.com/#portfolio-gallery",
+                "name": "Portofolio Hasil Pembuatan Website & Aplikasi TechSoe",
+                "description": "Koleksi thumbnail dan screenshot portofolio hasil pembuatan website, aplikasi, dan sistem informasi oleh TechSoe Purwokerto.",
+                "url": "https://techsoe.com/#portfolio",
+                "associatedMedia": [
+                  {
+                    "@type": "ImageObject",
+                    "name": "Larasena - Batik AI & Manajemen Konveksi",
+                    "caption": "Portofolio sistem generate batik dengan AI dan manajemen operasional konveksi batik oleh TechSoe Purwokerto.",
+                    "contentUrl": "https://techsoe.com/projects/larasena.png",
+                    "thumbnailUrl": "https://techsoe.com/projects/larasena.png"
+                  },
+                  {
+                    "@type": "ImageObject",
+                    "name": "Jemari Point - Sistem Manajemen Toko Emas",
+                    "caption": "Portofolio sistem informasi terintegrasi manajemen toko emas oleh TechSoe Purwokerto.",
+                    "contentUrl": "https://techsoe.com/projects/jemari.png",
+                    "thumbnailUrl": "https://techsoe.com/projects/jemari.png"
+                  },
+                  {
+                    "@type": "ImageObject",
+                    "name": "Differlok E-Learning - Platform Pembelajaran Mahasiswa",
+                    "caption": "Portofolio platform LMS pembelajaran mahasiswa oleh TechSoe Purwokerto.",
+                    "contentUrl": "https://techsoe.com/projects/differlok.png",
+                    "thumbnailUrl": "https://techsoe.com/projects/differlok.png"
+                  },
+                  {
+                    "@type": "ImageObject",
+                    "name": "KP-SPAMS Damar Wulan - Sistem Layanan Air",
+                    "caption": "Portofolio website pengelolaan layanan air dengan fitur cek pelanggan oleh TechSoe Purwokerto.",
+                    "contentUrl": "https://techsoe.com/projects/damarwulan.png",
+                    "thumbnailUrl": "https://techsoe.com/projects/damarwulan.png"
+                  },
+                  {
+                    "@type": "ImageObject",
+                    "name": "Website Desa Kalisabuk - Sistem Informasi Desa",
+                    "caption": "Portofolio website profil dan sistem data warga Desa Kalisabuk oleh TechSoe Purwokerto.",
+                    "contentUrl": "https://techsoe.com/projects/kalisabuk.png",
+                    "thumbnailUrl": "https://techsoe.com/projects/kalisabuk.png"
+                  },
+                  {
+                    "@type": "ImageObject",
+                    "name": "Rico Capital - Platform Edukasi Crypto & Blockchain",
+                    "caption": "Portofolio platform edukasi cryptocurrency dan blockchain oleh TechSoe Purwokerto.",
+                    "contentUrl": "https://techsoe.com/projects/ricocapital.png",
+                    "thumbnailUrl": "https://techsoe.com/projects/ricocapital.png"
+                  }
+                ]
               }
             ])
           }}

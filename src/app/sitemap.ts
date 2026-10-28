@@ -5,12 +5,43 @@ import { blogPosts } from '@/lib/blogData';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://techsoe.com';
 
+  const defaultPortfolioImages = [
+    `${baseUrl}/projects/larasena.png`,
+    `${baseUrl}/projects/jemari.png`,
+    `${baseUrl}/projects/differlok.png`,
+    `${baseUrl}/projects/damarwulan.png`,
+    `${baseUrl}/projects/kalisabuk.png`,
+    `${baseUrl}/projects/ricocapital.png`,
+  ];
+
+  let portfolioImages = [...defaultPortfolioImages];
+
+  try {
+    const supabase = createPublicClient();
+    const { data: dbProjects } = await supabase
+      .from('projects')
+      .select('image_url')
+      .order('order_index', { ascending: true });
+
+    if (dbProjects && dbProjects.length > 0) {
+      const dbImages = dbProjects
+        .map((p) => (p.image_url?.startsWith('http') ? p.image_url : `${baseUrl}${p.image_url}`))
+        .filter(Boolean);
+      if (dbImages.length > 0) {
+        portfolioImages = Array.from(new Set([...portfolioImages, ...dbImages]));
+      }
+    }
+  } catch (err) {
+    // fallback to default
+  }
+
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1.0,
+      images: portfolioImages,
     },
     {
       url: `${baseUrl}/blog`,
