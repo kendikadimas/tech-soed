@@ -15,13 +15,15 @@ import {
   Activity,
   Users,
   ShieldCheck,
-  CheckCircle2
+  CheckCircle2,
+  AlertCircle
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { blogPosts as defaultBlogPosts } from '@/lib/blogData';
 
 export default function AdminAnalyticsPage() {
   const [loading, setLoading] = useState(true);
+  const [tableMissing, setTableMissing] = useState(false);
   const [articleViews, setArticleViews] = useState<{ [slug: string]: number }>({});
   const [totalViews, setTotalViews] = useState(0);
   const [articlesList, setArticlesList] = useState<any[]>([]);
@@ -50,7 +52,12 @@ export default function AdminAnalyticsPage() {
         .from('article_views')
         .select('slug, view_count');
 
-      if (!viewsErr && viewsData) {
+      if (viewsErr) {
+        if (viewsErr.code === 'PGRST205' || viewsErr.message?.includes('article_views')) {
+          setTableMissing(true);
+        }
+      } else if (viewsData) {
+        setTableMissing(false);
         const viewsMap: { [slug: string]: number } = {};
         let total = 0;
         viewsData.forEach((row: any) => {
@@ -127,6 +134,33 @@ export default function AdminAnalyticsPage() {
           </a>
         </div>
       </div>
+
+      {/* Table Missing Alert Banner */}
+      {tableMissing && (
+        <div className="bg-amber-50 border border-amber-200/90 rounded-2xl p-5 sm:p-6 text-amber-950 shadow-sm space-y-3">
+          <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-amber-900">
+            <AlertCircle className="w-5 h-5 text-amber-600 shrink-0" />
+            <span>Tabel Database `article_views` Belum Aktif di Supabase</span>
+          </div>
+          <p className="text-xs sm:text-sm text-amber-800 leading-relaxed max-w-3xl">
+            Sistem tracking views artikel internal belum dapat menyimpan kunjungan karena tabel <code>article_views</code> belum dibuat di project Supabase Anda. Itulah sebabnya views di dashboard masih terbaca 0.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <a
+              href="https://supabase.com/dashboard/project/duvextmdokvbwbirzpua/editor"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition-colors shadow-sm"
+            >
+              Buka Supabase SQL Editor
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <span className="text-xs font-medium text-amber-700">
+              Jalankan file <code>supabase_article_views_schema.sql</code> yang telah dibuat di folder proyek Anda.
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* GA4 Integration Panel (Clean Monochromatic Enterprise Design) */}
       <div className="bg-slate-900 rounded-2xl p-6 sm:p-7 text-white shadow-sm border border-slate-800 space-y-4">

@@ -33,17 +33,19 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  let targetSlug = '';
   try {
     const supabaseAdmin = getSupabaseAdmin();
-    const { slug } = await req.json();
-    if (!slug || typeof slug !== 'string') {
+    const body = await req.json();
+    targetSlug = body?.slug || '';
+    if (!targetSlug || typeof targetSlug !== 'string') {
       return NextResponse.json({ error: 'slug required' }, { status: 400 });
     }
 
     let views = 1;
 
     // Upsert view count — increment if exists, insert if not
-    const { data: rpcViews, error } = await supabaseAdmin.rpc('increment_article_views', { p_slug: slug });
+    const { data: rpcViews, error } = await supabaseAdmin.rpc('increment_article_views', { p_slug: targetSlug });
 
     if (!error && typeof rpcViews === 'number') {
       views = rpcViews;
@@ -52,7 +54,7 @@ export async function POST(req: NextRequest) {
       const { data: existing } = await supabaseAdmin
         .from('article_views')
         .select('id, view_count')
-        .eq('slug', slug)
+        .eq('slug', targetSlug)
         .maybeSingle();
 
       if (existing) {
@@ -65,12 +67,13 @@ export async function POST(req: NextRequest) {
         views = 1;
         await supabaseAdmin
           .from('article_views')
-          .insert({ slug, view_count: 1, last_viewed_at: new Date().toISOString() });
+          .insert({ slug: targetSlug, view_count: 1, last_viewed_at: new Date().toISOString() });
       }
     }
 
     return NextResponse.json({ ok: true, views });
-  } catch (e) {
+  } catch (e: any) {
+    console.warn('[track-view] Error recording view for slug:', targetSlug, e?.message || e);
     // Silently fail — tracking should never break the page
     return NextResponse.json({ ok: false, views: 0 }, { status: 200 });
   }
