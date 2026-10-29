@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Sparkles,
   Copy,
@@ -14,7 +12,14 @@ import {
   BookOpen,
   ArrowRight,
   ClipboardCheck,
+  AlertTriangle,
+  ShieldAlert,
 } from 'lucide-react';
+import {
+  fetchAllExistingArticles,
+  checkArticleDuplicate,
+  ExistingArticleRef,
+} from '@/lib/articleDuplicateChecker';
 
 interface AiPromptModalProps {
   isOpen: boolean;
@@ -22,6 +27,7 @@ interface AiPromptModalProps {
   onApplyTitle?: (title: string, category: string) => void;
   onOpenPasteModal?: () => void;
   initialTitle?: string;
+  currentArticleId?: string;
 }
 
 const PRESET_TOPICS = [
@@ -47,6 +53,7 @@ export default function AiPromptModal({
   onApplyTitle,
   onOpenPasteModal,
   initialTitle = '',
+  currentArticleId,
 }: AiPromptModalProps) {
   const [topic, setTopic] = useState(initialTitle);
   const [category, setCategory] = useState('Bisnis & Teknologi');
@@ -56,6 +63,30 @@ export default function AiPromptModal({
   const [copiedImagePrompt, setCopiedImagePrompt] = useState(false);
   const [copiedKeywords, setCopiedKeywords] = useState(false);
   const [activeTab, setActiveTab] = useState<'prompt' | 'image'>('prompt');
+  const [existingArticles, setExistingArticles] = useState<ExistingArticleRef[]>([]);
+
+  // Sync initialTitle if prop changes
+  useEffect(() => {
+    if (isOpen) {
+      setTopic(initialTitle || '');
+    }
+  }, [isOpen, initialTitle]);
+
+  // Load existing articles when modal opens
+  useEffect(() => {
+    if (!isOpen) return;
+    let isMounted = true;
+    fetchAllExistingArticles().then((list) => {
+      if (isMounted) setExistingArticles(list);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [isOpen]);
+
+  const duplicateCheck = useMemo(() => {
+    return checkArticleDuplicate(topic, existingArticles, currentArticleId);
+  }, [topic, existingArticles, currentArticleId]);
 
   if (!isOpen) return null;
 
@@ -163,16 +194,54 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
           
           {/* Input 1: Judul / Topik Artikel */}
           <div className="space-y-2">
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-              1. Judul / Topik Artikel <span className="text-rose-500">*</span>
-            </label>
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                1. Judul / Topik Artikel <span className="text-rose-500">*</span>
+              </label>
+              {duplicateCheck.isDuplicate ? (
+                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-2 py-0.5 rounded-md border border-rose-200 dark:border-rose-800">
+                  <ShieldAlert className="w-3.5 h-3.5" />
+                  Duplikat Terdeteksi
+                </span>
+              ) : topic.trim().length > 10 ? (
+                <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                  <Check className="w-3.5 h-3.5" />
+                  Judul Unik & Tersedia
+                </span>
+              ) : null}
+            </div>
+
             <input
               type="text"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               placeholder="Ketik judul artikel... Contoh: Cara Mengembangkan Website E-Commerce untuk UMKM"
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:border-blue-600 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/40 rounded-xl px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white outline-none transition-colors"
+              className={`w-full bg-slate-50 dark:bg-slate-800 border rounded-xl px-4 py-3 text-sm font-semibold text-slate-900 dark:text-white outline-none transition-colors ${
+                duplicateCheck.isDuplicate
+                  ? 'border-rose-500 focus:border-rose-600 focus:ring-2 focus:ring-rose-200 dark:focus:ring-rose-900/40 bg-rose-50/30'
+                  : 'border-slate-300 dark:border-slate-700 focus:border-blue-600 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/40'
+              }`}
             />
+
+            {/* DUPLICATE WARNING BOX */}
+            {duplicateCheck.isDuplicate && (
+              <div className="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800/80 text-rose-900 dark:text-rose-200 space-y-1 text-xs animate-in fade-in duration-200">
+                <div className="flex items-start gap-2">
+                  <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-bold text-rose-700 dark:text-rose-300">
+                      Peringatan: Judul ini sudah ada atau sangat mirip!
+                    </p>
+                    <p className="text-[11px] text-rose-600/90 dark:text-rose-300/80 mt-0.5 leading-relaxed">
+                      {duplicateCheck.reason}
+                    </p>
+                    <p className="text-[11px] font-semibold text-rose-700 dark:text-rose-300 mt-1">
+                      💡 Silakan ubah sudut pandang judul atau tambahkan kata kunci baru agar tidak terjadi konten ganda di website.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Quick Preset Topics */}
@@ -453,8 +522,14 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
               {onApplyTitle && topic.trim() && (
                 <button
                   type="button"
+                  disabled={duplicateCheck.isDuplicate}
                   onClick={handleApplyToForm}
-                  className="flex-1 sm:flex-initial px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                  className={`flex-1 sm:flex-initial px-3 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    duplicateCheck.isDuplicate
+                      ? 'bg-slate-200 text-slate-400 dark:bg-slate-800 dark:text-slate-600 cursor-not-allowed'
+                      : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md cursor-pointer'
+                  }`}
+                  title={duplicateCheck.isDuplicate ? 'Judul duplikat, tidak bisa diterapkan' : 'Terapkan judul ini ke formulir'}
                 >
                   <Check className="w-4 h-4 shrink-0" />
                   <span>Terapkan Judul</span>
@@ -462,12 +537,18 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
               )}
               <button
                 type="button"
+                disabled={duplicateCheck.isDuplicate && activeTab === 'prompt'}
                 onClick={activeTab === 'prompt' ? handleCopyPrompt : handleCopyImagePrompt}
-                className="flex-1 sm:flex-initial px-4 py-2.5 bg-[#172657] hover:bg-[#1f3373] text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer flex items-center justify-center gap-2"
+                className={`flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2 ${
+                  duplicateCheck.isDuplicate && activeTab === 'prompt'
+                    ? 'bg-slate-300 text-slate-500 dark:bg-slate-800 dark:text-slate-600 cursor-not-allowed shadow-none'
+                    : 'bg-[#172657] hover:bg-[#1f3373] text-white shadow-[#172657]/20 cursor-pointer'
+                }`}
+                title={duplicateCheck.isDuplicate && activeTab === 'prompt' ? 'Ganti judul terlebih dahulu agar tidak membuat naskah duplikat' : 'Salin prompt ke clipboard'}
               >
                 {copiedPrompt || copiedImagePrompt ? <Check className="w-4 h-4 text-emerald-400 shrink-0" /> : <Copy className="w-4 h-4 shrink-0" />}
                 <span>
-                  {copiedPrompt || copiedImagePrompt ? 'Tersalin!' : 'Salin Prompt'}
+                  {copiedPrompt || copiedImagePrompt ? 'Tersalin!' : duplicateCheck.isDuplicate && activeTab === 'prompt' ? 'Judul Duplikat' : 'Salin Prompt'}
                 </span>
               </button>
             </div>

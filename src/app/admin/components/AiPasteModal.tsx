@@ -12,7 +12,14 @@ import {
   Eye,
   Tag,
   Clock,
+  AlertTriangle,
+  ShieldAlert,
 } from 'lucide-react';
+import {
+  fetchAllExistingArticles,
+  checkArticleDuplicate,
+  ExistingArticleRef,
+} from '@/lib/articleDuplicateChecker';
 
 interface ParsedArticle {
   title: string;
@@ -26,6 +33,7 @@ interface AiPasteModalProps {
   isOpen: boolean;
   onClose: () => void;
   onApply: (data: ParsedArticle) => void;
+  currentArticleId?: string;
 }
 
 export function parseAiArticleText(rawText: string): ParsedArticle {
@@ -201,11 +209,24 @@ export function parseAiArticleText(rawText: string): ParsedArticle {
   };
 }
 
-export default function AiPasteModal({ isOpen, onClose, onApply }: AiPasteModalProps) {
+export default function AiPasteModal({ isOpen, onClose, onApply, currentArticleId }: AiPasteModalProps) {
   const [rawPastedText, setRawPastedText] = useState('');
   const [manualTitle, setManualTitle] = useState('');
   const [manualExcerpt, setManualExcerpt] = useState('');
   const [manualCategory, setManualCategory] = useState('');
+  const [existingArticles, setExistingArticles] = useState<ExistingArticleRef[]>([]);
+
+  // Fetch existing articles when modal opens
+  React.useEffect(() => {
+    if (!isOpen) return;
+    let isMounted = true;
+    fetchAllExistingArticles().then((list) => {
+      if (isMounted) setExistingArticles(list);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [isOpen]);
 
   // Auto-parse
   const parsed = useMemo(() => {
@@ -216,6 +237,11 @@ export default function AiPasteModal({ isOpen, onClose, onApply }: AiPasteModalP
   const activeTitle = manualTitle || parsed.title;
   const activeExcerpt = manualExcerpt || parsed.excerpt;
   const activeCategory = manualCategory || parsed.category;
+
+  // Duplicate check on activeTitle
+  const duplicateCheck = useMemo(() => {
+    return checkArticleDuplicate(activeTitle, existingArticles, currentArticleId);
+  }, [activeTitle, existingArticles, currentArticleId]);
 
   if (!isOpen) return null;
 
@@ -333,17 +359,55 @@ export default function AiPasteModal({ isOpen, onClose, onApply }: AiPasteModalP
               </div>
 
               {/* Title Detected */}
-              <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
-                  Judul Artikel Terdeteksi:
-                </label>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                    Judul Artikel Terdeteksi:
+                  </label>
+                  {duplicateCheck.isDuplicate ? (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-2 py-0.5 rounded-md border border-rose-200 dark:border-rose-800">
+                      <ShieldAlert className="w-3.5 h-3.5" />
+                      Duplikat Terdeteksi
+                    </span>
+                  ) : activeTitle.trim().length > 10 ? (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                      <Check className="w-3.5 h-3.5" />
+                      Judul Unik
+                    </span>
+                  ) : null}
+                </div>
+
                 <input
                   type="text"
                   value={activeTitle}
                   onChange={(e) => setManualTitle(e.target.value)}
                   placeholder="Judul artikel..."
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 dark:text-white outline-none focus:border-blue-600"
+                  className={`w-full bg-white dark:bg-slate-900 border rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 dark:text-white outline-none transition-colors ${
+                    duplicateCheck.isDuplicate
+                      ? 'border-rose-500 focus:border-rose-600 focus:ring-2 focus:ring-rose-200 dark:focus:ring-rose-900/40 bg-rose-50/20'
+                      : 'border-slate-300 dark:border-slate-700 focus:border-blue-600'
+                  }`}
                 />
+
+                {/* DUPLICATE WARNING */}
+                {duplicateCheck.isDuplicate && (
+                  <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800/80 text-rose-900 dark:text-rose-200 space-y-1 text-xs">
+                    <div className="flex items-start gap-2">
+                      <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-bold text-rose-700 dark:text-rose-300">
+                          Judul artikel ini sudah terdaftar di database!
+                        </p>
+                        <p className="text-[11px] text-rose-600/90 dark:text-rose-300/80 mt-0.5 leading-relaxed">
+                          {duplicateCheck.reason}
+                        </p>
+                        <p className="text-[11px] font-semibold text-rose-700 dark:text-rose-300 mt-1">
+                          Silakan edit judul di atas agar menjadi unik sebelum menerapkan ke editor.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Excerpt Detected */}
@@ -405,12 +469,17 @@ export default function AiPasteModal({ isOpen, onClose, onApply }: AiPasteModalP
 
           <button
             type="button"
-            disabled={!rawPastedText.trim()}
+            disabled={!rawPastedText.trim() || duplicateCheck.isDuplicate}
             onClick={handleApplyClick}
-            className="px-5 py-2.5 bg-[#172657] hover:bg-[#1f3373] disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 transition-all cursor-pointer flex items-center gap-2 active:scale-95"
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              !rawPastedText.trim() || duplicateCheck.isDuplicate
+                ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed shadow-none'
+                : 'bg-[#172657] hover:bg-[#1f3373] text-white shadow-md shadow-[#172657]/20 cursor-pointer active:scale-95'
+            }`}
+            title={duplicateCheck.isDuplicate ? 'Ubah judul duplikat sebelum menerapkan' : 'Terapkan artikel ke editor'}
           >
             <Check className="w-4 h-4 text-emerald-400" />
-            <span>Terapkan ke Editor Artikel</span>
+            <span>{duplicateCheck.isDuplicate ? 'Judul Duplikat (Ganti Dulu)' : 'Terapkan ke Editor Artikel'}</span>
           </button>
         </div>
 

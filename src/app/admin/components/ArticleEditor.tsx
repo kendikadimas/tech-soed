@@ -16,9 +16,16 @@ import {
   Sparkles,
   ExternalLink,
   ClipboardCheck,
+  AlertTriangle,
+  ShieldAlert,
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { createClient } from '@/lib/supabase/client';
+import {
+  fetchAllExistingArticles,
+  checkArticleDuplicate,
+  ExistingArticleRef,
+} from '@/lib/articleDuplicateChecker';
 import WordRibbonEditor from './WordRibbonEditor';
 import AiPromptModal from './AiPromptModal';
 import AiPasteModal from './AiPasteModal';
@@ -38,6 +45,7 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
   const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
   const [isPasteModalOpen, setIsPasteModalOpen] = useState(false);
+  const [existingArticles, setExistingArticles] = useState<ExistingArticleRef[]>([]);
 
   const [form, setForm] = useState({
     title: '',
@@ -55,6 +63,22 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
     setStatusMsg({ type, text });
     setTimeout(() => setStatusMsg(null), 4000);
   };
+
+  // Fetch all existing articles for real-time duplicate checking
+  useEffect(() => {
+    let isMounted = true;
+    fetchAllExistingArticles().then((list) => {
+      if (isMounted) setExistingArticles(list);
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Real-time duplicate check
+  const duplicateCheck = React.useMemo(() => {
+    return checkArticleDuplicate(form.title, existingArticles, articleId);
+  }, [form.title, existingArticles, articleId]);
 
   // Check URL query parameter for ?paste=true
   useEffect(() => {
@@ -214,6 +238,11 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
       return;
     }
 
+    if (duplicateCheck.isDuplicate) {
+      showToast('error', `Tidak dapat menyimpan: ${duplicateCheck.reason}`);
+      return;
+    }
+
     setSaving(true);
     try {
       if (articleId) {
@@ -320,13 +349,23 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
           </Link>
           <button
             onClick={handleSubmit}
-            disabled={saving}
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 bg-[#172657] hover:bg-[#1f3373] disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-md shadow-[#172657]/20 cursor-pointer transition-all active:scale-95 whitespace-nowrap"
+            disabled={saving || duplicateCheck.isDuplicate}
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+              duplicateCheck.isDuplicate
+                ? 'bg-rose-100 text-rose-500 border border-rose-200 cursor-not-allowed shadow-none'
+                : 'bg-[#172657] hover:bg-[#1f3373] disabled:opacity-50 text-white shadow-md shadow-[#172657]/20 cursor-pointer active:scale-95'
+            }`}
+            title={duplicateCheck.isDuplicate ? 'Judul duplikat, ubah judul terlebih dahulu' : 'Simpan artikel'}
           >
             {saving ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin shrink-0" />
                 <span>Menyimpan...</span>
+              </>
+            ) : duplicateCheck.isDuplicate ? (
+              <>
+                <ShieldAlert className="w-4 h-4 shrink-0 text-rose-500" />
+                <span>Judul Duplikat</span>
               </>
             ) : (
               <>
@@ -346,9 +385,22 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
           <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
             <div>
               <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                  Judul Artikel <span className="text-rose-500">*</span>
-                </label>
+                <div className="flex items-center gap-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                    Judul Artikel <span className="text-rose-500">*</span>
+                  </label>
+                  {duplicateCheck.isDuplicate ? (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">
+                      <ShieldAlert className="w-3.5 h-3.5" />
+                      Duplikat Terdeteksi
+                    </span>
+                  ) : form.title.trim().length > 10 ? (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      Judul Unik
+                    </span>
+                  ) : null}
+                </div>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -374,8 +426,32 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
                 value={form.title}
                 onChange={(e) => handleTitleChange(e.target.value)}
                 placeholder="Contoh: 5 Tips Memilih Software House Terbaik untuk UMKM"
-                className="w-full bg-white border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 rounded-xl px-4 py-3.5 text-base font-bold text-slate-900 placeholder-slate-400 outline-none transition-colors"
+                className={`w-full bg-white border rounded-xl px-4 py-3.5 text-base font-bold text-slate-900 placeholder-slate-400 outline-none transition-colors ${
+                  duplicateCheck.isDuplicate
+                    ? 'border-rose-500 focus:border-rose-600 focus:ring-2 focus:ring-rose-200 bg-rose-50/20'
+                    : 'border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-100'
+                }`}
               />
+
+              {/* DUPLICATE WARNING BOX */}
+              {duplicateCheck.isDuplicate && (
+                <div className="mt-2.5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 space-y-1 text-xs animate-in fade-in duration-200">
+                  <div className="flex items-start gap-2">
+                    <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-rose-700">
+                        Judul ini sudah terdaftar di sistem!
+                      </p>
+                      <p className="text-[11px] text-rose-600 mt-0.5 leading-relaxed">
+                        {duplicateCheck.reason}
+                      </p>
+                      <p className="text-[11px] font-semibold text-rose-700 mt-1">
+                        💡 Tombol Simpan/Terbitkan dimatikan sementara sampai Anda mengubah judul agar tidak terjadi duplikasi konten artikel.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Excerpt */}
@@ -587,6 +663,7 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
         isOpen={isPromptModalOpen}
         onClose={() => setIsPromptModalOpen(false)}
         initialTitle={form.title}
+        currentArticleId={articleId}
         onOpenPasteModal={() => {
           setIsPromptModalOpen(false);
           setIsPasteModalOpen(true);
@@ -605,6 +682,7 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
       <AiPasteModal
         isOpen={isPasteModalOpen}
         onClose={() => setIsPasteModalOpen(false)}
+        currentArticleId={articleId}
         onApply={(data) => {
           if (data.title) {
             handleTitleChange(data.title);
