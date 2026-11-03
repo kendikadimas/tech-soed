@@ -161,6 +161,23 @@ export function parseAiArticleText(rawText: string): ParsedArticle {
   // Auto-detect category
   const fullTextLower = (title + ' ' + cleanContent).toLowerCase();
   if (
+    fullTextLower.includes('serah terima') ||
+    fullTextLower.includes('handover') ||
+    fullTextLower.includes('penyerahan web') ||
+    fullTextLower.includes('penyerahan aplikasi') ||
+    fullTextLower.includes('serah terima website')
+  ) {
+    category = 'Serah Terima Proyek';
+  } else if (
+    fullTextLower.includes('peluncuran') ||
+    fullTextLower.includes('launching') ||
+    fullTextLower.includes('resmi meluncurkan') ||
+    fullTextLower.includes('press release') ||
+    fullTextLower.includes('rilis resmi') ||
+    fullTextLower.includes('berita resmi')
+  ) {
+    category = 'Berita & Rilis';
+  } else if (
     fullTextLower.includes('ui/ux') ||
     fullTextLower.includes('antarmuka') ||
     fullTextLower.includes('mobile app') ||
@@ -168,21 +185,14 @@ export function parseAiArticleText(rawText: string): ParsedArticle {
     fullTextLower.includes('android') ||
     fullTextLower.includes('ios')
   ) {
-    category = 'UI/UX & Mobile';
-  } else if (
-    fullTextLower.includes('seo') ||
-    fullTextLower.includes('digital marketing') ||
-    fullTextLower.includes('pemasaran digital') ||
-    fullTextLower.includes('traffic')
-  ) {
-    category = 'Digital Marketing';
+    category = 'Mobile Apps';
   } else if (
     fullTextLower.includes('website') ||
     fullTextLower.includes('web development') ||
     fullTextLower.includes('landing page') ||
     fullTextLower.includes('wordpress')
   ) {
-    category = 'Tips Website';
+    category = 'Web Development';
   } else if (
     fullTextLower.includes('sistem informasi') ||
     fullTextLower.includes('database') ||
@@ -434,11 +444,14 @@ export default function AiPasteModal({ isOpen, onClose, onApply, currentArticleI
                   onChange={(e) => setManualCategory(e.target.value)}
                   className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 dark:text-white outline-none"
                 >
+                  <option value="Berita & Rilis">Berita & Rilis (Press Release / Launching)</option>
+                  <option value="Serah Terima Proyek">Serah Terima Proyek (Client Handover)</option>
                   <option value="Bisnis & Teknologi">Bisnis & Teknologi</option>
-                  <option value="Tips Website">Tips Website</option>
-                  <option value="UI/UX & Mobile">UI/UX & Mobile</option>
-                  <option value="Digital Marketing">Digital Marketing</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Mobile Apps">Mobile Apps</option>
+                  <option value="UI/UX Design">UI/UX Design</option>
                   <option value="Sistem Informasi">Sistem Informasi</option>
+                  <option value="Tutorial & Tips">Tutorial & Tips</option>
                 </select>
               </div>
 

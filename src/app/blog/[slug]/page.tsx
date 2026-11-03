@@ -298,7 +298,13 @@ export default async function BlogPostPage({ params }: Props) {
                     </div>
 
                     <div>
-                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold uppercase tracking-wider text-xs border border-blue-200 dark:border-blue-800">
+                        <span className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold uppercase tracking-wider text-xs border ${
+                            post.category?.toLowerCase().includes("serah terima") || post.category?.toLowerCase().includes("handover")
+                                ? "bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
+                                : post.category?.toLowerCase().includes("berita") || post.category?.toLowerCase().includes("rilis")
+                                ? "bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800"
+                                : "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800"
+                        }`}>
                             <Tag className="w-3.5 h-3.5" />
                             {post.category}
                         </span>

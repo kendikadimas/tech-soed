@@ -30,6 +30,8 @@ import {
   Check,
   Terminal,
   Building2,
+  Megaphone,
+  Handshake,
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { blogPosts as defaultBlogPosts } from '@/lib/blogData';
@@ -37,6 +39,7 @@ import { CLIENTS_DATA as defaultClientsData } from '../components/ClientsSection
 import AiPromptModal from './components/AiPromptModal';
 import TestimonialModal, { TestimonialData } from './components/TestimonialModal';
 import ClientModal, { ClientData } from './components/ClientModal';
+import QuickNewsModal from './components/QuickNewsModal';
 
 // 8 Default Hero Projects
 const defaultProjects = [
@@ -114,6 +117,7 @@ function AdminDashboardContent() {
   const [copiedClientsSql, setCopiedClientsSql] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
+  const [isQuickNewsModalOpen, setIsQuickNewsModalOpen] = useState(false);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false);
   const [editingTestimonial, setEditingTestimonial] = useState<TestimonialData | null>(null);
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
@@ -462,6 +466,15 @@ function AdminDashboardContent() {
 
           {currentTab === 'articles' ? (
             <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsQuickNewsModalOpen(true)}
+                className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold shadow-md shadow-purple-600/20 transition-all cursor-pointer whitespace-nowrap"
+                title="Akses Cepat Buat Berita Launching / Serah Terima"
+              >
+                <Megaphone className="w-4 h-4 text-purple-100 animate-pulse" />
+                <span>Buat Berita / Rilis</span>
+              </button>
               <Link
                 href="/admin/articles/new?paste=true"
                 className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all cursor-pointer whitespace-nowrap"

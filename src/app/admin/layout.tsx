@@ -15,6 +15,8 @@ import {
   User,
   Sparkles,
   ChevronRight,
+  Megaphone,
+  Handshake,
   LayoutDashboard,
   BarChart3,
   Quote,
@@ -248,6 +250,26 @@ function AdminNavContent({ children }: { children: React.ReactNode }) {
                 Aksi Cepat
               </p>
               <nav className="space-y-1">
+                <Link
+                  href="/admin/articles/new?template=handover"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-emerald-700 bg-emerald-50/80 hover:bg-emerald-100 border border-emerald-200/80 transition-all"
+                  title="Template instan Serah Terima Website Klien"
+                >
+                  <Handshake className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Buat Serah Terima Web</span>
+                </Link>
+
+                <Link
+                  href="/admin/articles/new?template=launching"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-purple-700 bg-purple-50/80 hover:bg-purple-100 border border-purple-200/80 transition-all"
+                  title="Template instan Berita Peluncuran / Launching"
+                >
+                  <Megaphone className="w-4 h-4 text-purple-600 shrink-0" />
+                  <span>Buat Berita Launching</span>
+                </Link>
+
                 <Link
                   href="/admin/articles/new"
                   onClick={() => setMobileMenuOpen(false)}

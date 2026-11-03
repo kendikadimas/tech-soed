@@ -15,6 +15,8 @@ import {
   AlertCircle,
   Sparkles,
   ExternalLink,
+  Megaphone,
+  Handshake,
   ClipboardCheck,
   AlertTriangle,
   ShieldAlert,
@@ -29,6 +31,8 @@ import {
 import WordRibbonEditor from './WordRibbonEditor';
 import AiPromptModal from './AiPromptModal';
 import AiPasteModal from './AiPasteModal';
+import { getNewsTemplate } from '@/lib/newsTemplates';
+import QuickNewsModal from './QuickNewsModal';
 
 interface ArticleEditorProps {
   articleId?: string;
@@ -45,6 +49,7 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
   const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
   const [isPasteModalOpen, setIsPasteModalOpen] = useState(false);
+  const [isQuickNewsModalOpen, setIsQuickNewsModalOpen] = useState(false);
   const [existingArticles, setExistingArticles] = useState<ExistingArticleRef[]>([]);
 
   const [form, setForm] = useState({
@@ -86,6 +91,23 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
       const params = new URLSearchParams(window.location.search);
       if (params.get('paste') === 'true') {
         setIsPasteModalOpen(true);
+      }
+      const tmpl = params.get('template');
+      if (tmpl === 'handover' || tmpl === 'launching') {
+        const data = getNewsTemplate(tmpl);
+        setForm((prev) => ({
+          ...prev,
+          title: data.title,
+          slug: data.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)+/g, ''),
+          category: data.category,
+          excerpt: data.excerpt,
+          content: data.content,
+          read_time: data.read_time,
+        }));
+        showToast('success', `Template ${data.category} berhasil dimuat!`);
       }
     }
   }, []);
@@ -326,6 +348,15 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <button
             type="button"
+            onClick={() => setIsQuickNewsModalOpen(true)}
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-xl text-xs font-bold shadow-md shadow-purple-600/20 cursor-pointer transition-all active:scale-95 whitespace-nowrap"
+            title="Pilih template cepat Berita Peluncuran atau Serah Terima Web"
+          >
+            <Megaphone className="w-4 h-4 text-purple-100 shrink-0" />
+            <span>Format Berita / Serah Terima</span>
+          </button>
+          <button
+            type="button"
             onClick={() => setIsPasteModalOpen(true)}
             className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-600/20 cursor-pointer transition-all active:scale-95 whitespace-nowrap"
             title="Tempel teks lengkap dari ChatGPT / Gemini dan sistem akan otomatis merapikannya"
@@ -546,6 +577,8 @@ export default function ArticleEditor({ articleId }: ArticleEditorProps) {
                 onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
                 className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-blue-600 transition-colors"
               >
+                <option value="Berita & Rilis">Berita & Rilis (Press Release / Launching)</option>
+                <option value="Serah Terima Proyek">Serah Terima Proyek (Client Handover)</option>
                 <option value="Bisnis & Teknologi">Bisnis & Teknologi</option>
                 <option value="Web Development">Web Development</option>
                 <option value="Mobile Apps">Mobile Apps</option>

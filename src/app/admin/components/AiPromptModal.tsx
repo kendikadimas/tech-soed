@@ -31,20 +31,24 @@ interface AiPromptModalProps {
 }
 
 const PRESET_TOPICS = [
+  "TechSoe Resmi Meluncurkan Platform Website Modern Baru untuk Penguatan Digital",
+  "Dokumentasi Serah Terima Website & Sistem Informasi Klien: Sukses Go-Live",
   "5 Alasan UMKM Purwokerto Wajib Memiliki Website Profesional di 2026",
   "Panduan Lengkap Memilih Jasa Pembuatan Aplikasi Mobile untuk Bisnis",
   "Perbedaan Custom Web Development vs CMS WordPress: Mana yang Cocok?",
   "Cara Mengoptimalkan UI/UX Design Aplikasi agar Angka Konversi Naik",
   "Pentingnya Sistem Informasi Manajemen bagi Efisiensi Operasional Perusahaan",
-  "Strategi Digital Marketing & SEO Terbukti untuk Meningkatkan Omset UMKM",
 ];
 
 const CATEGORY_IMAGE_KEYWORDS: Record<string, string> = {
+  "Berita & Rilis": "official company press release ceremony modern business announcement ribbon cutting handshake professional",
+  "Serah Terima Proyek": "client project handover ceremony handshake laptop business meeting contract signing professional office",
   "Bisnis & Teknologi": "software development team business office technology modern laptop",
-  "Tips Website": "web design developer responsive website coding workspace desk",
-  "UI/UX & Mobile": "mobile app UI UX design prototype smartphone screen mockup",
-  "Digital Marketing": "digital marketing SEO strategy dashboard growth analytics laptop",
+  "Web Development": "web design developer responsive website coding workspace desk",
+  "Mobile Apps": "mobile app UI UX design prototype smartphone screen mockup",
+  "UI/UX Design": "ui ux designer working modern mockup color palette layout figma",
   "Sistem Informasi": "enterprise software data dashboard cloud server system architecture",
+  "Tutorial & Tips": "tutorial coding screen step by step guide educational tech",
 };
 
 export default function AiPromptModal({
@@ -275,11 +279,14 @@ Mohon berikan hasil penulisan lengkap dalam format Markdown murni (tanpa pembuka
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs font-semibold text-slate-900 dark:text-white outline-none"
               >
+                <option value="Berita & Rilis">Berita & Rilis (Press Release / Launching)</option>
+                <option value="Serah Terima Proyek">Serah Terima Proyek (Client Handover)</option>
                 <option value="Bisnis & Teknologi">Bisnis & Teknologi</option>
-                <option value="Tips Website">Tips Website</option>
-                <option value="UI/UX & Mobile">UI/UX & Mobile</option>
-                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Mobile Apps">Mobile Apps</option>
+                <option value="UI/UX Design">UI/UX Design</option>
                 <option value="Sistem Informasi">Sistem Informasi</option>
+                <option value="Tutorial & Tips">Tutorial & Tips</option>
               </select>
             </div>
 

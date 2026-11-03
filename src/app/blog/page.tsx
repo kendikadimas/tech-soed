@@ -13,9 +13,22 @@ import {
   BookOpen,
   ChevronRight,
   User,
+  Megaphone,
+  CheckCircle2,
 } from 'lucide-react';
 import { blogPosts as defaultBlogPosts } from '@/lib/blogData';
 import { createClient } from '@/lib/supabase/client';
+
+const getCategoryBadgeClass = (cat?: string) => {
+  const c = cat?.toLowerCase() || '';
+  if (c.includes('serah terima') || c.includes('handover')) {
+    return 'bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
+  }
+  if (c.includes('berita') || c.includes('rilis') || c.includes('press')) {
+    return 'bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800';
+  }
+  return 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800';
+};
 
 export default function BlogIndexPage() {
   const [articles, setArticles] = useState<any[]>(defaultBlogPosts);
@@ -71,6 +84,8 @@ export default function BlogIndexPage() {
   // Filter Categories list
   const categories = [
     'Semua',
+    'Berita & Rilis',
+    'Serah Terima Proyek',
     'Bisnis & Teknologi',
     'Web Development',
     'Mobile Apps',
@@ -210,7 +225,7 @@ export default function BlogIndexPage() {
               <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <span className="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-bold border border-blue-200 dark:border-blue-800">
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold border ${getCategoryBadgeClass(featuredArticle.category)}`}>
                       {featuredArticle.category}
                     </span>
                     <span className="text-xs text-slate-400 font-medium flex items-center gap-1">
@@ -293,7 +308,7 @@ export default function BlogIndexPage() {
                         className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                       />
                       <div className="absolute top-3 left-3">
-                        <span className="px-3 py-1 rounded-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md text-slate-900 dark:text-white text-[10px] font-bold border border-white/60 shadow-xs">
+                        <span className={`px-3 py-1 rounded-full backdrop-blur-md text-[10px] font-bold border shadow-xs ${getCategoryBadgeClass(post.category)}`}>
                           {post.category}
                         </span>
                       </div>
