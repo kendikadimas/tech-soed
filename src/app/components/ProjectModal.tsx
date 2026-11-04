@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { X, ArrowRight, Tag, ExternalLink } from 'lucide-react';
+import { trackLeadConversion } from '@/lib/gtag';
 
 interface Project {
   title: string;
@@ -136,6 +137,7 @@ export default function ProjectModal({ project, onClose, lang }: ProjectModalPro
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackLeadConversion('project_modal_whatsapp_' + project.title)}
                   className="btn-3d-base btn-3d-green flex-1 px-5 py-3 rounded-xl font-extrabold text-xs sm:text-sm tracking-wider flex items-center justify-center gap-2 min-h-[44px]"
                 >
                   <span>{lang === 'id' ? 'Diskusikan Proyek' : 'Discuss Project'}</span>

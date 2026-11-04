@@ -12,6 +12,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { trackLeadConversion } from '@/lib/gtag';
 
 interface PricingSectionProps {
   onOrderClick: (pkg: { name: string; price: string; category: string }) => void;
@@ -363,6 +364,7 @@ export default function PricingSection({ onOrderClick }: PricingSectionProps) {
             href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackLeadConversion('pricing_custom_enterprise_whatsapp')}
             className="btn-3d-base btn-3d-green shrink-0 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-extrabold tracking-wider whitespace-nowrap text-xs sm:text-sm min-h-[44px] flex items-center justify-center gap-2"
           >
             <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg">

@@ -434,20 +434,27 @@ export default async function RootLayout({
       <body
         className={`${inter.variable} ${plusJakarta.variable} ${geist.variable} antialiased dark:bg-slate-950 transition-colors`}
       >
-        {/* Google Analytics 4 */}
+        {/* Google Tag (Google Analytics 4 & Google Ads Conversion Tracking) */}
         {(() => {
           const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-D20W7Q7SCK";
+          const gAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18553208547";
           return (
             <>
+              {/* Google Ads Tag script (as specified in AW-18553208547) */}
               <Script
-                src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+                src={`https://www.googletagmanager.com/gtag/js?id=${gAdsId}`}
                 strategy="afterInteractive"
               />
-              <Script id="ga4-init" strategy="afterInteractive">
+              <Script id="google-tags-init" strategy="afterInteractive">
                 {`
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
+
+                  // Google Ads Conversion Tag
+                  gtag('config', '${gAdsId}');
+
+                  // Google Analytics 4
                   gtag('config', '${gaId}', {
                     page_path: window.location.pathname,
                     send_page_view: true

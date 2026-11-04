@@ -5,6 +5,7 @@ import { ShoppingCart, X, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { trackLeadConversion } from '@/lib/gtag';
 
 interface SelectedPackage {
   name: string;
@@ -25,6 +26,7 @@ export default function OrderModal({ isOpen, onClose, selectedPackage }: OrderMo
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const message = `${t[lang].orderWaGreeting}%0A%0A${t[lang].orderWaName}: ${form.name}%0A${t[lang].orderWaEmail}: ${form.email || '-'}%0A${t[lang].orderWaPackage}: ${selectedPackage.category} - ${selectedPackage.name} (${selectedPackage.price})%0A${t[lang].orderWaDesc}: ${form.projectDesc}`;
+    trackLeadConversion(`order_modal_${selectedPackage?.name || 'custom'}`);
     window.open(`https://wa.me/6285814174267?text=${message}`, '_blank');
     onClose();
     setForm({ name: '', phone: '', email: '', projectDesc: '' });

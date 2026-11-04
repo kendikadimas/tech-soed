@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { ChevronDown, Globe, Menu, X, Sun, Moon } from 'lucide-react';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { trackLeadConversion } from '@/lib/gtag';
 import { useTheme } from 'next-themes';
 
 
@@ -221,6 +222,7 @@ export default function Navbar() {
                 href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackLeadConversion('navbar_whatsapp_desktop')}
                 className={`btn-3d-base btn-3d-green text-xs xl:text-sm font-extrabold tracking-wider ${
                   scrolled
                     ? "px-4 sm:px-5 py-2 min-h-[38px] rounded-xl"
@@ -360,6 +362,7 @@ export default function Navbar() {
                   href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackLeadConversion('navbar_whatsapp_mobile')}
                   className="btn-3d-base btn-3d-green w-full py-3.5 rounded-xl text-center font-extrabold text-sm tracking-wider mt-3 flex items-center justify-center gap-2"
                 >
                   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg">

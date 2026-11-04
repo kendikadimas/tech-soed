@@ -1,10 +1,10 @@
 "use client";
 
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { trackLeadConversion } from '@/lib/gtag';
 
 export default function WhatsAppButton() {
   const { lang } = useLang();
@@ -19,6 +19,7 @@ export default function WhatsAppButton() {
       href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
       target="_blank"
       rel="noreferrer"
+      onClick={() => trackLeadConversion('floating_whatsapp_button')}
       aria-label="Hubungi WhatsApp TechSoe"
       className="btn-3d-base btn-3d-green !fixed bottom-6 right-6 z-[9999] w-14 h-14 !p-0 !rounded-full flex items-center justify-center cursor-pointer transition-all duration-300"
     >

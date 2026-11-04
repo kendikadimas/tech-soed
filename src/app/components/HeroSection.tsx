@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { trackLeadConversion } from '@/lib/gtag';
 import { Grid } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
@@ -366,6 +367,7 @@ export default function HeroSection({ initialProjects }: HeroSectionProps = {}) 
                 href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackLeadConversion('hero_cta_whatsapp')}
                 className="btn-3d-base btn-3d-green min-h-[44px] sm:min-h-[50px] px-2.5 min-[380px]:px-3.5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl font-extrabold text-[10px] min-[360px]:text-[11px] min-[400px]:text-xs sm:text-sm lg:text-base tracking-tight min-[380px]:tracking-normal sm:tracking-wider text-center flex items-center justify-center gap-1.5 sm:gap-2.5"
               >
                 <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-5 sm:h-5 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg">

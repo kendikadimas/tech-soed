@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { trackLeadConversion } from '@/lib/gtag';
 import { ArrowRight } from 'lucide-react';
 
 export default function CtaSection() {
@@ -35,6 +36,7 @@ export default function CtaSection() {
             href={`https://wa.me/6285814174267?text=${encodeURIComponent(t[lang].orderWaGreeting)}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackLeadConversion('bottom_cta_whatsapp')}
             className="btn-3d-base btn-3d-white w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base font-extrabold tracking-wider min-h-[48px] flex items-center justify-center gap-3"
           >
             <span>{t[lang].ctaBtn}</span>

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Clock, Send, ArrowUpRight } from 'lucide-react';
 import { t } from '../translations';
 import { useLang } from './LangContext';
+import { trackLeadConversion } from '@/lib/gtag';
 
 export default function ContactSection() {
   const { lang } = useLang();
@@ -23,6 +24,7 @@ export default function ContactSection() {
       ? `Halo TechSoe, saya ingin konsultasi kebutuhan digital:\n\n*Nama:* ${name}\n*No. WhatsApp:* ${phone}\n*Email:* ${email}\n*Layanan:* ${service}\n\n*Pesan:* \n${message}`
       : `Hello TechSoe, I would like to consult about digital needs:\n\n*Name:* ${name}\n*WhatsApp:* ${phone}\n*Email:* ${email}\n*Service:* ${service}\n\n*Message:* \n${message}`;
 
+    trackLeadConversion('contact_form_submit');
     const whatsappUrl = `https://wa.me/6285814174267?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -81,6 +83,7 @@ export default function ContactSection() {
                 href={`https://wa.me/6285814174267?text=${encodeURIComponent(lang === 'id' ? 'Halo TechSoe, saya ingin konsultasi kebutuhan website/aplikasi.' : 'Hello TechSoe, I would like to consult about website/app development.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackLeadConversion('contact_section_whatsapp_card')}
                 className="card-3d-seamless p-4 sm:p-5 rounded-2xl flex items-center justify-between gap-4 group cursor-pointer block"
               >
                 <div className="flex items-center gap-4 min-w-0">
