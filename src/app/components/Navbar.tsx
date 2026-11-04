@@ -53,6 +53,7 @@ export default function Navbar() {
       { id: 'pricing', title: lang === 'id' ? 'Daftar Harga' : 'Pricing', href: '/#harga' },
       { id: 'faq', title: 'FAQ', href: '/#faq' },
       { id: 'blog', title: lang === 'id' ? 'Artikel' : 'Blog', href: '/blog' },
+      { id: 'contact', title: lang === 'id' ? 'Kontak Kami' : 'Contact Us', href: '/#contact' },
     ]
   };
 
