@@ -459,6 +459,24 @@ export default async function RootLayout({
                     page_path: window.location.pathname,
                     send_page_view: true
                   });
+
+                  // Google Ads Event snippet for Contact conversion page
+                  window.gtag_report_conversion = function (url) {
+                    var callback = function () {
+                      if (typeof(url) != 'undefined') {
+                        window.location = url;
+                      }
+                    };
+                    if (typeof window.gtag === 'function') {
+                      window.gtag('event', 'conversion', {
+                        'send_to': 'AW-18553208547/L2i8CNaNjrIdEOP97Y5F',
+                        'value': 1.0,
+                        'currency': 'IDR',
+                        'event_callback': callback
+                      });
+                    }
+                    return false;
+                  };
                 `}
               </Script>
             </>
