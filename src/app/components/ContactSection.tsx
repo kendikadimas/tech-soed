@@ -28,7 +28,9 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="kontak" className="py-20 lg:py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden">
+    <section id="contact" className="py-20 lg:py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-950 transition-colors relative overflow-hidden scroll-mt-20">
+      {/* Anchor alias for #kontak */}
+      <div id="kontak" className="absolute -top-24 left-0 pointer-events-none invisible" aria-hidden="true" />
       {/* Decorative Blur */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100 dark:bg-blue-900/30 rounded-full blur-[120px] opacity-30 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       

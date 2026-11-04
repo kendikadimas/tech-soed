@@ -60,9 +60,9 @@ export default function Footer() {
           <div>
             <div className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Navigation</div>
             <ul className="space-y-4">
-              {['Layanan', 'Portfolio', 'Tentang Kami', 'Harga'].map((item, i) => (
+              {['Layanan', 'Portfolio', 'Tentang Kami', 'Harga', 'Kontak'].map((item, i) => (
                 <li key={i}>
-                  <Link href={`#${item === 'Tentang Kami' ? 'tentang' : item.toLowerCase()}`} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
+                  <Link href={`#${item === 'Tentang Kami' ? 'tentang' : item === 'Kontak' ? 'contact' : item.toLowerCase()}`} className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
                     <div className="w-1.5 h-1.5 rounded-full bg-slate-800 group-hover:bg-indigo-500 transition-colors" />
                     <span className="text-sm font-bold">{item}</span>
                   </Link>
@@ -98,7 +98,7 @@ export default function Footer() {
             <ul className="space-y-6">
               <li>
                 <a
-                  href="https://maps.google.com/?q=Purwokerto%2C%20Jawa%20Tengah%2C%20Indonesia"
+                  href="https://maps.app.goo.gl/ss9S1x2hRGXseBW76"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex items-start gap-4"
