@@ -31,7 +31,26 @@ export default function LandingPageClient({ initialProjects }: LandingPageClient
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 200);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const scrollToHash = () => {
+      if (window.location.hash) {
+        const id = window.location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    // Delayed trigger after DOM renders
+    const timer = setTimeout(scrollToHash, 200);
+    window.addEventListener('hashchange', scrollToHash);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', scrollToHash);
+    };
   }, []);
 
   const handleOrderClick = (pkg: { name: string; price: string; category: string }) => {
@@ -67,8 +86,8 @@ export default function LandingPageClient({ initialProjects }: LandingPageClient
         <LatestArticles />
         <FaqSection />
         <CtaSection />
-        <ContactSection />
       </div>
+      <ContactSection />
       <ScrollToTop visible={scrolled} />
       <OrderModal
         isOpen={isOrderModalOpen}
